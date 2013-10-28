@@ -40,7 +40,7 @@ class InstallData(install_data):
     if sys.platform == 'win32':
       return data_files
 
-    PO_DIR = 'locales'
+    PO_DIR = 'po'
     for po in glob.glob (os.path.join(PO_DIR,'*.po')):
       lang = os.path.basename(po[:-3])
       mo = os.path.join('build', 'mo', lang, 'bluewho.mo')
