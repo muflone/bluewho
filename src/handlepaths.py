@@ -28,7 +28,7 @@ APP_VERSION = '0.1'
 
 PATHS = {
   'locale': [
-    '%s/../locales' % base_path,
+    '%s/../locale' % base_path,
     '%s/share/locale' % sys.prefix],
   'data': [
     '%s/../data' % base_path,
