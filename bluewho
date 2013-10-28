@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /usr/share/bluewho/src
+env python bluewho.py

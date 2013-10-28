@@ -1,0 +1,15 @@
+bluewho (0.1.1) all; urgency=low
+
+  * New russian translation by Сергей Богатов
+  * Completed spanish translation by Federico Caiazza and Luca Della Ghezza
+  * New hungarian translation by Gyorgy Lakatos
+  * New german translation by Claudius Henrichs
+
+ -- Fabio Castelli <muflone@vbsimple.net>  Tue, 06 Jul 2010 23:43:22 +0200
+
+bluewho (0.1) all; urgency=low
+
+  * Initial release
+
+ -- Fabio Castelli <muflone@vbsimple.net>  Fri, 1 Jan 2009 22:20:00 +0100
+
