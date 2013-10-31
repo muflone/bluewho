@@ -102,19 +102,12 @@ class MainWindow(object):
     self.spinnerScan.start()
     self.toolbRefresh.set_sensitive(False)
     self.toolbServices.set_sensitive(False)
-    
     # Let the interface to continue its main loop
     GtkProcessEvents()
+    # Start the scanner thread
     self.thread_scanner.start()
-    # Single scan
-    #self.do_scan()
     # Automatic scan
     #while self.toolbAutoScan.get_active():
-    #  print 'cycling'
-    #  GtkProcessEvents()
-    #  #self.do_scan()
-    #  pass
-    #self.thread_scanner.cancel()
     self.spinnerScan.stop()
     self.spinnerScan.set_visible(False)
     self.toolbRefresh.set_sensitive(True)
