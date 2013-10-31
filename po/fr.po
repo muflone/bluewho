@@ -8,7 +8,7 @@
 # Emmanuel <emmanuel(at)simple-linux.com>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: bluewho 0.1\n"
+"Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: Fabio Castelli <muflone(at)vbsimple.net>\n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
 "PO-Revision-Date: 2010-01-02 01:32+0100\n"
