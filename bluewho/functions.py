@@ -21,6 +21,7 @@
 from time import localtime
 from gettext import gettext as _
 from gi.repository import Gtk
+from gi.repository.GObject import idle_add as thread_safe
 from bluewho.constants import *
 
 def readlines(filename, empty_lines = False):
@@ -70,5 +71,6 @@ __all__ = [
   'get_current_time',
   'GtkProcessEvents',
   'GtkMessageDialogOK',
+  'thread_safe',
   '_'
 ]
