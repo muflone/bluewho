@@ -21,9 +21,15 @@
 from time import localtime
 from gettext import gettext as _
 from gi.repository import Gtk
-from gi.repository.GObject import idle_add as thread_safe
+from gi.repository.GObject import idle_add
 from bluewho.constants import *
 
+def thread_safe(func):
+  "Decorator function to make a thread safe call to a GTK+ function"
+  def callback(*args):
+    idle_add(func, *args)
+  return callback
+    
 def readlines(filename, empty_lines = False):
   "Read all lines from a text file"
   result = []
@@ -73,5 +79,6 @@ __all__ = [
   'GtkProcessEvents',
   'GtkMessageDialogOK',
   'thread_safe',
+  'idle_add',
   '_'
 ]
