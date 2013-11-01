@@ -19,10 +19,8 @@
 ##
 
 import shutil
-import select
 from gi.repository import Gtk
 from gi.repository import Gio
-from gi.repository import GObject
 from bluewho.constants import *
 from bluewho.functions import *
 from bluewho.settings import Settings
@@ -51,7 +49,7 @@ class MainWindow(object):
     self.about = AboutWindow(self.winMain, False)
     # Set other properties
     self.btsupport.set_new_device_cb(self.on_new_device_cb)
-    self.thread_scanner = DaemonThread(self.do_scan)
+    self.thread_scanner = None
 
   @get_current_thread_ident
   def run(self):
@@ -67,8 +65,7 @@ class MainWindow(object):
     self.winMain = builder.get_object("winMain")
     self.model = ModelDevices(builder.get_object('modelDevices'), self.settings, self.btsupport)
     self.tvwResources = builder.get_object('tvwResources')
-    self.toolbRefresh = builder.get_object('toolbRefresh')
-    self.toolbAutoScan = builder.get_object('toolbAutoScan')
+    self.toolbDetect = builder.get_object('toolbDetect')
     self.toolbServices = builder.get_object('toolbServices')
     self.spinnerScan = builder.get_object('spinnerScan')
     # Set various properties
@@ -102,23 +99,31 @@ class MainWindow(object):
     self.about.show()
 
   @get_current_thread_ident
-  def on_toolbRefresh_clicked(self, widget):
+  def on_toolbDetect_toggled(self, widget):
     "Reload the list of local and detected devices"
-    self.spinnerScan.set_visible(True)
-    self.spinnerScan.start()
-    self.toolbRefresh.set_sensitive(False)
     self.toolbServices.set_sensitive(False)
-    # Let the interface to continue its main loop
-    GtkProcessEvents()
     # Start the scanner thread
-    self.thread_scanner.start()
-    # Automatic scan
-    #while self.toolbAutoScan.get_active():
-    self.spinnerScan.stop()
-    self.spinnerScan.set_visible(False)
-    self.toolbRefresh.set_sensitive(True)
-    print 'done'
+    if self.toolbDetect.get_active():
+      print 'active'
+      self.spinnerScan.set_visible(True)
+      self.spinnerScan.start()
+      assert not self.thread_scanner
+      self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
+      self.thread_scanner.start()
+    else:
+      if self.thread_scanner:
+        self.toolbDetect.set_sensitive(False)
+        # Check if the scanner is still running and cancel it
+        if self.thread_scanner.is_alive():
+          self.thread_scanner.cancel()
+        else:
+          # The scanner thread has died for some error, we need to recover
+          # the UI to allow the user to launch the scanner again
+          print 'the thread has died, recovering the UI'
+          self.thread_scanner = None
+          self.toolbDetect.set_sensitive(True)
 
+  @thread_safe
   @get_current_thread_ident
   def on_toolbClear_clicked(self, widget):
     "Clear the devices list"
@@ -143,7 +148,7 @@ class MainWindow(object):
       name = ''
     # If device doesn't exist then add it
     if not modelRow:
-      print self.model.add_device(
+      self.add_device(
         address,
         name,
         device_class,
@@ -159,6 +164,12 @@ class MainWindow(object):
       #modelRow[COL_LASTSEEN] = getCurrentTime()
       pass
 
+  @thread_safe
+  @get_current_thread_ident
+  def add_device(self, address, name, device_class, time, notify):
+    self.model.add_device(address, name, device_class, time, notify)
+    return False
+
   @get_current_thread_ident
   def do_scan(self):
     # Add local adapters
@@ -170,7 +181,7 @@ class MainWindow(object):
           # Adapter device found
           #if not foundDevices.get(address):
           name = 'hci%d (%s)' % (i, name)
-          self.model.add_device(address, name, 0, get_current_time(), True)
+          self.add_device(address, name, 0, get_current_time(), True)
             #modelRow = modelDevices[-1]
             #foundDevices[address] = modelRow
             # Update seen time
@@ -179,14 +190,32 @@ class MainWindow(object):
           # No more devices found
           if i==0:
             print 'error: no local devices found, unable to continue'
-            GtkMessageDialogOK(self.winMain, 
-              _('No local devices found during detection.'),
-              Gtk.MessageType.WARNING)
+            #dialog = Gtk.MessageDialog(
+            #  parent=self.winMain,
+            #  flags=Gtk.DialogFlags.MODAL,
+            #  type=Gtk.MessageType.WARNING,
+            #  buttons=Gtk.ButtonsType.OK,
+            #  message_format=_('No local devices found during detection.')
+            #)
+            #thread_safe(dialog.set_title, APP_NAME)
+            #thread_safe(dialog.set_icon_from_file, FILE_ICON)
+            #thread_safe(dialog.run)
+            #dialog.run()
+            #thread_safe(dialog.destroy)
+
+            #idle_add(GtkMessageDialogOK,
+            #  self.winMain, 
+            #  _('No local devices found during detection.'),
+            #  Gtk.MessageType.WARNING)
             # Disable autoscan
-            self.toolbAutoScan.set_active(False)
-            return
+            self.thread_scanner = None
+            idle_add(self.spinnerScan.stop)
+            idle_add(self.spinnerScan.set_visible, False)
+            idle_add(self.toolbDetect.set_active, False)
+            return True
           break
 
+    print 'init'
     from random import randint
     while True:
     #if True:
@@ -196,6 +225,15 @@ class MainWindow(object):
         break
       else:
         print 'cycle'
+
+      if self.thread_scanner.paused:
+        print 'wait'
+        print self.thread_scanner.event.wait()
+        print 'proceed'
+        self.thread_scanner.event.clear()
+        print 'done pause'
+
+
       self.on_toolbClear_clicked(None)
       # What is this? useful for testing purposes, you can just ignore it
       if randint(0, 1) == 1:
@@ -205,33 +243,10 @@ class MainWindow(object):
       if randint(0, 1) == 1:
         self.on_new_device_cb('TEST 3', '55:44:33:22:11:00', 7864836)
 
-      # Add detected devices
-      devices = self.btsupport.new_discoverer()
-      #try:
-      if True:
-        devices.find_devices(
-          lookup_names=True,
-          duration=8,
-          flush_cache=False
-        )
-      #else:
-      #  devices.find_devices(
-      #    lookup_names=settings.get('retrieve names'),
-      #    duration=settings.get('scan duration'),
-      #    flush_cache=settings.get('flush cache')
-      #  )
-      #except:
-      #  devices.done = True
-      #  self.toolbAutoScan.set_active(False)
-      readfiles = [ devices, ]
-      # Wait till the end
-      while not devices.done:
-        #self.progScanning.pulse()
-        #GtkProcessEvents()
-        ret = select.select( readfiles, [], [] )[0]
-        if devices in ret:
-          devices.process_event()
-      #lastscan = time.localtime()
-      #statusScan.pop(statusBarContextId)
-      #statusScan.push(statusBarContextId, _('Last scan: %s') % getCurrentTime())
+      self.btsupport.discover()
+
+    self.thread_scanner = None
+    idle_add(self.spinnerScan.stop)
+    idle_add(self.spinnerScan.set_visible, False)
+    idle_add(self.toolbDetect.set_sensitive, True)
     return False

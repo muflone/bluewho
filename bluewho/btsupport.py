@@ -19,6 +19,7 @@
 ##
 
 import struct
+import select
 import bluetooth
 from bluetooth import _bluetooth as bt
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
@@ -34,8 +35,34 @@ class BluetoothSupport(object):
     "Set the new device callback for BluetoothDeviceDiscoverer"
     self.new_device_cb = new_device_cb
 
-  def new_discoverer(self):
-    return BluetoothDeviceDiscoverer(self.new_device_cb)
+  def discover(self):
+    # Add detected devices
+    discoverer = BluetoothDeviceDiscoverer(self.new_device_cb)
+    #try:
+    if True:
+      discoverer.find_devices(
+        lookup_names=True,
+        duration=8,
+        flush_cache=False
+      )
+    #else:
+    #  discoverer.find_devices(
+    #    lookup_names=settings.get('retrieve names'),
+    #    duration=settings.get('scan duration'),
+    #    flush_cache=settings.get('flush cache')
+    #  )
+    #except:
+    #  discoverer.done = True
+    #  self.toolbAutoScan.set_active(False)
+    readfiles = [ discoverer, ]
+    # Wait till the end
+    while not discoverer.done:
+      ret = select.select(readfiles, [], [])[0]
+      if discoverer in ret:
+        discoverer.process_event()
+    #lastscan = time.localtime()
+    #statusScan.pop(statusBarContextId)
+    #statusScan.push(statusBarContextId, _('Last scan: %s') % getCurrentTime())
     
   def get_localAdapter(self, deviceNr):
     "Return name and address of a local adapter"
