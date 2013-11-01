@@ -25,6 +25,7 @@ from gi.repository.GObject import idle_add as thread_safe
 from bluewho.constants import *
 
 def readlines(filename, empty_lines = False):
+  "Read all lines from a text file"
   result = []
   with open(filename) as f:
     for line in f.readlines():
@@ -48,12 +49,12 @@ def get_current_time():
   }
 
 def GtkProcessEvents():
-  # Let the main GTK+ loop to continue
+  "Let the main GTK+ loop to continue"
   while Gtk.events_pending():
     Gtk.main_iteration()
 
 def GtkMessageDialogOK(parent, message, type=Gtk.MessageType.INFO):
-  # Show the completion dialog
+  "Show a GTK+ dialog with OK button only"
   dialog = Gtk.MessageDialog(
     parent=parent,
     flags=Gtk.DialogFlags.MODAL,
