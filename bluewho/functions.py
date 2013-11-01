@@ -18,6 +18,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
+import threading
 from time import localtime
 from gettext import gettext as _
 from gi.repository import Gtk
@@ -73,6 +74,13 @@ def GtkMessageDialogOK(parent, message, type=Gtk.MessageType.INFO):
   dialog.run()
   dialog.destroy()
 
+def get_current_thread_ident(func):
+  "Decorator function to print the active running thread"
+  def callback(*args):
+    print '%s is called from %s thread' % (func, threading.current_thread().name)
+    return func(*args)
+  return callback
+  
 __all__ = [
   'readlines',
   'get_current_time',
@@ -80,5 +88,6 @@ __all__ = [
   'GtkMessageDialogOK',
   'thread_safe',
   'idle_add',
+  'get_current_thread_ident',
   '_'
 ]
