@@ -31,6 +31,7 @@ from bluewho.about import AboutWindow
 from bluewho.daemon_thread import DaemonThread
 
 class MainWindow(object):
+  @get_current_thread_ident
   def __init__(self, application, settings, btsupport):
     self.application = application
     self.settings = settings
@@ -52,10 +53,12 @@ class MainWindow(object):
     self.btsupport.set_new_device_cb(self.on_new_device_cb)
     self.thread_scanner = DaemonThread(self.do_scan)
 
+  @get_current_thread_ident
   def run(self):
     "Show the UI"
     self.winMain.show_all()
 
+  @get_current_thread_ident
   def loadUI(self):
     "Load the interface UI"
     builder = Gtk.Builder()
@@ -75,6 +78,7 @@ class MainWindow(object):
     # Connect signals from the glade file to the functions with the same name
     builder.connect_signals(self)
 
+  @get_current_thread_ident
   def on_winMain_delete_event(self, widget, event):
     "Close the application"
     # Cancel the running thread
@@ -92,10 +96,12 @@ class MainWindow(object):
     self.winMain.destroy()
     self.application.quit()
 
+  @get_current_thread_ident
   def on_toolbAbout_clicked(self, widget):
     "Show the about dialog"
     self.about.show()
 
+  @get_current_thread_ident
   def on_toolbRefresh_clicked(self, widget):
     "Reload the list of local and detected devices"
     self.spinnerScan.set_visible(True)
@@ -113,12 +119,14 @@ class MainWindow(object):
     self.toolbRefresh.set_sensitive(True)
     print 'done'
 
+  @get_current_thread_ident
   def on_toolbClear_clicked(self, widget):
     "Clear the devices list"
     self.model.clear()
     #foundDevices.clear()
     self.toolbServices.set_sensitive(False)
 
+  @get_current_thread_ident
   def on_new_device_cb(self, name, address, device_class):
     "Callback function called when a new device has been discovered"
     modelRow = None
@@ -144,13 +152,14 @@ class MainWindow(object):
       #modelRow = self.model[-1]
       #foundDevices[address] = modelRow
     else:
-      pass
       # Sets the new name if it didn't exist
       #if not modelRow[COL_NAME] and name:
       #  modelRow[COL_NAME] = name
       ## Update seen time
       #modelRow[COL_LASTSEEN] = getCurrentTime()
+      pass
 
+  @get_current_thread_ident
   def do_scan(self):
     # Add local adapters
     #if settings.get('show local'):
