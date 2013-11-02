@@ -67,6 +67,8 @@ class MainWindow(object):
     self.tvwResources = builder.get_object('tvwResources')
     self.toolbDetect = builder.get_object('toolbDetect')
     self.toolbServices = builder.get_object('toolbServices')
+    self.statusScan = builder.get_object('statusScan')
+    self.statusScanContextId = self.statusScan.get_context_id(DOMAIN_NAME)
     self.spinnerScan = builder.get_object('spinnerScan')
     # Set various properties
     self.winMain.set_title(APP_NAME)
@@ -109,6 +111,7 @@ class MainWindow(object):
       self.spinnerScan.start()
       assert not self.thread_scanner
       self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
+      self.set_status_bar_message('Start new scan')
       self.thread_scanner.start()
     else:
       if self.thread_scanner:
@@ -116,10 +119,14 @@ class MainWindow(object):
         # Check if the scanner is still running and cancel it
         if self.thread_scanner.is_alive():
           self.thread_scanner.cancel()
+          self.set_status_bar_message('Cancel running scan')
         else:
           # The scanner thread has died for some error, we need to recover
           # the UI to allow the user to launch the scanner again
           print 'the thread has died, recovering the UI'
+          self.set_status_bar_message('The scanning thread has died, recovering the UI')
+          self.spinnerScan.stop()
+          self.spinnerScan.set_visible(False)
           self.thread_scanner = None
           self.toolbDetect.set_sensitive(True)
 
@@ -167,46 +174,49 @@ class MainWindow(object):
   @thread_safe
   @get_current_thread_ident
   def add_device(self, address, name, device_class, time, notify):
+    self.set_status_bar_message('Found new device %s [%s]' % (name, address))
     self.model.add_device(address, name, device_class, time, notify)
     return False
 
   @get_current_thread_ident
   def do_scan(self):
-    # Add local adapters
-    #if settings.get('show local'):
-    if True:
-      for i in range(10):
-        name, address = self.btsupport.get_localAdapter(i)
+    from random import randint
+    while True:
+    #if True:
+      # Cancel the running thread
+      if self.thread_scanner.cancelled:
+        break
+      # Wait until an event awakes the thread again
+      if self.thread_scanner.paused:
+        print self.thread_scanner.event.wait()
+        self.thread_scanner.event.clear()
+      # Clear the model before to populate it again (only for testing purposes)
+      self.on_toolbClear_clicked(None)
+
+      # Add local adapters
+      for devices_count in range(10):
+        name, address = self.btsupport.get_localAdapter(devices_count)
         if name and address:
           # Adapter device found
           #if not foundDevices.get(address):
-          name = 'hci%d (%s)' % (i, name)
-          self.add_device(address, name, 0, get_current_time(), True)
-            #modelRow = modelDevices[-1]
-            #foundDevices[address] = modelRow
-            # Update seen time
-            #modelRow[COL_LASTSEEN] = getCurrentTime()
+          #if settings.get('show local'):
+          name = 'hci%d (%s)' % (devices_count, name)
+          if True:
+            self.add_device(address, name, 0, get_current_time(), True)
+              #modelRow = modelDevices[-1]
+              #foundDevices[address] = modelRow
+              # Update seen time
+              #modelRow[COL_LASTSEEN] = getCurrentTime()
         else:
           # No more devices found
-          if i==0:
+          if devices_count==0:
             print 'error: no local devices found, unable to continue'
-            #dialog = Gtk.MessageDialog(
-            #  parent=self.winMain,
-            #  flags=Gtk.DialogFlags.MODAL,
-            #  type=Gtk.MessageType.WARNING,
-            #  buttons=Gtk.ButtonsType.OK,
-            #  message_format=_('No local devices found during detection.')
-            #)
-            #thread_safe(dialog.set_title, APP_NAME)
-            #thread_safe(dialog.set_icon_from_file, FILE_ICON)
-            #thread_safe(dialog.run)
-            #dialog.run()
-            #thread_safe(dialog.destroy)
-
             #idle_add(GtkMessageDialogOK,
             #  self.winMain, 
             #  _('No local devices found during detection.'),
             #  Gtk.MessageType.WARNING)
+            GtkMessageDialogOK(self.winMain, _('No local devices found during detection.'), Gtk.MessageType.WARNING, False)
+            self.set_status_bar_message(_('No local devices found during detection.'))
             # Disable autoscan
             self.thread_scanner = None
             idle_add(self.spinnerScan.stop)
@@ -215,26 +225,6 @@ class MainWindow(object):
             return True
           break
 
-    print 'init'
-    from random import randint
-    while True:
-    #if True:
-      # Cancel the running thread
-      if self.thread_scanner.cancelled:
-        print 'break'
-        break
-      else:
-        print 'cycle'
-
-      if self.thread_scanner.paused:
-        print 'wait'
-        print self.thread_scanner.event.wait()
-        print 'proceed'
-        self.thread_scanner.event.clear()
-        print 'done pause'
-
-
-      self.on_toolbClear_clicked(None)
       # What is this? useful for testing purposes, you can just ignore it
       if randint(0, 1) == 1:
         self.on_new_device_cb('TEST 1', '00:11:22:33:44:55', 5211141)
@@ -246,7 +236,15 @@ class MainWindow(object):
       self.btsupport.discover()
 
     self.thread_scanner = None
+    self.set_status_bar_message(None)
     idle_add(self.spinnerScan.stop)
     idle_add(self.spinnerScan.set_visible, False)
     idle_add(self.toolbDetect.set_sensitive, True)
     return False
+
+  @thread_safe
+  @get_current_thread_ident
+  def set_status_bar_message(self, message=None):
+    self.statusScan.pop(self.statusScanContextId)
+    if message is not None:
+      self.statusScan.push(self.statusScanContextId, message)
