@@ -35,12 +35,14 @@ class DaemonThread(Thread):
     self.event = Event()
 
   def cancel(self):
+    "Mark the thread as cancelled"
     self.cancelled = True
 
   def pause(self):
+    "Mark the thread as in pause"
     self.paused = True
 
   def unpause(self):
+    "Remove the pause from the thread"
     self.paused = False
-    print 'unpausing'
     self.event.set()
