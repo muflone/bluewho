@@ -20,8 +20,8 @@
 
 import os.path
 from gi.repository import GdkPixbuf
-from gextractwinicons.constants import *
-from gextractwinicons.functions import *
+from bluewho.constants import *
+from bluewho.functions import *
 
 class ModelDevices(object):
   COL_ICON = 0
@@ -49,10 +49,16 @@ class ModelDevices(object):
     else:
       device_type = (0, 'adapter')
       device_detail = (0, _('adapter'))
-    #iconPath = getIconPath(device_type[0], device_detail[0])
-    
+    if device_type[0] == 0 and device_detail[0] == 0:
+      # Adapter
+      icon_path = os.path.join(DIR_DATA, 'adapter.png')
+    else:
+      icon_path = os.path.join(DIR_DATA, 'class%d/%d.png' % (device_type[0], device_detail[0]))
+    if not os.path.isfile(icon_path):
+      icon_path = os.path.join(DIR_DATA, 'unknown.png')
+
     return self.model.append([
-      None,
+      GdkPixbuf.Pixbuf.new_from_file(icon_path),
       device_class,
       device_type[1],
       device_detail[1],
@@ -68,14 +74,6 @@ class ModelDevices(object):
 #        'icon': iconPath, 'name': name and name or '', 'address': address }
 #      proc = subprocess.Popen(command, shell=True)
 #      proc.communicate()
-
-  def add_resource(self, parent, sType, name, language, width, height, depth, path):
-    return self.model.append(parent, [True, sType, name, language, 
-      width, height, depth,
-      os.path.getsize(path),
-      GdkPixbuf.Pixbuf.new_from_file(path),
-      path
-    ])
 
   def get_selected(self, path):
     return self.model[path][self.__class__.COL_SELECTED]
