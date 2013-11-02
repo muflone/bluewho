@@ -80,15 +80,17 @@ class MainWindow(object):
   @get_current_thread_ident
   def on_winMain_delete_event(self, widget, event):
     "Close the application"
-    # Cancel the running thread
-    if self.thread_scanner.isAlive():
-      # Hide immediately the window and let the GTK+ cycle to continue giving
-      # the perception that the app was really closed
-      self.winMain.hide()
-      GtkProcessEvents()
-      print 'please wait for scan to complete...'
-      self.thread_scanner.cancel()
-      self.thread_scanner.join()
+    if self.thread_scanner:
+      # Cancel the running thread
+      if self.thread_scanner.isAlive():
+        # Hide immediately the window and let the GTK+ cycle to continue giving
+        # the perception that the app was really closed
+        self.winMain.hide()
+        GtkProcessEvents()
+        print 'please wait for scan to complete...'
+        self.thread_scanner.cancel()
+        self.thread_scanner.join()
+    self.thread_scanner = None
     self.about.destroy()
     self.settings.set_sizes(self.winMain)
     self.settings.save()
