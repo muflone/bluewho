@@ -60,7 +60,8 @@ def GtkProcessEvents():
   while Gtk.events_pending():
     Gtk.main_iteration()
 
-def GtkMessageDialogOK(parent, message, type=Gtk.MessageType.INFO):
+@thread_safe
+def GtkMessageDialogOK(parent, message, type=Gtk.MessageType.INFO, direct=True):
   "Show a GTK+ dialog with OK button only"
   dialog = Gtk.MessageDialog(
     parent=parent,
@@ -71,8 +72,12 @@ def GtkMessageDialogOK(parent, message, type=Gtk.MessageType.INFO):
   )
   dialog.set_title(APP_NAME)
   dialog.set_icon_from_file(FILE_ICON)
-  dialog.run()
-  dialog.destroy()
+  if direct:
+    dialog.run()
+    dialog.destroy()
+  else:
+    dialog.connect('response', lambda widget, response_id: dialog.destroy())
+    dialog.show()
 
 def get_current_thread_ident(func):
   "Decorator function to print the active running thread"
