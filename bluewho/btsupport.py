@@ -28,7 +28,6 @@ from bluewho.functions import *
 
 class BluetoothSupport(object):
   def __init__(self):
-    pass
     self.new_device_cb = None
 
   def set_new_device_cb(self, new_device_cb):
@@ -122,17 +121,17 @@ class BluetoothSupport(object):
   def get_device_type(self, major_class):
     "Return the device major class"
     major_classes = (
-      (0, _('miscellaneous')),
-      (1, _('computer')),
-      (2, _('phone')),
-      (3, _('network')),
-      (4, _('audio-video')),
-      (5, _('peripheral')),
-      (6, _('imaging')),
-      (7, _('uncategorized'))
+      (BT_DEVICETYPE_UNKNOWN, _('unknown')),
+      (BT_DEVICETYPE_COMPUTER, _('computer')),
+      (BT_DEVICETYPE_PHONE, _('phone')),
+      (BT_DEVICETYPE_NETWORK, _('network')),
+      (BT_DEVICETYPE_AUDIOVIDEO, _('audio-video')),
+      (BT_DEVICETYPE_PERIPHERAL, _('peripheral')),
+      (BT_DEVICETYPE_IMAGING, _('imaging')),
+      (BT_DEVICETYPE_UNCATEGORIZED, _('uncategorized'))
     )
-    if major_class > BT_DEVICETYPE_UNCATEGORIZED:
-      major_class = BT_DEVICETYPE_UNKNOWN        # Unknown class
+    if major_class >= len(major_classes):
+      major_class = BT_DEVICETYPE_UNKNOWN        # Fallback to unknown class
     return major_classes[major_class]
 
   def get_device_detail(self, major_class, minor_class):
