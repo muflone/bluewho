@@ -29,6 +29,25 @@ from bluewho.functions import *
 class BluetoothSupport(object):
   def __init__(self):
     self.new_device_cb = None
+    # Load classes from file FILE_BT_CLASSES
+    self.classes = {}
+    for line in readlines(FILE_BT_CLASSES):
+      # Skip comments
+      if '#' in line:
+        line = line.split('#', 1)[0]
+      # Skip empty lines
+      line = line.strip()
+      if line:
+        # File format: Major class | Minor class | PNG Image | Description
+        major_class, minor_class, image_path, description = line.split(' | ', 3)
+        major_class = int(major_class)
+        minor_class = int(minor_class)
+        image_path = image_path.strip()
+        # New major class
+        if not self.classes.has_key(major_class):
+          self.classes[major_class] = {}
+        # Add minor class with image and description
+        self.classes[major_class][minor_class] = (image_path, description)
 
   def set_new_device_cb(self, new_device_cb):
     "Set the new device callback for BluetoothDeviceDiscoverer"
@@ -129,85 +148,15 @@ class BluetoothSupport(object):
       (BT_DEVICETYPE_AUDIOVIDEO, _('audio-video')),
       (BT_DEVICETYPE_PERIPHERAL, _('peripheral')),
       (BT_DEVICETYPE_IMAGING, _('imaging')),
-      (BT_DEVICETYPE_UNCATEGORIZED, _('uncategorized'))
+      (BT_DEVICETYPE_MISCELLANEOUS, _('miscellaneous')),
+      (BT_DEVICETYPE_TOY, _('toy')),
+      (BT_DEVICETYPE_HEALTH, _('health')),
     )
     if major_class >= len(major_classes):
       major_class = BT_DEVICETYPE_UNKNOWN        # Fallback to unknown class
     return major_classes[major_class]
 
   def get_device_detail(self, major_class, minor_class):
-    "Return the device detail type"
-    uncategorized = _('uncategorized')
-      
-    if major_class == BT_DEVICETYPE_MISCELLANEOUS:
-      return (0, uncategorized)
-    if major_class == BT_DEVICETYPE_COMPUTER:
-      return {
-        1: (1, _('desktop workstation')),
-        2: (2, _('server')),
-        3: (3, _('laptop')),
-        4: (4, _('handheld')),
-        5: (5, _('palm')),
-        6: (6, _('wearable computer'))
-      }.get(minor_class, (0, uncategorized))
-    elif major_class == BT_DEVICETYPE_PHONE:
-      return {
-        1: (1, _('cellular')),
-        2: (2, _('cordless')),
-        3: (3, _('smartphone')),
-        4: (4, _('wired modem - voice gateway')),
-        5: (5, _('common ISDN access'))
-      }.get(minor_class, (0, uncategorized))
-    elif major_class == BT_DEVICETYPE_NETWORK:
-      return {
-        0: (0, _('network fully available')),
-        1: (1, _('network 1-17%% used')),
-        2: (2, _('network 17-33%% used')),
-        3: (3, _('network 33-50%% used')),
-        4: (4, _('network 50-67%% used')),
-        5: (5, _('network 67-83%% used')),
-        6: (6, _('network 83-99%% used')),
-        7: (7, _('network unavailable'))
-      }.get(minor_class >> 3, (0, uncategorized))  # 3 lowers bit unused
-    elif major_class == BT_DEVICETYPE_AUDIOVIDEO:
-      return {
-        1: (1, _('headset')),
-        2: (2, _('hands-free')),
-        4: (4, _('microphone')),
-        5: (5, _('loudspeaker')),
-        6: (6, _('headphone')),
-        7: (7, _('portable audio')),
-        8: (8, _('car audio')),
-        9: (9, _('set-top box')),
-        10: (10, _('hifi audio')),
-        11: (11, _('vcr')),
-        12: (12, _('videocamera')),
-        13: (13, _('camcorder')),
-        14: (14, _('video monitor')),
-        15: (15, _('video display loudspeaker')),
-        16: (16, _('video conferencing')),
-        18: (18, _('gaming toy'))
-      }.get(minor_class, (0, uncategorized))
-    elif major_class == BT_DEVICETYPE_PERIPHERAL:
-      if minor_class <= 15:                   # Lower 4 bits
-        return {
-          1: (1, _('joystick')),
-          2: (1, _('gamepad')),
-          3: (1, _('remote control')),
-          4: (1, _('sensing device')),
-          5: (1, _('digitizer tablet')),
-          6: (1, _('card reader'))
-        }.get(minor_class, (0, uncategorized))
-      else:                                   # Higher 2 bits
-        return {
-          1: (81, _('keyboard')),
-          2: (82, _('mouse')),
-          3: (83, _('keyboard+mouse'))
-        }.get(minor_class >> 4, (0, uncategorized))
-    elif major_class == BT_DEVICETYPE_IMAGING:
-      return {
-        1: _('display'),
-        2: _('camera'),
-        4: _('scanner'),
-        8: _('printer')
-      }.get(minor_class, (0, uncategorized))
+    "Return the device detail type or fallback to the unknown device"
+    return self.classes.get(major_class, BT_DEVICETYPE_UNKNOWN).get(
+      minor_class, self.classes[BT_DEVICETYPE_UNKNOWN][0])

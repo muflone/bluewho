@@ -42,20 +42,12 @@ class ModelDevices(object):
 
   def add_device(self, address, name, device_class, time, notify):
     "Add a new device to the list and pops notification"
-    if device_class > 0:
-      minor_class, major_class, services_class = self.btsupport.get_classes(device_class)
-      device_type = self.btsupport.get_device_type(major_class)
-      device_detail = self.btsupport.get_device_detail(major_class, minor_class)
-    else:
-      device_type = (0, 'adapter')
-      device_detail = (0, _('adapter'))
-    if device_type[0] == 0 and device_detail[0] == 0:
-      # Adapter
-      icon_path = os.path.join(DIR_DATA, 'adapter.png')
-    else:
-      icon_path = os.path.join(DIR_DATA, 'class%d/%d.png' % (device_type[0], device_detail[0]))
+    minor_class, major_class, services_class = self.btsupport.get_classes(device_class)
+    device_type = self.btsupport.get_device_type(major_class)
+    device_detail = self.btsupport.get_device_detail(major_class, minor_class)
+    icon_path = os.path.join(DIR_BT_ICONS, device_detail[0])
     if not os.path.isfile(icon_path):
-      icon_path = os.path.join(DIR_DATA, 'unknown.png')
+      icon_path = os.path.join(DIR_BT_ICONS, 'unknown.png')
 
     return self.model.append([
       GdkPixbuf.Pixbuf.new_from_file(icon_path),

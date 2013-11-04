@@ -52,6 +52,7 @@ else:
 DIR_DATA = os.path.join(DIR_PREFIX, 'data')
 DIR_UI = os.path.join(DIR_PREFIX, 'ui')
 DIR_SETTINGS = BaseDirectory.save_config_path(DOMAIN_NAME)
+DIR_BT_ICONS = os.path.join(DIR_DATA, 'icons')
 # Set the paths for the UI files
 FILE_UI_MAIN = os.path.join(DIR_UI, 'main.glade')
 FILE_UI_ABOUT = os.path.join(DIR_UI, 'about.glade')
@@ -61,15 +62,17 @@ FILE_ICON = os.path.join(DIR_DATA, 'bluewho.png')
 FILE_TRANSLATORS = os.path.join(DIR_DOCS, 'translators')
 FILE_LICENSE = os.path.join(DIR_DOCS, 'license')
 FILE_RESOURCES = os.path.join(DIR_DOCS, 'resources')
+FILE_BT_CLASSES = os.path.join(DIR_DATA, 'classes.txt')
 # Set the paths for configuration files
 FILE_SETTINGS_NEW = os.path.join(DIR_SETTINGS, 'settings.conf')
 # Set bluetooth types
-BT_DEVICETYPE_MISCELLANEOUS = 0
+BT_DEVICETYPE_UNKNOWN = 0
 BT_DEVICETYPE_COMPUTER = 1
 BT_DEVICETYPE_PHONE = 2
 BT_DEVICETYPE_NETWORK = 3
 BT_DEVICETYPE_AUDIOVIDEO = 4
 BT_DEVICETYPE_PERIPHERAL = 5
 BT_DEVICETYPE_IMAGING = 6
-BT_DEVICETYPE_UNCATEGORIZED = 7
-BT_DEVICETYPE_UNKNOWN = 8
+BT_DEVICETYPE_MISCELLANEOUS = 7
+BT_DEVICETYPE_TOY = 8
+BT_DEVICETYPE_HEALTH = 9
