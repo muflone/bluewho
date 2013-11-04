@@ -37,8 +37,8 @@ class BluetoothSupport(object):
   def discover(self):
     # Add detected devices
     discoverer = BluetoothDeviceDiscoverer(self.new_device_cb)
-    #try:
-    if True:
+    try:
+    #if True:
       discoverer.find_devices(
         lookup_names=True,
         duration=8,
@@ -50,8 +50,8 @@ class BluetoothSupport(object):
     #    duration=settings.get('scan duration'),
     #    flush_cache=settings.get('flush cache')
     #  )
-    #except:
-    #  discoverer.done = True
+    except:
+      discoverer.done = True
     #  self.toolbAutoScan.set_active(False)
     readfiles = [ discoverer, ]
     # Wait till the end
@@ -62,6 +62,7 @@ class BluetoothSupport(object):
     #lastscan = time.localtime()
     #statusScan.pop(statusBarContextId)
     #statusScan.push(statusBarContextId, _('Last scan: %s') % getCurrentTime())
+    pass
     
   def get_localAdapter(self, deviceNr):
     "Return name and address of a local adapter"
