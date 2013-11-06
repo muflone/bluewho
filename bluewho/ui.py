@@ -65,9 +65,8 @@ class MainWindow(object):
     # Obtain widget references
     self.winMain = builder.get_object("winMain")
     self.model = ModelDevices(builder.get_object('modelDevices'), self.settings, self.btsupport)
-    self.tvwResources = builder.get_object('tvwResources')
+    self.tvwDevices = builder.get_object('tvwDevices')
     self.toolbDetect = builder.get_object('toolbDetect')
-    self.toolbServices = builder.get_object('toolbServices')
     self.statusScan = builder.get_object('statusScan')
     self.statusScanContextId = self.statusScan.get_context_id(DOMAIN_NAME)
     self.spinnerScan = builder.get_object('spinnerScan')
@@ -103,13 +102,10 @@ class MainWindow(object):
     "Show the about dialog"
     self.about.show()
 
-  @get_current_thread_ident
   def on_toolbDetect_toggled(self, widget):
     "Reload the list of local and detected devices"
-    self.toolbServices.set_sensitive(False)
     # Start the scanner thread
     if self.toolbDetect.get_active():
-      print 'active'
       self.spinnerScan.set_visible(True)
       self.spinnerScan.start()
       assert not self.thread_scanner
@@ -134,12 +130,10 @@ class MainWindow(object):
           self.toolbDetect.set_sensitive(True)
 
   @thread_safe
-  @get_current_thread_ident
   def on_toolbClear_clicked(self, widget):
     "Clear the devices list"
     self.model.clear()
     #foundDevices.clear()
-    self.toolbServices.set_sensitive(False)
 
   @get_current_thread_ident
   def on_new_device_cb(self, name, address, device_class):

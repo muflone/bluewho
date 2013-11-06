@@ -86,4 +86,3 @@
 9 | 05 | pulse.png | pulse oximeter
 9 | 06 | pulse.png | pulse rate
 9 | 07 | monitor.png | display
-
