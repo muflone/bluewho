@@ -26,6 +26,7 @@ from bluewho.functions import *
 from bluewho.settings import Settings
 from bluewho.model_devices import ModelDevices
 from bluewho.about import AboutWindow
+from bluewho.services import ServicesDialog
 from bluewho.daemon_thread import DaemonThread
 
 class MainWindow(object):
@@ -243,6 +244,12 @@ class MainWindow(object):
     idle_add(self.spinnerScan.set_visible, False)
     idle_add(self.toolbDetect.set_sensitive, True)
     return False
+
+  def on_toolbServices_clicked(self, widget):
+    selected = self.tvwDevices.get_selection().get_selected()[1]
+    if selected:
+      dialog = ServicesDialog(self.winMain, False)
+      dialog.show()
 
   @thread_safe
   @get_current_thread_ident

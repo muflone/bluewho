@@ -56,6 +56,7 @@ DIR_BT_ICONS = os.path.join(DIR_DATA, 'icons')
 # Set the paths for the UI files
 FILE_UI_MAIN = os.path.join(DIR_UI, 'main.glade')
 FILE_UI_ABOUT = os.path.join(DIR_UI, 'about.glade')
+FILE_UI_SERVICES = os.path.join(DIR_UI, 'services.glade')
 FILE_UI_APPMENU = os.path.join(DIR_UI, 'appmenu.ui')
 # Set the paths for the data files
 FILE_ICON = os.path.join(DIR_DATA, 'bluewho.png')
