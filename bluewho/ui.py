@@ -46,6 +46,14 @@ class MainWindow(object):
       self.winMain.move(
         self.settings.get_value('left', 0),
         self.settings.get_value('top', 0))
+    # Restore the devices list
+    for device in self.settings.get_value('devices'):
+      self.add_device(
+        device['address'],
+        device['name'],
+        device['class'],
+        device['lastseen'],
+        False)
     # Load the others dialogs
     self.about = AboutWindow(self.winMain, False)
     # Set other properties

@@ -65,6 +65,23 @@ class Settings(object):
         self.settings['width'] = self.config.getint(SECTION_MAINWIN, 'width')
       if self.config.has_option(SECTION_MAINWIN, 'height'):
         self.settings['height'] = self.config.getint(SECTION_MAINWIN, 'height')
+      self.load_devices()
+
+  def load_devices(self):
+    "Load devices list from configuration file"
+    self.settings['devices'] = []
+    with open(FILE_SETTINGS_DEVICES, 'r') as f:
+      devices = f.read().split('\n>\n')
+      for device in devices:
+        if len(device) > 0:
+          device = device.split('\n')
+          self.settings['devices'].append({
+            'address': device[0],
+            'name': device[1],
+            'class': int(device[2]),
+            'lastseen': device[3],
+          })
+      f.close()
 
   def get_value(self, name, default=None):
     return self.settings.get(name, default)
