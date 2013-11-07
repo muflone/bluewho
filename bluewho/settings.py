@@ -69,19 +69,21 @@ class Settings(object):
   def load_devices(self):
     "Return the devices list from the configuration file"
     devices = []
-    with open(FILE_SETTINGS_DEVICES, 'r') as f:
-      # Each device is separated by a single line with >
-      lines = f.read().split('\n>\n')
-      for device in lines:
-        if device:
-          device = device.split('\n')
-          devices.append({
-            'address': device[0],
-            'name': device[1],
-            'class': int(device[2]),
-            'lastseen': device[3],
-          })
-      f.close()
+    if os.path.exists(FILE_SETTINGS_DEVICES):
+      self.logText('Loading the devices list', VERBOSE_LEVEL_NORMAL)
+      with open(FILE_SETTINGS_DEVICES, 'r') as f:
+        # Each device is separated by a single line with >
+        lines = f.read().split('\n>\n')
+        for device in lines:
+          if device:
+            device = device.split('\n')
+            devices.append({
+              'address': device[0],
+              'name': device[1],
+              'class': int(device[2]),
+              'lastseen': device[3],
+            })
+        f.close()
     return devices
 
   def save_devices(self, devices):
