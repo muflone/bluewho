@@ -215,7 +215,7 @@ msgstr "immagine"
 
 #: ../src/btsupport.py:65 ../src/btsupport.py:73
 msgid "uncategorized"
-msgstr "sernza categoria"
+msgstr "senza categoria"
 
 #: ../src/btsupport.py:79
 msgid "desktop workstation"
