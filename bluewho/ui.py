@@ -47,7 +47,7 @@ class MainWindow(object):
         self.settings.get_value('left', 0),
         self.settings.get_value('top', 0))
     # Restore the devices list
-    for device in self.settings.get_value('devices'):
+    for device in self.settings.load_devices():
       self.add_device(
         device['address'],
         device['name'],
