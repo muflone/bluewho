@@ -48,6 +48,8 @@ class ModelDevices(object):
     device_type = self.btsupport.get_device_type(major_class)
     icon_filename, device_subtype = self.btsupport.get_device_detail(
       major_class, minor_class)
+    if device_subtype == 'adapter':
+      device_type = 'adapter'
     icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
     if not os.path.isfile(icon_path):
       icon_path = os.path.join(DIR_BT_ICONS, 'unknown.png')
