@@ -29,10 +29,11 @@ class ModelServices(object):
     "Clear the model"
     return self.model.clear()
 
-  def add_service(self, service, protocol, name):
+  def add_service(self, service):
     "Add devices's services to the list"
-    return self.model.append([
-      service,
-      protocol,
-      name
-    ])
+    # Refer to bluetooth.find_service help section
+    return self.model.append((
+      service['name'],
+      service['protocol'],
+      service['port']
+    ))

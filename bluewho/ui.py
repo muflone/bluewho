@@ -241,9 +241,17 @@ class MainWindow(object):
     return False
 
   def on_toolbServices_clicked(self, widget):
+    "Show the available services dialog for the selected device"
     selected = self.tvwDevices.get_selection().get_selected()[1]
     if selected:
+      # Get the device address
+      address = self.model.get_type(selected) == 'adapter' and \
+        'localhost' or self.model.get_address(selected)
+      # Show the services dialog
       dialog = ServicesDialog(self.winMain, False)
+      # Load the list of enabled services
+      for service in self.btsupport.get_services(address):
+        dialog.model.add_service(service)
       dialog.show()
 
   @thread_safe

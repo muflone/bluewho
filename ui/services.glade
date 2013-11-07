@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.0 on Thu Nov  7 10:08:54 2013 -->
+<!-- Generated with glade 3.16.0 on Thu Nov  7 11:46:47 2013 -->
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkListStore" id="modelServices">
     <columns>
-      <!-- column-name ColName -->
+      <!-- column-name colName -->
       <column type="gchararray"/>
-      <!-- column-name ColProtocol -->
+      <!-- column-name colProtocol -->
       <column type="gchararray"/>
-      <!-- column-name ColChannel -->
-      <column type="gchararray"/>
+      <!-- column-name colChannel -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkDialog" id="dialogServices">
     <property name="can_focus">False</property>
-    <property name="default_width">320</property>
-    <property name="default_height">260</property>
+    <property name="default_width">400</property>
+    <property name="default_height">300</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
@@ -32,9 +32,13 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="model">modelServices</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection1"/>
+                </child>
                 <child>
                   <object class="GtkTreeViewColumn" id="colName">
                     <property name="title" translatable="yes">Service name</property>
+                    <property name="expand">True</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellName"/>
                       <attributes>
@@ -58,7 +62,9 @@
                   <object class="GtkTreeViewColumn" id="colChannel">
                     <property name="title" translatable="yes">Channel</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellChannel"/>
+                      <object class="GtkCellRendererText" id="cellChannel">
+                        <property name="xalign">0.50999999046325684</property>
+                      </object>
                       <attributes>
                         <attribute name="text">2</attribute>
                       </attributes>

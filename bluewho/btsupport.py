@@ -160,3 +160,7 @@ class BluetoothSupport(object):
     "Return the device detail type or fallback to the unknown device"
     return self.classes.get(major_class, BT_DEVICETYPE_UNKNOWN).get(
       minor_class, self.classes[BT_DEVICETYPE_UNKNOWN][0])
+
+  def get_services(self, address):
+    "Return the list of the device's available services"
+    return bluetooth.find_service(address=address)

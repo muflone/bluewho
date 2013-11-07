@@ -76,3 +76,12 @@ class ModelDevices(object):
 
   def get_model(self):
     return self.model
+
+  def get_type(self, path):
+    return self.model[path][self.__class__.COL_TYPE]
+
+  def get_subtype(self, path):
+    return self.model[path][self.__class__.COL_SUBTYPE]
+
+  def get_address(self, path):
+    return self.model[path][self.__class__.COL_ADDRESS]
