@@ -64,7 +64,10 @@ class MainWindow(object):
     builder.add_from_file(FILE_UI_MAIN)
     # Obtain widget references
     self.winMain = builder.get_object("winMain")
-    self.model = ModelDevices(builder.get_object('modelDevices'), self.settings, self.btsupport)
+    self.model = ModelDevices(
+      builder.get_object('modelDevices'),
+      self.settings,
+      self.btsupport)
     self.tvwDevices = builder.get_object('tvwDevices')
     self.toolbDetect = builder.get_object('toolbDetect')
     self.statusScan = builder.get_object('statusScan')
