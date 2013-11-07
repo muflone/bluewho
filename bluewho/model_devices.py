@@ -19,6 +19,7 @@
 ##
 
 import os.path
+from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 from bluewho.constants import *
 from bluewho.functions import *
@@ -77,11 +78,30 @@ class ModelDevices(object):
   def get_model(self):
     return self.model
 
-  def get_type(self, path):
-    return self.model[path][self.__class__.COL_TYPE]
+  def path_from_iter(self, treeiter):
+    return type(treeiter) is Gtk.TreeModelRow and treeiter.path or treeiter
 
-  def get_subtype(self, path):
-    return self.model[path][self.__class__.COL_SUBTYPE]
+  def get_model_data(self, treeiter, column):
+    return self.model[self.path_from_iter(treeiter)][column]
 
-  def get_address(self, path):
-    return self.model[path][self.__class__.COL_ADDRESS]
+  def get_name(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_NAME)
+
+  def get_class(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_CLASS)
+
+  def get_type(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_TYPE)
+
+  def get_subtype(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_SUBTYPE)
+
+  def get_address(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_ADDRESS)
+
+  def get_last_seen(self, treeiter):
+    return self.get_model_data(treeiter, self.__class__.COL_LASTSEEN)
+
+  def __iter__(self):
+    for each in self.model:
+      yield self.model[each.path]
