@@ -140,19 +140,19 @@ class BluetoothSupport(object):
 
   def get_device_type(self, major_class):
     "Return the device major class"
-    major_classes = (
-      (BT_DEVICETYPE_UNKNOWN, _('unknown')),
-      (BT_DEVICETYPE_COMPUTER, _('computer')),
-      (BT_DEVICETYPE_PHONE, _('phone')),
-      (BT_DEVICETYPE_NETWORK, _('network')),
-      (BT_DEVICETYPE_AUDIOVIDEO, _('audio-video')),
-      (BT_DEVICETYPE_PERIPHERAL, _('peripheral')),
-      (BT_DEVICETYPE_IMAGING, _('imaging')),
-      (BT_DEVICETYPE_MISCELLANEOUS, _('miscellaneous')),
-      (BT_DEVICETYPE_TOY, _('toy')),
-      (BT_DEVICETYPE_HEALTH, _('health')),
-    )
-    if major_class >= len(major_classes):
+    major_classes = {
+      BT_DEVICETYPE_UNKNOWN: 'unknown',
+      BT_DEVICETYPE_COMPUTER: 'computer',
+      BT_DEVICETYPE_PHONE: 'phone',
+      BT_DEVICETYPE_NETWORK: 'network',
+      BT_DEVICETYPE_AUDIOVIDEO: 'audio-video',
+      BT_DEVICETYPE_PERIPHERAL: 'peripheral',
+      BT_DEVICETYPE_IMAGING: 'imaging',
+      BT_DEVICETYPE_MISCELLANEOUS: 'miscellaneous',
+      BT_DEVICETYPE_TOY: 'toy',
+      BT_DEVICETYPE_HEALTH: 'health',
+    }
+    if not major_classes.has_key(major_class):
       major_class = BT_DEVICETYPE_UNKNOWN        # Fallback to unknown class
     return major_classes[major_class]
 

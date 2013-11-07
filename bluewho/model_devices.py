@@ -52,7 +52,7 @@ class ModelDevices(object):
     return self.model.append([
       GdkPixbuf.Pixbuf.new_from_file(icon_path),
       device_class,
-      device_type[1],
+      device_type,
       device_detail[1],
       name,
       address,
