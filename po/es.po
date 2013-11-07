@@ -268,33 +268,33 @@ msgstr "red totalmente disponible"
 
 #: ../src/btsupport.py:97
 #, python-format
-msgid "network 1-17%% used"
-msgstr "red utilizada al 1-17%%"
+msgid "network 1-17% used"
+msgstr "red utilizada al 1-17%"
 
 #: ../src/btsupport.py:98
 #, python-format
-msgid "network 17-33%% used"
-msgstr "red utilizada al 17-33%%"
+msgid "network 17-33% used"
+msgstr "red utilizada al 17-33%"
 
 #: ../src/btsupport.py:99
 #, python-format
-msgid "network 33-50%% used"
-msgstr "red utilizada al 33-50%%"
+msgid "network 33-50% used"
+msgstr "red utilizada al 33-50%"
 
 #: ../src/btsupport.py:100
 #, python-format
-msgid "network 50-67%% used"
-msgstr "red utilizada 50-67%%"
+msgid "network 50-67% used"
+msgstr "red utilizada 50-67%"
 
 #: ../src/btsupport.py:101
 #, python-format
-msgid "network 67-83%% used"
-msgstr "red utilizada 67-83%%"
+msgid "network 67-83% used"
+msgstr "red utilizada 67-83%"
 
 #: ../src/btsupport.py:102
 #, python-format
-msgid "network 83-99%% used"
-msgstr "red utilizada 83-99%%"
+msgid "network 83-99% used"
+msgstr "red utilizada 83-99%"
 
 #: ../src/btsupport.py:103
 msgid "network unavailable"

@@ -93,12 +93,12 @@ def getDeviceDetail(major_class, minor_class):
   elif major_class == DEVICETYPE_NETWORK:
     return {
       0: (0, _('network fully available')),
-      1: (1, _('network 1-17%% used')),
-      2: (2, _('network 17-33%% used')),
-      3: (3, _('network 33-50%% used')),
-      4: (4, _('network 50-67%% used')),
-      5: (5, _('network 67-83%% used')),
-      6: (6, _('network 83-99%% used')),
+      1: (1, _('network 1-17% used')),
+      2: (2, _('network 17-33% used')),
+      3: (3, _('network 33-50% used')),
+      4: (4, _('network 50-67% used')),
+      5: (5, _('network 67-83% used')),
+      6: (6, _('network 83-99% used')),
       7: (7, _('network unavailable'))
     }.get(minor_class >> 3, (0, uncategorized))  # 3 lowers bit unused
   elif major_class == DEVICETYPE_AUDIOVIDEO:

@@ -21,12 +21,12 @@
 
 # Class 3 BT_DEVICETYPE_NETWORK
 3 | 00 | network-0.png | network fully available
-3 | 08 | network-1.png | network 1-17%% used
-3 | 16 | network-2.png | network 17-33%% used
-3 | 24 | network-3.png | network 33-50%% used
-3 | 32 | network-4.png | network 50-67%% used
-3 | 40 | network-5.png | network 67-83%% used
-3 | 48 | network-6.png | network 83-99%% used
+3 | 08 | network-1.png | network 1-17% used
+3 | 16 | network-2.png | network 17-33% used
+3 | 24 | network-3.png | network 33-50% used
+3 | 32 | network-4.png | network 50-67% used
+3 | 40 | network-5.png | network 67-83% used
+3 | 48 | network-6.png | network 83-99% used
 3 | 56 | network-7.png | network unavailable
 
 # Class 4 BT_DEVICETYPE_AUDIOVIDEO
