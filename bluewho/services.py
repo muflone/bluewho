@@ -19,9 +19,9 @@
 ##
 
 from gi.repository import Gtk
-from gi.repository.GdkPixbuf import Pixbuf
 from bluewho.constants import *
 from bluewho.functions import *
+from bluewho.model_services import ModelServices
 
 class ServicesDialog(object):
   def __init__(self, winParent, show = False):
@@ -30,6 +30,7 @@ class ServicesDialog(object):
     builder.add_from_file(FILE_UI_SERVICES)
     # Obtain widget references
     self.dialog = builder.get_object("dialogServices")
+    self.model = ModelServices(builder.get_object('modelServices'))
     # Set various properties
     self.dialog.set_title(_('Available services'))
     self.dialog.set_icon_from_file(FILE_ICON)
