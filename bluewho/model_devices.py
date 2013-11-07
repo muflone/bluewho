@@ -46,8 +46,9 @@ class ModelDevices(object):
     "Add a new device to the list and pops notification"
     minor_class, major_class, services_class = self.btsupport.get_classes(device_class)
     device_type = self.btsupport.get_device_type(major_class)
-    device_detail = self.btsupport.get_device_detail(major_class, minor_class)
-    icon_path = os.path.join(DIR_BT_ICONS, device_detail[0])
+    icon_filename, device_subtype = self.btsupport.get_device_detail(
+      major_class, minor_class)
+    icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
     if not os.path.isfile(icon_path):
       icon_path = os.path.join(DIR_BT_ICONS, 'unknown.png')
 
@@ -56,8 +57,8 @@ class ModelDevices(object):
       device_class,
       device_type,
       _(device_type),
-      device_detail[1],
-      _(device_detail[1]),
+      device_subtype,
+      _(device_subtype),
       name,
       address,
       time
