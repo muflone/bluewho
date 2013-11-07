@@ -75,33 +75,43 @@ class ModelDevices(object):
 #      proc = subprocess.Popen(command, shell=True)
 #      proc.communicate()
 
-  def get_model(self):
-    return self.model
-
   def path_from_iter(self, treeiter):
+    "Get path from iter"
     return type(treeiter) is Gtk.TreeModelRow and treeiter.path or treeiter
 
   def get_model_data(self, treeiter, column):
+    "Get the data from a column of a treeiter"
     return self.model[self.path_from_iter(treeiter)][column]
 
   def get_name(self, treeiter):
+    "Get the device name"
     return self.get_model_data(treeiter, self.__class__.COL_NAME)
 
   def get_class(self, treeiter):
+    "Get the device class"
     return self.get_model_data(treeiter, self.__class__.COL_CLASS)
 
   def get_type(self, treeiter):
+    "Get the device type (untranslated)"
     return self.get_model_data(treeiter, self.__class__.COL_TYPE)
 
   def get_subtype(self, treeiter):
+    "Get the device sub type (untranslated)"
     return self.get_model_data(treeiter, self.__class__.COL_SUBTYPE)
 
   def get_address(self, treeiter):
+    "Get the device address"
     return self.get_model_data(treeiter, self.__class__.COL_ADDRESS)
 
   def get_last_seen(self, treeiter):
+    "Get the device last seen date"
     return self.get_model_data(treeiter, self.__class__.COL_LASTSEEN)
 
   def __iter__(self):
+    "Iter over the whole model rows"
     for each in self.model:
       yield self.model[each.path]
+
+  def __len__(self):
+    "Get the devices count"
+    return len(self.model)
