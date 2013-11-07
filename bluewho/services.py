@@ -31,7 +31,7 @@ class ServicesDialog(object):
     # Obtain widget references
     self.dialog = builder.get_object("dialogServices")
     # Set various properties
-    # Set various properties
+    self.dialog.set_title(_('Available services'))
     self.dialog.set_icon_from_file(FILE_ICON)
     self.dialog.set_transient_for(winParent)
     self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
