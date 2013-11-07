@@ -104,6 +104,7 @@ class MainWindow(object):
     self.thread_scanner = None
     self.about.destroy()
     self.settings.set_sizes(self.winMain)
+    self.settings.save_devices(self.model)
     self.settings.save()
     self.winMain.destroy()
     self.application.quit()

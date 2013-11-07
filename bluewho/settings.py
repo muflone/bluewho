@@ -84,6 +84,18 @@ class Settings(object):
       f.close()
     return devices
 
+  def save_devices(self, devices):
+    "Save devices list to filename"
+    with open(FILE_SETTINGS_DEVICES, 'w') as f:
+      for device in devices:
+        f.write('%s\n%s\n%d\n%s\n>\n' % (
+          devices.get_address(device),
+          devices.get_name(device),
+          devices.get_class(device),
+          devices.get_last_seen(device),
+        ))
+      f.close()
+
   def get_value(self, name, default=None):
     return self.settings.get(name, default)
 
