@@ -135,7 +135,6 @@ class MainWindow(object):
     self.model.clear()
     #foundDevices.clear()
 
-  @get_current_thread_ident
   def on_new_device_cb(self, name, address, device_class):
     "Callback function called when a new device has been discovered"
     modelRow = None
@@ -169,7 +168,6 @@ class MainWindow(object):
       pass
 
   @thread_safe
-  @get_current_thread_ident
   def add_device(self, address, name, device_class, time, notify):
     self.set_status_bar_message('Found new device %s [%s]' % (name, address))
     self.model.add_device(address, name, device_class, time, notify)
@@ -246,7 +244,6 @@ class MainWindow(object):
       dialog.show()
 
   @thread_safe
-  @get_current_thread_ident
   def set_status_bar_message(self, message=None):
     self.statusScan.pop(self.statusScanContextId)
     if message is not None:
