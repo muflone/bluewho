@@ -67,14 +67,5 @@ class ModelDevices(object):
 #      proc = subprocess.Popen(command, shell=True)
 #      proc.communicate()
 
-  def get_selected(self, path):
-    return self.model[path][self.__class__.COL_SELECTED]
-
-  def set_selected(self, path, value):
-    self.model[path][self.__class__.COL_SELECTED] = value
-
-  def get_file_path(self, path):
-    return self.model[path][self.__class__.COL_FILEPATH]
-
   def get_model(self):
     return self.model
