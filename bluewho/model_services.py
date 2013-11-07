@@ -18,26 +18,19 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
-import os.path
-from gi.repository import GdkPixbuf
-from bluewho.constants import *
-from bluewho.functions import *
-
 class ModelServices(object):
   COL_NAME = 0
   COL_PROTOCOL = 1
   COL_CHANNEL = 2
-  def __init__(self, model, settings, btsupport):
+  def __init__(self, model):
     self.model = model
-    self.settings = settings
-    self.btsupport = btsupport
 
   def clear(self):
     "Clear the model"
     return self.model.clear()
 
-  def add_service(self, service, protocol, channel):
-    "Add a new service to the list"
+  def add_service(self, service, protocol, name):
+    "Add devices's services to the list"
     return self.model.append([
       service,
       protocol,
