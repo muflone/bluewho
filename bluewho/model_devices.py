@@ -83,21 +83,43 @@ class ModelDevices(object):
     "Get the data from a column of a treeiter"
     return self.model[self.path_from_iter(treeiter)][column]
 
+  def set_model_data(self, treeiter, column, value):
+    "Set the data in a column of a treeiter"
+    self.model[self.path_from_iter(treeiter)][column] = value
+
   def get_name(self, treeiter):
     "Get the device name"
     return self.get_model_data(treeiter, self.__class__.COL_NAME)
+
+  def set_name(self, treeiter, value):
+    "Set the device name"
+    self.set_model_data(treeiter, self.__class__.COL_NAME, value)
 
   def get_class(self, treeiter):
     "Get the device class"
     return self.get_model_data(treeiter, self.__class__.COL_CLASS)
 
+  def set_class(self, treeiter, value):
+    "Set the device class"
+    self.set_model_data(treeiter, self.__class__.COL_CLASS, value)
+
   def get_type(self, treeiter):
     "Get the device type (untranslated)"
     return self.get_model_data(treeiter, self.__class__.COL_TYPE)
 
+  def set_type(self, treeiter, value):
+    "Set the device type (untranslated)"
+    self.set_model_data(treeiter, self.__class__.COL_TYPE, value)
+    self.set_model_data(treeiter, self.__class__.COL_TYPE_TRANSLATED, _(value))
+
   def get_subtype(self, treeiter):
     "Get the device sub type (untranslated)"
     return self.get_model_data(treeiter, self.__class__.COL_SUBTYPE)
+
+  def set_subtype(self, treeiter, value):
+    "Set the device sub type (untranslated)"
+    self.set_model_data(treeiter, self.__class__.COL_SUBTYPE, value)
+    self.set_model_data(treeiter, self.__class__.COL_SUBTYPE_TRANSLATED, _(value))
 
   def get_address(self, treeiter):
     "Get the device address"
@@ -106,6 +128,10 @@ class ModelDevices(object):
   def get_last_seen(self, treeiter):
     "Get the device last seen date"
     return self.get_model_data(treeiter, self.__class__.COL_LASTSEEN)
+
+  def set_last_seen(self, treeiter, value):
+    "Set the device last seen date"
+    self.set_model_data(treeiter, self.__class__.COL_LASTSEEN, value)
 
   def __iter__(self):
     "Iter over the whole model rows"
