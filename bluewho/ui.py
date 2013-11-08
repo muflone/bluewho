@@ -193,9 +193,6 @@ class MainWindow(object):
       if self.thread_scanner.paused:
         print self.thread_scanner.event.wait()
         self.thread_scanner.event.clear()
-      # Clear the model before to populate it again (only for testing purposes)
-      self.on_toolbClear_clicked(None)
-
       # Add local adapters
       for devices_count in range(10):
         name, address = self.btsupport.get_localAdapter(devices_count)

@@ -39,6 +39,7 @@ class ModelDevices(object):
     self.model = model
     self.settings = settings
     self.btsupport = btsupport
+    self.devices = {}
 
   def clear(self):
     "Clear the model"
@@ -57,20 +58,59 @@ class ModelDevices(object):
       icon_filename = 'unknown.png'
       icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
 
-    treeiter = self.model.append([
-      GdkPixbuf.Pixbuf.new_from_file(icon_path),
-      icon_path,
-      device_class,
-      device_type,
-      _(device_type),
-      device_subtype,
-      _(device_subtype),
-      name,
-      address,
-      last_seen
-    ])
-    self.settings.logText('Added new device %s (%s)' % (name, address),
-      VERBOSE_LEVEL_MAX)
+    if self.devices.has_key(address):
+      # Update the existing device in the model
+      treeiter = self.devices[address]
+      # Update icon
+      old_value = self.get_icon(treeiter)
+      if icon_path != old_value:
+        self.settings.logText('Updated device %s icon from %s to %s' % (
+          name, os.path.basename(old_value), os.path.basename(icon_path)),
+          VERBOSE_LEVEL_MAX)
+        self.set_icon(treeiter, icon_path)
+      # Update device name
+      old_value = self.get_name(treeiter)
+      if name and name != old_value:
+        self.settings.logText('Updated device %s name from %s to %s' % (
+          name, old_value, name), VERBOSE_LEVEL_MAX)
+        self.set_name(treeiter, name)
+      # Update device class
+      old_value = self.get_class(treeiter)
+      if device_class != old_value:
+        self.settings.logText('Updated device %s class from %d to %d' % (
+          name, old_value, device_class), VERBOSE_LEVEL_MAX)
+        self.set_class(treeiter, device_class)
+      # Update device type
+      old_value = self.get_type(treeiter)
+      if device_type != old_value:
+        self.settings.logText('Updated device %s type from %s to %s' % (
+          name, old_value, device_type), VERBOSE_LEVEL_MAX)
+        self.set_type(treeiter, device_type)
+      # Update device subtype
+      old_value = self.get_subtype(treeiter)
+      if device_subtype != old_value:
+        self.settings.logText('Updated device %s subtype from %s to %s' % (
+          name, old_value, device_subtype), VERBOSE_LEVEL_MAX)
+        self.set_subtype(treeiter, device_subtype)
+      # Update device last seen time (always)
+      self.set_last_seen(treeiter, last_seen)
+    else:
+      # Add a new device to the model
+      treeiter = self.model.append([
+        GdkPixbuf.Pixbuf.new_from_file(icon_path),
+        icon_path,
+        device_class,
+        device_type,
+        _(device_type),
+        device_subtype,
+        _(device_subtype),
+        name,
+        address,
+        last_seen
+      ])
+      self.devices[address] = treeiter
+      self.settings.logText('Added new device %s (%s)' % (name, address),
+        VERBOSE_LEVEL_MAX)
 #  if notify:
 #    if settings.get('play sound'):
 #      playSound()
