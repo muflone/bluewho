@@ -89,6 +89,16 @@ class ModelDevices(object):
     "Set the data in a column of a treeiter"
     self.model[self.path_from_iter(treeiter)][column] = value
 
+  def get_icon(self, treeiter):
+    "Get the device icon"
+    return self.get_model_data(treeiter, self.__class__.COL_ICON_NAME)
+
+  def set_icon(self, treeiter, value):
+    "Set the device icon"
+    self.set_model_data(treeiter, self.__class__.COL_ICON_NAME, value)
+    self.set_model_data(treeiter, self.__class__.COL_ICON, 
+      GdkPixbuf.Pixbuf.new_from_file(value))
+
   def get_name(self, treeiter):
     "Get the device name"
     return self.get_model_data(treeiter, self.__class__.COL_NAME)
