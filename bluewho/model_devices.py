@@ -43,7 +43,7 @@ class ModelDevices(object):
     "Clear the model"
     return self.model.clear()
 
-  def add_device(self, address, name, device_class, time, notify):
+  def add_device(self, address, name, device_class, last_seen, notify):
     "Add a new device to the list and pops notification"
     minor_class, major_class, services_class = self.btsupport.get_classes(device_class)
     device_type = self.btsupport.get_device_type(major_class)
@@ -64,7 +64,7 @@ class ModelDevices(object):
       _(device_subtype),
       name,
       address,
-      time
+      last_seen
     ])
 #  if notify:
 #    if settings.get('play sound'):
