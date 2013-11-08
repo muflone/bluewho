@@ -26,14 +26,15 @@ from bluewho.functions import *
 
 class ModelDevices(object):
   COL_ICON = 0
-  COL_CLASS = 1
-  COL_TYPE = 2
-  COL_TYPE_TRANSLATED = 3
-  COL_SUBTYPE = 4
-  COL_SUBTYPE_TRANSLATED = 5
-  COL_NAME = 6
-  COL_ADDRESS = 7
-  COL_LASTSEEN = 8
+  COL_ICON_NAME = 1
+  COL_CLASS = 2
+  COL_TYPE = 3
+  COL_TYPE_TRANSLATED = 4
+  COL_SUBTYPE = 5
+  COL_SUBTYPE_TRANSLATED = 6
+  COL_NAME = 7
+  COL_ADDRESS = 8
+  COL_LASTSEEN = 9
   def __init__(self, model, settings, btsupport):
     self.model = model
     self.settings = settings
@@ -57,6 +58,7 @@ class ModelDevices(object):
 
     return self.model.append([
       GdkPixbuf.Pixbuf.new_from_file(icon_path),
+      icon_path,
       device_class,
       device_type,
       _(device_type),

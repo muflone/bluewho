@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.0 on Thu Nov  7 10:55:20 2013 -->
+<!-- Generated with glade 3.16.0 on Fri Nov  8 14:30:51 2013 -->
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkListStore" id="modelDevices">
     <columns>
       <!-- column-name colIcon -->
       <column type="GdkPixbuf"/>
+      <!-- column-name colIconName -->
+      <column type="gchararray"/>
       <!-- column-name colClass -->
       <column type="gint"/>
       <!-- column-name colType -->
@@ -176,13 +178,13 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellType"/>
                           <attributes>
-                            <attribute name="text">3</attribute>
+                            <attribute name="text">4</attribute>
                           </attributes>
                         </child>
                         <child>
                           <object class="GtkCellRendererText" id="cellDetail"/>
                           <attributes>
-                            <attribute name="text">5</attribute>
+                            <attribute name="text">6</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -194,7 +196,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellName"/>
                           <attributes>
-                            <attribute name="text">6</attribute>
+                            <attribute name="text">7</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -205,7 +207,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellAddress"/>
                           <attributes>
-                            <attribute name="text">7</attribute>
+                            <attribute name="text">8</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -216,7 +218,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellLastSeen"/>
                           <attributes>
-                            <attribute name="text">8</attribute>
+                            <attribute name="text">9</attribute>
                           </attributes>
                         </child>
                       </object>
