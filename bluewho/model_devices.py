@@ -111,14 +111,16 @@ class ModelDevices(object):
       self.devices[address] = treeiter
       self.settings.logText('Added new device %s (%s)' % (name, address),
         VERBOSE_LEVEL_MAX)
-#  if notify:
-#    if settings.get('play sound'):
-#      playSound()
-#    if settings.get('show notification'):
-#      command = settings.get('notify cmd').replace('\\n', '\n') % {
-#        'icon': iconPath, 'name': name and name or '', 'address': address }
-#      proc = subprocess.Popen(command, shell=True)
-#      proc.communicate()
+      # Execute notification for new devices
+      if notify:
+        print 'notify'
+        #if settings.get('play sound'):
+        #  playSound()
+        #if settings.get('show notification'):
+        #  command = settings.get('notify cmd').replace('\\n', '\n') % {
+        #    'icon': iconPath, 'name': name and name or '', 'address': address }
+        #  proc = subprocess.Popen(command, shell=True)
+        #  proc.communicate()
     return treeiter
 
   def path_from_iter(self, treeiter):
