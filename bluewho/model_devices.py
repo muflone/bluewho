@@ -57,7 +57,7 @@ class ModelDevices(object):
       icon_filename = 'unknown.png'
       icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
 
-    return self.model.append([
+    treeiter = self.model.append([
       GdkPixbuf.Pixbuf.new_from_file(icon_path),
       icon_path,
       device_class,
@@ -69,6 +69,8 @@ class ModelDevices(object):
       address,
       last_seen
     ])
+    self.settings.logText('Added new device %s (%s)' % (name, address),
+      VERBOSE_LEVEL_MAX)
 #  if notify:
 #    if settings.get('play sound'):
 #      playSound()
@@ -77,6 +79,7 @@ class ModelDevices(object):
 #        'icon': iconPath, 'name': name and name or '', 'address': address }
 #      proc = subprocess.Popen(command, shell=True)
 #      proc.communicate()
+    return treeiter
 
   def path_from_iter(self, treeiter):
     "Get path from iter"
