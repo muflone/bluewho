@@ -42,7 +42,8 @@ class ModelDevices(object):
     self.devices = {}
 
   def clear(self):
-    "Clear the model"
+    "Clear the devices list"
+    self.devices = {}
     return self.model.clear()
 
   def add_device(self, address, name, device_class, last_seen, notify):
