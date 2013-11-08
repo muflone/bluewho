@@ -60,12 +60,10 @@ class MainWindow(object):
     self.btsupport.set_new_device_cb(self.on_new_device_cb)
     self.thread_scanner = None
 
-  @get_current_thread_ident
   def run(self):
     "Show the UI"
     self.winMain.show_all()
 
-  @get_current_thread_ident
   def loadUI(self):
     "Load the interface UI"
     builder = Gtk.Builder()
@@ -88,7 +86,6 @@ class MainWindow(object):
     # Connect signals from the glade file to the functions with the same name
     builder.connect_signals(self)
 
-  @get_current_thread_ident
   def on_winMain_delete_event(self, widget, event):
     "Close the application"
     if self.thread_scanner:
@@ -109,7 +106,6 @@ class MainWindow(object):
     self.winMain.destroy()
     self.application.quit()
 
-  @get_current_thread_ident
   def on_toolbAbout_clicked(self, widget):
     "Show the about dialog"
     self.about.show()
