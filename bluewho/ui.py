@@ -158,23 +158,7 @@ class MainWindow(object):
         name = self.btsupport.get_device_name(address)
     if name is None:
       name = ''
-    # If device doesn't exist then add it
-    if not modelRow:
-      self.add_device(
-        address,
-        name,
-        device_class,
-        get_current_time(),
-        True)
-      #modelRow = self.model[-1]
-      #foundDevices[address] = modelRow
-    else:
-      # Sets the new name if it didn't exist
-      #if not modelRow[COL_NAME] and name:
-      #  modelRow[COL_NAME] = name
-      ## Update seen time
-      #modelRow[COL_LASTSEEN] = getCurrentTime()
-      pass
+    self.add_device(address, name, device_class, get_current_time(), True)
 
   @thread_safe
   def add_device(self, address, name, device_class, time, notify):
@@ -211,19 +195,8 @@ class MainWindow(object):
         else:
           # No more devices found
           if devices_count==0:
-            print 'error: no local devices found, unable to continue'
-            #idle_add(GtkMessageDialogOK,
-            #  self.winMain, 
-            #  _('No local devices found during detection.'),
-            #  Gtk.MessageType.WARNING)
-            GtkMessageDialogOK(self.winMain, _('No local devices found during detection.'), Gtk.MessageType.WARNING, False)
+            print _('No local devices found during detection.')
             self.set_status_bar_message(_('No local devices found during detection.'))
-            # Disable autoscan
-            self.thread_scanner = None
-            idle_add(self.spinnerScan.stop)
-            idle_add(self.spinnerScan.set_visible, False)
-            idle_add(self.toolbDetect.set_active, False)
-            return True
           break
 
       # What is this? useful for testing purposes, you can just ignore it
