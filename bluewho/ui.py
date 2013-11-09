@@ -25,8 +25,8 @@ from bluewho.constants import *
 from bluewho.functions import *
 from bluewho.settings import Settings
 from bluewho.model_devices import ModelDevices
-from bluewho.about import AboutWindow
-from bluewho.services import ServicesDialog
+from bluewho.dialog_about import DialogAbout
+from bluewho.dialog_services import DialogServices
 from bluewho.daemon_thread import DaemonThread
 
 class MainWindow(object):
@@ -55,7 +55,7 @@ class MainWindow(object):
         device['lastseen'],
         False)
     # Load the others dialogs
-    self.about = AboutWindow(self.winMain, False)
+    self.about = DialogAbout(self.winMain, False)
     # Set other properties
     self.btsupport.set_new_device_cb(self.on_new_device_cb)
     self.thread_scanner = None
@@ -251,7 +251,7 @@ class MainWindow(object):
       address = self.model.get_type(selected) == 'adapter' and \
         'localhost' or self.model.get_address(selected)
       # Show the services dialog
-      dialog = ServicesDialog(self.winMain, False)
+      dialog = DialogServices(self.winMain, False)
       # Load the list of enabled services
       for service in self.btsupport.get_services(address):
         dialog.model.add_service(service)

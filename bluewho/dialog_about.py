@@ -23,7 +23,7 @@ from gi.repository.GdkPixbuf import Pixbuf
 from bluewho.constants import *
 from bluewho.functions import *
 
-class AboutWindow(object):
+class DialogAbout(object):
   def __init__(self, winParent, show = False):
     # Retrieve the translators list
     translators = []

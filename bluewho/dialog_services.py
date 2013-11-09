@@ -23,7 +23,7 @@ from bluewho.constants import *
 from bluewho.functions import *
 from bluewho.model_services import ModelServices
 
-class ServicesDialog(object):
+class DialogServices(object):
   def __init__(self, winParent, show = False):
     # Load the user interface
     builder = Gtk.Builder()
