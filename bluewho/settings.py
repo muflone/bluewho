@@ -26,7 +26,7 @@ import ConfigParser
 from bluewho.functions import *
 from bluewho.constants import *
 
-SECTION_MAINWIN = 'startup'
+SECTION_MAINWINDOW = 'main window'
 
 class Settings(object):
   def __init__(self):
@@ -54,17 +54,17 @@ class Settings(object):
 
   def load(self):
     "Load window settings"
-    if self.config.has_section(SECTION_MAINWIN):
+    if self.config.has_section(SECTION_MAINWINDOW):
       self.logText('Retrieving window settings', VERBOSE_LEVEL_NORMAL)
       # Retrieve window position and size
-      if self.config.has_option(SECTION_MAINWIN, 'left'):
-        self.settings['left'] = self.config.getint(SECTION_MAINWIN, 'left')
-      if self.config.has_option(SECTION_MAINWIN, 'top'):
-        self.settings['top'] = self.config.getint(SECTION_MAINWIN, 'top')
-      if self.config.has_option(SECTION_MAINWIN, 'width'):
-        self.settings['width'] = self.config.getint(SECTION_MAINWIN, 'width')
-      if self.config.has_option(SECTION_MAINWIN, 'height'):
-        self.settings['height'] = self.config.getint(SECTION_MAINWIN, 'height')
+      if self.config.has_option(SECTION_MAINWINDOW, 'left'):
+        self.settings['left'] = self.config.getint(SECTION_MAINWINDOW, 'left')
+      if self.config.has_option(SECTION_MAINWINDOW, 'top'):
+        self.settings['top'] = self.config.getint(SECTION_MAINWINDOW, 'top')
+      if self.config.has_option(SECTION_MAINWINDOW, 'width'):
+        self.settings['width'] = self.config.getint(SECTION_MAINWINDOW, 'width')
+      if self.config.has_option(SECTION_MAINWINDOW, 'height'):
+        self.settings['height'] = self.config.getint(SECTION_MAINWINDOW, 'height')
 
   def load_devices(self):
     "Return the devices list from the configuration file"
@@ -110,16 +110,16 @@ class Settings(object):
     "Save configuration for main window"
     # Main window settings section
     self.logText('Saving window settings', VERBOSE_LEVEL_NORMAL)
-    if not self.config.has_section(SECTION_MAINWIN):
-      self.config.add_section(SECTION_MAINWIN)
+    if not self.config.has_section(SECTION_MAINWINDOW):
+      self.config.add_section(SECTION_MAINWINDOW)
     # Window position
     position = winParent.get_position()
-    self.config.set(SECTION_MAINWIN, 'left', position[0])
-    self.config.set(SECTION_MAINWIN, 'top', position[1])
+    self.config.set(SECTION_MAINWINDOW, 'left', position[0])
+    self.config.set(SECTION_MAINWINDOW, 'top', position[1])
     # Window size
     size = winParent.get_size()
-    self.config.set(SECTION_MAINWIN, 'width', size[0])
-    self.config.set(SECTION_MAINWIN, 'height', size[1])
+    self.config.set(SECTION_MAINWINDOW, 'width', size[0])
+    self.config.set(SECTION_MAINWINDOW, 'height', size[1])
 
   def save(self):
     "Save the whole configuration"
