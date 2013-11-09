@@ -37,7 +37,7 @@ class DialogAbout(object):
     builder = Gtk.Builder()
     builder.add_from_file(FILE_UI_ABOUT)
     # Obtain widget references
-    self.dialog = builder.get_object("dialogAbout")
+    self.dialog = builder.get_object('dialogAbout')
     # Set various properties
     self.dialog.set_program_name(APP_NAME)
     self.dialog.set_version('Version %s' % APP_VERSION)

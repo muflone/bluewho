@@ -29,7 +29,7 @@ class DialogServices(object):
     builder = Gtk.Builder()
     builder.add_from_file(FILE_UI_SERVICES)
     # Obtain widget references
-    self.dialog = builder.get_object("dialogServices")
+    self.dialog = builder.get_object('dialogServices')
     self.model = ModelServices(builder.get_object('modelServices'))
     # Set various properties
     self.dialog.set_title(_('Available services'))

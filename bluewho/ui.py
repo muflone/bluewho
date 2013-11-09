@@ -70,7 +70,7 @@ class MainWindow(object):
     builder = Gtk.Builder()
     builder.add_from_file(FILE_UI_MAIN)
     # Obtain widget references
-    self.winMain = builder.get_object("winMain")
+    self.winMain = builder.get_object('winMain')
     self.model = ModelDevices(
       builder.get_object('modelDevices'),
       self.settings,

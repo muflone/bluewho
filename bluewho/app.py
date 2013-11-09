@@ -28,19 +28,19 @@ class Application(Gtk.Application):
     super(self.__class__, self).__init__(application_id=APP_ID)
     self.settings = settings
     self.btsupport = btsupport
-    self.connect("activate", self.activate)
+    self.connect('activate', self.activate)
     self.connect('startup', self.startup)
 
   def startup(self, application):
     "Configure the application during the startup"
     self.ui = MainWindow(self, self.settings, self.btsupport)
     # Add the actions related to the app menu
-    action = Gio.SimpleAction(name="about")
-    action.connect("activate", self.on_app_about_activate)
+    action = Gio.SimpleAction(name='about')
+    action.connect('activate', self.on_app_about_activate)
     self.add_action(action)
 
-    action = Gio.SimpleAction(name="quit")
-    action.connect("activate", self.on_app_quit_activate)
+    action = Gio.SimpleAction(name='quit')
+    action.connect('activate', self.on_app_quit_activate)
     self.add_action(action)
     # Add the app menu
     builder = Gtk.Builder()

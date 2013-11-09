@@ -115,7 +115,7 @@ class BluetoothSupport(object):
       bt.hci_send_cmd(sock, bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
       try:
         data = sock.recv(255)
-        status, raw_bdaddr = struct.unpack("xxxxxxB6s", data)
+        status, raw_bdaddr = struct.unpack('xxxxxxB6s', data)
         address = ['%02X' % ord(b) for b in raw_bdaddr]
         address.reverse()
         address = ':'.join(address)

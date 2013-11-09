@@ -29,7 +29,7 @@ class DialogPreferences(object):
     builder = Gtk.Builder()
     builder.add_from_file(FILE_UI_PREFERENCES)
     # Obtain widget references
-    self.dialog = builder.get_object("dialogPreferences")
+    self.dialog = builder.get_object('dialogPreferences')
     # Set various properties
     self.dialog.set_title(_('Preferences'))
     self.dialog.set_icon_from_file(FILE_ICON)
