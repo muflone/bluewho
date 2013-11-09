@@ -104,6 +104,7 @@ class MainWindow(object):
     self.settings.save_devices(self.model)
     self.settings.save()
     self.winMain.destroy()
+    self.model.destroy()
     self.application.quit()
 
   def on_toolbAbout_clicked(self, widget):

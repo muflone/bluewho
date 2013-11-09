@@ -41,6 +41,10 @@ class ModelDevices(object):
     self.btsupport = btsupport
     self.devices = {}
 
+  def destroy(self):
+    "Destroy any pending objects"
+    self.clear()
+
   def clear(self):
     "Clear the devices list"
     self.devices = {}
