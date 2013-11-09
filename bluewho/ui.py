@@ -27,6 +27,7 @@ from bluewho.settings import Settings
 from bluewho.model_devices import ModelDevices
 from bluewho.dialog_about import DialogAbout
 from bluewho.dialog_services import DialogServices
+from bluewho.dialog_preferences import DialogPreferences
 from bluewho.daemon_thread import DaemonThread
 
 class MainWindow(object):
@@ -256,6 +257,11 @@ class MainWindow(object):
       for service in self.btsupport.get_services(address):
         dialog.model.add_service(service)
       dialog.show()
+
+  def on_toolbPreferences_clicked(self, widget):
+    "Show the preferences dialog"
+    dialog = DialogPreferences(self.settings, self.winMain, False)
+    dialog.show()
 
   @thread_safe
   def set_status_bar_message(self, message=None):
