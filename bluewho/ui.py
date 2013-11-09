@@ -31,7 +31,6 @@ from bluewho.dialog_preferences import DialogPreferences
 from bluewho.daemon_thread import DaemonThread
 
 class MainWindow(object):
-  @get_current_thread_ident
   def __init__(self, application, settings, btsupport):
     self.application = application
     self.settings = settings
