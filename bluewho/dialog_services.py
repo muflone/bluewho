@@ -42,11 +42,11 @@ class DialogServices(object):
       self.show()
 
   def show(self):
-    "Show the About dialog"
+    "Show the Services dialog"
     self.dialog.run()
     self.dialog.hide()
 
   def destroy(self):
-    "Destroy the About dialog"
+    "Destroy the Services dialog"
     self.dialog.destroy()
     self.dialog = None
