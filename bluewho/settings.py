@@ -27,6 +27,9 @@ from bluewho.functions import *
 from bluewho.constants import *
 
 SECTION_MAINWINDOW = 'main window'
+SECTION_STARTUP = 'startup'
+SECTION_SCAN = 'scan'
+SECTION_NOTIFY = 'notify'
 
 class Settings(object):
   def __init__(self):
@@ -65,6 +68,36 @@ class Settings(object):
         self.settings['width'] = self.config.getint(SECTION_MAINWINDOW, 'width')
       if self.config.has_option(SECTION_MAINWINDOW, 'height'):
         self.settings['height'] = self.config.getint(SECTION_MAINWINDOW, 'height')
+    # Load preferences
+    if self.config.has_section(SECTION_STARTUP):
+      self.logText('Retrieving startup preferences', VERBOSE_LEVEL_NORMAL)
+      # Load startup preferences
+      self.load_setting(SECTION_STARTUP, 'startup scan', bool, False)
+    if self.config.has_section(SECTION_SCAN):
+      self.logText('Retrieving scan preferences', VERBOSE_LEVEL_NORMAL)
+      # Load scan preferences
+      self.load_setting(SECTION_SCAN, 'retrieve names', bool, False)
+      self.load_setting(SECTION_SCAN, 'resolve names', bool, False)
+      self.load_setting(SECTION_SCAN, 'show local', bool, False)
+    if self.config.has_section(SECTION_NOTIFY):
+      self.logText('Retrieving notify preferences', VERBOSE_LEVEL_NORMAL)
+      # Load notify preferences
+      self.load_setting(SECTION_NOTIFY, 'show notification', bool, False)
+      self.load_setting(SECTION_NOTIFY, 'play sound', bool, False)
+
+  def load_setting(self, section, option, option_type, default_value):
+    "Retrieve the setting from the file"
+    value = default_value
+    # Check if the option exists
+    if self.config.has_option(section, option):
+      if option_type is bool:
+        # Get boolean value
+        value = self.config.getboolean(section, option)
+      else:
+        # Type unexpected
+        assert False
+    self.settings[option] = value
+    return value
 
   def load_devices(self):
     "Return the devices list from the configuration file"
