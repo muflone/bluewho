@@ -60,14 +60,10 @@ class Settings(object):
     if self.config.has_section(SECTION_MAINWINDOW):
       self.logText('Retrieving window settings', VERBOSE_LEVEL_NORMAL)
       # Retrieve window position and size
-      if self.config.has_option(SECTION_MAINWINDOW, 'left'):
-        self.settings['left'] = self.config.getint(SECTION_MAINWINDOW, 'left')
-      if self.config.has_option(SECTION_MAINWINDOW, 'top'):
-        self.settings['top'] = self.config.getint(SECTION_MAINWINDOW, 'top')
-      if self.config.has_option(SECTION_MAINWINDOW, 'width'):
-        self.settings['width'] = self.config.getint(SECTION_MAINWINDOW, 'width')
-      if self.config.has_option(SECTION_MAINWINDOW, 'height'):
-        self.settings['height'] = self.config.getint(SECTION_MAINWINDOW, 'height')
+      self.load_setting(SECTION_MAINWINDOW, 'left', int, None)
+      self.load_setting(SECTION_MAINWINDOW, 'top', int, None)
+      self.load_setting(SECTION_MAINWINDOW, 'width', int, None)
+      self.load_setting(SECTION_MAINWINDOW, 'height', int, None)
     # Load preferences
     if self.config.has_section(SECTION_STARTUP):
       self.logText('Retrieving startup preferences', VERBOSE_LEVEL_NORMAL)
@@ -93,6 +89,9 @@ class Settings(object):
       if option_type is bool:
         # Get boolean value
         value = self.config.getboolean(section, option)
+      elif option_type is int:
+        # Get integer value
+        value = self.config.getint(section, option)
       else:
         # Type unexpected
         assert False
