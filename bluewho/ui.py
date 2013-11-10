@@ -178,12 +178,13 @@ class MainWindow(object):
             # Adapter device found
             name = 'hci%d (%s)' % (devices_count, name)
             self.add_device(address, name, 1 << 2, get_current_time(), True)
-        else:
-          # No more devices found
-          if devices_count==0:
-            print _('No local devices found during detection.')
-            self.set_status_bar_message(_('No local devices found during detection.'))
-          break
+          else:
+            # No more devices found
+            if devices_count==0:
+              self.settings.logText('No local devices found during detection',
+                  VERBOSE_LEVEL_NORMAL)
+              self.set_status_bar_message(_('No local devices found during detection.'))
+            break
       # Discover devices via bluetooth
       self.btsupport.discover(
         self.settings.get_value(PREFS_OPTION_RETRIEVE_NAMES),
