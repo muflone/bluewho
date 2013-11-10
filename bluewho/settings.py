@@ -91,6 +91,8 @@ class Settings(object):
       else:
         # Type unexpected
         assert False
+    # Set value back in the configuration to allow its saving
+    self.config.set(section, option, value)
     self.settings[option] = value
     return value
 
