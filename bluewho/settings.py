@@ -133,8 +133,9 @@ class Settings(object):
       self.logText('Deleting the devices list', VERBOSE_LEVEL_NORMAL)
       os.remove(FILE_SETTINGS_DEVICES)
 
-  def get_value(self, name, default=None):
-    return self.settings.get(name, default)
+  def get_value(self, option, default=None):
+    "Get the value of an option"
+    return self.settings.get(option, default)
 
   def set_sizes(self, winParent):
     "Save configuration for main window"
