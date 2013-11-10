@@ -38,16 +38,17 @@ class MainWindow(object):
     self.is_refreshing = False
     self.loadUI()
     # Restore the saved size and position
-    if self.settings.get_value(PREFS_OPTION_WINWIDTH) and \
-      self.settings.get_value(PREFS_OPTION_WINHEIGHT):
-      self.winMain.set_default_size(
-        self.settings.get_value(PREFS_OPTION_WINWIDTH),
-        self.settings.get_value(PREFS_OPTION_WINHEIGHT))
-    if self.settings.get_value(PREFS_OPTION_WINLEFT) and \
-      self.settings.get_value(PREFS_OPTION_WINTOP):
-      self.winMain.move(
-        self.settings.get_value(PREFS_OPTION_WINLEFT),
-        self.settings.get_value(PREFS_OPTION_WINTOP))
+    if self.settings.get_value(PREFS_OPTION_RESTORE_SIZE):
+      if self.settings.get_value(PREFS_OPTION_WINWIDTH) and \
+        self.settings.get_value(PREFS_OPTION_WINHEIGHT):
+        self.winMain.set_default_size(
+          self.settings.get_value(PREFS_OPTION_WINWIDTH),
+          self.settings.get_value(PREFS_OPTION_WINHEIGHT))
+      if self.settings.get_value(PREFS_OPTION_WINLEFT) and \
+        self.settings.get_value(PREFS_OPTION_WINTOP):
+        self.winMain.move(
+          self.settings.get_value(PREFS_OPTION_WINLEFT),
+          self.settings.get_value(PREFS_OPTION_WINTOP))
     # Restore the devices list
     for device in self.settings.load_devices():
       self.add_device(
@@ -102,7 +103,9 @@ class MainWindow(object):
         self.thread_scanner.join()
     self.thread_scanner = None
     self.about.destroy()
-    self.settings.set_sizes(self.winMain)
+    # Save the position and size only if PREFS_OPTION_RESTORE_SIZE is set
+    if self.settings.get_value(PREFS_OPTION_RESTORE_SIZE):
+      self.settings.set_sizes(self.winMain)
     self.settings.save_devices(self.model)
     self.settings.save()
     self.winMain.destroy()
