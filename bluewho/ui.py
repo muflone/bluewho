@@ -186,15 +186,10 @@ class MainWindow(object):
         name, address = self.btsupport.get_localAdapter(devices_count)
         if name and address:
           # Adapter device found
-          #if not foundDevices.get(address):
           #if settings.get('show local'):
           name = 'hci%d (%s)' % (devices_count, name)
           if True:
             self.add_device(address, name, 0, get_current_time(), True)
-              #modelRow = modelDevices[-1]
-              #foundDevices[address] = modelRow
-              # Update seen time
-              #modelRow[COL_LASTSEEN] = getCurrentTime()
         else:
           # No more devices found
           if devices_count==0:
