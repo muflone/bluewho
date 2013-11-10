@@ -76,32 +76,32 @@ class ModelDevices(object):
       # Update icon
       old_value = self.get_icon(treeiter)
       if icon_path != old_value:
-        self.settings.logText('Updated device %s icon from %s to %s' % (
+        self.settings.logText('Updated device "%s" icon from %s to %s' % (
           name, os.path.basename(old_value), os.path.basename(icon_path)),
           VERBOSE_LEVEL_MAX)
         self.set_icon(treeiter, icon_path)
       # Update device name
       old_value = self.get_name(treeiter)
       if name and name != old_value:
-        self.settings.logText('Updated device %s name from %s to %s' % (
+        self.settings.logText('Updated device "%s" name from "%s" to "%s"' % (
           name, old_value, name), VERBOSE_LEVEL_MAX)
         self.set_name(treeiter, name)
       # Update device class
       old_value = self.get_class(treeiter)
       if device_class != old_value:
-        self.settings.logText('Updated device %s class from %d to %d' % (
+        self.settings.logText('Updated device "%s" class from %d to %d' % (
           name, old_value, device_class), VERBOSE_LEVEL_MAX)
         self.set_class(treeiter, device_class)
       # Update device type
       old_value = self.get_type(treeiter)
       if device_type != old_value:
-        self.settings.logText('Updated device %s type from %s to %s' % (
+        self.settings.logText('Updated device "%s" type from %s to %s' % (
           name, old_value, device_type), VERBOSE_LEVEL_MAX)
         self.set_type(treeiter, device_type)
       # Update device subtype
       old_value = self.get_subtype(treeiter)
       if device_subtype != old_value:
-        self.settings.logText('Updated device %s subtype from %s to %s' % (
+        self.settings.logText('Updated device "%s" subtype from %s to %s' % (
           name, old_value, device_subtype), VERBOSE_LEVEL_MAX)
         self.set_subtype(treeiter, device_subtype)
       # Update device last seen time (always)
@@ -121,7 +121,7 @@ class ModelDevices(object):
         last_seen
       ])
       self.devices[address] = treeiter
-      self.settings.logText('Added new device %s (%s)' % (name, address),
+      self.settings.logText('Added new device "%s" (%s)' % (name, address),
         VERBOSE_LEVEL_MAX)
       # Execute notification for new devices
       if notify:

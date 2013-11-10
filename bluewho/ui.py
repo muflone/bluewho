@@ -150,17 +150,6 @@ class MainWindow(object):
 
   def on_new_device_cb(self, name, address, device_class):
     "Callback function called when a new device has been discovered"
-    modelRow = None
-    # Search for the name if not found during scan
-    #if not name and settings.get('resolve names'):
-    if False:
-      # Search name if the device exists without name or if doesn't exist at all
-      if True:
-      #if (modelRow and not modelRow[COL_NAME]) or not modelRow:
-        # Find name by scanning device
-        name = self.btsupport.get_device_name(address)
-    if name is None:
-      name = ''
     self.add_device(address, name, device_class, get_current_time(), True)
 
   @thread_safe
