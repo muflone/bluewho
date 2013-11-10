@@ -110,7 +110,7 @@ class Settings(object):
             devices.append({
               'address': device[0],
               'name': device[1],
-              'class': int(device[2]),
+              'class': int(device[2], device[2].startswith('0x') and 16 or 10),
               'lastseen': device[3],
             })
         f.close()
@@ -122,10 +122,10 @@ class Settings(object):
       self.logText('Saving the devices list', VERBOSE_LEVEL_NORMAL)
       with open(FILE_SETTINGS_DEVICES, 'w') as f:
         for device in devices:
-          f.write('%s\n%s\n%d\n%s\n>\n' % (
+          f.write('%s\n%s\n%s\n%s\n>\n' % (
             devices.get_address(device),
             devices.get_name(device),
-            devices.get_class(device),
+            hex(devices.get_class(device)),
             devices.get_last_seen(device),
           ))
         f.close()
