@@ -26,6 +26,10 @@ from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.constants import *
 from bluewho.functions import *
 
+# Please refer to Bluetooth specifications:
+# https://www.bluetooth.org/en-us/specification/assigned-numbers
+# https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband
+
 class BluetoothSupport(object):
   def __init__(self):
     self.new_device_cb = None
