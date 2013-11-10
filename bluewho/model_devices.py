@@ -73,6 +73,11 @@ class ModelDevices(object):
     if self.devices.has_key(address):
       # Update the existing device in the model
       treeiter = self.devices[address]
+      # Resolve the undetected name if PREFS_OPTION_RESOLVE_NAMES is set
+      if self.settings.get_value(PREFS_OPTION_RESOLVE_NAMES) and not name:
+        name = self.btsupport.get_device_name(address)
+        self.settings.logText('Resolved device %s name to "%s"' % (
+          address, name), VERBOSE_LEVEL_MAX)
       # Update icon
       old_value = self.get_icon(treeiter)
       if icon_path != old_value:
