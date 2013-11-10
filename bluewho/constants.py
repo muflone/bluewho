@@ -36,6 +36,7 @@ DOMAIN_NAME = 'bluewho'
 VERBOSE_LEVEL_QUIET = 0
 VERBOSE_LEVEL_NORMAL = 1
 VERBOSE_LEVEL_MAX = 2
+USE_FAKE_DEVICES = False
 
 # Paths constants
 # If there's a file data/bluewho.png then the shared data are searched
@@ -65,6 +66,7 @@ FILE_TRANSLATORS = os.path.join(DIR_DOCS, 'translators')
 FILE_LICENSE = os.path.join(DIR_DOCS, 'license')
 FILE_RESOURCES = os.path.join(DIR_DOCS, 'resources')
 FILE_BT_CLASSES = os.path.join(DIR_DATA, 'classes.txt')
+FILE_FAKE_DEVICES = os.path.join(DIR_DATA, 'fake_devices.txt')
 FILE_SOUND = os.path.join(DIR_DATA, 'newdevice.wav')
 # Set the paths for configuration files
 FILE_SETTINGS_NEW = os.path.join(DIR_SETTINGS, 'settings.conf')

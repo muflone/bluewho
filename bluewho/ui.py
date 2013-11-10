@@ -19,6 +19,7 @@
 ##
 
 import shutil
+from time import sleep
 from gi.repository import Gtk
 from gi.repository import Gio
 from bluewho.constants import *
@@ -30,6 +31,7 @@ from bluewho.dialog_about import DialogAbout
 from bluewho.dialog_services import DialogServices
 from bluewho.dialog_preferences import DialogPreferences
 from bluewho.daemon_thread import DaemonThread
+from bluewho.fake_devices import FakeDevices
 
 class MainWindow(object):
   def __init__(self, application, settings, btsupport):
@@ -63,6 +65,7 @@ class MainWindow(object):
     # Set other properties
     self.btsupport.set_new_device_cb(self.on_new_device_cb)
     self.thread_scanner = None
+    self.fake_devices = FakeDevices()
 
   def run(self):
     "Show the UI"
@@ -197,6 +200,17 @@ class MainWindow(object):
         8,
         True
       )
+
+      # What is this? useful for testing purposes, you can just ignore it
+      if USE_FAKE_DEVICES:
+        #self.on_new_device_cb(*self.fake_devices.pick_one())
+        self.fake_devices = FakeDevices()
+        #self.on_new_device_cb(*self.fake_devices.fetch_one())
+        for fake_device in self.fake_devices.fetch_many():
+        #for fake_device in self.fake_devices.fetch_max(5):
+        #for fake_device in self.fake_devices.fetch_all():
+          self.on_new_device_cb(*fake_device)
+      sleep(2)
     # After exiting from the scanning process, change the UI
     self.thread_scanner = None
     self.set_status_bar_message(None)
