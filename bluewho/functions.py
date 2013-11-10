@@ -85,7 +85,7 @@ def get_current_thread_ident(func):
     print '%s is called from %s thread' % (func, threading.current_thread().name)
     return func(*args)
   return callback
-  
+
 __all__ = [
   'readlines',
   'get_current_time',
