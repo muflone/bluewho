@@ -21,6 +21,7 @@
 import os.path
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
+from gi.repository import Notify
 from bluewho.audio_player import AudioPlayer
 from bluewho.constants import *
 from bluewho.functions import *
@@ -42,6 +43,7 @@ class ModelDevices(object):
     self.btsupport = btsupport
     self.devices = {}
     self.audio_player = AudioPlayer()
+    Notify.init(APP_NAME)
 
   def destroy(self):
     "Destroy any pending objects"
@@ -135,6 +137,15 @@ class ModelDevices(object):
         # Play the sound notification
         if self.settings.get_value(PREFS_OPTION_PLAY_SOUND):
           self.audio_player.play_file(FILE_SOUND)
+        # Show the graphical notification with icon
+        if self.settings.get_value(PREFS_OPTION_NOTIFICATION):
+          notification = Notify.Notification.new(
+            _('New bluetooth device detected'),
+            _('Name: %s\nAddress: %s') % ( name and name or 'unknown', address),
+            os.path.abspath(icon_path) # Notification requires absolute paths
+          )
+          notification.set_urgency(Notify.Urgency.LOW)
+          notification.show()
     return treeiter
 
   def path_from_iter(self, treeiter):
