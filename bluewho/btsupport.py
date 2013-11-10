@@ -41,6 +41,19 @@ class MajorDeviceClasses(object):
   MISCELLANEOUS = 7
   TOY = 8
   HEALTH = 9
+  # Dictionary for classes descriptions
+  CLASSES = {
+    UNKNOWN: 'unknown',
+    COMPUTER: 'computer',
+    PHONE: 'phone',
+    NETWORK: 'network',
+    AUDIOVIDEO: 'audio-video',
+    PERIPHERAL: 'peripheral',
+    IMAGING: 'imaging',
+    MISCELLANEOUS: 'miscellaneous',
+    TOY: 'toy',
+    HEALTH: 'health',
+  }
 
 class BluetoothSupport(object):
   def __init__(self):
@@ -144,22 +157,10 @@ class BluetoothSupport(object):
 
   def get_device_type(self, major_class):
     "Return the device major class"
-    major_classes = {
-      MajorDeviceClasses.UNKNOWN: 'unknown',
-      MajorDeviceClasses.COMPUTER: 'computer',
-      MajorDeviceClasses.PHONE: 'phone',
-      MajorDeviceClasses.NETWORK: 'network',
-      MajorDeviceClasses.AUDIOVIDEO: 'audio-video',
-      MajorDeviceClasses.PERIPHERAL: 'peripheral',
-      MajorDeviceClasses.IMAGING: 'imaging',
-      MajorDeviceClasses.MISCELLANEOUS: 'miscellaneous',
-      MajorDeviceClasses.TOY: 'toy',
-      MajorDeviceClasses.HEALTH: 'health',
-    }
-    if not major_classes.has_key(major_class):
+    if not MajorDeviceClasses.CLASSES.has_key(major_class):
       # Fallback to unknown class
       major_class = MajorDeviceClasses.UNKNOWN
-    return major_classes[major_class]
+    return MajorDeviceClasses.CLASSES[major_class]
 
   def get_device_detail(self, major_class, minor_class):
     "Return the device detail type or fallback to the unknown device"
