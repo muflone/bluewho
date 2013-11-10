@@ -174,13 +174,12 @@ class MainWindow(object):
   def do_scan(self):
     from random import randint
     while True:
-    #if True:
       # Cancel the running thread
       if self.thread_scanner.cancelled:
         break
       # Wait until an event awakes the thread again
       if self.thread_scanner.paused:
-        print self.thread_scanner.event.wait()
+        self.thread_scanner.event.wait()
         self.thread_scanner.event.clear()
       # Only show local adapters when PREFS_OPTION_SHOW_LOCAL preference is set
       if self.settings.get_value(PREFS_OPTION_SHOW_LOCAL):
