@@ -157,6 +157,7 @@ class MainWindow(object):
 
   @thread_safe
   def add_device(self, address, name, device_class, time, notify):
+    "Add a device to the model and optionally notify it"
     if notify:
       self.set_status_bar_message('Found new device %s [%s]' % (name, address))
     self.model.add_device(address, name, device_class, time, notify)
@@ -164,6 +165,7 @@ class MainWindow(object):
 
   @get_current_thread_ident
   def do_scan(self):
+    "Scan for bluetooth devices until cancelled"
     while True:
       # Cancel the running thread
       if self.thread_scanner.cancelled:
@@ -194,7 +196,7 @@ class MainWindow(object):
         8,
         True
       )
-
+    # After exiting from the scanning process, change the UI
     self.thread_scanner = None
     self.set_status_bar_message(None)
     idle_add(self.spinnerScan.stop)
@@ -223,6 +225,7 @@ class MainWindow(object):
 
   @thread_safe
   def set_status_bar_message(self, message=None):
+    "Set a new message in the status bar"
     self.statusScan.pop(self.statusScanContextId)
     if message is not None:
       self.statusScan.push(self.statusScanContextId, message)

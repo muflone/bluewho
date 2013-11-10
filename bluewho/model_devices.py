@@ -132,14 +132,9 @@ class ModelDevices(object):
         VERBOSE_LEVEL_MAX)
       # Execute notification for new devices
       if notify:
-        print 'notify'
+        # Play the sound notification
         if self.settings.get_value(PREFS_OPTION_PLAY_SOUND):
           self.audio_player.play_file(FILE_SOUND)
-        #if settings.get('show notification'):
-        #  command = settings.get('notify cmd').replace('\\n', '\n') % {
-        #    'icon': iconPath, 'name': name and name or '', 'address': address }
-        #  proc = subprocess.Popen(command, shell=True)
-        #  proc.communicate()
     return treeiter
 
   def path_from_iter(self, treeiter):
