@@ -1,16 +1,18 @@
-# BlueWho - Information and notification of new discovered bluetooth devices.
-# Copyright (C) 2009 Fabio Castelli
+# BlueWho
+# Information and notification of new discovered bluetooth devices.
+# Copyright (C) 2009-2013 Fabio Castelli <webreg(at)vbsimple.net>
 # This file is distributed under the GPL v2 license (see copyright file).
-# Fabio Castelli <muflone@vbsimple.net>, 2009.
-# English translation for bluewho package.
+# X translation for BlueWho.
 #
+# Translators:
+# Fabio Castelli <webreg(at)vbsimple.net>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: bluewho 0.1\n"
-"Report-Msgid-Bugs-To: Fabio Castelli <muflone@vbsimple.net>\n"
+"Project-Id-Version: BlueWho\n"
+"Report-Msgid-Bugs-To: Fabio Castelli <muflone(at)vbsimple.net>\n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
 "PO-Revision-Date: 2010-01-02 01:32+0100\n"
-"Last-Translator: Fabio Castelli <muflone@vbsimple.net>\n"
+"Last-Translator: Fabio Castelli <muflone(at)vbsimple.net>\n"
 "Language-Team: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ASCII\n"
@@ -265,33 +267,33 @@ msgstr "network fully available"
 
 #: ../src/btsupport.py:97
 #, python-format
-msgid "network 1-17%% used"
-msgstr "network 1-17%% used"
+msgid "network 1-17% used"
+msgstr "network 1-17% used"
 
 #: ../src/btsupport.py:98
 #, python-format
-msgid "network 17-33%% used"
-msgstr "network 17-33%% used"
+msgid "network 17-33% used"
+msgstr "network 17-33% used"
 
 #: ../src/btsupport.py:99
 #, python-format
-msgid "network 33-50%% used"
-msgstr "network 33-50%% used"
+msgid "network 33-50% used"
+msgstr "network 33-50% used"
 
 #: ../src/btsupport.py:100
 #, python-format
-msgid "network 50-67%% used"
-msgstr "network 50-67%% used"
+msgid "network 50-67% used"
+msgstr "network 50-67% used"
 
 #: ../src/btsupport.py:101
 #, python-format
-msgid "network 67-83%% used"
-msgstr "network 67-83%% used"
+msgid "network 67-83% used"
+msgstr "network 67-83% used"
 
 #: ../src/btsupport.py:102
 #, python-format
-msgid "network 83-99%% used"
-msgstr "network 83-99%% used"
+msgid "network 83-99% used"
+msgstr "network 83-99% used"
 
 #: ../src/btsupport.py:103
 msgid "network unavailable"
