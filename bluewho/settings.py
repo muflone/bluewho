@@ -32,6 +32,19 @@ class Sections(object):
   SCAN = 'scan'
   NOTIFY = 'notify'
 
+class Preferences(object):
+  RESTORE_SIZE = 'restore size'
+  WINLEFT = 'left'
+  WINTOP = 'top'
+  WINWIDTH = 'width'
+  WINHEIGHT = 'height'
+  STARTUPSCAN = 'startup scan'
+  RETRIEVE_NAMES = 'retrieve names'
+  RESOLVE_NAMES = 'resolve names'
+  SHOW_LOCAL = 'show local'
+  NOTIFICATION = 'show notification'
+  PLAY_SOUND = 'play sound'
+
 class Settings(object):
   def __init__(self):
     self.settings = {}
@@ -62,29 +75,29 @@ class Settings(object):
     self.logText('Loading window settings', VERBOSE_LEVEL_NORMAL)
     if not self.config.has_section(Sections.MAIN):
       self.config.add_section(Sections.MAIN)
-    self.load_setting(Sections.MAIN, PREFS_OPTION_RESTORE_SIZE, bool, True)
-    self.load_setting(Sections.MAIN, PREFS_OPTION_WINLEFT, int, 0)
-    self.load_setting(Sections.MAIN, PREFS_OPTION_WINTOP, int, 0)
-    self.load_setting(Sections.MAIN, PREFS_OPTION_WINWIDTH, int, 0)
-    self.load_setting(Sections.MAIN, PREFS_OPTION_WINHEIGHT, int, 0)
+    self.load_setting(Sections.MAIN, Preferences.RESTORE_SIZE, bool, True)
+    self.load_setting(Sections.MAIN, Preferences.WINLEFT, int, 0)
+    self.load_setting(Sections.MAIN, Preferences.WINTOP, int, 0)
+    self.load_setting(Sections.MAIN, Preferences.WINWIDTH, int, 0)
+    self.load_setting(Sections.MAIN, Preferences.WINHEIGHT, int, 0)
     # Load startup preferences
     self.logText('Loading startup preferences', VERBOSE_LEVEL_NORMAL)
     if not self.config.has_section(Sections.STARTUP):
       self.config.add_section(Sections.STARTUP)
-    self.load_setting(Sections.STARTUP, PREFS_OPTION_STARTUPSCAN, bool, False)
+    self.load_setting(Sections.STARTUP, Preferences.STARTUPSCAN, bool, False)
     # Load scan preferences
     self.logText('Loading scan preferences', VERBOSE_LEVEL_NORMAL)
     if not self.config.has_section(Sections.SCAN):
       self.config.add_section(Sections.SCAN)
-    self.load_setting(Sections.SCAN, PREFS_OPTION_RETRIEVE_NAMES, bool, True)
-    self.load_setting(Sections.SCAN, PREFS_OPTION_RESOLVE_NAMES, bool, False)
-    self.load_setting(Sections.SCAN, PREFS_OPTION_SHOW_LOCAL, bool, True)
+    self.load_setting(Sections.SCAN, Preferences.RETRIEVE_NAMES, bool, True)
+    self.load_setting(Sections.SCAN, Preferences.RESOLVE_NAMES, bool, False)
+    self.load_setting(Sections.SCAN, Preferences.SHOW_LOCAL, bool, True)
     # Load notify preferences
     self.logText('Loading notify preferences', VERBOSE_LEVEL_NORMAL)
     if not self.config.has_section(Sections.NOTIFY):
       self.config.add_section(Sections.NOTIFY)
-    self.load_setting(Sections.NOTIFY, PREFS_OPTION_NOTIFICATION, bool, True)
-    self.load_setting(Sections.NOTIFY, PREFS_OPTION_PLAY_SOUND, bool, True)
+    self.load_setting(Sections.NOTIFY, Preferences.NOTIFICATION, bool, True)
+    self.load_setting(Sections.NOTIFY, Preferences.PLAY_SOUND, bool, True)
 
   def load_setting(self, section, option, option_type, default_value):
     "Retrieve the setting from the file"
@@ -164,12 +177,12 @@ class Settings(object):
       self.config.add_section(Sections.MAIN)
     # Window position
     position = winParent.get_position()
-    self.config.set(Sections.MAIN, PREFS_OPTION_WINLEFT, position[0])
-    self.config.set(Sections.MAIN, PREFS_OPTION_WINTOP, position[1])
+    self.config.set(Sections.MAIN, Preferences.WINLEFT, position[0])
+    self.config.set(Sections.MAIN, Preferences.WINTOP, position[1])
     # Window size
     size = winParent.get_size()
-    self.config.set(Sections.MAIN, PREFS_OPTION_WINWIDTH, size[0])
-    self.config.set(Sections.MAIN, PREFS_OPTION_WINHEIGHT, size[1])
+    self.config.set(Sections.MAIN, Preferences.WINWIDTH, size[0])
+    self.config.set(Sections.MAIN, Preferences.WINHEIGHT, size[1])
 
   def save(self):
     "Save the whole configuration"

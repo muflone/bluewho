@@ -24,6 +24,7 @@ from gi.repository import Gio
 from bluewho.constants import *
 from bluewho.functions import *
 from bluewho.settings import Settings
+from bluewho.settings import Preferences
 from bluewho.model_devices import ModelDevices
 from bluewho.dialog_about import DialogAbout
 from bluewho.dialog_services import DialogServices
@@ -38,17 +39,17 @@ class MainWindow(object):
     self.is_refreshing = False
     self.loadUI()
     # Restore the saved size and position
-    if self.settings.get_value(PREFS_OPTION_RESTORE_SIZE):
-      if self.settings.get_value(PREFS_OPTION_WINWIDTH) and \
-        self.settings.get_value(PREFS_OPTION_WINHEIGHT):
+    if self.settings.get_value(Preferences.RESTORE_SIZE):
+      if self.settings.get_value(Preferences.WINWIDTH) and \
+        self.settings.get_value(Preferences.WINHEIGHT):
         self.winMain.set_default_size(
-          self.settings.get_value(PREFS_OPTION_WINWIDTH),
-          self.settings.get_value(PREFS_OPTION_WINHEIGHT))
-      if self.settings.get_value(PREFS_OPTION_WINLEFT) and \
-        self.settings.get_value(PREFS_OPTION_WINTOP):
+          self.settings.get_value(Preferences.WINWIDTH),
+          self.settings.get_value(Preferences.WINHEIGHT))
+      if self.settings.get_value(Preferences.WINLEFT) and \
+        self.settings.get_value(Preferences.WINTOP):
         self.winMain.move(
-          self.settings.get_value(PREFS_OPTION_WINLEFT),
-          self.settings.get_value(PREFS_OPTION_WINTOP))
+          self.settings.get_value(Preferences.WINLEFT),
+          self.settings.get_value(Preferences.WINTOP))
     # Restore the devices list
     for device in self.settings.load_devices():
       self.add_device(
@@ -66,8 +67,8 @@ class MainWindow(object):
   def run(self):
     "Show the UI"
     self.winMain.show_all()
-    # Activate scan on startup if PREFS_OPTION_STARTUPSCAN is set
-    if self.settings.get_value(PREFS_OPTION_STARTUPSCAN):
+    # Activate scan on startup if Preferences.STARTUPSCAN is set
+    if self.settings.get_value(Preferences.STARTUPSCAN):
       self.toolbDetect.set_active(True)
 
   def loadUI(self):
@@ -106,8 +107,8 @@ class MainWindow(object):
         self.thread_scanner.join()
     self.thread_scanner = None
     self.about.destroy()
-    # Save the position and size only if PREFS_OPTION_RESTORE_SIZE is set
-    if self.settings.get_value(PREFS_OPTION_RESTORE_SIZE):
+    # Save the position and size only if Preferences.RESTORE_SIZE is set
+    if self.settings.get_value(Preferences.RESTORE_SIZE):
       self.settings.set_sizes(self.winMain)
     self.settings.save_devices(self.model)
     self.settings.save()
@@ -174,8 +175,8 @@ class MainWindow(object):
       if self.thread_scanner.paused:
         self.thread_scanner.event.wait()
         self.thread_scanner.event.clear()
-      # Only show local adapters when PREFS_OPTION_SHOW_LOCAL preference is set
-      if self.settings.get_value(PREFS_OPTION_SHOW_LOCAL):
+      # Only show local adapters when Preferences.SHOW_LOCAL preference is set
+      if self.settings.get_value(Preferences.SHOW_LOCAL):
         # Add local adapters
         for devices_count in range(10):
           name, address = self.btsupport.get_localAdapter(devices_count)
@@ -192,7 +193,7 @@ class MainWindow(object):
             break
       # Discover devices via bluetooth
       self.btsupport.discover(
-        self.settings.get_value(PREFS_OPTION_RETRIEVE_NAMES),
+        self.settings.get_value(Preferences.RETRIEVE_NAMES),
         8,
         True
       )

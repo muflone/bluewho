@@ -19,6 +19,7 @@
 ##
 
 from gi.repository import Gtk
+from bluewho.settings import Preferences
 from bluewho.constants import *
 from bluewho.functions import *
 
@@ -43,13 +44,13 @@ class DialogPreferences(object):
     self.dialog.set_transient_for(winParent)
     self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
     self.dialog.set_default_response(Gtk.ResponseType.OK)
-    self.chkStartupScan.set_active(settings.get_value(PREFS_OPTION_STARTUPSCAN))
-    self.chkRestoreSize.set_active(settings.get_value(PREFS_OPTION_RESTORE_SIZE))
-    self.chkRetrieveName.set_active(settings.get_value(PREFS_OPTION_RETRIEVE_NAMES))
-    self.chkResolveNames.set_active(settings.get_value(PREFS_OPTION_RESOLVE_NAMES))
-    self.chkLocalAdapters.set_active(settings.get_value(PREFS_OPTION_SHOW_LOCAL))
-    self.chkNotification.set_active(settings.get_value(PREFS_OPTION_NOTIFICATION))
-    self.chkPlaySound.set_active(settings.get_value(PREFS_OPTION_PLAY_SOUND))
+    self.chkStartupScan.set_active(settings.get_value(Preferences.STARTUPSCAN))
+    self.chkRestoreSize.set_active(settings.get_value(Preferences.RESTORE_SIZE))
+    self.chkRetrieveName.set_active(settings.get_value(Preferences.RETRIEVE_NAMES))
+    self.chkResolveNames.set_active(settings.get_value(Preferences.RESOLVE_NAMES))
+    self.chkLocalAdapters.set_active(settings.get_value(Preferences.SHOW_LOCAL))
+    self.chkNotification.set_active(settings.get_value(Preferences.NOTIFICATION))
+    self.chkPlaySound.set_active(settings.get_value(Preferences.PLAY_SOUND))
     # Optionally show the dialog
     if show:
       self.show()
@@ -59,13 +60,13 @@ class DialogPreferences(object):
     self.dialog.run()
     self.dialog.hide()
     # Save the values back in the configuration
-    self.settings.set_value(PREFS_OPTION_STARTUPSCAN, self.chkStartupScan.get_active())
-    self.settings.set_value(PREFS_OPTION_RESTORE_SIZE, self.chkRestoreSize.get_active())
-    self.settings.set_value(PREFS_OPTION_RETRIEVE_NAMES, self.chkRetrieveName.get_active())
-    self.settings.set_value(PREFS_OPTION_RESOLVE_NAMES, self.chkResolveNames.get_active())
-    self.settings.set_value(PREFS_OPTION_SHOW_LOCAL, self.chkLocalAdapters.get_active())
-    self.settings.set_value(PREFS_OPTION_NOTIFICATION, self.chkNotification.get_active())
-    self.settings.set_value(PREFS_OPTION_PLAY_SOUND, self.chkPlaySound.get_active())
+    self.settings.set_value(Preferences.STARTUPSCAN, self.chkStartupScan.get_active())
+    self.settings.set_value(Preferences.RESTORE_SIZE, self.chkRestoreSize.get_active())
+    self.settings.set_value(Preferences.RETRIEVE_NAMES, self.chkRetrieveName.get_active())
+    self.settings.set_value(Preferences.RESOLVE_NAMES, self.chkResolveNames.get_active())
+    self.settings.set_value(Preferences.SHOW_LOCAL, self.chkLocalAdapters.get_active())
+    self.settings.set_value(Preferences.NOTIFICATION, self.chkNotification.get_active())
+    self.settings.set_value(Preferences.PLAY_SOUND, self.chkPlaySound.get_active())
 
   def destroy(self):
     "Destroy the Preferences dialog"

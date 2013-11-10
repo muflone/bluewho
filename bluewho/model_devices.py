@@ -77,8 +77,8 @@ class ModelDevices(object):
     if self.devices.has_key(address):
       # Update the existing device in the model
       treeiter = self.devices[address]
-      # Resolve the undetected name if PREFS_OPTION_RESOLVE_NAMES is set
-      if self.settings.get_value(PREFS_OPTION_RESOLVE_NAMES) and not name:
+      # Resolve the undetected name if Preferences.RESOLVE_NAMES is set
+      if self.settings.get_value(Preferences.RESOLVE_NAMES) and not name:
         name = self.btsupport.get_device_name(address)
         self.settings.logText('Resolved device %s name to "%s"' % (
           address, name), VERBOSE_LEVEL_MAX)
@@ -135,10 +135,10 @@ class ModelDevices(object):
       # Execute notification for new devices
       if notify:
         # Play the sound notification
-        if self.settings.get_value(PREFS_OPTION_PLAY_SOUND):
+        if self.settings.get_value(Preferences.PLAY_SOUND):
           self.audio_player.play_file(FILE_SOUND)
         # Show the graphical notification with icon
-        if self.settings.get_value(PREFS_OPTION_NOTIFICATION):
+        if self.settings.get_value(Preferences.NOTIFICATION):
           notification = Notify.Notification.new(
             _('New bluetooth device detected'),
             _('Name: %s\nAddress: %s') % ( name and name or 'unknown', address),

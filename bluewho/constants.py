@@ -69,15 +69,3 @@ FILE_SOUND = os.path.join(DIR_DATA, 'newdevice.wav')
 # Set the paths for configuration files
 FILE_SETTINGS_NEW = os.path.join(DIR_SETTINGS, 'settings.conf')
 FILE_SETTINGS_DEVICES = os.path.join(DIR_SETTINGS, 'devices')
-# Preferences options
-PREFS_OPTION_RESTORE_SIZE = 'restore size'
-PREFS_OPTION_WINLEFT = 'left'
-PREFS_OPTION_WINTOP = 'top'
-PREFS_OPTION_WINWIDTH = 'width'
-PREFS_OPTION_WINHEIGHT = 'height'
-PREFS_OPTION_STARTUPSCAN = 'startup scan'
-PREFS_OPTION_RETRIEVE_NAMES = 'retrieve names'
-PREFS_OPTION_RESOLVE_NAMES = 'resolve names'
-PREFS_OPTION_SHOW_LOCAL = 'show local'
-PREFS_OPTION_NOTIFICATION = 'show notification'
-PREFS_OPTION_PLAY_SOUND = 'play sound'
