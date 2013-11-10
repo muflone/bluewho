@@ -66,6 +66,9 @@ class MainWindow(object):
   def run(self):
     "Show the UI"
     self.winMain.show_all()
+    # Activate scan on startup if PREFS_OPTION_STARTUPSCAN is set
+    if self.settings.get_value(PREFS_OPTION_STARTUPSCAN):
+      self.toolbDetect.set_active(True)
 
   def loadUI(self):
     "Load the interface UI"
