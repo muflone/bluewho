@@ -182,15 +182,15 @@ class MainWindow(object):
       if self.thread_scanner.paused:
         print self.thread_scanner.event.wait()
         self.thread_scanner.event.clear()
-      # Add local adapters
-      for devices_count in range(10):
-        name, address = self.btsupport.get_localAdapter(devices_count)
-        if name and address:
-          # Adapter device found
-          #if settings.get('show local'):
-          name = 'hci%d (%s)' % (devices_count, name)
-          if True:
-            self.add_device(address, name, 0, get_current_time(), True)
+      # Only show local adapters when PREFS_OPTION_SHOW_LOCAL preference is set
+      if self.settings.get_value(PREFS_OPTION_SHOW_LOCAL):
+        # Add local adapters
+        for devices_count in range(10):
+          name, address = self.btsupport.get_localAdapter(devices_count)
+          if name and address:
+            # Adapter device found
+            name = 'hci%d (%s)' % (devices_count, name)
+            self.add_device(address, name, 1 << 2, get_current_time(), True)
         else:
           # No more devices found
           if devices_count==0:
