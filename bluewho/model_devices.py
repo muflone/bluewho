@@ -132,6 +132,8 @@ class ModelDevices(object):
       self.devices[address] = treeiter
       self.settings.logText('Added new device "%s" (%s)' % (name, address),
         VERBOSE_LEVEL_MAX)
+      # List the services from the device classes
+      # print self.btsupport.get_services_from_class(services_class)
       # Execute notification for new devices
       if notify:
         # Play the sound notification

@@ -55,6 +55,27 @@ class MajorDeviceClasses(object):
     HEALTH: 'health',
   }
 
+class ServiceDeviceClasses(object):
+  POSITIONING = 1       # 0x010000 >> 16
+  NETWORKING = 2        # 0x020000 >> 16
+  RENDERING = 4         # 0x040000 >> 16
+  CAPTURING = 8         # 0x080000 >> 16
+  OBJECT_TRANSFER = 16  # 0x100000 >> 16
+  AUDIO = 32            # 0x200000 >> 16
+  TELEPHONY = 64        # 0x400000 >> 16
+  INFORMATION = 128     # 0x800000 >> 16
+  # Dictionary for services descriptions
+  SERVICE_CLASSES = {
+    POSITIONING: 'positioning service',
+    NETWORKING: 'networking service',
+    RENDERING: 'rendering service',
+    CAPTURING: 'capturing service',
+    OBJECT_TRANSFER: 'object transfer service',
+    AUDIO: 'audio service',
+    TELEPHONY: 'telephony service',
+    INFORMATION: 'information service',
+  }
+
 class BluetoothSupport(object):
   def __init__(self):
     self.new_device_cb = None
@@ -171,3 +192,11 @@ class BluetoothSupport(object):
   def get_services(self, address):
     "Return the list of the device's available services"
     return bluetooth.find_service(address=address)
+
+  def get_services_from_class(self, service_class):
+    "Return the enabled services for a device class"
+    services = []
+    for service, description in ServiceDeviceClasses.SERVICE_CLASSES.iteritems():
+      if service_class & service:
+        services.append(description)
+    return services
