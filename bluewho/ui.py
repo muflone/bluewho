@@ -196,7 +196,11 @@ class MainWindow(object):
             self.set_status_bar_message(_('No local devices found during detection.'))
           break
       # Discover devices via bluetooth
-      self.btsupport.discover()
+      self.btsupport.discover(
+        self.settings.get_value(PREFS_OPTION_RETRIEVE_NAMES),
+        8,
+        True
+      )
 
     self.thread_scanner = None
     self.set_status_bar_message(None)

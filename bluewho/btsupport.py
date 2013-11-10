@@ -53,15 +53,15 @@ class BluetoothSupport(object):
     "Set the new device callback for BluetoothDeviceDiscoverer"
     self.new_device_cb = new_device_cb
 
-  def discover(self):
+  def discover(self, lookup_names, scan_duration, flush_cache):
     # Add detected devices
     discoverer = BluetoothDeviceDiscoverer(self.new_device_cb)
     try:
     #if True:
       discoverer.find_devices(
-        lookup_names=True,
-        duration=8,
-        flush_cache=False
+        lookup_names=lookup_names,
+        duration=scan_duration,
+        flush_cache=flush_cache
       )
     #else:
     #  discoverer.find_devices(
