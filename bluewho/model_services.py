@@ -32,8 +32,10 @@ class ModelServices(object):
   def add_service(self, service):
     "Add devices's services to the list"
     # Refer to bluetooth.find_service help section
-    return self.model.append((
-      service['name'],
-      service['protocol'],
-      service['port']
-    ))
+    if service['name'] or service['protocol'] or service['port']:
+      # Skipping services with no name, protocol and port
+      return self.model.append((
+        service['name'],
+        service['protocol'],
+        service['port']
+      ))
