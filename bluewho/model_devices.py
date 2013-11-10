@@ -21,6 +21,7 @@
 import os.path
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
+from bluewho.audio_player import AudioPlayer
 from bluewho.constants import *
 from bluewho.functions import *
 
@@ -40,10 +41,16 @@ class ModelDevices(object):
     self.settings = settings
     self.btsupport = btsupport
     self.devices = {}
+    self.audio_player = AudioPlayer()
 
   def destroy(self):
     "Destroy any pending objects"
     self.clear()
+    self.model = None
+    self.settings = None
+    self.btsupport = None
+    self.devices = None
+    self.audio_player = None
 
   def clear(self):
     "Clear the devices list"
@@ -119,8 +126,8 @@ class ModelDevices(object):
       # Execute notification for new devices
       if notify:
         print 'notify'
-        #if settings.get('play sound'):
-        #  playSound()
+        if self.settings.get_value(PREFS_OPTION_PLAY_SOUND):
+          self.audio_player.play_file(FILE_SOUND)
         #if settings.get('show notification'):
         #  command = settings.get('notify cmd').replace('\\n', '\n') % {
         #    'icon': iconPath, 'name': name and name or '', 'address': address }

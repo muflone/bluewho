@@ -65,6 +65,7 @@ FILE_TRANSLATORS = os.path.join(DIR_DOCS, 'translators')
 FILE_LICENSE = os.path.join(DIR_DOCS, 'license')
 FILE_RESOURCES = os.path.join(DIR_DOCS, 'resources')
 FILE_BT_CLASSES = os.path.join(DIR_DATA, 'classes.txt')
+FILE_SOUND = os.path.join(DIR_DATA, 'newdevice.wav')
 # Set the paths for configuration files
 FILE_SETTINGS_NEW = os.path.join(DIR_SETTINGS, 'settings.conf')
 FILE_SETTINGS_DEVICES = os.path.join(DIR_SETTINGS, 'devices')
