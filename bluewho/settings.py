@@ -137,6 +137,16 @@ class Settings(object):
     "Get the value of an option"
     return self.settings.get(option, default)
 
+  def set_value(self, option, value):
+    "Set the value for an option"
+    self.settings[option] = value
+    # Search the option in all the sections of the configuration file
+    for section in self.config.sections():
+      if self.config.has_option(section, option):
+        # Set the value in the configuration file
+        self.config.set(section, option, value)
+        break
+
   def set_sizes(self, winParent):
     "Save configuration for main window"
     # Main window settings section
