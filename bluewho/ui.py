@@ -172,7 +172,6 @@ class MainWindow(object):
 
   @get_current_thread_ident
   def do_scan(self):
-    from random import randint
     while True:
       # Cancel the running thread
       if self.thread_scanner.cancelled:
@@ -196,15 +195,7 @@ class MainWindow(object):
             print _('No local devices found during detection.')
             self.set_status_bar_message(_('No local devices found during detection.'))
           break
-
-      # What is this? useful for testing purposes, you can just ignore it
-      if randint(0, 1) == 1:
-        self.on_new_device_cb('TEST 1', '00:11:22:33:44:55', 5211141)
-      if randint(0, 1) == 1:
-        self.on_new_device_cb('TEST 2', '88:77:66:55:44:33', 1704212)
-      if randint(0, 1) == 1:
-        self.on_new_device_cb('TEST 3', '55:44:33:22:11:00', 7864836)
-
+      # Discover devices via bluetooth
       self.btsupport.discover()
 
     self.thread_scanner = None
