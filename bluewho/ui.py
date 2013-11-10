@@ -165,7 +165,8 @@ class MainWindow(object):
 
   @thread_safe
   def add_device(self, address, name, device_class, time, notify):
-    self.set_status_bar_message('Found new device %s [%s]' % (name, address))
+    if notify:
+      self.set_status_bar_message('Found new device %s [%s]' % (name, address))
     self.model.add_device(address, name, device_class, time, notify)
     return False
 
