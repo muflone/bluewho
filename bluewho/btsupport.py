@@ -30,17 +30,17 @@ from bluewho.functions import *
 # https://www.bluetooth.org/en-us/specification/assigned-numbers
 # https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband
 
-class BluetoothMajorDeviceClasses(object):
-  BT_DEVICETYPE_UNKNOWN = 0
-  BT_DEVICETYPE_COMPUTER = 1
-  BT_DEVICETYPE_PHONE = 2
-  BT_DEVICETYPE_NETWORK = 3
-  BT_DEVICETYPE_AUDIOVIDEO = 4
-  BT_DEVICETYPE_PERIPHERAL = 5
-  BT_DEVICETYPE_IMAGING = 6
-  BT_DEVICETYPE_MISCELLANEOUS = 7
-  BT_DEVICETYPE_TOY = 8
-  BT_DEVICETYPE_HEALTH = 9
+class MajorDeviceClasses(object):
+  UNKNOWN = 0
+  COMPUTER = 1
+  PHONE = 2
+  NETWORK = 3
+  AUDIOVIDEO = 4
+  PERIPHERAL = 5
+  IMAGING = 6
+  MISCELLANEOUS = 7
+  TOY = 8
+  HEALTH = 9
 
 class BluetoothSupport(object):
   def __init__(self):
@@ -145,27 +145,27 @@ class BluetoothSupport(object):
   def get_device_type(self, major_class):
     "Return the device major class"
     major_classes = {
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_UNKNOWN: 'unknown',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_COMPUTER: 'computer',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_PHONE: 'phone',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_NETWORK: 'network',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_AUDIOVIDEO: 'audio-video',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_PERIPHERAL: 'peripheral',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_IMAGING: 'imaging',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_MISCELLANEOUS: 'miscellaneous',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_TOY: 'toy',
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_HEALTH: 'health',
+      MajorDeviceClasses.UNKNOWN: 'unknown',
+      MajorDeviceClasses.COMPUTER: 'computer',
+      MajorDeviceClasses.PHONE: 'phone',
+      MajorDeviceClasses.NETWORK: 'network',
+      MajorDeviceClasses.AUDIOVIDEO: 'audio-video',
+      MajorDeviceClasses.PERIPHERAL: 'peripheral',
+      MajorDeviceClasses.IMAGING: 'imaging',
+      MajorDeviceClasses.MISCELLANEOUS: 'miscellaneous',
+      MajorDeviceClasses.TOY: 'toy',
+      MajorDeviceClasses.HEALTH: 'health',
     }
     if not major_classes.has_key(major_class):
       # Fallback to unknown class
-      major_class = BluetoothMajorDeviceClasses.BT_DEVICETYPE_UNKNOWN
+      major_class = MajorDeviceClasses.UNKNOWN
     return major_classes[major_class]
 
   def get_device_detail(self, major_class, minor_class):
     "Return the device detail type or fallback to the unknown device"
     return self.classes.get(major_class,
-      BluetoothMajorDeviceClasses.BT_DEVICETYPE_UNKNOWN).get(minor_class,
-      self.classes[BluetoothMajorDeviceClasses.BT_DEVICETYPE_UNKNOWN][0])
+      MajorDeviceClasses.UNKNOWN).get(minor_class,
+      self.classes[MajorDeviceClasses.UNKNOWN][0])
 
   def get_services(self, address):
     "Return the list of the device's available services"
