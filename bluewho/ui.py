@@ -144,12 +144,10 @@ class MainWindow(object):
   def on_toolbClear_clicked(self, widget):
     "Clear the devices list"
     self.model.clear()
-    #foundDevices.clear()
 
   def on_new_device_cb(self, name, address, device_class):
     "Callback function called when a new device has been discovered"
     modelRow = None
-    #modelRow = foundDevices.get(address)
     # Search for the name if not found during scan
     #if not name and settings.get('resolve names'):
     if False:
