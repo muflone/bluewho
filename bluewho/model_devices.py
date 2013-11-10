@@ -69,7 +69,9 @@ class ModelDevices(object):
     if not os.path.isfile(icon_path):
       icon_filename = 'unknown.png'
       icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
-
+    # Replace None with empty string in name
+    if name is None:
+      name = ''
     if self.devices.has_key(address):
       # Update the existing device in the model
       treeiter = self.devices[address]
