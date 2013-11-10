@@ -26,11 +26,6 @@ import ConfigParser
 from bluewho.functions import *
 from bluewho.constants import *
 
-SECTION_MAINWINDOW = 'main window'
-SECTION_STARTUP = 'startup'
-SECTION_SCAN = 'scan'
-SECTION_NOTIFY = 'notify'
-
 class Settings(object):
   def __init__(self):
     self.settings = {}
@@ -57,29 +52,30 @@ class Settings(object):
 
   def load(self):
     "Load window settings"
-    if self.config.has_section(SECTION_MAINWINDOW):
+    if self.config.has_section(PREFS_SECTION_MAIN):
       self.logText('Retrieving window settings', VERBOSE_LEVEL_NORMAL)
       # Retrieve window position and size
-      self.load_setting(SECTION_MAINWINDOW, 'left', int, None)
-      self.load_setting(SECTION_MAINWINDOW, 'top', int, None)
-      self.load_setting(SECTION_MAINWINDOW, 'width', int, None)
-      self.load_setting(SECTION_MAINWINDOW, 'height', int, None)
+      self.load_setting(PREFS_SECTION_MAIN, PREFS_OPTION_RESTORE_SIZE, bool, True)
+      self.load_setting(PREFS_SECTION_MAIN, PREFS_OPTION_WINLEFT, int, None)
+      self.load_setting(PREFS_SECTION_MAIN, PREFS_OPTION_WINTOP, int, None)
+      self.load_setting(PREFS_SECTION_MAIN, PREFS_OPTION_WINWIDTH, int, None)
+      self.load_setting(PREFS_SECTION_MAIN, PREFS_OPTION_WINHEIGHT, int, None)
     # Load preferences
-    if self.config.has_section(SECTION_STARTUP):
+    if self.config.has_section(PREFS_SECTION_STARTUP):
       self.logText('Retrieving startup preferences', VERBOSE_LEVEL_NORMAL)
       # Load startup preferences
-      self.load_setting(SECTION_STARTUP, 'startup scan', bool, False)
-    if self.config.has_section(SECTION_SCAN):
+      self.load_setting(PREFS_SECTION_STARTUP, PREFS_OPTION_STARTUPSCAN, bool, False)
+    if self.config.has_section(PREFS_SECTION_SCAN):
       self.logText('Retrieving scan preferences', VERBOSE_LEVEL_NORMAL)
       # Load scan preferences
-      self.load_setting(SECTION_SCAN, 'retrieve names', bool, False)
-      self.load_setting(SECTION_SCAN, 'resolve names', bool, False)
-      self.load_setting(SECTION_SCAN, 'show local', bool, False)
-    if self.config.has_section(SECTION_NOTIFY):
+      self.load_setting(PREFS_SECTION_SCAN, PREFS_OPTION_RETRIEVE_NAMES, bool, False)
+      self.load_setting(PREFS_SECTION_SCAN, PREFS_OPTION_RESOLVE_NAMES, bool, False)
+      self.load_setting(PREFS_SECTION_SCAN, PREFS_OPTION_SHOW_LOCAL, bool, False)
+    if self.config.has_section(PREFS_SECTION_NOTIFY):
       self.logText('Retrieving notify preferences', VERBOSE_LEVEL_NORMAL)
       # Load notify preferences
-      self.load_setting(SECTION_NOTIFY, 'show notification', bool, False)
-      self.load_setting(SECTION_NOTIFY, 'play sound', bool, False)
+      self.load_setting(PREFS_SECTION_NOTIFY, PREFS_OPTION_NOTIFICATION, bool, False)
+      self.load_setting(PREFS_SECTION_NOTIFY, PREFS_OPTION_PLAY_SOUND, bool, False)
 
   def load_setting(self, section, option, option_type, default_value):
     "Retrieve the setting from the file"
@@ -142,16 +138,16 @@ class Settings(object):
     "Save configuration for main window"
     # Main window settings section
     self.logText('Saving window settings', VERBOSE_LEVEL_NORMAL)
-    if not self.config.has_section(SECTION_MAINWINDOW):
-      self.config.add_section(SECTION_MAINWINDOW)
+    if not self.config.has_section(PREFS_SECTION_MAIN):
+      self.config.add_section(PREFS_SECTION_MAIN)
     # Window position
     position = winParent.get_position()
-    self.config.set(SECTION_MAINWINDOW, 'left', position[0])
-    self.config.set(SECTION_MAINWINDOW, 'top', position[1])
+    self.config.set(PREFS_SECTION_MAIN, PREFS_OPTION_WINLEFT, position[0])
+    self.config.set(PREFS_SECTION_MAIN, PREFS_OPTION_WINTOP, position[1])
     # Window size
     size = winParent.get_size()
-    self.config.set(SECTION_MAINWINDOW, 'width', size[0])
-    self.config.set(SECTION_MAINWINDOW, 'height', size[1])
+    self.config.set(PREFS_SECTION_MAIN, PREFS_OPTION_WINWIDTH, size[0])
+    self.config.set(PREFS_SECTION_MAIN, PREFS_OPTION_WINHEIGHT, size[1])
 
   def save(self):
     "Save the whole configuration"

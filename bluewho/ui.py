@@ -38,14 +38,16 @@ class MainWindow(object):
     self.is_refreshing = False
     self.loadUI()
     # Restore the saved size and position
-    if self.settings.get_value('width', 0) and self.settings.get_value('height', 0):
+    if self.settings.get_value(PREFS_OPTION_WINWIDTH) and \
+      self.settings.get_value(PREFS_OPTION_WINHEIGHT):
       self.winMain.set_default_size(
-        self.settings.get_value('width', -1),
-        self.settings.get_value('height', -1))
-    if self.settings.get_value('left', 0) and self.settings.get_value('top', 0):
+        self.settings.get_value(PREFS_OPTION_WINWIDTH),
+        self.settings.get_value(PREFS_OPTION_WINHEIGHT))
+    if self.settings.get_value(PREFS_OPTION_WINLEFT) and \
+      self.settings.get_value(PREFS_OPTION_WINTOP):
       self.winMain.move(
-        self.settings.get_value('left', 0),
-        self.settings.get_value('top', 0))
+        self.settings.get_value(PREFS_OPTION_WINLEFT),
+        self.settings.get_value(PREFS_OPTION_WINTOP))
     # Restore the devices list
     for device in self.settings.load_devices():
       self.add_device(
