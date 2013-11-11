@@ -23,6 +23,7 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 from gi.repository import Notify
 from bluewho.audio_player import AudioPlayer
+from bluewho.settings import Preferences
 from bluewho.constants import *
 from bluewho.functions import *
 
