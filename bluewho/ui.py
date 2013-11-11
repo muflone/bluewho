@@ -167,7 +167,6 @@ class MainWindow(object):
     self.model.add_device(address, name, device_class, time, notify)
     return False
 
-  @get_current_thread_ident
   def do_scan(self):
     "Scan for bluetooth devices until cancelled"
     while True:
