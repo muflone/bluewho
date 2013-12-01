@@ -24,10 +24,10 @@ from xdg import BaseDirectory
 
 # Application constants
 APP_NAME = 'BlueWho'
-APP_VERSION = '0.2'
+APP_VERSION = '0.2.1'
 APP_DESCRIPTION = 'Information and notification of new discovered bluetooth devices'
 APP_ID = 'bluewho.muflone.com'
-APP_URL = 'http://bluewho.muflone.com/'
+APP_URL = 'http://url.muflone.com/bluewho'
 APP_AUTHOR = 'Fabio Castelli'
 APP_AUTHOR_EMAIL = 'webreg@vbsimple.net'
 APP_COPYRIGHT = 'Copyright 2009-2013 %s' % APP_AUTHOR
