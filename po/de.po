@@ -7,13 +7,15 @@
 #
 # Translators:
 # Claudius Henrichs, 2010
+# Christoph Bauer <transifex(at)stargazer.at>, 2011
+# Fabian Affolter <fab(at)fedoraproject.org>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
-"Last-Translator: Claudius Henrichs\n"
+"Last-Translator: Fabian Affolter <fab(at)fedoraproject.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/bluewho/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,23 +33,23 @@ msgstr "<b>Erkannte Geräte:</b>"
 
 #: ../data/bluewho.glade.h:3
 msgid "<b>Scan options:</b>"
-msgstr "<b>Suchoptionen:</b>"
+msgstr "<b>Scan optionen:</b>"
 
 #: ../data/bluewho.glade.h:4
 msgid "<b>Startup preferences:</b>"
-msgstr "<b>Starteinstellungen:</b>"
+msgstr "<b>Start einstellungen:</b>"
 
 #: ../data/bluewho.glade.h:5
 msgid "<b>When a device has been found:</b>"
-msgstr "<b>Wenn ein Gerät erkannt wurde:</b>"
+msgstr "<b>Wenn ein neues Gerät gefunden wurde:</b>"
 
 #: ../data/bluewho.glade.h:6
 msgid "About"
-msgstr "Info"
+msgstr "Über"
 
 #: ../data/bluewho.glade.h:7
 msgid "Auto scan"
-msgstr "Automatische Suche"
+msgstr "Auto Scan"
 
 #: ../data/bluewho.glade.h:8
 msgid "Available services"
@@ -63,23 +65,23 @@ msgstr "Geräte erkennen"
 
 #: ../data/bluewho.glade.h:11
 msgid "Detect devices at _startup"
-msgstr "Geräte beim _Start erkennen"
+msgstr "Geräte beim Starten erkennen"
 
 #: ../data/bluewho.glade.h:12
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "Voreinstellungen"
 
 #: ../data/bluewho.glade.h:13
 msgid "Re_trieve name during scan (slow)"
-msgstr "_Name während Suche ermitteln (langsam)"
+msgstr "_Namen beim Scannen abfragen (langsam)"
 
 #: ../data/bluewho.glade.h:14
 msgid "Restore last used _window size and position"
-msgstr "Letzte _Fenstergröße und -position verwenden"
+msgstr "Letzte _Fenstergröße und -position wiederherstellen"
 
 #: ../data/bluewho.glade.h:15
 msgid "S_end notification"
-msgstr "Benachrichtigung _senden"
+msgstr "Benachrichtigung _anzeigen"
 
 #: ../data/bluewho.glade.h:16
 msgid "Show _local adapters"
@@ -95,11 +97,11 @@ msgstr "_Benachrichtigungsbefehl:"
 
 #: ../data/bluewho.glade.h:19
 msgid "_Play a sound"
-msgstr "_Klang abspielen"
+msgstr "_Eine Audio-Datei abspielen"
 
 #: ../data/bluewho.glade.h:20
 msgid "_Resolve device name after each detection"
-msgstr "_Gerätename nach jeder Erkennung auflösen"
+msgstr "_Gerätenamen nach jeder Erkennung auflösen"
 
 #: ../src/bluewho.py:64
 msgid "adapter"
@@ -112,12 +114,12 @@ msgstr "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
 
 #: ../src/bluewho.py:113
 msgid "No local devices found during detection."
-msgstr "Keine lokalen Geräte erkannt."
+msgstr "Keine lokalen Geräte bei der Erkennung gefunden."
 
 #: ../src/bluewho.py:143
 #, python-format
 msgid "Last scan: %s"
-msgstr "Letzte Suche: %s"
+msgstr "Letzter Scan: %s"
 
 #: ../src/bluewho.py:156
 msgid "Type"
@@ -125,7 +127,7 @@ msgstr "Typ"
 
 #: ../src/bluewho.py:164
 msgid "Device name"
-msgstr "Gerätename"
+msgstr "Gerät-Name"
 
 #: ../src/bluewho.py:172
 msgid "Bluetooth address"
@@ -137,7 +139,7 @@ msgstr "Zuletzt gesehen"
 
 #: ../src/bluewho.py:188
 msgid "Service name"
-msgstr "Dienstname"
+msgstr "Name des Dienstes"
 
 #: ../src/bluewho.py:195
 msgid "Protocol"
@@ -153,7 +155,7 @@ msgstr "Ein GTK-Werkzeug, dass über das Erkennen eines neuen Bluetooth-Gerätes
 
 #: ../src/btsupport.py:40
 msgid "positioning service"
-msgstr "standortdienst"
+msgstr "positionierungsdienst"
 
 #: ../src/btsupport.py:41
 msgid "networking service"
@@ -209,7 +211,7 @@ msgstr "peripherie"
 
 #: ../src/btsupport.py:64
 msgid "imaging"
-msgstr "bildgebungssystem"
+msgstr "bildbearbeitung"
 
 #: ../src/btsupport.py:65 ../src/btsupport.py:73
 msgid "uncategorized"
@@ -245,7 +247,7 @@ msgstr "mobiltelefon"
 
 #: ../src/btsupport.py:89
 msgid "cordless"
-msgstr "drahtlos"
+msgstr "schnurlos"
 
 #: ../src/btsupport.py:90
 msgid "smartphone"
@@ -257,7 +259,7 @@ msgstr "drahtgebundenes modem-sprache gateway"
 
 #: ../src/btsupport.py:92
 msgid "common ISDN access"
-msgstr "common ISDN access"
+msgstr "gewühnlicher ISDN-zugang"
 
 #: ../src/btsupport.py:96
 msgid "network fully available"
@@ -345,15 +347,15 @@ msgstr "videomonitor"
 
 #: ../src/btsupport.py:120
 msgid "video display loudspeaker"
-msgstr ""
+msgstr "video display lautsprecher"
 
 #: ../src/btsupport.py:121
 msgid "video conferencing"
-msgstr ""
+msgstr "Videokonferenzen"
 
 #: ../src/btsupport.py:122
 msgid "gaming toy"
-msgstr ""
+msgstr "gaming spielzeug"
 
 #: ../src/btsupport.py:127
 msgid "joystick"
@@ -365,15 +367,15 @@ msgstr "gamepad"
 
 #: ../src/btsupport.py:129
 msgid "remote control"
-msgstr "fernsteuerung"
+msgstr "fernbedienung"
 
 #: ../src/btsupport.py:130
 msgid "sensing device"
-msgstr ""
+msgstr "abtasteinrichtung"
 
 #: ../src/btsupport.py:131
 msgid "digitizer tablet"
-msgstr "digitaltablet"
+msgstr "digitalisiertablett"
 
 #: ../src/btsupport.py:132
 msgid "card reader"
