@@ -35,7 +35,7 @@ msgstr "<b>Keresés beállítása:</b>"
 
 #: ../data/bluewho.glade.h:4
 msgid "<b>Startup preferences:</b>"
-msgstr ""
+msgstr "<b>Indítási beállítások:</b>"
 
 #: ../data/bluewho.glade.h:5
 msgid "<b>When a device has been found:</b>"
@@ -55,7 +55,7 @@ msgstr "Elérhető szolgáltatások"
 
 #: ../data/bluewho.glade.h:9
 msgid "Clear list"
-msgstr ""
+msgstr "Lista törlése"
 
 #: ../data/bluewho.glade.h:10
 msgid "Detect devices"
@@ -75,11 +75,11 @@ msgstr ""
 
 #: ../data/bluewho.glade.h:14
 msgid "Restore last used _window size and position"
-msgstr ""
+msgstr "Utoljára használt ablak méret és pozíció visszaállítása"
 
 #: ../data/bluewho.glade.h:15
 msgid "S_end notification"
-msgstr ""
+msgstr "Ért_esítés küldése"
 
 #: ../data/bluewho.glade.h:16
 msgid "Show _local adapters"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: ../data/bluewho.glade.h:17
 msgid "_Automatic scan at startup"
-msgstr ""
+msgstr "Auómatikus keresés induláskor"
 
 #: ../data/bluewho.glade.h:18
 msgid "_Notification command:"
