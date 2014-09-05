@@ -1,0 +1,412 @@
+# BlueWho
+# Information and notification of new discovered bluetooth devices.
+# Copyright (C) 2009-2014 Fabio Castelli (Muflone) <webreg(at)vbsimple.net>
+# Website: http://www.muflone.com/bluewho/
+# This file is distributed under the same license of BlueWho.
+# Turkish translation for BlueWho.
+#
+# Translators:
+# Necdet Yücel <necdetyucel(at)gmail.com>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: BlueWho\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
+"POT-Creation-Date: 2010-01-02 01:31+0100\n"
+"PO-Revision-Date: 2014-08-30 18:13+0000\n"
+"Last-Translator: Necdet Yücel <necdetyucel(at)gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/bluewho/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../data/bluewho.glade.h:1
+msgid "<b>Available services:</b>"
+msgstr "<b>Uygun servisler:</b>"
+
+#: ../data/bluewho.glade.h:2
+msgid "<b>Detected devices:</b>"
+msgstr "<b>Algılanan aygıtlar:</b>"
+
+#: ../data/bluewho.glade.h:3
+msgid "<b>Scan options:</b>"
+msgstr "<b>Tarama seçenekleri:</b>"
+
+#: ../data/bluewho.glade.h:4
+msgid "<b>Startup preferences:</b>"
+msgstr "<b>Başlangıç tercihleri:</b>"
+
+#: ../data/bluewho.glade.h:5
+msgid "<b>When a device has been found:</b>"
+msgstr "<b>Bir aygıt bulunduğunda:</b>"
+
+#: ../data/bluewho.glade.h:6
+msgid "About"
+msgstr "Hakkında"
+
+#: ../data/bluewho.glade.h:7
+msgid "Auto scan"
+msgstr "Otomatik tarama"
+
+#: ../data/bluewho.glade.h:8
+msgid "Available services"
+msgstr "Uygun servisler"
+
+#: ../data/bluewho.glade.h:9
+msgid "Clear list"
+msgstr "Listeyi temizle"
+
+#: ../data/bluewho.glade.h:10
+msgid "Detect devices"
+msgstr "Aygıtları belirle"
+
+#: ../data/bluewho.glade.h:11
+msgid "Detect devices at _startup"
+msgstr "_Başlangıçta aygıtları belirle"
+
+#: ../data/bluewho.glade.h:12
+msgid "Preferences"
+msgstr "Seçenekler"
+
+#: ../data/bluewho.glade.h:13
+msgid "Re_trieve name during scan (slow)"
+msgstr ""
+
+#: ../data/bluewho.glade.h:14
+msgid "Restore last used _window size and position"
+msgstr ""
+
+#: ../data/bluewho.glade.h:15
+msgid "S_end notification"
+msgstr "Bildirim _gönder"
+
+#: ../data/bluewho.glade.h:16
+msgid "Show _local adapters"
+msgstr "_Yerel adaptörleri göster"
+
+#: ../data/bluewho.glade.h:17
+msgid "_Automatic scan at startup"
+msgstr "_Taramayı başlangıçta başlat"
+
+#: ../data/bluewho.glade.h:18
+msgid "_Notification command:"
+msgstr "_Bildirim komutu:"
+
+#: ../data/bluewho.glade.h:19
+msgid "_Play a sound"
+msgstr "_Ses çal"
+
+#: ../data/bluewho.glade.h:20
+msgid "_Resolve device name after each detection"
+msgstr "Her tespit edişte aygıt adını _çöz"
+
+#: ../src/bluewho.py:64
+msgid "adapter"
+msgstr "adaptör"
+
+#: ../src/bluewho.py:83
+#, python-format
+msgid "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
+msgstr ""
+
+#: ../src/bluewho.py:113
+msgid "No local devices found during detection."
+msgstr "Tarama sırasında hiç aygıt bulunamadı."
+
+#: ../src/bluewho.py:143
+#, python-format
+msgid "Last scan: %s"
+msgstr "Son tarama: %s"
+
+#: ../src/bluewho.py:156
+msgid "Type"
+msgstr "Tip"
+
+#: ../src/bluewho.py:164
+msgid "Device name"
+msgstr "Aygıt adı"
+
+#: ../src/bluewho.py:172
+msgid "Bluetooth address"
+msgstr "Bluetooth adresi"
+
+#: ../src/bluewho.py:179
+msgid "Last seen"
+msgstr "En son görüldüğü zaman"
+
+#: ../src/bluewho.py:188
+msgid "Service name"
+msgstr "Servis adı"
+
+#: ../src/bluewho.py:195
+msgid "Protocol"
+msgstr "Protokol"
+
+#: ../src/bluewho.py:202
+msgid "Channel"
+msgstr "Kanal"
+
+#: ../src/bluewho.py:335
+msgid "A GTK utility to inform and notify you when a new bluetooth device is discovered."
+msgstr "Yeni bir bluetooth aygıtı bulunduğunda sizi uyaran bir GTK+ uygulaması."
+
+#: ../src/btsupport.py:40
+msgid "positioning service"
+msgstr ""
+
+#: ../src/btsupport.py:41
+msgid "networking service"
+msgstr "ağ servisi"
+
+#: ../src/btsupport.py:42
+msgid "rendering service"
+msgstr ""
+
+#: ../src/btsupport.py:43
+msgid "capturing service"
+msgstr ""
+
+#: ../src/btsupport.py:44
+msgid "object transfer service"
+msgstr ""
+
+#: ../src/btsupport.py:45
+msgid "audio service"
+msgstr ""
+
+#: ../src/btsupport.py:46
+msgid "telephony service"
+msgstr "telefon servisi"
+
+#: ../src/btsupport.py:47
+msgid "information service"
+msgstr "bilgi servisi"
+
+#: ../src/btsupport.py:58
+msgid "miscellaneous"
+msgstr "diğer"
+
+#: ../src/btsupport.py:59
+msgid "computer"
+msgstr "bilgisayar"
+
+#: ../src/btsupport.py:60
+msgid "phone"
+msgstr "telefon"
+
+#: ../src/btsupport.py:61
+msgid "network"
+msgstr "ağ"
+
+#: ../src/btsupport.py:62
+msgid "audio-video"
+msgstr ""
+
+#: ../src/btsupport.py:63
+msgid "peripheral"
+msgstr ""
+
+#: ../src/btsupport.py:64
+msgid "imaging"
+msgstr "görüntüleme"
+
+#: ../src/btsupport.py:65 ../src/btsupport.py:73
+msgid "uncategorized"
+msgstr "belirlenemeyen"
+
+#: ../src/btsupport.py:79
+msgid "desktop workstation"
+msgstr "masaüstü iş istasyonu"
+
+#: ../src/btsupport.py:80
+msgid "server"
+msgstr "sunucu"
+
+#: ../src/btsupport.py:81
+msgid "laptop"
+msgstr "dizüstü"
+
+#: ../src/btsupport.py:82
+msgid "handheld"
+msgstr ""
+
+#: ../src/btsupport.py:83
+msgid "palm"
+msgstr "palm"
+
+#: ../src/btsupport.py:84
+msgid "wearable computer"
+msgstr ""
+
+#: ../src/btsupport.py:88
+msgid "cellular"
+msgstr ""
+
+#: ../src/btsupport.py:89
+msgid "cordless"
+msgstr "kablosuz"
+
+#: ../src/btsupport.py:90
+msgid "smartphone"
+msgstr "akıllı telefon"
+
+#: ../src/btsupport.py:91
+msgid "wired modem - voice gateway"
+msgstr ""
+
+#: ../src/btsupport.py:92
+msgid "common ISDN access"
+msgstr ""
+
+#: ../src/btsupport.py:96
+msgid "network fully available"
+msgstr "ağ tamamen uygun"
+
+#: ../src/btsupport.py:97
+msgid "network 1-17% used"
+msgstr ""
+
+#: ../src/btsupport.py:98
+msgid "network 17-33% used"
+msgstr ""
+
+#: ../src/btsupport.py:99
+msgid "network 33-50% used"
+msgstr ""
+
+#: ../src/btsupport.py:100
+msgid "network 50-67% used"
+msgstr ""
+
+#: ../src/btsupport.py:101
+msgid "network 67-83% used"
+msgstr ""
+
+#: ../src/btsupport.py:102
+msgid "network 83-99% used"
+msgstr ""
+
+#: ../src/btsupport.py:103
+msgid "network unavailable"
+msgstr "ağ uygun değil"
+
+#: ../src/btsupport.py:107
+msgid "headset"
+msgstr "kulaklık"
+
+#: ../src/btsupport.py:108
+msgid "hands-free"
+msgstr ""
+
+#: ../src/btsupport.py:109
+msgid "microphone"
+msgstr "mikrofon"
+
+#: ../src/btsupport.py:110
+msgid "loudspeaker"
+msgstr ""
+
+#: ../src/btsupport.py:111
+msgid "headphone"
+msgstr "kulaklık"
+
+#: ../src/btsupport.py:112
+msgid "portable audio"
+msgstr ""
+
+#: ../src/btsupport.py:113
+msgid "car audio"
+msgstr ""
+
+#: ../src/btsupport.py:114
+msgid "set-top box"
+msgstr ""
+
+#: ../src/btsupport.py:115
+msgid "hifi audio"
+msgstr ""
+
+#: ../src/btsupport.py:116
+msgid "vcr"
+msgstr "vcr"
+
+#: ../src/btsupport.py:117
+msgid "videocamera"
+msgstr "video kamera"
+
+#: ../src/btsupport.py:118
+msgid "camcorder"
+msgstr ""
+
+#: ../src/btsupport.py:119
+msgid "video monitor"
+msgstr "video monitor"
+
+#: ../src/btsupport.py:120
+msgid "video display loudspeaker"
+msgstr ""
+
+#: ../src/btsupport.py:121
+msgid "video conferencing"
+msgstr "video konferans"
+
+#: ../src/btsupport.py:122
+msgid "gaming toy"
+msgstr ""
+
+#: ../src/btsupport.py:127
+msgid "joystick"
+msgstr "oyun cubuğu"
+
+#: ../src/btsupport.py:128
+msgid "gamepad"
+msgstr ""
+
+#: ../src/btsupport.py:129
+msgid "remote control"
+msgstr "uzaktan kumanda"
+
+#: ../src/btsupport.py:130
+msgid "sensing device"
+msgstr "aygıt aranıyor"
+
+#: ../src/btsupport.py:131
+msgid "digitizer tablet"
+msgstr ""
+
+#: ../src/btsupport.py:132
+msgid "card reader"
+msgstr "kart okuyucu"
+
+#: ../src/btsupport.py:136
+msgid "keyboard"
+msgstr "klavye"
+
+#: ../src/btsupport.py:137
+msgid "mouse"
+msgstr "fare"
+
+#: ../src/btsupport.py:138
+msgid "keyboard+mouse"
+msgstr "klavye+fare"
+
+#: ../src/btsupport.py:142
+msgid "display"
+msgstr ""
+
+#: ../src/btsupport.py:143
+msgid "camera"
+msgstr "kamera"
+
+#: ../src/btsupport.py:144
+msgid "scanner"
+msgstr "tarayıcı"
+
+#: ../src/btsupport.py:145
+msgid "printer"
+msgstr "yazıcı"
+
+#: ../src/settings.py:67
+msgid "New bluetooth device detected"
+msgstr "Hiö bluetooth aygıt algılanamadı"
