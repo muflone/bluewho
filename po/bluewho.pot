@@ -1,13 +1,15 @@
 # BlueWho
 # Information and notification of new discovered bluetooth devices.
-# Copyright (C) 2009-2013 Fabio Castelli <webreg(at)vbsimple.net>
-# This file is distributed under the GPL v2 license (see copyright file).
+# Copyright (C) 2009-2014 Fabio Castelli (Muflone) <webreg(at)vbsimple.net>
+# Website: http://www.muflone.com/bluewho/
+# This file is distributed under the same license of Bluewho.
 # X translation for BlueWho.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
-"Report-Msgid-Bugs-To: Fabio Castelli <muflone(at)vbsimple.net>\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -143,9 +145,7 @@ msgid "Channel"
 msgstr ""
 
 #: ../src/bluewho.py:335
-msgid ""
-"A GTK utility to inform and notify you when a new bluetooth device is "
-"discovered."
+msgid "A GTK utility to inform and notify you when a new bluetooth device is discovered."
 msgstr ""
 
 #: ../src/btsupport.py:40

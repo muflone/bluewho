@@ -1,22 +1,24 @@
 # BlueWho
 # Information and notification of new discovered bluetooth devices.
-# Copyright (C) 2009-2013 Fabio Castelli <webreg(at)vbsimple.net>
-# This file is distributed under the GPL v2 license (see copyright file).
-# X translation for BlueWho.
+# Copyright (C) 2009-2014 Fabio Castelli (Muflone) <webreg(at)vbsimple.net>
+# Website: http://www.muflone.com/bluewho/
+# This file is distributed under the same license of BlueWho.
+# Italian translation for BlueWho.
 #
 # Translators:
-# Fabio Castelli <webreg(at)vbsimple.net>, 2010
+# Fabio Castelli (Muflone) <webreg(at)vbsimple.net>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
-"Report-Msgid-Bugs-To: Fabio Castelli <muflone(at)vbsimple.net>\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
-"PO-Revision-Date: 2010-01-02 01:32+0100\n"
-"Last-Translator: Fabio Castelli <muflone(at)vbsimple.net>\n"
-"Language-Team: English\n"
+"PO-Revision-Date: 2014-08-30 18:13+0000\n"
+"Last-Translator: Fabio Castelli (Muflone) <webreg(at)vbsimple.net>\n"
+"Language-Team: English (United States) (http://www.transifex.com/projects/p/bluewho/language/en_US/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/bluewho.glade.h:1
@@ -146,12 +148,8 @@ msgid "Channel"
 msgstr "Channel"
 
 #: ../src/bluewho.py:335
-msgid ""
-"A GTK utility to inform and notify you when a new bluetooth device is "
-"discovered."
-msgstr ""
-"A GTK utility to inform and notify you when a new bluetooth device is "
-"discovered."
+msgid "A GTK utility to inform and notify you when a new bluetooth device is discovered."
+msgstr "A GTK utility to inform and notify you when a new bluetooth device is discovered."
 
 #: ../src/btsupport.py:40
 msgid "positioning service"
