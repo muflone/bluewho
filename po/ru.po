@@ -6,7 +6,7 @@
 # Russian translation for BlueWho.
 #
 # Translators:
-# HsH <hsh(at)runtu.org>, 2010
+# Сергей Богатов <hsh(at)runtu.org>, 2010
 # Ivan Vedernikov <ecugol(at)gmail.com>, 2011
 msgid ""
 msgstr ""
