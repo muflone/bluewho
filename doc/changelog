@@ -1,9 +1,27 @@
+bluewho (0.2.1) all; urgency=low
+
+  * Updated translations
+  * New Bulgarian translation by sahwar
+  * New Danish translation by Joe Hansen
+  * New Spanish Colombian translation by strel
+  * New Hebrew translation by Shalom Craimer
+  * New Dutch translation by RoyD
+  * New Turkish translation by Necdet Yücel
+
+ -- Fabio Castelli <muflone@vbsimple.net>  Sat, 06 Sep 2014 17:06:21 +0200
+
+bluewho (0.2.0) all; urgency=low
+
+  * Rewritten the whole application using GTK+ 3.0
+
+ -- Fabio Castelli <muflone@vbsimple.net>  Mon, 11 Nov 2013 15:04:02 +0100
+
 bluewho (0.1.1) all; urgency=low
 
-  * New russian translation by Сергей Богатов
-  * Completed spanish translation by Federico Caiazza and Luca Della Ghezza
-  * New hungarian translation by Gyorgy Lakatos
-  * New german translation by Claudius Henrichs
+  * New Russian translation by Сергей Богатов
+  * Completed Spanish translation by Federico Caiazza and Luca Della Ghezza
+  * New Hungarian translation by Gyorgy Lakatos
+  * New German translation by Claudius Henrichs
 
  -- Fabio Castelli <muflone@vbsimple.net>  Tue, 06 Jul 2010 23:43:22 +0200
 
