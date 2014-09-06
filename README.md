@@ -8,7 +8,7 @@ BlueWho
 
 **Source code:** https://github.com/muflone/bluewho
 
-**Documentation:** http://url.muflone.com/bluewho
+**Documentation:** http://www.muflone.com/bluewho
 
 Information
 -----------
