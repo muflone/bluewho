@@ -1,6 +1,6 @@
 # BlueWho
 # Information and notification of new discovered bluetooth devices.
-# Copyright (C) 2009-2014 Fabio Castelli (Muflone) <webreg(at)vbsimple.net>
+# Copyright (C) 2009-2014 Fabio Castelli (Muflone) <muflone(at)vbsimple.net>
 # Website: http://www.muflone.com/bluewho/
 # This file is distributed under the same license of Bluewho.
 # X translation for BlueWho.
