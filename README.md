@@ -2,7 +2,7 @@ BlueWho
 =======
 **Description:** Information and notification of new discovered bluetooth devices
 
-**Copyright:** 2009-2013 Fabio Castelli <webreg(at)vbsimple.net>
+**Copyright:** 2009-2014 Fabio Castelli <webreg(at)vbsimple.net>
 
 **License:** GPL-2+
 
