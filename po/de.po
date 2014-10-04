@@ -9,13 +9,14 @@
 # Claudius Henrichs, 2010
 # Christoph Bauer <transifex(at)stargazer.at>, 2011
 # Fabian Affolter <fab(at)fedoraproject.org>, 2011
+# Ettore Atalan <atalanttore(at)googlemail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
-"PO-Revision-Date: 2014-08-30 19:11+0000\n"
-"Last-Translator: Fabian Affolter <fab(at)fedoraproject.org>\n"
+"PO-Revision-Date: 2014-09-23 21:37+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore(at)googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/bluewho/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,11 +34,11 @@ msgstr "<b>Erkannte Geräte:</b>"
 
 #: ../data/bluewho.glade.h:3
 msgid "<b>Scan options:</b>"
-msgstr "<b>Scan optionen:</b>"
+msgstr "<b>Scanoptionen:</b>"
 
 #: ../data/bluewho.glade.h:4
 msgid "<b>Startup preferences:</b>"
-msgstr "<b>Start einstellungen:</b>"
+msgstr "<b>Starteinstellungen:</b>"
 
 #: ../data/bluewho.glade.h:5
 msgid "<b>When a device has been found:</b>"
@@ -49,7 +50,7 @@ msgstr "Über"
 
 #: ../data/bluewho.glade.h:7
 msgid "Auto scan"
-msgstr "Auto Scan"
+msgstr "Automatischer Scan"
 
 #: ../data/bluewho.glade.h:8
 msgid "Available services"
@@ -139,7 +140,7 @@ msgstr "Zuletzt gesehen"
 
 #: ../src/bluewho.py:188
 msgid "Service name"
-msgstr "Name des Dienstes"
+msgstr "Dienstname"
 
 #: ../src/bluewho.py:195
 msgid "Protocol"
