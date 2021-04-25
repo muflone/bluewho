@@ -169,9 +169,9 @@ class Settings(object):
         devices = []
         if os.path.exists(FILE_SETTINGS_DEVICES):
             self.logText('Loading the devices list', VERBOSE_LEVEL_NORMAL)
-            with open(FILE_SETTINGS_DEVICES, 'r') as f:
+            with open(FILE_SETTINGS_DEVICES, 'r') as file:
                 # Each device is separated by a single line with >
-                lines = f.read().split('\n>\n')
+                lines = file.read().split('\n>\n')
                 for device in lines:
                     if device:
                         device = device.split('\n')
@@ -182,21 +182,19 @@ class Settings(object):
                                        device[2].startswith('0x')
                                        and 16 or 10),
                           'lastseen': device[3]})
-                f.close()
         return devices
 
     def save_devices(self, devices):
         """Save devices list to filename"""
         if len(devices) > 0:
             self.logText('Saving the devices list', VERBOSE_LEVEL_NORMAL)
-            with open(FILE_SETTINGS_DEVICES, 'w') as f:
+            with open(FILE_SETTINGS_DEVICES, 'w') as file:
                 for device in devices:
-                    f.write('%s\n%s\n%s\n%s\n>\n' % (
+                    file.write('%s\n%s\n%s\n%s\n>\n' % (
                         devices.get_address(device),
                         devices.get_name(device),
                         hex(devices.get_class(device)),
                         devices.get_last_seen(device)))
-                f.close()
         elif os.path.exists(FILE_SETTINGS_DEVICES):
             self.logText('Deleting the devices list', VERBOSE_LEVEL_NORMAL)
             os.remove(FILE_SETTINGS_DEVICES)
@@ -233,11 +231,10 @@ class Settings(object):
     def save(self):
         """Save the whole configuration"""
         # Always save the settings in the new configuration file
-        file_settings = open(FILE_SETTINGS_NEW, mode='w')
-        self.logText('Saving settings to %s' % FILE_SETTINGS_NEW,
-                     VERBOSE_LEVEL_NORMAL)
-        self.config.write(file_settings)
-        file_settings.close()
+        with open(FILE_SETTINGS_NEW, mode='w') as file:
+            self.logText('Saving settings to %s' % FILE_SETTINGS_NEW,
+                         VERBOSE_LEVEL_NORMAL)
+            self.config.write(file)
 
     def logText(self, text, verbose_level=VERBOSE_LEVEL_NORMAL):
         """Print a text with current date and time based on verbose level"""

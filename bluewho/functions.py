@@ -38,12 +38,11 @@ def thread_safe(func):
 def readlines(filename, empty_lines=False):
     """Read all lines from a text file"""
     result = []
-    with open(filename) as f:
-        for line in f.readlines():
+    with open(filename) as file:
+        for line in file.readlines():
             line = line.strip()
             if line or empty_lines:
                 result.append(line)
-        f.close()
     return result
 
 
