@@ -23,6 +23,7 @@ import os.path
 import optparse
 import time
 import configparser
+
 from bluewho.constants import (FILE_SETTINGS_DEVICES,
                                FILE_SETTINGS_NEW,
                                VERBOSE_LEVEL_QUIET,

@@ -18,10 +18,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from gi.repository import Gtk
-from gi.repository import Gio
-from bluewho.ui import MainWindow
+from gi.repository import Gtk, Gio
+
 from bluewho.constants import APP_ID, FILE_UI_APPMENU
+from bluewho.ui import MainWindow
 
 
 class Application(Gtk.Application):

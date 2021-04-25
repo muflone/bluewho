@@ -19,25 +19,27 @@
 ##
 
 from time import sleep
+
 from gi.repository import Gtk
+
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
                                FILE_UI_MAIN,
                                USE_FAKE_DEVICES,
                                VERBOSE_LEVEL_NORMAL)
+from bluewho.daemon_thread import DaemonThread
+from bluewho.dialog_about import DialogAbout
+from bluewho.dialog_services import DialogServices
+from bluewho.dialog_preferences import DialogPreferences
+from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
                                get_current_time,
                                GtkProcessEvents,
                                idle_add,
                                thread_safe)
-from bluewho.settings import Preferences
 from bluewho.model_devices import ModelDevices
-from bluewho.dialog_about import DialogAbout
-from bluewho.dialog_services import DialogServices
-from bluewho.dialog_preferences import DialogPreferences
-from bluewho.daemon_thread import DaemonThread
-from bluewho.fake_devices import FakeDevices
+from bluewho.settings import Preferences
 
 
 class MainWindow(object):

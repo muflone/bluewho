@@ -21,8 +21,10 @@
 import threading
 from time import localtime
 from gettext import gettext as _
+
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
+
 from bluewho.constants import APP_NAME, FILE_ICON
 
 

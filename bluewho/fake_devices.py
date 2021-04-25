@@ -19,6 +19,7 @@
 ##
 
 import random
+
 from bluewho.constants import FILE_FAKE_DEVICES
 from bluewho.functions import readlines
 

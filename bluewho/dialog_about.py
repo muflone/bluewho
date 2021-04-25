@@ -20,6 +20,7 @@
 
 from gi.repository import Gtk
 from gi.repository.GdkPixbuf import Pixbuf
+
 from bluewho.constants import (APP_AUTHOR,
                                APP_AUTHOR_EMAIL,
                                APP_NAME,

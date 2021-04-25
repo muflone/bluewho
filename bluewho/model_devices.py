@@ -19,16 +19,18 @@
 ##
 
 import os.path
+
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 from gi.repository import Notify
+
 from bluewho.audio_player import AudioPlayer
-from bluewho.settings import Preferences
 from bluewho.constants import (APP_NAME,
                                DIR_BT_ICONS,
                                FILE_SOUND,
                                VERBOSE_LEVEL_MAX)
 from bluewho.functions import _
+from bluewho.settings import Preferences
 
 
 class ModelDevices(object):

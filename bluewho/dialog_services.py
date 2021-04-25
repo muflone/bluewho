@@ -19,6 +19,7 @@
 ##
 
 from gi.repository import Gtk
+
 from bluewho.constants import FILE_ICON, FILE_UI_SERVICES
 from bluewho.functions import _
 from bluewho.model_services import ModelServices

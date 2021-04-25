@@ -20,8 +20,10 @@
 
 import struct
 import select
+
 import bluetooth
 from bluetooth import _bluetooth as bt
+
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.constants import FILE_BT_CLASSES
 from bluewho.functions import readlines
@@ -149,7 +151,7 @@ class BluetoothSupport(object):
                 data = sock.recv(255)
                 name = data[7:].decode('utf-8')
                 name = name[:name.find('\0')]
-            except bluetooth._bluetooth.timeout:
+            except bt.timeout:
                 print('bluetooth timeout during local device scan for name')
             # CMD Read local address
             opcode = bt.cmd_opcode_pack(bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
@@ -162,7 +164,7 @@ class BluetoothSupport(object):
                 address = ['%02X' % b for b in raw_bdaddr]
                 address.reverse()
                 address = ':'.join(address)
-            except bluetooth._bluetooth.timeout:
+            except bt.timeout:
                 print('bluetooth timeout during local device scan for address')
 
             # Restore original filter

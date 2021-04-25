@@ -19,10 +19,11 @@
 ##
 
 from gi.repository import Gtk
-from bluewho.settings import Preferences
+
 from bluewho.constants import (FILE_ICON,
                                FILE_UI_PREFERENCES)
 from bluewho.functions import _
+from bluewho.settings import Preferences
 
 
 class DialogPreferences(object):

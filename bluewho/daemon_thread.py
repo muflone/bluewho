@@ -18,10 +18,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from gi.repository import Gdk
-from gi.repository import GObject
-from threading import Thread
-from threading import Event
+from threading import Event, Thread
+
+from gi.repository import Gdk, GObject
 
 
 class DaemonThread(Thread):
