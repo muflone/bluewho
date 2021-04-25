@@ -4,7 +4,7 @@ BlueWho
 
 **Copyright:** 2009-2021 Fabio Castelli <muflone(at)vbsimple.net>
 
-**Licenza:** GPL-2+
+**Licenza:** GPL-3+
 
 **Codice sorgente:** https://github.com/muflone/bluewho
 
