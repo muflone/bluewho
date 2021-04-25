@@ -19,16 +19,18 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from distutils.core import setup
-from distutils.command.install_scripts import install_scripts
-from distutils.command.install_data import install_data
-from distutils.log import info
-
+import glob
+import itertools
 import os
 import os.path
 import shutil
-from itertools import chain
-from glob import glob
+import subprocess
+
+from distutils.command.install_scripts import install_scripts
+from distutils.command.install_data import install_data
+from distutils.core import setup, Command
+from distutils.log import info
+
 from bluewho.constants import (APP_NAME,
                                APP_VERSION,
                                APP_AUTHOR,
@@ -55,7 +57,11 @@ class Install_Scripts(install_scripts):
 class Install_Data(install_data):
     def run(self):
         self.install_icons()
-        self.install_translations()
+        cmd_translations = Command_Translations(self.distribution)
+        cmd_translations.initialize_options()
+        cmd_translations.finalize_options()
+        cmd_translations.data_files = self.data_files
+        cmd_translations.run()
         install_data.run(self)
 
     def install_icons(self):
@@ -65,26 +71,66 @@ class Install_Data(install_data):
             icon_dir = os.path.join(DIR_ICONS, icon_format)
             self.data_files.append((
                 os.path.join('share', 'icons', 'hicolor', icon_format, 'apps'),
-                glob(os.path.join(icon_dir, '*'))))
+                glob.glob(os.path.join(icon_dir, '*'))))
 
-    def install_translations(self):
-        info('Installing translations...')
-        for po in glob(os.path.join('po', '*.po')):
-            lang = os.path.basename(po[:-3])
-            mo = os.path.join('build', 'mo', lang, '%s.mo' % DOMAIN_NAME)
 
-            directory = os.path.dirname(mo)
-            if not os.path.exists(directory):
-                info('creating %s' % directory)
-                os.makedirs(directory)
+class Command_Translation(Command):
+    description = "compile a translation"
+    user_options = [
+        ('input=', None, 'Define input file'),
+        ('output=', None, 'Define output file'),
+    ]
 
-            cmd = 'msgfmt -o %s %s' % (mo, po)
-            info('compiling %s -> %s' % (po, mo))
-            if os.system(cmd) != 0:
-                raise SystemExit('Error while running msgfmt')
+    def initialize_options(self):
+        self.input = None
+        self.output = None
+        self.data_files = []
 
-            dest = os.path.join('share', 'locale', lang, 'LC_MESSAGES')
-            self.data_files.append((dest, [mo]))
+    def finalize_options(self):
+        assert (self.input), 'Missing input file'
+        assert (self.output), 'Missing output file'
+
+    def run(self):
+        """Compile a single translation using self.input and self.output"""
+        lang = os.path.basename(self.input[:-3])
+        dir_lang = os.path.dirname(self.output)
+        if not os.path.exists(dir_lang):
+            os.makedirs(dir_lang)
+        subprocess.call(('msgfmt', '--output-file', self.output, self.input))
+        self.data_files.append((os.path.join('share',
+                                             'locale',
+                                             lang,
+                                             'LC_MESSAGES'),
+                                [self.output]))
+
+
+class Command_Translations(Command):
+    description = "build translations"
+    user_options = []
+
+    def initialize_options(self):
+        self.data_files = []
+
+    def finalize_options(self):
+        self.dir_base = os.path.dirname(os.path.abspath(__file__))
+        self.dir_po = os.path.join(self.dir_base, 'po')
+        self.dir_mo = os.path.join(self.dir_base, 'locale')
+
+    def run(self):
+        """Compile every translation and add it to the data files"""
+        for file_po in glob.glob(os.path.join(self.dir_po, '*.po')):
+            file_mo = os.path.join(self.dir_mo,
+                                   os.path.basename(file_po[:-3]),
+                                   'LC_MESSAGES',
+                                   '%s.mo' % DOMAIN_NAME)
+            cmd_translation = Command_Translation(self.distribution)
+            cmd_translation.initialize_options()
+            cmd_translation.input = file_po
+            cmd_translation.output = file_mo
+            cmd_translation.finalize_options()
+            # Add the translation files to the data files
+            cmd_translation.data_files = self.data_files
+            cmd_translation.run()
 
 
 setup(
@@ -104,15 +150,17 @@ setup(
                                 'data/classes.txt',
                                 'data/fake_devices.txt',
                                 'data/newdevice.wav']),
-        ('share/bluewho/data/icons', glob('data/icons/*')),
+        ('share/bluewho/data/icons', glob.glob('data/icons/*')),
         ('share/applications', ['data/bluewho.desktop']),
-        ('share/doc/bluewho', list(chain(glob('doc/*'),
-                                         glob('*.md')))),
+        ('share/doc/bluewho', list(itertools.chain(glob.glob('doc/*'),
+                                                   glob.glob('*.md')))),
         ('share/man/man1', ['man/bluewho.1']),
-        ('share/bluewho/ui', glob('ui/*')),
+        ('share/bluewho/ui', glob.glob('ui/*')),
     ],
     cmdclass={
         'install_scripts': Install_Scripts,
-        'install_data': Install_Data
+        'install_data': Install_Data,
+        'translation': Command_Translation,
+        'translations': Command_Translations
     }
 )
