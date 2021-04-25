@@ -27,7 +27,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Notify', '0.7')
 
 from bluewho.settings import Settings                              # noqa: E402
-from bluewho.btsupport import BluetoothSupport                     # noqa: E402
+from bluewho.bt_support import BluetoothSupport                    # noqa: E402
 from bluewho.app import Application                                # noqa: E402
 from bluewho.constants import DOMAIN_NAME, DIR_LOCALE              # noqa: E402
 
