@@ -1,7 +1,7 @@
 ##
 #     Project: BlueWho
 # Description: Information and notification of new discovered bluetooth devices.
-#      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
+#      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
 #  This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ APP_DESCRIPTION = 'Information and notification of new discovered bluetooth devi
 APP_ID = 'bluewho.muflone.com'
 APP_URL = 'http://www.muflone.com/bluewho'
 APP_AUTHOR = 'Fabio Castelli'
-APP_AUTHOR_EMAIL = 'muflone@vbsimple.net'
+APP_AUTHOR_EMAIL = 'muflone@muflone.com'
 APP_COPYRIGHT = 'Copyright 2009-2021 %s' % APP_AUTHOR
 # Other constants
 DOMAIN_NAME = 'bluewho'
