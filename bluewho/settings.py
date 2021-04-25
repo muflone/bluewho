@@ -123,11 +123,11 @@ class Settings(object):
         self.load_setting(section=Sections.SCAN,
                           option=Preferences.RETRIEVE_NAMES,
                           option_type=bool,
-                          default_value=True)
+                          default_value=False)
         self.load_setting(section=Sections.SCAN,
                           option=Preferences.RESOLVE_NAMES,
                           option_type=bool,
-                          default_value=False)
+                          default_value=True)
         self.load_setting(section=Sections.SCAN,
                           option=Preferences.SHOW_LOCAL,
                           option_type=bool,
