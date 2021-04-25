@@ -147,7 +147,7 @@ class BluetoothSupport(object):
             bt.hci_send_cmd(sock, bt.OGF_HOST_CTL, bt.OCF_READ_LOCAL_NAME)
             try:
                 data = sock.recv(255)
-                name = data[7:]
+                name = data[7:].decode('utf-8')
                 name = name[:name.find('\0')]
             except bluetooth._bluetooth.timeout:
                 print('bluetooth timeout during local device scan for name')
@@ -159,7 +159,7 @@ class BluetoothSupport(object):
             try:
                 data = sock.recv(255)
                 status, raw_bdaddr = struct.unpack('xxxxxxB6s', data)
-                address = ['%02X' % ord(b) for b in raw_bdaddr]
+                address = ['%02X' % b for b in raw_bdaddr]
                 address.reverse()
                 address = ':'.join(address)
             except bluetooth._bluetooth.timeout:
