@@ -9,6 +9,7 @@ addons:
   apt:
     packages:
     - python3-gi                              # GObject
+    - gobject-introspection                   # GObject
     - gir1.2-gtk-3.0                          # gi.repository.gtk
     - libbluetooth-dev                        # PyBluez
 install:
