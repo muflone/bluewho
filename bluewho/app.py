@@ -21,7 +21,7 @@
 from gi.repository import Gtk, Gio
 
 from bluewho.constants import APP_ID, FILE_UI_APPMENU
-from bluewho.ui import MainWindow
+from bluewho.ui.main import MainWindow
 
 
 class Application(Gtk.Application):

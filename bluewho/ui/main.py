@@ -29,9 +29,6 @@ from bluewho.constants import (APP_NAME,
                                USE_FAKE_DEVICES,
                                VERBOSE_LEVEL_NORMAL)
 from bluewho.daemon_thread import DaemonThread
-from bluewho.dialog_about import DialogAbout
-from bluewho.dialog_services import DialogServices
-from bluewho.dialog_preferences import DialogPreferences
 from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
                                get_current_time,
@@ -40,6 +37,9 @@ from bluewho.functions import (_,
                                thread_safe)
 from bluewho.model_devices import ModelDevices
 from bluewho.settings import Preferences
+from bluewho.ui.about import DialogAbout
+from bluewho.ui.preferences import DialogPreferences
+from bluewho.ui.services import DialogServices
 
 
 class MainWindow(object):
