@@ -119,7 +119,7 @@ class BluetoothSupport(object):
               lookup_names=lookup_names,
               duration=scan_duration,
               flush_cache=flush_cache)
-        except Exception:
+        except (bt.error, IndexError):
             discoverer.done = True
         readfiles = [discoverer]
         # Wait till the end
@@ -146,19 +146,21 @@ class BluetoothSupport(object):
                                         bt.OCF_READ_LOCAL_NAME)
             bt.hci_filter_set_opcode(new_filter, opcode)
             sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, new_filter)
-            bt.hci_send_cmd(sock, bt.OGF_HOST_CTL, bt.OCF_READ_LOCAL_NAME)
             try:
+                bt.hci_send_cmd(sock, bt.OGF_HOST_CTL, bt.OCF_READ_LOCAL_NAME)
                 data = sock.recv(255)
                 name = data[7:].decode('utf-8')
                 name = name[:name.find('\0')]
             except bt.timeout:
                 print('bluetooth timeout during local device scan for name')
+            except bt.error:
+                print('bluetooth error during local device scan for name')
             # CMD Read local address
             opcode = bt.cmd_opcode_pack(bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
             bt.hci_filter_set_opcode(new_filter, opcode)
             sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, new_filter)
-            bt.hci_send_cmd(sock, bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
             try:
+                bt.hci_send_cmd(sock, bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
                 data = sock.recv(255)
                 status, raw_bdaddr = struct.unpack('xxxxxxB6s', data)
                 address = ['%02X' % b for b in raw_bdaddr]
@@ -166,7 +168,8 @@ class BluetoothSupport(object):
                 address = ':'.join(address)
             except bt.timeout:
                 print('bluetooth timeout during local device scan for address')
-
+            except bt.error:
+                print('bluetooth error during local device scan for address')
             # Restore original filter
             sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, orig_filter)
         sock.close()
