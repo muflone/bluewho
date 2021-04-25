@@ -36,6 +36,7 @@ class DialogPreferences(object):
         self.dialog = builder.get_object('dialogPreferences')
         self.chkStartupScan = builder.get_object('chkStartupScan')
         self.chkRestoreSize = builder.get_object('chkRestoreSize')
+        self.adjScanSpeed = builder.get_object('adjScanSpeed')
         self.chkRetrieveName = builder.get_object('chkRetrieveName')
         self.chkResolveNames = builder.get_object('chkResolveNames')
         self.chkLocalAdapters = builder.get_object('chkLocalAdapters')
@@ -51,6 +52,8 @@ class DialogPreferences(object):
             settings.get_value(Preferences.STARTUPSCAN))
         self.chkRestoreSize.set_active(
             settings.get_value(Preferences.RESTORE_SIZE))
+        self.adjScanSpeed.set_value(
+            settings.get_value(Preferences.SCAN_SPEED))
         self.chkRetrieveName.set_active(
             settings.get_value(Preferences.RETRIEVE_NAMES))
         self.chkResolveNames.set_active(
@@ -74,6 +77,8 @@ class DialogPreferences(object):
                                 self.chkStartupScan.get_active())
         self.settings.set_value(Preferences.RESTORE_SIZE,
                                 self.chkRestoreSize.get_active())
+        self.settings.set_value(Preferences.SCAN_SPEED,
+                                int(self.adjScanSpeed.get_value()))
         self.settings.set_value(Preferences.RETRIEVE_NAMES,
                                 self.chkRetrieveName.get_active())
         self.settings.set_value(Preferences.RESOLVE_NAMES,

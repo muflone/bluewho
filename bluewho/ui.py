@@ -224,7 +224,7 @@ class MainWindow(object):
             # Discover devices via bluetooth
             self.btsupport.discover(
                 self.settings.get_value(Preferences.RETRIEVE_NAMES),
-                8,
+                self.settings.get_value(Preferences.SCAN_SPEED),
                 True)
 
             # What is this? useful for testing purposes, you can just ignore it

@@ -47,6 +47,7 @@ class Preferences(object):
     STARTUPSCAN = 'startup scan'
     RETRIEVE_NAMES = 'retrieve names'
     RESOLVE_NAMES = 'resolve names'
+    SCAN_SPEED = 'scan speed'
     SHOW_LOCAL = 'show local'
     NOTIFICATION = 'show notification'
     PLAY_SOUND = 'play sound'
@@ -115,6 +116,10 @@ class Settings(object):
         self.logText('Loading scan preferences', VERBOSE_LEVEL_NORMAL)
         if not self.config.has_section(Sections.SCAN):
             self.config.add_section(Sections.SCAN)
+        self.load_setting(section=Sections.SCAN,
+                          option=Preferences.SCAN_SPEED,
+                          option_type=int,
+                          default_value=14)
         self.load_setting(section=Sections.SCAN,
                           option=Preferences.RETRIEVE_NAMES,
                           option_type=bool,
