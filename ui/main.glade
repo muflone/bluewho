@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.0 on Sat Nov  9 19:53:51 2013 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.16"/>
   <object class="GtkListStore" id="modelDevices">
     <columns>
       <!-- column-name colIcon -->
@@ -27,27 +27,26 @@
     </columns>
   </object>
   <object class="GtkApplicationWindow" id="winMain">
-    <property name="can_focus">False</property>
-    <property name="border_width">0</property>
-    <property name="default_width">450</property>
-    <property name="default_height">300</property>
+    <property name="can-focus">False</property>
+    <property name="default-width">450</property>
+    <property name="default-height">300</property>
     <signal name="delete-event" handler="on_winMain_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkToolbar" id="toolButtons">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <child>
               <object class="GtkToggleToolButton" id="toolbDetect">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Detect devices</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-media-record</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-media-record</property>
                 <signal name="toggled" handler="on_toolbDetect_toggled" swapped="no"/>
               </object>
               <packing>
@@ -58,10 +57,10 @@
             <child>
               <object class="GtkToolButton" id="toolbClear">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Clear list</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-clear</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-clear</property>
                 <signal name="clicked" handler="on_toolbClear_clicked" swapped="no"/>
               </object>
               <packing>
@@ -72,7 +71,7 @@
             <child>
               <object class="GtkSeparatorToolItem" id="toolbSeparator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -82,10 +81,10 @@
             <child>
               <object class="GtkToolButton" id="toolbServices">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Available services</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-properties</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-properties</property>
                 <signal name="clicked" handler="on_toolbServices_clicked" swapped="no"/>
               </object>
               <packing>
@@ -96,10 +95,10 @@
             <child>
               <object class="GtkToolButton" id="toolbPreferences">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Preferences</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-preferences</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-preferences</property>
                 <signal name="clicked" handler="on_toolbPreferences_clicked" swapped="no"/>
               </object>
               <packing>
@@ -110,10 +109,10 @@
             <child>
               <object class="GtkToolButton" id="toolbAbout">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">About</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-about</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-about</property>
                 <signal name="clicked" handler="on_toolbAbout_clicked" swapped="no"/>
               </object>
               <packing>
@@ -131,16 +130,17 @@
         <child>
           <object class="GtkBox" id="box2">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="border_width">7</property>
+            <property name="can-focus">False</property>
+            <property name="vexpand">True</property>
+            <property name="border-width">7</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel" id="lblDevices">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">&lt;b&gt;Detected devices:&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="use-markup">True</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -151,14 +151,14 @@
             <child>
               <object class="GtkScrolledWindow" id="scrollDevices">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="shadow_type">in</property>
+                <property name="shadow-type">in</property>
                 <child>
                   <object class="GtkTreeView" id="tvwDevices">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                     <property name="model">modelDevices</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection1"/>
@@ -243,14 +243,12 @@
         <child>
           <object class="GtkStatusbar" id="statusScan">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">10</property>
+            <property name="can-focus">False</property>
             <property name="spacing">7</property>
             <child>
               <object class="GtkSpinner" id="spinnerScan">
-                <property name="can_focus">False</property>
-                <property name="no_show_all">True</property>
+                <property name="can-focus">False</property>
+                <property name="no-show-all">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
