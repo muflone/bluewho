@@ -232,7 +232,7 @@ class MainWindow(object):
                 self.fake_devices = FakeDevices()
                 for fake_device in self.fake_devices.fetch_many():
                     self.on_new_device_cb(*fake_device)
-            sleep(2)
+                sleep(2)
         # After exiting from the scanning process, change the UI
         self.thread_scanner = None
         self.set_status_bar_message(None)
