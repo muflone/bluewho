@@ -109,7 +109,7 @@ class MainWindow(object):
         """Close the application"""
         if self.thread_scanner:
             # Cancel the running thread
-            if self.thread_scanner.isAlive():
+            if self.thread_scanner.is_alive():
                 # Hide immediately the window and let the GTK+ cycle to
                 # continue giving the perception that the app was really closed
                 self.winMain.hide()
