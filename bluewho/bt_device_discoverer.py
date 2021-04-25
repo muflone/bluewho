@@ -33,7 +33,7 @@ class BluetoothDeviceDiscoverer(DeviceDiscoverer):
         """Scan is starting"""
         self.done = False
 
-    def device_discovered(self, address, device_class, name):
+    def device_discovered(self, address, device_class, rssi, name):
         """Call callback function for new discovered device"""
         if self.new_device_cb:
             self.new_device_cb(name, address, device_class)
