@@ -3,3 +3,4 @@
 /root/
 *.pyc
 *.glade~
+.idea/
