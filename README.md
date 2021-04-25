@@ -1,4 +1,4 @@
-BlueWho
+BlueWho [![Build Status](https://travis-ci.org/muflone/bluewho.svg?branch=master)](https://travis-ci.org/muflone/bluewho)
 =======
 **Description:** Information and notification of new discovered bluetooth devices
 
