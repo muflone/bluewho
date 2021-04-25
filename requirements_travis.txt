@@ -1,4 +1,4 @@
 -r requirements.txt
 
 pep8
-http://sourceforge.net/projects/pychecker/files/pychecker/0.8.19/pychecker-0.8.19.tar.gz/download
+flake8

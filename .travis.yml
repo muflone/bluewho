@@ -14,8 +14,6 @@ install:
 script:
   - python -m compileall .
   - pep8 . || true
-  - pychecker --no-shadow
-    --blacklist gi._glib,gi._gobject,gi._gobject._gobject,GLib,ssl,gobject
-    bluewho.py
+  - python -m flake8 .
   - python setup.py install --optimize=1 --root=build
   - ls -laR build
