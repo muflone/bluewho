@@ -9,7 +9,8 @@ addons:
   apt:
     packages:
     - python3-gi                              # GObject
-    - gir1.2-gtk-3.0                          # gi.repository.gtk python-xdg
+    - gir1.2-gtk-3.0                          # gi.repository.gtk
+    - libbluetooth-dev                        # PyBluez
 install:
   - pip install -r requirements_travis.txt
 script:
