@@ -26,29 +26,9 @@ from bluetooth import _bluetooth as bt
 
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.bt_major_device_classes import MajorDeviceClasses
+from bluewho.bt_service_device_classes import ServiceDeviceClasses
 from bluewho.constants import FILE_BT_CLASSES
 from bluewho.functions import readlines
-
-class ServiceDeviceClasses(object):
-    POSITIONING = 1       # 0x010000 >> 16
-    NETWORKING = 2        # 0x020000 >> 16
-    RENDERING = 4         # 0x040000 >> 16
-    CAPTURING = 8         # 0x080000 >> 16
-    OBJECT_TRANSFER = 16  # 0x100000 >> 16
-    AUDIO = 32            # 0x200000 >> 16
-    TELEPHONY = 64        # 0x400000 >> 16
-    INFORMATION = 128     # 0x800000 >> 16
-    # Dictionary for services descriptions
-    SERVICE_CLASSES = {
-      POSITIONING: 'positioning service',
-      NETWORKING: 'networking service',
-      RENDERING: 'rendering service',
-      CAPTURING: 'capturing service',
-      OBJECT_TRANSFER: 'object transfer service',
-      AUDIO: 'audio service',
-      TELEPHONY: 'telephony service',
-      INFORMATION: 'information service',
-    }
 
 
 class BluetoothSupport(object):
