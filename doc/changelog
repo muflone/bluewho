@@ -1,3 +1,11 @@
+bluewho (0.3.0) all; urgency=low
+
+  * Changed license GPL-3+
+  * Ported to Python 3
+  * Ported to GTK+ 3
+
+ -- Fabio Castelli <muflone@muflone.com>  Sun, 25 Apr 2021 21:45:52 +0200
+
 bluewho (0.2.2) all; urgency=low
 
   * Updated German translation
