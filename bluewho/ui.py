@@ -166,11 +166,11 @@ class MainWindow(object):
 
     def on_new_device_cb(self, name, address, device_class):
         """Callback function called when a new device has been discovered"""
-        self.add_device(address=address,
-                        name=name,
-                        device_class=device_class,
-                        time=get_current_time(),
-                        notify=True)
+        self.add_device(address,
+                        name,
+                        device_class,
+                        get_current_time(),
+                        True)
 
     @thread_safe
     def add_device(self, address, name, device_class, time, notify):
