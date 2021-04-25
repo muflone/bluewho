@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -17,6 +17,3 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
-
-# Nothing interesting here
-# This is a package placeholder

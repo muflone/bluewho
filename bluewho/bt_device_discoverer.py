@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -20,23 +20,24 @@
 
 from bluetooth import DeviceDiscoverer
 
+
 class BluetoothDeviceDiscoverer(DeviceDiscoverer):
-  "Support for asynchronous detection"
-  def __init__(self, new_device_cb):
-    "Superclass constructor"
-    DeviceDiscoverer.__init__(self)
-    # Callback function to receive new discovered device
-    self.new_device_cb = new_device_cb
-    
-  def pre_inquiry(self):
-    "Scan is starting"
-    self.done = False
+    """Support for asynchronous detection"""
+    def __init__(self, new_device_cb):
+        """Superclass constructor"""
+        DeviceDiscoverer.__init__(self)
+        # Callback function to receive new discovered device
+        self.new_device_cb = new_device_cb
 
-  def device_discovered(self, address, device_class, name):
-    "Call callback function for new discovered device"
-    if self.new_device_cb:
-      self.new_device_cb(name, address, device_class)
+    def pre_inquiry(self):
+        """Scan is starting"""
+        self.done = False
 
-  def inquiry_complete(self):
-    "Scan completed"
-    self.done = True
+    def device_discovered(self, address, device_class, name):
+        """Call callback function for new discovered device"""
+        if self.new_device_cb:
+            self.new_device_cb(name, address, device_class)
+
+    def inquiry_complete(self):
+        """Scan completed"""
+        self.done = True

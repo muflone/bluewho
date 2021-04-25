@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -19,34 +19,35 @@
 ##
 
 from gi.repository import Gtk
-from bluewho.constants import *
-from bluewho.functions import *
+from bluewho.constants import FILE_ICON, FILE_UI_SERVICES
+from bluewho.functions import _
 from bluewho.model_services import ModelServices
 
+
 class DialogServices(object):
-  def __init__(self, winParent, show = False):
-    # Load the user interface
-    builder = Gtk.Builder()
-    builder.add_from_file(FILE_UI_SERVICES)
-    # Obtain widget references
-    self.dialog = builder.get_object('dialogServices')
-    self.model = ModelServices(builder.get_object('modelServices'))
-    # Set various properties
-    self.dialog.set_title(_('Available services'))
-    self.dialog.set_icon_from_file(FILE_ICON)
-    self.dialog.set_transient_for(winParent)
-    self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
-    self.dialog.set_default_response(Gtk.ResponseType.OK)
-    # Optionally show the dialog
-    if show:
-      self.show()
+    def __init__(self, winParent, show=False):
+        # Load the user interface
+        builder = Gtk.Builder()
+        builder.add_from_file(FILE_UI_SERVICES)
+        # Obtain widget references
+        self.dialog = builder.get_object('dialogServices')
+        self.model = ModelServices(builder.get_object('modelServices'))
+        # Set various properties
+        self.dialog.set_title(_('Available services'))
+        self.dialog.set_icon_from_file(FILE_ICON)
+        self.dialog.set_transient_for(winParent)
+        self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        self.dialog.set_default_response(Gtk.ResponseType.OK)
+        # Optionally show the dialog
+        if show:
+            self.show()
 
-  def show(self):
-    "Show the Services dialog"
-    self.dialog.run()
-    self.dialog.hide()
+    def show(self):
+        """Show the Services dialog"""
+        self.dialog.run()
+        self.dialog.hide()
 
-  def destroy(self):
-    "Destroy the Services dialog"
-    self.dialog.destroy()
-    self.dialog = None
+    def destroy(self):
+        """Destroy the Services dialog"""
+        self.dialog.destroy()
+        self.dialog = None

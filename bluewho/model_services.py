@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -19,23 +19,24 @@
 ##
 
 class ModelServices(object):
-  COL_NAME = 0
-  COL_PROTOCOL = 1
-  COL_CHANNEL = 2
-  def __init__(self, model):
-    self.model = model
+    COL_NAME = 0
+    COL_PROTOCOL = 1
+    COL_CHANNEL = 2
 
-  def clear(self):
-    "Clear the model"
-    return self.model.clear()
+    def __init__(self, model):
+        self.model = model
 
-  def add_service(self, service):
-    "Add devices's services to the list"
-    # Refer to bluetooth.find_service help section
-    if service['name'] or service['protocol'] or service['port']:
-      # Skipping services with no name, protocol and port
-      return self.model.append((
-        service['name'],
-        service['protocol'],
-        service['port']
-      ))
+    def clear(self):
+        """Clear the model"""
+        return self.model.clear()
+
+    def add_service(self, service):
+        """Add devices's services to the list"""
+        # Refer to bluetooth.find_service help section
+        if service['name'] or service['protocol'] or service['port']:
+            # Skipping services with no name, protocol and port
+            return self.model.append((
+                service['name'],
+                service['protocol'],
+                service['port']
+            ))

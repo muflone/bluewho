@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -19,39 +19,45 @@
 ##
 
 import random
-from bluewho.constants import *
-from bluewho.functions import *
+from bluewho.constants import FILE_FAKE_DEVICES
+from bluewho.functions import readlines
+
 
 class FakeDevices(object):
-  def __init__(self):
-    "Fake devices producer by reading the FILE_FAKE_DEVICES file"
-    self.devices = []
-    for line in readlines(FILE_FAKE_DEVICES):
-      # Skip comments
-      if '#' in line:
-        line = line.split('#', 1)[0]
-      if line:
-        name, address, class_type = line.split(' | ', 2)
-        # Generate random MAC address
-        if address == '<RANDOM>':
-          address = ':'.join(map(lambda number: '%02x' % number,
-            (random.randint(0, 255) for octet in xrange(6)))).upper()
-        class_type = int(class_type, class_type.startswith('0x') and 16 or 10)
-        self.devices.append([name, address, class_type])
+    def __init__(self):
+        """Fake devices producer by reading the FILE_FAKE_DEVICES file"""
+        self.devices = []
+        for line in readlines(FILE_FAKE_DEVICES):
+            # Skip comments
+            if '#' in line:
+                line = line.split('#', 1)[0]
+            if line:
+                name, address, class_type = line.split(' | ', 2)
+                # Generate random MAC address
+                if address == '<RANDOM>':
+                    address = ':'.join(map(lambda number: '%02x' % number,
+                                           (random.randint(0, 255)
+                                            for octet in range(6)))).upper()
+                class_type = int(class_type,
+                                 class_type.startswith('0x') and 16 or 10)
+                self.devices.append([name, address, class_type])
 
-  def fetch_one(self):
-    "Fetch a single fake device"
-    return self.devices[random.randint(0, len(self.devices) - 1)]
+    def fetch_one(self):
+        """Fetch a single fake device"""
+        return self.devices[random.randint(0, len(self.devices) - 1)]
 
-  def fetch_max(self, count):
-    "Fetch max count fake devices"
-    return random.sample(self.devices, random.randint(0, 
-      count <= len(self.devices) and count or len(self.devices)))
+    def fetch_max(self, count):
+        """Fetch max count fake devices"""
+        return random.sample(self.devices,
+                             random.randint(0,
+                                            count <= len(self.devices)
+                                            and count or len(self.devices)))
 
-  def fetch_many(self):
-    "Fetch a random number of fake devices"
-    return random.sample(self.devices, random.randint(0, len(self.devices)))
+    def fetch_many(self):
+        """Fetch a random number of fake devices"""
+        return random.sample(self.devices, random.randint(0,
+                                                          len(self.devices)))
 
-  def fetch_all(self):
-    "Fetch all the fake devices"
-    return self.devices
+    def fetch_all(self):
+        """Fetch all the fake devices"""
+        return self.devices

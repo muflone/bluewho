@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -29,77 +29,89 @@ import os.path
 import shutil
 from itertools import chain
 from glob import glob
-from bluewho.constants import *
+from bluewho.constants import (APP_NAME,
+                               APP_VERSION,
+                               APP_AUTHOR,
+                               APP_AUTHOR_EMAIL,
+                               APP_URL,
+                               APP_DESCRIPTION,
+                               DOMAIN_NAME)
+
 
 class Install_Scripts(install_scripts):
-  def run(self):
-    install_scripts.run(self)
-    self.rename_python_scripts()
+    def run(self):
+        install_scripts.run(self)
+        self.rename_python_scripts()
 
-  def rename_python_scripts(self):
-    "Rename main executable python script without .py extension"
-    for script in self.get_outputs():
-      if script.endswith(".py"):
-        info('renaming the python script %s -> %s' % (script, script[:-3]))
-        shutil.move(script, script[:-3])
+    def rename_python_scripts(self):
+        "Rename main executable python script without .py extension"
+        for script in self.get_outputs():
+            if script.endswith(".py"):
+                info('renaming the python script %s -> %s' % (script,
+                                                              script[:-3]))
+                shutil.move(script, script[:-3])
+
 
 class Install_Data(install_data):
-  def run (self):
-    self.install_icons()
-    self.install_translations()
-    install_data.run(self)
-  
-  def install_icons(self):
-    info('Installing icons...')
-    DIR_ICONS = 'icons'
-    for icon_format in os.listdir(DIR_ICONS):
-      icon_dir = os.path.join(DIR_ICONS, icon_format)
-      self.data_files.append((
-        os.path.join('share', 'icons', 'hicolor', icon_format, 'apps'),
-        glob(os.path.join(icon_dir, '*'))))
+    def run(self):
+        self.install_icons()
+        self.install_translations()
+        install_data.run(self)
 
-  def install_translations(self):
-    info('Installing translations...')
-    for po in glob(os.path.join('po', '*.po')):
-      lang = os.path.basename(po[:-3])
-      mo = os.path.join('build', 'mo', lang, '%s.mo' % DOMAIN_NAME)
+    def install_icons(self):
+        info('Installing icons...')
+        DIR_ICONS = 'icons'
+        for icon_format in os.listdir(DIR_ICONS):
+            icon_dir = os.path.join(DIR_ICONS, icon_format)
+            self.data_files.append((
+                os.path.join('share', 'icons', 'hicolor', icon_format, 'apps'),
+                glob(os.path.join(icon_dir, '*'))))
 
-      directory = os.path.dirname(mo)
-      if not os.path.exists(directory):
-        info('creating %s' % directory)
-        os.makedirs(directory)
+    def install_translations(self):
+        info('Installing translations...')
+        for po in glob(os.path.join('po', '*.po')):
+            lang = os.path.basename(po[:-3])
+            mo = os.path.join('build', 'mo', lang, '%s.mo' % DOMAIN_NAME)
 
-      cmd = 'msgfmt -o %s %s' % (mo, po)
-      info('compiling %s -> %s' % (po, mo))
-      if os.system(cmd) != 0:
-        raise SystemExit('Error while running msgfmt')
+            directory = os.path.dirname(mo)
+            if not os.path.exists(directory):
+                info('creating %s' % directory)
+                os.makedirs(directory)
 
-      dest = os.path.join('share', 'locale', lang, 'LC_MESSAGES')
-      self.data_files.append((dest, [mo]))
+            cmd = 'msgfmt -o %s %s' % (mo, po)
+            info('compiling %s -> %s' % (po, mo))
+            if os.system(cmd) != 0:
+                raise SystemExit('Error while running msgfmt')
+
+            dest = os.path.join('share', 'locale', lang, 'LC_MESSAGES')
+            self.data_files.append((dest, [mo]))
+
 
 setup(
-  name=APP_NAME,
-  version=APP_VERSION,
-  author=APP_AUTHOR,
-  author_email=APP_AUTHOR_EMAIL,
-  maintainer=APP_AUTHOR,
-  maintainer_email=APP_AUTHOR_EMAIL,
-  url=APP_URL,
-  description=APP_DESCRIPTION,
-  license='GPL v3',
-  scripts=['bluewho.py'],
-  packages=['bluewho'],
-  data_files=[
-    ('share/bluewho/data', ['data/bluewho.png', 'data/classes.txt',
-       'data/fake_devices.txt', 'data/newdevice.wav']),
-    ('share/bluewho/data/icons', glob('data/icons/*')),
-    ('share/applications', ['data/bluewho.desktop']),
-    ('share/doc/bluewho', list(chain(glob('doc/*'),  glob('*.md')))),
-    ('share/man/man1', ['man/bluewho.1']),
-    ('share/bluewho/ui', glob('ui/*')),
-  ],
-  cmdclass = {
-    'install_scripts': Install_Scripts,
-    'install_data': Install_Data
-  }
+    name=APP_NAME,
+    version=APP_VERSION,
+    author=APP_AUTHOR,
+    author_email=APP_AUTHOR_EMAIL,
+    maintainer=APP_AUTHOR,
+    maintainer_email=APP_AUTHOR_EMAIL,
+    url=APP_URL,
+    description=APP_DESCRIPTION,
+    license='GPL v3',
+    scripts=['bluewho.py'],
+    packages=['bluewho'],
+    data_files=[
+        ('share/bluewho/data', ['data/bluewho.png',
+                                'data/classes.txt',
+                                'data/fake_devices.txt',
+                                'data/newdevice.wav']),
+        ('share/bluewho/data/icons', glob('data/icons/*')),
+        ('share/applications', ['data/bluewho.desktop']),
+        ('share/doc/bluewho', list(chain(glob('doc/*'),  glob('*.md')))),
+        ('share/man/man1', ['man/bluewho.1']),
+        ('share/bluewho/ui', glob('ui/*')),
+    ],
+    cmdclass={
+        'install_scripts': Install_Scripts,
+        'install_data': Install_Data
+    }
 )

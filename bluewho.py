@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -24,20 +24,20 @@ import locale
 from bluewho.settings import Settings
 from bluewho.btsupport import BluetoothSupport
 from bluewho.app import Application
-from bluewho.constants import *
+from bluewho.constants import DOMAIN_NAME, DIR_LOCALE
 
 if __name__ == '__main__':
-  # Load domain for translation
-  for module in (gettext, locale):
-    module.bindtextdomain(DOMAIN_NAME, DIR_LOCALE)
-    module.textdomain(DOMAIN_NAME)
+    # Load domain for translation
+    for module in (gettext, locale):
+        module.bindtextdomain(DOMAIN_NAME, DIR_LOCALE)
+        module.textdomain(DOMAIN_NAME)
 
-  # Load the settings from the configuration file
-  settings = Settings()
-  settings.load()
+    # Load the settings from the configuration file
+    settings = Settings()
+    settings.load()
 
-  # Create BluetoothSupport instance
-  btsupport = BluetoothSupport()
-  # Start the application
-  app = Application(settings, btsupport)
-  app.run(None)
+    # Create BluetoothSupport instance
+    btsupport = BluetoothSupport()
+    # Start the application
+    app = Application(settings, btsupport)
+    app.run(None)

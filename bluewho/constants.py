@@ -1,6 +1,6 @@
 ##
 #     Project: BlueWho
-# Description: Information and notification of new discovered bluetooth devices.
+# Description: Information and notification of new discovered bluetooth devices
 #      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
 #   Copyright: 2009-2021 Fabio Castelli
 #     License: GPL-3+
@@ -25,7 +25,8 @@ from xdg import BaseDirectory
 # Application constants
 APP_NAME = 'BlueWho'
 APP_VERSION = '0.3.0'
-APP_DESCRIPTION = 'Information and notification of new discovered bluetooth devices'
+APP_DESCRIPTION = ('Information and notification of new discovered '
+                   'bluetooth devices')
 APP_ID = 'bluewho.muflone.com'
 APP_URL = 'http://www.muflone.com/bluewho'
 APP_AUTHOR = 'Fabio Castelli'
@@ -42,13 +43,13 @@ USE_FAKE_DEVICES = False
 # If there's a file data/bluewho.png then the shared data are searched
 # in relative paths, else the standard paths are used
 if os.path.isfile(os.path.join('data', 'bluewho.png')):
-  DIR_PREFIX = '.'
-  DIR_LOCALE = os.path.join(DIR_PREFIX, 'locale')
-  DIR_DOCS = os.path.join(DIR_PREFIX, 'doc')
+    DIR_PREFIX = '.'
+    DIR_LOCALE = os.path.join(DIR_PREFIX, 'locale')
+    DIR_DOCS = os.path.join(DIR_PREFIX, 'doc')
 else:
-  DIR_PREFIX = os.path.join(sys.prefix, 'share', 'bluewho')
-  DIR_LOCALE = os.path.join(sys.prefix, 'share', 'locale')
-  DIR_DOCS = os.path.join(sys.prefix, 'share', 'doc', 'bluewho')
+    DIR_PREFIX = os.path.join(sys.prefix, 'share', 'bluewho')
+    DIR_LOCALE = os.path.join(sys.prefix, 'share', 'locale')
+    DIR_DOCS = os.path.join(sys.prefix, 'share', 'doc', 'bluewho')
 # Set the paths for the folders
 DIR_DATA = os.path.join(DIR_PREFIX, 'data')
 DIR_UI = os.path.join(DIR_PREFIX, 'ui')
