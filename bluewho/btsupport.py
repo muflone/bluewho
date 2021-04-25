@@ -25,39 +25,9 @@ import bluetooth
 from bluetooth import _bluetooth as bt
 
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
+from bluewho.bt_major_device_classes import MajorDeviceClasses
 from bluewho.constants import FILE_BT_CLASSES
 from bluewho.functions import readlines
-
-# Please refer to Bluetooth specifications:
-# https://www.bluetooth.org/en-us/specification/assigned-numbers
-# https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband
-
-
-class MajorDeviceClasses(object):
-    UNKNOWN = 0
-    COMPUTER = 1
-    PHONE = 2
-    NETWORK = 3
-    AUDIOVIDEO = 4
-    PERIPHERAL = 5
-    IMAGING = 6
-    MISCELLANEOUS = 7
-    TOY = 8
-    HEALTH = 9
-    # Dictionary for classes descriptions
-    CLASSES = {
-      UNKNOWN: 'unknown',
-      COMPUTER: 'computer',
-      PHONE: 'phone',
-      NETWORK: 'network',
-      AUDIOVIDEO: 'audio-video',
-      PERIPHERAL: 'peripheral',
-      IMAGING: 'imaging',
-      MISCELLANEOUS: 'miscellaneous',
-      TOY: 'toy',
-      HEALTH: 'health',
-    }
-
 
 class ServiceDeviceClasses(object):
     POSITIONING = 1       # 0x010000 >> 16
