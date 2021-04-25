@@ -200,7 +200,7 @@ class MainWindow(object):
             if self.settings.get_value(Preferences.SHOW_LOCAL):
                 # Add local adapters
                 for devices_count in range(10):
-                    name, address = self.btsupport.get_localAdapter(
+                    name, address = self.btsupport.get_local_adapter(
                         devices_count)
                     if name and address:
                         # Adapter device found

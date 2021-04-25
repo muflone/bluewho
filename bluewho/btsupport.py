@@ -126,7 +126,7 @@ class BluetoothSupport(object):
             if discoverer in ret:
                 discoverer.process_event()
 
-    def get_localAdapter(self, device_num):
+    def get_local_adapter(self, device_num):
         "Return name and address of a local adapter"
         name = None
         address = None
