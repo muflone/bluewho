@@ -220,6 +220,7 @@ class MainWindow(object):
                                 VERBOSE_LEVEL_NORMAL)
                             self.set_status_bar_message(
                                 _('No local devices found during detection.'))
+                        sleep(2)
                         break
             # Discover devices via bluetooth
             self.btsupport.discover(
