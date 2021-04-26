@@ -86,14 +86,6 @@ class BluetoothSupport(object):
         adapters = [node.attrib['name'] for node in xml if node.tag == 'node']
         return adapters
 
-    def get_local_adapter(self, device_name):
-        """Return name and address of a local adapter"""
-        dbus_interface = pydbus.SystemBus().get('org.bluez',
-                                                '/org/bluez/%s' % device_name)
-        name = dbus_interface.Name
-        address = dbus_interface.Address
-        return name, address
-
     def get_device_name(self, address):
         """Retrieve device name"""
         return bluetooth.lookup_name(address)

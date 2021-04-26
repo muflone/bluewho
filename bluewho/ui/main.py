@@ -22,6 +22,7 @@ from time import sleep
 
 from gi.repository import Gtk
 
+from bluewho.bt.adapter import BluetoothAdapter
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
@@ -204,11 +205,11 @@ class MainWindow(object):
                 adapters = self.btsupport.find_local_adapters()
                 if adapters:
                     # Local adapters found
-                    for adapter in adapters:
-                        name, address = self.btsupport.get_local_adapter(
-                            adapter)
-                        self.add_device(address,
-                                        '%s (%s)' % (adapter, name),
+                    for device_name in adapters:
+                        adapter = BluetoothAdapter(device_name)
+                        self.add_device(adapter.get_address(),
+                                        '%s (%s)' % (device_name,
+                                                     adapter.get_name()),
                                         1 << 2,
                                         get_current_time(),
                                         True)
