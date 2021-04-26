@@ -18,11 +18,13 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import struct
 import select
+from xml.etree import ElementTree
 
 import bluetooth
 from bluetooth import _bluetooth as bt
+
+import pydbus
 
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.bt_major_device_classes import MajorDeviceClasses
@@ -78,51 +80,19 @@ class BluetoothSupport(object):
             if discoverer in ret:
                 discoverer.process_event()
 
-    def get_local_adapter(self, device_num):
-        "Return name and address of a local adapter"
-        name = None
-        address = None
-        sock = bt.hci_open_dev(device_num)
-        if sock.getsockid() >= 0:
-            sock.settimeout(3)
-            # Save original filter
-            orig_filter = sock.getsockopt(bt.SOL_HCI, bt.HCI_FILTER, 14)
-            # Create new filter
-            new_filter = bt.hci_filter_new()
-            bt.hci_filter_set_ptype(new_filter, bt.HCI_EVENT_PKT)
-            bt.hci_filter_set_event(new_filter, bt.EVT_CMD_COMPLETE)
-            # CMD Read local name
-            opcode = bt.cmd_opcode_pack(bt.OGF_HOST_CTL,
-                                        bt.OCF_READ_LOCAL_NAME)
-            bt.hci_filter_set_opcode(new_filter, opcode)
-            sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, new_filter)
-            try:
-                bt.hci_send_cmd(sock, bt.OGF_HOST_CTL, bt.OCF_READ_LOCAL_NAME)
-                data = sock.recv(255)
-                name = data[7:].decode('utf-8')
-                name = name[:name.find('\0')]
-            except bt.timeout:
-                print('bluetooth timeout during local device scan for name')
-            except bt.error:
-                print('bluetooth error during local device scan for name')
-            # CMD Read local address
-            opcode = bt.cmd_opcode_pack(bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
-            bt.hci_filter_set_opcode(new_filter, opcode)
-            sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, new_filter)
-            try:
-                bt.hci_send_cmd(sock, bt.OGF_INFO_PARAM, bt.OCF_READ_BD_ADDR)
-                data = sock.recv(255)
-                status, raw_bdaddr = struct.unpack('xxxxxxB6s', data)
-                address = ['%02X' % b for b in raw_bdaddr]
-                address.reverse()
-                address = ':'.join(address)
-            except bt.timeout:
-                print('bluetooth timeout during local device scan for address')
-            except bt.error:
-                print('bluetooth error during local device scan for address')
-            # Restore original filter
-            sock.setsockopt(bt.SOL_HCI, bt.HCI_FILTER, orig_filter)
-        sock.close()
+    def find_local_adapters(self):
+        """Return all the detected adapters"""
+        dbus_manager = pydbus.SystemBus().get('org.bluez')
+        xml = ElementTree.fromstring(dbus_manager.Introspect())
+        adapters = [node.attrib['name'] for node in xml if node.tag == 'node']
+        return adapters
+
+    def get_local_adapter(self, device_name):
+        """Return name and address of a local adapter"""
+        dbus_interface = pydbus.SystemBus().get('org.bluez',
+                                                '/org/bluez/%s' % device_name)
+        name = dbus_interface.Name
+        address = dbus_interface.Address
         return name, address
 
     def get_device_name(self, address):

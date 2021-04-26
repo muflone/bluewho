@@ -200,28 +200,26 @@ class MainWindow(object):
             # Only show local adapters when Preferences.SHOW_LOCAL
             # preference is set
             if self.settings.get_value(Preferences.SHOW_LOCAL):
-                # Add local adapters
-                for devices_count in range(10):
-                    name, address = self.btsupport.get_local_adapter(
-                        devices_count)
-                    if name and address:
-                        # Adapter device found
-                        name = 'hci%d (%s)' % (devices_count, name)
+                # Find local adapters
+                adapters = self.btsupport.find_local_adapters()
+                if adapters:
+                    # Local adapters found
+                    for adapter in adapters:
+                        name, address = self.btsupport.get_local_adapter(
+                            adapter)
                         self.add_device(address,
-                                        name,
+                                        '%s (%s)' % (adapter, name),
                                         1 << 2,
                                         get_current_time(),
                                         True)
-                    else:
-                        # No more devices found
-                        if devices_count == 0:
-                            self.settings.logText(
-                                'No local devices found during detection',
-                                VERBOSE_LEVEL_NORMAL)
-                            self.set_status_bar_message(
-                                _('No local devices found during detection.'))
-                        sleep(2)
-                        break
+                else:
+                    # No local adapters found
+                    self.settings.logText(
+                        'No local devices found during detection',
+                        VERBOSE_LEVEL_NORMAL)
+                    self.set_status_bar_message(
+                        _('No local devices found during detection.'))
+                sleep(2)
             # Discover devices via bluetooth
             self.btsupport.discover(
                 self.settings.get_value(Preferences.RETRIEVE_NAMES),
