@@ -22,9 +22,9 @@ import select
 
 import bluetooth
 
-from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
-from bluewho.bt_major_device_classes import MajorDeviceClasses
-from bluewho.bt_service_device_classes import ServiceDeviceClasses
+from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
+from bluewho.bt.major_device_classes import MajorDeviceClasses
+from bluewho.bt.service_device_classes import ServiceDeviceClasses
 from bluewho.constants import FILE_BT_CLASSES
 from bluewho.functions import readlines
 
