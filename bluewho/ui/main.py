@@ -90,10 +90,9 @@ class MainWindow(object):
         builder.add_from_file(FILE_UI_MAIN)
         # Obtain widget references
         self.winMain = builder.get_object('winMain')
-        self.model = ModelDevices(
-            builder.get_object('modelDevices'),
-            self.settings,
-            self.btsupport)
+        self.model = ModelDevices(builder.get_object('modelDevices'),
+                                  self.settings,
+                                  self.btsupport)
         self.tvwDevices = builder.get_object('tvwDevices')
         self.toolbDetect = builder.get_object('toolbDetect')
         self.statusScan = builder.get_object('statusScan')
@@ -138,37 +137,7 @@ class MainWindow(object):
         """Reload the list of local and detected devices"""
         # Start the scanner thread
         if self.toolbDetect.get_active():
-            # Check if any Bluetooth adapter is powered on before making a scan
-            adapters = BluetoothAdapters().get_adapters()
-            for adapter in adapters:
-                if adapter.is_powered():
-                    break
-            else:
-                # No powered on adapters
-                dialog = MessageDialogYesNo(
-                    parent=self.winMain,
-                    message_type=Gtk.MessageType.QUESTION,
-                    title=None,
-                    msg1=_('Do you want to start the bluetooth devices?'),
-                    msg2=None)
-                if dialog.run() == Gtk.ResponseType.YES:
-                    # Try to power on every adapter
-                    for adapter in adapters:
-                        self.settings.logText('powering on adapter %s' %
-                                              adapter.get_device_name())
-                        try:
-                            adapter.set_powered(status=True)
-                        except GLib.Error as e:
-                            self.settings.logText(e)
-                            dialog_error = MessageDialogOK(
-                                parent=self.winMain,
-                                message_type=Gtk.MessageType.WARNING,
-                                title='Unable to start adapter %s' %
-                                      adapter.get_device_name(),
-                                msg2=e.message,
-                                msg1=None
-                            )
-                            dialog_error.run()
+            self.check_adapter_activation()
             # Start the scan
             self.spinnerScan.set_visible(True)
             self.spinnerScan.start()
@@ -300,3 +269,38 @@ class MainWindow(object):
         self.statusScan.pop(self.statusScanContextId)
         if message is not None:
             self.statusScan.push(self.statusScanContextId, message)
+
+    def check_adapter_activation(self):
+        """Check if any Bluetooth adapter is powered on"""
+        adapters = BluetoothAdapters().get_adapters()
+        for adapter in adapters:
+            if adapter.is_powered():
+                # At least one adapter is powered on
+                break
+        else:
+            # No powered on adapters
+            dialog = MessageDialogYesNo(
+                parent=self.winMain,
+                message_type=Gtk.MessageType.QUESTION,
+                title=None,
+                msg1=_('Do you want to start the bluetooth devices?'),
+                msg2=None)
+            if dialog.run() == Gtk.ResponseType.YES:
+                # Try to power on every adapter
+                for adapter in adapters:
+                    self.settings.logText('powering on adapter %s' %
+                                          adapter.get_device_name())
+                    try:
+                        adapter.set_powered(status=True)
+                    except GLib.Error as e:
+                        # Intercept errors
+                        self.settings.logText(e)
+                        dialog_error = MessageDialogOK(
+                            parent=self.winMain,
+                            message_type=Gtk.MessageType.WARNING,
+                            title='Unable to start adapter %s' %
+                                  adapter.get_device_name(),
+                            msg2=e.message,
+                            msg1=None
+                        )
+                        dialog_error.run()
