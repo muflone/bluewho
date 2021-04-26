@@ -19,11 +19,8 @@
 ##
 
 import select
-from xml.etree import ElementTree
 
 import bluetooth
-
-import pydbus
 
 from bluewho.bt_device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.bt_major_device_classes import MajorDeviceClasses
@@ -78,13 +75,6 @@ class BluetoothSupport(object):
             ret = select.select(readfiles, [], [])[0]
             if discoverer in ret:
                 discoverer.process_event()
-
-    def find_local_adapters(self):
-        """Return all the detected adapters"""
-        dbus_manager = pydbus.SystemBus().get('org.bluez')
-        xml = ElementTree.fromstring(dbus_manager.Introspect())
-        adapters = [node.attrib['name'] for node in xml if node.tag == 'node']
-        return adapters
 
     def get_device_name(self, address):
         """Retrieve device name"""

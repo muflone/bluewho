@@ -22,7 +22,7 @@ from time import sleep
 
 from gi.repository import Gtk
 
-from bluewho.bt.adapter import BluetoothAdapter
+from bluewho.bt.adapters import BluetoothAdapters
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
@@ -202,13 +202,12 @@ class MainWindow(object):
             # preference is set
             if self.settings.get_value(Preferences.SHOW_LOCAL):
                 # Find local adapters
-                adapters = self.btsupport.find_local_adapters()
+                adapters = BluetoothAdapters().get_adapters()
                 if adapters:
                     # Local adapters found
-                    for device_name in adapters:
-                        adapter = BluetoothAdapter(device_name)
+                    for adapter in adapters:
                         self.add_device(adapter.get_address(),
-                                        '%s (%s)' % (device_name,
+                                        '%s (%s)' % (adapter.get_device_name(),
                                                      adapter.get_name()),
                                         1 << 2,
                                         get_current_time(),
