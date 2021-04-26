@@ -39,6 +39,7 @@ class MessageDialog(Gtk.Window):
         """Show the dialog"""
         result = self.dialog.run()
         self.dialog.hide()
+        self.destroy()
         return result
 
     def destroy(self):
