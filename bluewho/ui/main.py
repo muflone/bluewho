@@ -20,7 +20,7 @@
 
 from time import sleep
 
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 
 from bluewho.bt.adapters import BluetoothAdapters
 from bluewho.constants import (APP_NAME,
@@ -38,7 +38,7 @@ from bluewho.functions import (_,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
-from bluewho.ui.message_dialog import MessageDialogYesNo
+from bluewho.ui.message_dialog import MessageDialogYesNo, MessageDialogOK
 from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
@@ -154,9 +154,21 @@ class MainWindow(object):
                 if dialog.run() == Gtk.ResponseType.YES:
                     # Try to power on every adapter
                     for adapter in adapters:
-                        print('power on adapter', adapter.get_device_name())
-                        adapter.set_powered(status=True)
-                dialog.destroy()
+                        self.settings.logText('powering on adapter %s' %
+                                              adapter.get_device_name())
+                        try:
+                            adapter.set_powered(status=True)
+                        except GLib.Error as e:
+                            self.settings.logText(e)
+                            dialog_error = MessageDialogOK(
+                                parent=self.winMain,
+                                message_type=Gtk.MessageType.WARNING,
+                                title='Unable to start adapter %s' %
+                                      adapter.get_device_name(),
+                                msg2=e.message,
+                                msg1=None
+                            )
+                            dialog_error.run()
             # Start the scan
             self.spinnerScan.set_visible(True)
             self.spinnerScan.start()
