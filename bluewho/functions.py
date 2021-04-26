@@ -25,8 +25,6 @@ from gettext import gettext as _
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
 
-from bluewho.constants import APP_NAME, FILE_ICON
-
 
 def thread_safe(func):
     """Decorator function to make a thread safe call to a GTK+ function"""
@@ -65,29 +63,6 @@ def GtkProcessEvents():
         Gtk.main_iteration()
 
 
-@thread_safe
-def GtkMessageDialogOK(parent,
-                       message,
-                       type=Gtk.MessageType.INFO,
-                       direct=True):
-    """Show a GTK+ dialog with OK button only"""
-    dialog = Gtk.MessageDialog(
-        parent=parent,
-        flags=Gtk.DialogFlags.MODAL,
-        type=type,
-        buttons=Gtk.ButtonsType.OK,
-        message_format=message)
-    dialog.set_title(APP_NAME)
-    dialog.set_icon_from_file(FILE_ICON)
-    if direct:
-        dialog.run()
-        dialog.destroy()
-    else:
-        dialog.connect('response',
-                       lambda widget, response_id: dialog.destroy())
-        dialog.show()
-
-
 def get_current_thread_ident(func):
     """Decorator function to print the active running thread"""
     def callback(*args):
@@ -102,7 +77,6 @@ __all__ = [
     'readlines',
     'get_current_time',
     'GtkProcessEvents',
-    'GtkMessageDialogOK',
     'thread_safe',
     'idle_add',
     'get_current_thread_ident',
