@@ -22,7 +22,6 @@ import select
 from xml.etree import ElementTree
 
 import bluetooth
-from bluetooth import _bluetooth as bt
 
 import pydbus
 
@@ -71,7 +70,7 @@ class BluetoothSupport(object):
               lookup_names=lookup_names,
               duration=scan_duration,
               flush_cache=flush_cache)
-        except (bt.error, IndexError):
+        except (bluetooth._bluetooth.error, IndexError):
             discoverer.done = True
         readfiles = [discoverer]
         # Wait till the end
