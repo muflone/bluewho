@@ -36,9 +36,9 @@ from bluewho.functions import (_,
                                GtkProcessEvents,
                                idle_add,
                                thread_safe)
-from bluewho.model_devices import ModelDevices
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
+from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
 

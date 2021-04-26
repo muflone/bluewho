@@ -31,6 +31,7 @@ from bluewho.app import Application                                # noqa: E402
 from bluewho.bt.support import BluetoothSupport                    # noqa: E402
 from bluewho.constants import DOMAIN_NAME, DIR_LOCALE              # noqa: E402
 
+
 if __name__ == '__main__':
     # Load domain for translation
     for module in (gettext, locale):

@@ -31,6 +31,6 @@ class BluetoothAdapters(object):
         dbus_manager = pydbus.SystemBus().get('org.bluez')
         xml = ElementTree.fromstring(dbus_manager.Introspect())
         adapters = [BluetoothAdapter(node.attrib['name'])
-                                     for node in xml
-                                     if node.tag == 'node']
+                    for node in xml
+                    if node.tag == 'node']
         return adapters

@@ -22,7 +22,7 @@ from gi.repository import Gtk
 
 from bluewho.constants import FILE_ICON, FILE_UI_SERVICES
 from bluewho.functions import _
-from bluewho.model_services import ModelServices
+from bluewho.ui.model_services import ModelServices
 
 
 class DialogServices(object):
