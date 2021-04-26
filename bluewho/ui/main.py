@@ -244,6 +244,8 @@ class MainWindow(object):
         """Show the available services dialog for the selected device"""
         selected = self.tvwDevices.get_selection().get_selected()[1]
         if selected:
+            # Stop the scan to avoid locks
+            self.toolbDetect.set_active(False)
             # Get the device address
             address = self.model.get_type(selected) == 'adapter' and \
                 'localhost' or self.model.get_address(selected)
