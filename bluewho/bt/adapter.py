@@ -41,3 +41,7 @@ class BluetoothAdapter(object):
     def get_address(self):
         """Return the adapter address"""
         return self._get_dbus_interface().Address
+
+    def is_powered(self):
+        """Return the adapter powered status"""
+        return self._get_dbus_interface().Powered
