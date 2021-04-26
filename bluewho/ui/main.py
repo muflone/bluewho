@@ -38,6 +38,7 @@ from bluewho.functions import (_,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
+from bluewho.ui.message_dialog import MessageDialogYesNo
 from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
@@ -137,6 +138,26 @@ class MainWindow(object):
         """Reload the list of local and detected devices"""
         # Start the scanner thread
         if self.toolbDetect.get_active():
+            # Check if any Bluetooth adapter is powered on before making a scan
+            adapters = BluetoothAdapters().get_adapters()
+            for adapter in adapters:
+                if adapter.is_powered():
+                    break
+            else:
+                # No powered on adapters
+                dialog = MessageDialogYesNo(
+                    parent=self.winMain,
+                    message_type=Gtk.MessageType.QUESTION,
+                    title=None,
+                    msg1=_('Do you want to start the bluetooth devices?'),
+                    msg2=None)
+                if dialog.run() == Gtk.ResponseType.YES:
+                    # Try to power on every adapter
+                    for adapter in adapters:
+                        print('power on adapter', adapter.get_device_name())
+                        adapter.set_powered(status=True)
+                dialog.destroy()
+            # Start the scan
             self.spinnerScan.set_visible(True)
             self.spinnerScan.start()
             assert not self.thread_scanner

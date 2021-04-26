@@ -45,3 +45,7 @@ class BluetoothAdapter(object):
     def is_powered(self):
         """Return the adapter powered status"""
         return self._get_dbus_interface().Powered
+
+    def set_powered(self, status):
+        """Set the adapter powered status"""
+        self._get_dbus_interface().Powered = status
