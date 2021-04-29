@@ -38,7 +38,9 @@ from bluewho.functions import (_,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
-from bluewho.ui.message_dialog import MessageDialogYesNo, MessageDialogOK
+from bluewho.ui.message_dialog import (MessageDialogNoYes,
+                                       MessageDialogOK,
+                                       MessageDialogYesNo)
 from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
@@ -181,7 +183,14 @@ class MainWindow(object):
     @thread_safe
     def on_toolbClear_clicked(self, widget):
         """Clear the devices list"""
-        self.model.clear()
+        dialog = MessageDialogNoYes(
+            parent=self.winMain,
+            message_type=Gtk.MessageType.QUESTION,
+            title=None,
+            msg1=_('Do you want to clear the devices list?'),
+            msg2=None)
+        if dialog.run() == Gtk.ResponseType.YES:
+            self.model.clear()
 
     def on_new_device_cb(self, name, address, device_class):
         """Callback function called when a new device has been discovered"""
