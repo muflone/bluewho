@@ -322,3 +322,8 @@ class MainWindow(object):
                             msg1=None
                         )
                         dialog_error.run()
+
+    def on_toolbutton_shortcuts_clicked(self, widget):
+        """Show the shortcuts dialog"""
+        dialog = DialogShortcuts(parent=self.ui.window_main)
+        dialog.show()

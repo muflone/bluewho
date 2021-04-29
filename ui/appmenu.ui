@@ -10,6 +10,13 @@
     </section>
     <section>
       <item>
+        <attribute name='label' translatable='yes'>Shortcuts dialog</attribute>
+        <attribute name='action'>app.shortcuts</attribute>
+        <attribute name='accel'>&lt;Primary&gt;F1</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name='label' translatable='yes'>Preferences</attribute>
         <attribute name='action'>app.preferences</attribute>
         <attribute name='accel'>&lt;Primary&gt;p</attribute>

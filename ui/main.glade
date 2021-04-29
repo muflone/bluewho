@@ -107,6 +107,20 @@
               </packing>
             </child>
             <child>
+              <object class="GtkToolButton" id="toolbutton_shortcuts">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Shortcuts</property>
+                <property name="use-underline">True</property>
+                <property name="stock-id">gtk-help</property>
+                <signal name="clicked" handler="on_toolbutton_shortcuts_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkToolButton" id="toolbutton_about">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
