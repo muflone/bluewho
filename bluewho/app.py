@@ -44,6 +44,10 @@ class Application(Gtk.Application):
         action.connect('activate', self.on_app_preferences_activate)
         self.add_action(action)
 
+        action = Gio.SimpleAction(name='scan')
+        action.connect('activate', self.on_app_scan_activate)
+        self.add_action(action)
+
         action = Gio.SimpleAction(name='quit')
         action.connect('activate', self.on_app_quit_activate)
         self.add_action(action)
@@ -60,6 +64,12 @@ class Application(Gtk.Application):
     def on_app_about_activate(self, action, data):
         """Show the about dialog from the app menu"""
         self.ui.on_toolbAbout_clicked(self)
+
+    def on_app_scan_activate(self, action, data):
+        """Toggle the scan button"""
+        if self.ui.toolbDetect.get_sensitive():
+            self.ui.toolbDetect.set_active(
+                not self.ui.toolbDetect.get_active())
 
     def on_app_preferences_activate(self, action, data):
         """Show the preferences dialog from the app menu"""

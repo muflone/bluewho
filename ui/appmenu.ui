@@ -17,6 +17,13 @@
     </section>
     <section>
       <item>
+        <attribute name='label' translatable='yes'>Scan</attribute>
+        <attribute name='action'>app.scan</attribute>
+        <attribute name='accel'>F5</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name='label' translatable='yes'>_Quit</attribute>
         <attribute name='action'>app.quit</attribute>
         <attribute name='accel'>&lt;Primary&gt;q</attribute>
