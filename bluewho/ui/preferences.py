@@ -27,7 +27,7 @@ from bluewho.settings import Preferences
 
 
 class DialogPreferences(object):
-    def __init__(self, settings, winParent, show=False):
+    def __init__(self, settings, parent, show=False):
         self.settings = settings
         # Load the user interface
         builder = Gtk.Builder()
@@ -45,7 +45,7 @@ class DialogPreferences(object):
         # Set various properties
         self.dialog.set_title(_('Preferences'))
         self.dialog.set_icon_from_file(FILE_ICON)
-        self.dialog.set_transient_for(winParent)
+        self.dialog.set_transient_for(parent)
         self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         self.dialog.set_default_response(Gtk.ResponseType.OK)
         self.chkStartupScan.set_active(

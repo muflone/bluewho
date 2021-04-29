@@ -37,7 +37,7 @@ from bluewho.functions import readlines
 
 
 class DialogAbout(object):
-    def __init__(self, winParent, show=False):
+    def __init__(self, parent, show=False):
         # Retrieve the translators list
         translators = []
         for line in readlines(FILE_TRANSLATORS, False):
@@ -66,7 +66,7 @@ class DialogAbout(object):
             self.dialog.add_credit_section(resource_type, (resource_url,))
         icon_logo = Pixbuf.new_from_file(FILE_ICON)
         self.dialog.set_logo(icon_logo)
-        self.dialog.set_transient_for(winParent)
+        self.dialog.set_transient_for(parent)
         # Optionally show the dialog
         if show:
             self.show()

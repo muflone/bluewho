@@ -213,18 +213,18 @@ class Settings(object):
                 self.config.set(section, option, value)
                 break
 
-    def set_sizes(self, winParent):
+    def set_sizes(self, parent):
         """Save configuration for main window"""
         # Main window settings section
         self.logText('Saving window settings', VERBOSE_LEVEL_NORMAL)
         if not self.config.has_section(Sections.MAIN):
             self.config.add_section(Sections.MAIN)
         # Window position
-        position = winParent.get_position()
+        position = parent.get_position()
         self.config.set(Sections.MAIN, Preferences.WINLEFT, position[0])
         self.config.set(Sections.MAIN, Preferences.WINTOP, position[1])
         # Window size
-        size = winParent.get_size()
+        size = parent.get_size()
         self.config.set(Sections.MAIN, Preferences.WINWIDTH, size[0])
         self.config.set(Sections.MAIN, Preferences.WINHEIGHT, size[1])
 

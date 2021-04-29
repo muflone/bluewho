@@ -26,7 +26,7 @@ from bluewho.ui.model_services import ModelServices
 
 
 class DialogServices(object):
-    def __init__(self, winParent, show=False):
+    def __init__(self, parent, show=False):
         # Load the user interface
         builder = Gtk.Builder()
         builder.add_from_file(FILE_UI_SERVICES)
@@ -36,7 +36,7 @@ class DialogServices(object):
         # Set various properties
         self.dialog.set_title(_('Available services'))
         self.dialog.set_icon_from_file(FILE_ICON)
-        self.dialog.set_transient_for(winParent)
+        self.dialog.set_transient_for(parent)
         self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         self.dialog.set_default_response(Gtk.ResponseType.OK)
         # Optionally show the dialog
