@@ -18,7 +18,6 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from gi.repository import Gtk
 from gi.repository.GdkPixbuf import Pixbuf
 
 from bluewho.constants import (APP_AUTHOR,
@@ -31,9 +30,9 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_ICON,
                                FILE_LICENSE,
                                FILE_RESOURCES,
-                               FILE_TRANSLATORS,
-                               FILE_UI_ABOUT)
-from bluewho.functions import readlines
+                               FILE_TRANSLATORS)
+from bluewho.functions import get_ui_file, readlines
+from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
 
 
 class DialogAbout(object):
@@ -47,36 +46,34 @@ class DialogAbout(object):
             if line not in translators:
                 translators.append(line)
         # Load the user interface
-        builder = Gtk.Builder()
-        builder.add_from_file(FILE_UI_ABOUT)
+        self.ui = GtkBuilderLoader(get_ui_file('about.glade'))
         # Obtain widget references
-        self.dialog = builder.get_object('dialogAbout')
+        dialog = self.ui.dialog
         # Set various properties
-        self.dialog.set_program_name(APP_NAME)
-        self.dialog.set_version('Version %s' % APP_VERSION)
-        self.dialog.set_comments(APP_DESCRIPTION)
-        self.dialog.set_website(APP_URL)
-        self.dialog.set_copyright(APP_COPYRIGHT)
-        self.dialog.set_authors(['%s <%s>' % (APP_AUTHOR, APP_AUTHOR_EMAIL)])
-        self.dialog.set_license('\n'.join(readlines(FILE_LICENSE, True)))
-        self.dialog.set_translator_credits('\n'.join(translators))
+        dialog.set_program_name(APP_NAME)
+        dialog.set_version('Version %s' % APP_VERSION)
+        dialog.set_comments(APP_DESCRIPTION)
+        dialog.set_website(APP_URL)
+        dialog.set_copyright(APP_COPYRIGHT)
+        dialog.set_authors(['%s <%s>' % (APP_AUTHOR, APP_AUTHOR_EMAIL)])
+        dialog.set_license('\n'.join(readlines(FILE_LICENSE, True)))
+        dialog.set_translator_credits('\n'.join(translators))
         # Retrieve the external resources links
         for line in readlines(FILE_RESOURCES, False):
             resource_type, resource_url = line.split(':', 1)
-            self.dialog.add_credit_section(resource_type, (resource_url,))
+            dialog.add_credit_section(resource_type, (resource_url,))
         icon_logo = Pixbuf.new_from_file(FILE_ICON)
-        self.dialog.set_logo(icon_logo)
-        self.dialog.set_transient_for(parent)
+        dialog.set_logo(icon_logo)
+        dialog.set_transient_for(parent)
         # Optionally show the dialog
         if show:
             self.show()
 
     def show(self):
         """Show the About dialog"""
-        self.dialog.run()
-        self.dialog.hide()
+        self.ui.dialog.run()
+        self.ui.dialog.hide()
 
     def destroy(self):
         """Destroy the About dialog"""
-        self.dialog.destroy()
-        self.dialog = None
+        self.ui.dialog.destroy()

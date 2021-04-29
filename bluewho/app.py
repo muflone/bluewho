@@ -20,7 +20,9 @@
 
 from gi.repository import Gtk, Gio
 
-from bluewho.constants import APP_ID, FILE_UI_APPMENU
+from bluewho.constants import APP_ID
+from bluewho.functions import get_ui_file
+from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
 from bluewho.ui.main import MainWindow
 
 
@@ -60,9 +62,8 @@ class Application(Gtk.Application):
         action.connect('activate', self.on_app_quit_activate)
         self.add_action(action)
         # Add the app menu
-        builder = Gtk.Builder()
-        builder.add_from_file(FILE_UI_APPMENU)
-        menubar = builder.get_object('app-menu')
+        ui = GtkBuilderLoader(get_ui_file('appmenu.ui'))
+        menubar = ui.get_object('app-menu')
         self.set_app_menu(menubar)
 
     def activate(self, application):

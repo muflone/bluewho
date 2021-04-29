@@ -26,24 +26,26 @@ from bluewho.bt.adapters import BluetoothAdapters
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
-                               FILE_UI_MAIN,
                                USE_FAKE_DEVICES,
                                VERBOSE_LEVEL_NORMAL)
 from bluewho.daemon_thread import DaemonThread
 from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
                                get_current_time,
+                               get_ui_file,
                                GtkProcessEvents,
                                idle_add,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
+from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
 from bluewho.ui.message_dialog import (MessageDialogNoYes,
                                        MessageDialogOK,
                                        MessageDialogYesNo)
 from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
+from bluewho.ui.shortcuts import DialogShortcuts
 
 
 class MainWindow(object):
@@ -57,12 +59,12 @@ class MainWindow(object):
         if self.settings.get_value(Preferences.RESTORE_SIZE):
             if self.settings.get_value(Preferences.WINWIDTH) and \
                     self.settings.get_value(Preferences.WINHEIGHT):
-                self.window_main.set_default_size(
+                self.ui.window_main.set_default_size(
                     self.settings.get_value(Preferences.WINWIDTH),
                     self.settings.get_value(Preferences.WINHEIGHT))
             if self.settings.get_value(Preferences.WINLEFT) and \
                     self.settings.get_value(Preferences.WINTOP):
-                self.window_main.move(
+                self.ui.window_main.move(
                     self.settings.get_value(Preferences.WINLEFT),
                     self.settings.get_value(Preferences.WINTOP))
         # Restore the devices list
@@ -79,32 +81,27 @@ class MainWindow(object):
 
     def run(self):
         """Show the UI"""
-        self.window_main.show_all()
+        self.ui.window_main.show_all()
         # Activate scan on startup if Preferences.STARTUPSCAN is set
         if self.settings.get_value(Preferences.STARTUPSCAN):
-            self.toolbutton_scan.set_active(True)
+            self.ui.toolbutton_scan.set_active(True)
 
     def loadUI(self):
         """Load the interface UI"""
-        builder = Gtk.Builder()
-        builder.add_from_file(FILE_UI_MAIN)
+        self.ui = GtkBuilderLoader(get_ui_file('main.glade'))
         # Obtain widget references
-        self.window_main = builder.get_object('window_main')
-        self.model_devices = ModelDevices(builder.get_object('model_devices'),
+        self.model_devices = ModelDevices(self.ui.model_devices,
                                           self.settings,
                                           self.btsupport)
-        self.treeview_devices = builder.get_object('treeview_devices')
-        self.toolbutton_scan = builder.get_object('toolbutton_scan')
-        self.statusbar = builder.get_object('statusbar')
-        self.statusbar_context_id = self.statusbar.get_context_id(DOMAIN_NAME)
-        self.spinner = builder.get_object('spinner')
+        self.statusbar_context_id = self.ui.statusbar.get_context_id(
+            DOMAIN_NAME)
         # Set various properties
-        self.window_main.set_title(APP_NAME)
-        self.window_main.set_icon_from_file(FILE_ICON)
-        self.window_main.set_application(self.application)
+        self.ui.window_main.set_title(APP_NAME)
+        self.ui.window_main.set_icon_from_file(FILE_ICON)
+        self.ui.window_main.set_application(self.application)
         # Connect signals from the glade file to the functions with the
         # same name
-        builder.connect_signals(self)
+        self.ui.connect_signals(self)
 
     def on_window_main_delete_event(self, widget, event):
         """Close the application"""
@@ -113,7 +110,7 @@ class MainWindow(object):
             if self.thread_scanner.is_alive():
                 # Hide immediately the window and let the GTK+ cycle to
                 # continue giving the perception that the app was really closed
-                self.window_main.hide()
+                self.ui.window_main.hide()
                 GtkProcessEvents()
                 print('please wait for scan to complete...')
                 self.thread_scanner.cancel()
@@ -121,28 +118,28 @@ class MainWindow(object):
         self.thread_scanner = None
         # Save the position and size only if Preferences.RESTORE_SIZE is set
         if self.settings.get_value(Preferences.RESTORE_SIZE):
-            self.settings.set_sizes(self.window_main)
+            self.settings.set_sizes(self.ui.window_main)
         self.settings.save_devices(self.model_devices)
         self.settings.save()
-        self.window_main.destroy()
+        self.ui.window_main.destroy()
         self.model_devices.destroy()
         self.application.quit()
 
     def on_toolbutton_about_clicked(self, widget):
         """Show the about dialog"""
-        dialog = DialogAbout(self.window_main, False)
+        dialog = DialogAbout(self.ui.window_main, False)
         dialog.show()
         dialog.destroy()
 
     def on_toolbutton_scan_toggled(self, widget):
         """Reload the list of local and detected devices"""
         # Start the scanner thread
-        if self.toolbutton_scan.get_active():
+        if self.ui.toolbutton_scan.get_active():
             # Check if Bluez service is started
             if not self.btsupport.is_bluez_available():
                 self.settings.logText('Bluez is not available')
                 dialog_error = MessageDialogOK(
-                    parent=self.window_main,
+                    parent=self.ui.window_main,
                     message_type=Gtk.MessageType.ERROR,
                     title=None,
                     msg1=_('Bluez seems not to be started, please make sure'
@@ -150,19 +147,19 @@ class MainWindow(object):
                     msg2=None
                 )
                 dialog_error.run()
-                self.toolbutton_scan.set_active(False)
+                self.ui.toolbutton_scan.set_active(False)
             else:
                 self.check_adapter_activation()
                 # Start the scan
-                self.spinner.set_visible(True)
-                self.spinner.start()
+                self.ui.spinner.set_visible(True)
+                self.ui.spinner.start()
                 assert not self.thread_scanner
                 self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
                 self.set_status_bar_message('Start new scan')
                 self.thread_scanner.start()
         else:
             if self.thread_scanner:
-                self.toolbutton_scan.set_sensitive(False)
+                self.ui.toolbutton_scan.set_sensitive(False)
                 # Check if the scanner is still running and cancel it
                 if self.thread_scanner.is_alive():
                     self.thread_scanner.cancel()
@@ -174,15 +171,15 @@ class MainWindow(object):
                     print('the thread has died, recovering the UI')
                     self.set_status_bar_message(
                         'The scanning thread has died, recovering the UI')
-                    self.spinner.stop()
-                    self.spinner.set_visible(False)
+                    self.ui.spinner.stop()
+                    self.ui.spinner.set_visible(False)
                     self.thread_scanner = None
-                    self.toolbutton_scan.set_sensitive(True)
+                    self.ui.toolbutton_scan.set_sensitive(True)
 
     def on_toolbutton_clear_clicked(self, widget):
         """Clear the devices list"""
         dialog = MessageDialogNoYes(
-            parent=self.window_main,
+            parent=self.ui.window_main,
             message_type=Gtk.MessageType.QUESTION,
             title=None,
             msg1=_('Do you want to clear the devices list?'),
@@ -258,22 +255,22 @@ class MainWindow(object):
         # After exiting from the scanning process, change the UI
         self.thread_scanner = None
         self.set_status_bar_message(None)
-        idle_add(self.spinner.stop)
-        idle_add(self.spinner.set_visible, False)
-        idle_add(self.toolbutton_scan.set_sensitive, True)
+        idle_add(self.ui.spinner.stop)
+        idle_add(self.ui.spinner.set_visible, False)
+        idle_add(self.ui.toolbutton_scan.set_sensitive, True)
         return False
 
     def on_toolbutton_services_clicked(self, widget):
         """Show the available services dialog for the selected device"""
-        selected = self.treeview_devices.get_selection().get_selected()[1]
+        selected = self.ui.treeview_devices.get_selection().get_selected()[1]
         if selected:
             # Stop the scan to avoid locks
-            self.toolbutton_scan.set_active(False)
+            self.ui.toolbutton_scan.set_active(False)
             # Get the device address
             address = self.model_devices.get_type(selected) == 'adapter' and \
                 'localhost' or self.model_devices.get_address(selected)
             # Show the services dialog
-            dialog = DialogServices(self.window_main, False)
+            dialog = DialogServices(self.ui.window_main, False)
             # Load the list of enabled services
             for service in self.btsupport.get_services(address):
                 dialog.model.add_service(service)
@@ -281,15 +278,15 @@ class MainWindow(object):
 
     def on_toolbutton_preferences_clicked(self, widget):
         """Show the preferences dialog"""
-        dialog = DialogPreferences(self.settings, self.window_main, False)
+        dialog = DialogPreferences(self.settings, self.ui.window_main, False)
         dialog.show()
 
     @thread_safe
     def set_status_bar_message(self, message=None):
         """Set a new message in the status bar"""
-        self.statusbar.pop(self.statusbar_context_id)
+        self.ui.statusbar.pop(self.statusbar_context_id)
         if message is not None:
-            self.statusbar.push(self.statusbar_context_id, message)
+            self.ui.statusbar.push(self.statusbar_context_id, message)
 
     def check_adapter_activation(self):
         """Check if any Bluetooth adapter is powered on"""
@@ -301,7 +298,7 @@ class MainWindow(object):
         else:
             # No powered on adapters
             dialog = MessageDialogYesNo(
-                parent=self.window_main,
+                parent=self.ui.window_main,
                 message_type=Gtk.MessageType.QUESTION,
                 title=None,
                 msg1=_('Do you want to start the bluetooth devices?'),
@@ -317,7 +314,7 @@ class MainWindow(object):
                         # Intercept errors
                         self.settings.logText(e)
                         dialog_error = MessageDialogOK(
-                            parent=self.window_main,
+                            parent=self.ui.window_main,
                             message_type=Gtk.MessageType.WARNING,
                             title='Unable to start adapter %s' %
                                   adapter.get_device_name(),

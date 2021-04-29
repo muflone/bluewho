@@ -20,35 +20,34 @@
 
 from gi.repository import Gtk
 
-from bluewho.constants import FILE_ICON, FILE_UI_SERVICES
-from bluewho.functions import _
+from bluewho.constants import FILE_ICON
+from bluewho.functions import _, get_ui_file
+from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
 from bluewho.ui.model_services import ModelServices
 
 
 class DialogServices(object):
     def __init__(self, parent, show=False):
         # Load the user interface
-        builder = Gtk.Builder()
-        builder.add_from_file(FILE_UI_SERVICES)
+        self.ui = GtkBuilderLoader(get_ui_file('services.glade'))
         # Obtain widget references
-        self.dialog = builder.get_object('dialogServices')
-        self.model = ModelServices(builder.get_object('modelServices'))
+        dialog = self.ui.dialog
+        self.model = ModelServices(self.ui.model_services)
         # Set various properties
-        self.dialog.set_title(_('Available services'))
-        self.dialog.set_icon_from_file(FILE_ICON)
-        self.dialog.set_transient_for(parent)
-        self.dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
-        self.dialog.set_default_response(Gtk.ResponseType.OK)
+        dialog.set_title(_('Available services'))
+        dialog.set_icon_from_file(FILE_ICON)
+        dialog.set_transient_for(parent)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        dialog.set_default_response(Gtk.ResponseType.OK)
         # Optionally show the dialog
         if show:
             self.show()
 
     def show(self):
         """Show the Services dialog"""
-        self.dialog.run()
-        self.dialog.hide()
+        self.ui.dialog.run()
+        self.ui.dialog.hide()
 
     def destroy(self):
         """Destroy the Services dialog"""
-        self.dialog.destroy()
-        self.dialog = None
+        self.ui.dialog.destroy()
