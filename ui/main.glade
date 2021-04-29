@@ -44,6 +44,7 @@
               <object class="GtkToggleToolButton" id="toolbutton_scan">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Start or stop the scan</property>
                 <property name="label" translatable="yes">Detect devices</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-media-record</property>
@@ -58,6 +59,7 @@
               <object class="GtkToolButton" id="toolbutton_clear">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Clear the devices list</property>
                 <property name="label" translatable="yes">Clear list</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-clear</property>
@@ -82,6 +84,7 @@
               <object class="GtkToolButton" id="toolbutton_services">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Show the services for the selected device</property>
                 <property name="label" translatable="yes">Available services</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-properties</property>
@@ -96,6 +99,7 @@
               <object class="GtkToolButton" id="toolbutton_preferences">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Open the preferences dialog</property>
                 <property name="label" translatable="yes">Preferences</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-preferences</property>
@@ -110,6 +114,7 @@
               <object class="GtkToolButton" id="toolbutton_shortcuts">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Open the shortcuts dialog</property>
                 <property name="label" translatable="yes">Shortcuts</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-help</property>
@@ -124,6 +129,7 @@
               <object class="GtkToolButton" id="toolbutton_about">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Open the about dialog</property>
                 <property name="label" translatable="yes">About</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-about</property>
