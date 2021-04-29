@@ -71,26 +71,26 @@ class Application(Gtk.Application):
 
     def on_app_about_activate(self, action, data):
         """Show the about dialog from the app menu"""
-        self.ui.on_toolbAbout_clicked(self)
+        self.ui.on_toolbutton_about_clicked(self)
 
     def on_app_scan_activate(self, action, data):
         """Toggle the scan button"""
-        if self.ui.toolbDetect.get_sensitive():
-            self.ui.toolbDetect.set_active(
-                not self.ui.toolbDetect.get_active())
+        if self.ui.toolbutton_scan.get_sensitive():
+            self.ui.toolbutton_scan.set_active(
+                not self.ui.toolbutton_scan.get_active())
 
     def on_app_clear_activate(self, action, data):
         """Clear the results list"""
-        self.ui.on_toolbClear_clicked(self)
+        self.ui.on_toolbutton_clear_clicked(self)
 
     def on_app_services_activate(self, action, data):
         """Show the services dialog"""
-        self.ui.on_toolbServices_clicked(self)
+        self.ui.on_toolbutton_services_clicked(self)
 
     def on_app_preferences_activate(self, action, data):
         """Show the preferences dialog from the app menu"""
-        self.ui.on_toolbPreferences_clicked(self)
+        self.ui.on_toolbutton_preferences_clicked(self)
 
     def on_app_quit_activate(self, action, data):
         """Quit the application from the app menu"""
-        self.ui.on_winMain_delete_event(self, None)
+        self.ui.on_window_main_delete_event(self, None)

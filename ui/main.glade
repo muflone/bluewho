@@ -2,52 +2,52 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
-  <object class="GtkListStore" id="modelDevices">
+  <object class="GtkListStore" id="model_devices">
     <columns>
-      <!-- column-name colIcon -->
+      <!-- column-name column_icon -->
       <column type="GdkPixbuf"/>
-      <!-- column-name colIconName -->
+      <!-- column-name column_icon_name -->
       <column type="gchararray"/>
-      <!-- column-name colClass -->
+      <!-- column-name column_class -->
       <column type="gint"/>
-      <!-- column-name colType -->
+      <!-- column-name column_type -->
       <column type="gchararray"/>
-      <!-- column-name colTypeTranslated -->
+      <!-- column-name column_type_translated -->
       <column type="gchararray"/>
-      <!-- column-name colSubType -->
+      <!-- column-name column_subtype -->
       <column type="gchararray"/>
-      <!-- column-name colSubTypeTranslated -->
+      <!-- column-name column_subtype_translated -->
       <column type="gchararray"/>
-      <!-- column-name colName -->
+      <!-- column-name column_name -->
       <column type="gchararray"/>
-      <!-- column-name colAddress -->
+      <!-- column-name column_address -->
       <column type="gchararray"/>
-      <!-- column-name colLastSeen -->
+      <!-- column-name column_last_seen -->
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkApplicationWindow" id="winMain">
+  <object class="GtkApplicationWindow" id="window_main">
     <property name="can-focus">False</property>
     <property name="default-width">450</property>
     <property name="default-height">300</property>
-    <signal name="delete-event" handler="on_winMain_delete_event" swapped="no"/>
+    <signal name="delete-event" handler="on_window_main_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkToolbar" id="toolButtons">
+          <object class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkToggleToolButton" id="toolbDetect">
+              <object class="GtkToggleToolButton" id="toolbutton_scan">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Detect devices</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-media-record</property>
-                <signal name="toggled" handler="on_toolbDetect_toggled" swapped="no"/>
+                <signal name="toggled" handler="on_toolbutton_scan_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -55,13 +55,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbClear">
+              <object class="GtkToolButton" id="toolbutton_clear">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Clear list</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-clear</property>
-                <signal name="clicked" handler="on_toolbClear_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_toolbutton_clear_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -69,7 +69,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSeparatorToolItem" id="toolbSeparator">
+              <object class="GtkSeparatorToolItem" id="toolbutton_separator_1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
               </object>
@@ -79,13 +79,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbServices">
+              <object class="GtkToolButton" id="toolbutton_services">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Available services</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-properties</property>
-                <signal name="clicked" handler="on_toolbServices_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_toolbutton_services_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -93,13 +93,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbPreferences">
+              <object class="GtkToolButton" id="toolbutton_preferences">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Preferences</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-preferences</property>
-                <signal name="clicked" handler="on_toolbPreferences_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_toolbutton_preferences_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -107,13 +107,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbAbout">
+              <object class="GtkToolButton" id="toolbutton_about">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">About</property>
                 <property name="use-underline">True</property>
                 <property name="stock-id">gtk-about</property>
-                <signal name="clicked" handler="on_toolbAbout_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_toolbutton_about_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -135,7 +135,7 @@
             <property name="border-width">7</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel" id="lblDevices">
+              <object class="GtkLabel" id="label_devices">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">&lt;b&gt;Detected devices:&lt;/b&gt;</property>
@@ -149,24 +149,24 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="scrollDevices">
+              <object class="GtkScrolledWindow" id="scroll_devices">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <property name="shadow-type">in</property>
                 <child>
-                  <object class="GtkTreeView" id="tvwDevices">
+                  <object class="GtkTreeView" id="treeview_devices">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="model">modelDevices</property>
+                    <property name="model">model_devices</property>
                     <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection1"/>
+                      <object class="GtkTreeSelection" id="treeview-selection"/>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="colIcon">
+                      <object class="GtkTreeViewColumn" id="column_icon">
                         <child>
-                          <object class="GtkCellRendererPixbuf" id="cellIcon"/>
+                          <object class="GtkCellRendererPixbuf" id="cell_icon"/>
                           <attributes>
                             <attribute name="pixbuf">0</attribute>
                           </attributes>
@@ -174,16 +174,16 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="colType">
+                      <object class="GtkTreeViewColumn" id="column_type">
                         <property name="title" translatable="yes">Type</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellType"/>
+                          <object class="GtkCellRendererText" id="cell_type"/>
                           <attributes>
                             <attribute name="text">4</attribute>
                           </attributes>
                         </child>
                         <child>
-                          <object class="GtkCellRendererText" id="cellDetail"/>
+                          <object class="GtkCellRendererText" id="cell_detail"/>
                           <attributes>
                             <attribute name="text">6</attribute>
                           </attributes>
@@ -191,11 +191,11 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="colName">
+                      <object class="GtkTreeViewColumn" id="column_name">
                         <property name="title" translatable="yes">Name</property>
                         <property name="expand">True</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellName"/>
+                          <object class="GtkCellRendererText" id="cell_name"/>
                           <attributes>
                             <attribute name="text">7</attribute>
                           </attributes>
@@ -203,10 +203,10 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="colAddress">
+                      <object class="GtkTreeViewColumn" id="column_address">
                         <property name="title" translatable="yes">Bluetooth address</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellAddress"/>
+                          <object class="GtkCellRendererText" id="cell_address"/>
                           <attributes>
                             <attribute name="text">8</attribute>
                           </attributes>
@@ -214,10 +214,10 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="colLastSeen">
+                      <object class="GtkTreeViewColumn" id="column_last_seen">
                         <property name="title" translatable="yes">Last seen</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellLastSeen"/>
+                          <object class="GtkCellRendererText" id="cell_last_seen"/>
                           <attributes>
                             <attribute name="text">9</attribute>
                           </attributes>
@@ -241,12 +241,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkStatusbar" id="statusScan">
+          <object class="GtkStatusbar" id="statusbar">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="spacing">7</property>
             <child>
-              <object class="GtkSpinner" id="spinnerScan">
+              <object class="GtkSpinner" id="spinner">
                 <property name="can-focus">False</property>
                 <property name="no-show-all">True</property>
               </object>
