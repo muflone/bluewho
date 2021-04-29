@@ -24,8 +24,8 @@ import optparse
 import time
 import configparser
 
-from bluewho.constants import (FILE_SETTINGS_DEVICES,
-                               FILE_SETTINGS_NEW,
+from bluewho.constants import (FILE_DEVICES,
+                               FILE_SETTINGS,
                                VERBOSE_LEVEL_QUIET,
                                VERBOSE_LEVEL_NORMAL,
                                VERBOSE_LEVEL_MAX)
@@ -72,7 +72,7 @@ class Settings(object):
         # Allow saving in case sensitive (useful for machine names)
         self.config.optionxform = str
         # Determine which filename to use for settings
-        self.filename = FILE_SETTINGS_NEW
+        self.filename = FILE_SETTINGS
         if self.filename:
             self.logText('Loading settings from %s' % self.filename,
                          VERBOSE_LEVEL_NORMAL)
@@ -167,9 +167,9 @@ class Settings(object):
     def load_devices(self):
         """Return the devices list from the configuration file"""
         devices = []
-        if os.path.exists(FILE_SETTINGS_DEVICES):
+        if os.path.exists(FILE_DEVICES):
             self.logText('Loading the devices list', VERBOSE_LEVEL_NORMAL)
-            with open(FILE_SETTINGS_DEVICES, 'r') as file:
+            with open(FILE_DEVICES, 'r') as file:
                 # Each device is separated by a single line with >
                 lines = file.read().split('\n>\n')
                 for device in lines:
@@ -188,16 +188,16 @@ class Settings(object):
         """Save devices list to filename"""
         if len(devices) > 0:
             self.logText('Saving the devices list', VERBOSE_LEVEL_NORMAL)
-            with open(FILE_SETTINGS_DEVICES, 'w') as file:
+            with open(FILE_DEVICES, 'w') as file:
                 for device in devices:
                     file.write('%s\n%s\n%s\n%s\n>\n' % (
                         devices.get_address(device),
                         devices.get_name(device),
                         hex(devices.get_class(device)),
                         devices.get_last_seen(device)))
-        elif os.path.exists(FILE_SETTINGS_DEVICES):
+        elif os.path.exists(FILE_DEVICES):
             self.logText('Deleting the devices list', VERBOSE_LEVEL_NORMAL)
-            os.remove(FILE_SETTINGS_DEVICES)
+            os.remove(FILE_DEVICES)
 
     def get_value(self, option, default=None):
         """Get the value of an option"""
@@ -231,8 +231,8 @@ class Settings(object):
     def save(self):
         """Save the whole configuration"""
         # Always save the settings in the new configuration file
-        with open(FILE_SETTINGS_NEW, mode='w') as file:
-            self.logText('Saving settings to %s' % FILE_SETTINGS_NEW,
+        with open(FILE_SETTINGS, mode='w') as file:
+            self.logText('Saving settings to %s' % FILE_SETTINGS,
                          VERBOSE_LEVEL_NORMAL)
             self.config.write(file)
 
