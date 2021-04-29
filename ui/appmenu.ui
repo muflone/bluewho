@@ -24,6 +24,13 @@
     </section>
     <section>
       <item>
+        <attribute name='label' translatable='yes'>Clear results</attribute>
+        <attribute name='action'>app.clear</attribute>
+        <attribute name='accel'>&lt;Primary&gt;Delete</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name='label' translatable='yes'>_Quit</attribute>
         <attribute name='action'>app.quit</attribute>
         <attribute name='accel'>&lt;Primary&gt;q</attribute>
