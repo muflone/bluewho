@@ -18,12 +18,20 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import os.path
 import threading
 from time import localtime
 from gettext import gettext as _
 
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
+
+from bluewho.constants import DIR_UI
+
+
+def get_ui_file(filename):
+    """Return the full path of a Glade/UI file"""
+    return os.path.join(DIR_UI, filename)
 
 
 def thread_safe(func):
@@ -74,6 +82,7 @@ def get_current_thread_ident(func):
 
 
 __all__ = [
+    'get_ui_file',
     'readlines',
     'get_current_time',
     'GtkProcessEvents',
