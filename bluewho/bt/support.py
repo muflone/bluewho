@@ -20,6 +20,10 @@
 
 import select
 
+from gi.repository import GLib
+
+import pydbus
+
 import bluetooth
 
 from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
@@ -116,3 +120,12 @@ class BluetoothSupport(object):
             if service_class & service:
                 services.append(description)
         return services
+
+    def is_bluez_available(self):
+        """Check if bluez is available"""
+        try:
+            pydbus.SystemBus().get('org.bluez')
+            result = True
+        except GLib.Error:
+            result = False
+        return result

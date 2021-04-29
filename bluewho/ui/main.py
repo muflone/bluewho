@@ -137,14 +137,28 @@ class MainWindow(object):
         """Reload the list of local and detected devices"""
         # Start the scanner thread
         if self.toolbDetect.get_active():
-            self.check_adapter_activation()
-            # Start the scan
-            self.spinnerScan.set_visible(True)
-            self.spinnerScan.start()
-            assert not self.thread_scanner
-            self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
-            self.set_status_bar_message('Start new scan')
-            self.thread_scanner.start()
+            # Check if Bluez service is started
+            if not self.btsupport.is_bluez_available():
+                self.settings.logText('Bluez is not available')
+                dialog_error = MessageDialogOK(
+                    parent=self.winMain,
+                    message_type=Gtk.MessageType.ERROR,
+                    title=None,
+                    msg1=_('Bluez seems not to be started, please make sure'
+                           'the bluetooth service is started'),
+                    msg2=None
+                )
+                dialog_error.run()
+                self.toolbDetect.set_active(False)
+            else:
+                self.check_adapter_activation()
+                # Start the scan
+                self.spinnerScan.set_visible(True)
+                self.spinnerScan.start()
+                assert not self.thread_scanner
+                self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
+                self.set_status_bar_message('Start new scan')
+                self.thread_scanner.start()
         else:
             if self.thread_scanner:
                 self.toolbDetect.set_sensitive(False)
