@@ -28,6 +28,8 @@ from gi.repository.GLib import idle_add
 
 from bluewho.constants import DIR_UI
 
+localized_messages = {}
+
 
 def get_current_thread_ident(func):
     """Decorator function to print the active running thread"""
@@ -72,6 +74,26 @@ def readlines(filename, empty_lines=False):
             if line or empty_lines:
                 result.append(line)
     return result
+
+
+def text(message, gtk30=False, context=None):
+    """Return a translated message and cache it for reuse"""
+    if message not in localized_messages:
+        if gtk30:
+            # Get a message translated from GTK+ 3 domain
+            full_message = message if not context else f'{context}\04{message}'
+            localized_messages[message] = dgettext('gtk30', full_message)
+            # Fix for untranslated messages with context
+            if context and localized_messages[message] == full_message:
+                localized_messages[message] = dgettext('gtk30', message)
+        else:
+            localized_messages[message] = gettext(message)
+    return localized_messages[message]
+
+
+def text_gtk30(message, context=None):
+    """Return a translated text from GTK+ 3.0"""
+    return text(message=message, gtk30=True, context=context)
 
 
 def thread_safe(func):
