@@ -18,10 +18,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+from gettext import gettext, dgettext
 import os.path
 import threading
 from time import localtime
-from gettext import gettext as _
 
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
@@ -29,27 +29,14 @@ from gi.repository.GLib import idle_add
 from bluewho.constants import DIR_UI
 
 
-def get_ui_file(filename):
-    """Return the full path of a Glade/UI file"""
-    return os.path.join(DIR_UI, filename)
-
-
-def thread_safe(func):
-    """Decorator function to make a thread safe call to a GTK+ function"""
+def get_current_thread_ident(func):
+    """Decorator function to print the active running thread"""
     def callback(*args):
-        idle_add(func, *args)
+        print('%s is called from %s thread' % (
+            func,
+            threading.current_thread().name))
+        return func(*args)
     return callback
-
-
-def readlines(filename, empty_lines=False):
-    """Read all lines from a text file"""
-    result = []
-    with open(filename) as file:
-        for line in file.readlines():
-            line = line.strip()
-            if line or empty_lines:
-                result.append(line)
-    return result
 
 
 def get_current_time():
@@ -65,29 +52,35 @@ def get_current_time():
                  'second': current_time.tm_sec}
 
 
-def GtkProcessEvents():
+def get_ui_file(filename):
+    """Return the full path of a Glade/UI file"""
+    return os.path.join(DIR_UI, filename)
+
+
+def process_events():
     """Let the main GTK+ loop to continue"""
     while Gtk.events_pending():
         Gtk.main_iteration()
 
 
-def get_current_thread_ident(func):
-    """Decorator function to print the active running thread"""
+def readlines(filename, empty_lines=False):
+    """Read all lines from a text file"""
+    result = []
+    with open(filename) as file:
+        for line in file.readlines():
+            line = line.strip()
+            if line or empty_lines:
+                result.append(line)
+    return result
+
+
+def thread_safe(func):
+    """Decorator function to make a thread safe call to a GTK+ function"""
     def callback(*args):
-        print('%s is called from %s thread' % (
-            func,
-            threading.current_thread().name))
-        return func(*args)
+        idle_add(func, *args)
     return callback
 
 
-__all__ = [
-    'get_ui_file',
-    'readlines',
-    'get_current_time',
-    'GtkProcessEvents',
-    'thread_safe',
-    'idle_add',
-    'get_current_thread_ident',
-    '_'
-]
+# This special alias is used to track localization requests to catch
+# by xgettext. The text() calls aren't tracked by xgettext
+_ = text

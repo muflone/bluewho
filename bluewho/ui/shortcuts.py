@@ -21,7 +21,7 @@
 from gi.repository import Gtk
 
 from bluewho.functions import get_ui_file
-from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
+from bluewho.gtkbuilder_loader import GtkBuilderLoader
 
 
 class DialogShortcuts(object):

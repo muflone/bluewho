@@ -32,7 +32,7 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_RESOURCES,
                                FILE_TRANSLATORS)
 from bluewho.functions import get_ui_file, readlines
-from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
+from bluewho.gtkbuilder_loader import GtkBuilderLoader
 
 
 class DialogAbout(object):

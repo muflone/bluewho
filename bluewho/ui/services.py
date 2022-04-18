@@ -22,7 +22,7 @@ from gi.repository import Gtk
 
 from bluewho.constants import FILE_ICON
 from bluewho.functions import _, get_ui_file
-from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
+from bluewho.gtkbuilder_loader import GtkBuilderLoader
 from bluewho.ui.model_services import ModelServices
 
 

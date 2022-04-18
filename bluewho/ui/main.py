@@ -33,12 +33,12 @@ from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
                                get_current_time,
                                get_ui_file,
-                               GtkProcessEvents,
+                               process_events,
                                idle_add,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
-from bluewho.ui.gtk_builder_loader import GtkBuilderLoader
+from bluewho.gtkbuilder_loader import GtkBuilderLoader
 from bluewho.ui.message_dialog import (MessageDialogNoYes,
                                        MessageDialogOK,
                                        MessageDialogYesNo)
@@ -111,7 +111,7 @@ class MainWindow(object):
                 # Hide immediately the window and let the GTK+ cycle to
                 # continue giving the perception that the app was really closed
                 self.ui.window_main.hide()
-                GtkProcessEvents()
+                process_events()
                 print('please wait for scan to complete...')
                 self.thread_scanner.cancel()
                 self.thread_scanner.join()
