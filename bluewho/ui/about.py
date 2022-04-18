@@ -33,10 +33,12 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_TRANSLATORS)
 from bluewho.functions import get_ui_file, readlines
 from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.ui.base import UIBase
 
 
-class DialogAbout(object):
+class DialogAbout(UIBase):
     def __init__(self, parent, show=False):
+        super().__init__(filename='about.glade')
         # Retrieve the translators list
         translators = []
         for line in readlines(FILE_TRANSLATORS, False):
@@ -45,8 +47,6 @@ class DialogAbout(object):
             line = line.replace('(at)', '@').strip()
             if line not in translators:
                 translators.append(line)
-        # Load the user interface
-        self.ui = GtkBuilderLoader(get_ui_file('about.glade'))
         # Obtain widget references
         dialog = self.ui.dialog
         # Set various properties

@@ -20,15 +20,14 @@
 
 from gi.repository import Gtk
 
-from bluewho.functions import get_ui_file
-from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.ui.base import UIBase
 
 
-class DialogShortcuts(object):
+class DialogShortcuts(UIBase):
     def __init__(self, parent):
         """Prepare the shortcuts dialog"""
+        super().__init__(filename='shortcuts.ui')
         # Load the user interface
-        self.ui = GtkBuilderLoader(get_ui_file('shortcuts.ui'))
         self.ui.shortcuts.set_transient_for(parent)
         # Initialize groups
         for widget in self.ui.get_objects_by_type(Gtk.ShortcutsGroup):

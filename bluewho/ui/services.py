@@ -21,15 +21,14 @@
 from gi.repository import Gtk
 
 from bluewho.constants import FILE_ICON
-from bluewho.functions import _, get_ui_file
-from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.functions import _
+from bluewho.ui.base import UIBase
 from bluewho.ui.model_services import ModelServices
 
 
-class DialogServices(object):
+class DialogServices(UIBase):
     def __init__(self, parent, show=False):
-        # Load the user interface
-        self.ui = GtkBuilderLoader(get_ui_file('services.glade'))
+        super().__init__(filename='services.glade')
         # Obtain widget references
         dialog = self.ui.dialog
         self.model = ModelServices(self.ui.model_services)

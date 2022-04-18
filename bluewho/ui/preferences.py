@@ -21,16 +21,15 @@
 from gi.repository import Gtk
 
 from bluewho.constants import FILE_ICON
-from bluewho.functions import _, get_ui_file
+from bluewho.functions import _
 from bluewho.settings import Preferences
-from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.ui.base import UIBase
 
 
-class DialogPreferences(object):
+class DialogPreferences(UIBase):
     def __init__(self, settings, parent, show=False):
+        super().__init__(filename='preferences.glade')
         self.settings = settings
-        # Load the user interface
-        self.ui = GtkBuilderLoader(get_ui_file('preferences.glade'))
         # Obtain widget references
         dialog = self.ui.dialog
         # Set various properties

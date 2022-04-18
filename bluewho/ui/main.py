@@ -32,13 +32,12 @@ from bluewho.daemon_thread import DaemonThread
 from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
                                get_current_time,
-                               get_ui_file,
                                process_events,
                                idle_add,
                                thread_safe)
 from bluewho.settings import Preferences
 from bluewho.ui.about import DialogAbout
-from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.ui.base import UIBase
 from bluewho.ui.message_dialog import (MessageDialogNoYes,
                                        MessageDialogOK,
                                        MessageDialogYesNo)
@@ -48,8 +47,9 @@ from bluewho.ui.services import DialogServices
 from bluewho.ui.shortcuts import DialogShortcuts
 
 
-class MainWindow(object):
+class MainWindow(UIBase):
     def __init__(self, application, settings, btsupport):
+        super().__init__(filename='main.glade')
         self.application = application
         self.settings = settings
         self.btsupport = btsupport
