@@ -2,7 +2,7 @@ BlueWho [![Build Status](https://travis-ci.org/muflone/bluewho.svg?branch=master
 =======
 **Description:** Information and notification of new discovered bluetooth devices
 
-**Copyright:** 2009-2021 Fabio Castelli <muflone@muflone.com>
+**Copyright:** 2009-2022 Fabio Castelli <muflone@muflone.com>
 
 **License:** GPL-3+
 
