@@ -8,7 +8,9 @@ BlueWho [![Build Status](https://travis-ci.org/muflone/bluewho.svg?branch=master
 
 **Source code:** https://github.com/muflone/bluewho
 
-**Documentation:** http://www.muflone.com/bluewho
+**Documentation:** https://www.muflone.com/bluewho
+
+**Translations:** https://www.transifex.com/projects/p/bluewho/
 
 Information
 -----------

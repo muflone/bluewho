@@ -30,7 +30,7 @@ APP_VERSION = '0.5.0'
 APP_DESCRIPTION = ('Information and notification of new discovered '
                    'bluetooth devices')
 APP_ID = 'bluewho.muflone.com'
-APP_URL = 'http://www.muflone.com/bluewho'
+APP_URL = 'https://www.muflone.com/bluewho'
 APP_AUTHOR = 'Fabio Castelli'
 APP_AUTHOR_EMAIL = 'muflone@muflone.com'
 APP_COPYRIGHT = 'Copyright 2009-2022 %s' % APP_AUTHOR

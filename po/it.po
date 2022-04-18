@@ -1,7 +1,7 @@
 # BlueWho
 # Information and notification of new discovered bluetooth devices.
 # Copyright (C) 2009-2022 Fabio Castelli (Muflone) <muflone(at)muflone.com>
-# Website: http://www.muflone.com/bluewho/
+# Website: https://www.muflone.com/bluewho/
 # This file is distributed under the same license of BlueWho.
 # Italian translation for BlueWho.
 #
@@ -14,7 +14,7 @@ msgstr ""
 "POT-Creation-Date: 2010-01-02 01:31+0100\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/bluewho/language/it/)\n"
+"Language-Team: Italian (https://www.transifex.com/projects/p/bluewho/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
