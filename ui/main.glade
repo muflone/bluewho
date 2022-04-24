@@ -1,7 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.16"/>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkAccelGroup" id="accelerators"/>
+  <object class="GtkActionGroup" id="actions_app">
+    <property name="accel-group">accelerators</property>
+    <child>
+      <object class="GtkAction" id="action_quit">
+        <property name="label" context="gtk30">Quit</property>
+        <signal name="activate" handler="on_action_quit_activate" swapped="no"/>
+      </object>
+      <accelerator key="q" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_about">
+        <property name="label" context="gtk30">About</property>
+        <property name="icon-name">help-about</property>
+        <signal name="activate" handler="on_action_about_activate" swapped="no"/>
+      </object>
+      <accelerator key="F1"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_shortcuts">
+        <property name="label" context="gtk30">Shortcuts</property>
+        <property name="icon-name">help-browser</property>
+        <signal name="activate" handler="on_action_shortcuts_activate" swapped="no"/>
+      </object>
+      <accelerator key="question" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_options">
+        <property name="label" translatable="yes">Open the options menu</property>
+        <property name="icon-name">open-menu</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_options_menu">
+        <property name="label" translatable="yes">Open the options menu</property>
+        <signal name="activate" handler="on_action_options_menu_activate" swapped="no"/>
+      </object>
+      <accelerator key="F10"/>
+    </child>
+  </object>
+  <object class="GtkActionGroup" id="actions_devices">
+    <property name="accel-group">accelerators</property>
+    <child>
+      <object class="GtkAction" id="action_scan">
+        <property name="label" translatable="yes">Detect devices</property>
+        <property name="icon-name">bluetooth</property>
+        <property name="is-important">True</property>
+        <signal name="activate" handler="on_action_scan_activate" swapped="no"/>
+      </object>
+      <accelerator key="r" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_stop">
+        <property name="label" context="gtk30">Stop</property>
+        <property name="icon-name">bluetooth-disabled</property>
+        <signal name="activate" handler="on_action_stop_activate" swapped="no"/>
+      </object>
+      <accelerator key="Escape"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_clear">
+        <property name="label" translatable="yes">Clear list</property>
+        <property name="icon-name">edit-clear-all-symbolic</property>
+        <signal name="activate" handler="on_action_clear_activate" swapped="no"/>
+      </object>
+      <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_preferences">
+        <property name="label" translatable="yes">Preferences</property>
+        <property name="icon-name">preferences-system-symbolic.symbolic</property>
+        <signal name="activate" handler="on_action_preferences_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="action_services">
+        <property name="icon-name">document-properties</property>
+        <signal name="activate" handler="on_action_services_activate" swapped="no"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkHeaderBar" id="header_bar">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="title">BlueWho</property>
+    <property name="has-subtitle">False</property>
+    <property name="show-close-button">True</property>
+    <child>
+      <object class="GtkButton" id="button_scan">
+        <property name="label" translatable="yes">Detect devices</property>
+        <property name="related-action">action_scan</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="button_stop">
+        <property name="label" translatable="yes">Stop</property>
+        <property name="related-action">action_stop</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+      <packing>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+      </object>
+      <packing>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="button_clear">
+        <property name="label" translatable="yes">Clear list</property>
+        <property name="related-action">action_clear</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+      <packing>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkMenuButton" id="button_options">
+        <property name="related-action">action_options</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="focus-on-click">False</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="button_about">
+        <property name="label" translatable="yes">About</property>
+        <property name="related-action">action_about</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="button_services">
+        <property name="label" translatable="yes">Available services</property>
+        <property name="related-action">action_services</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="button_preferences">
+        <property name="label" translatable="yes">Preferences</property>
+        <property name="related-action">action_preferences</property>
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="relief">none</property>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">7</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_options">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="accel-group">accelerators</property>
+    <child>
+      <object class="GtkMenuItem" id="menuitem_scan">
+        <property name="related-action">action_scan</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" translatable="yes">Refresh</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="menuitem_stop">
+        <property name="related-action">action_stop</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" translatable="yes">Stop</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="menuitem_shortcuts">
+        <property name="related-action">action_shortcuts</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" context="gtk30">Shortcuts</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="menuitem_about">
+        <property name="related-action">action_about</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" context="gtk30">About</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+  </object>
   <object class="GtkListStore" id="model_devices">
     <columns>
       <!-- column-name column_icon -->
@@ -26,127 +265,16 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkApplicationWindow" id="window_main">
+  <object class="GtkApplicationWindow" id="window">
     <property name="can-focus">False</property>
     <property name="default-width">450</property>
     <property name="default-height">300</property>
-    <signal name="delete-event" handler="on_window_main_delete_event" swapped="no"/>
+    <signal name="delete-event" handler="on_window_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkToolbar" id="toolbar">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <child>
-              <object class="GtkToggleToolButton" id="toolbutton_scan">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Start or stop the scan</property>
-                <property name="label" translatable="yes">Detect devices</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-media-record</property>
-                <signal name="toggled" handler="on_toolbutton_scan_toggled" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_clear">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Clear the devices list</property>
-                <property name="label" translatable="yes">Clear list</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-clear</property>
-                <signal name="clicked" handler="on_toolbutton_clear_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSeparatorToolItem" id="toolbutton_separator_1">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_services">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Show the services for the selected device</property>
-                <property name="label" translatable="yes">Available services</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-properties</property>
-                <signal name="clicked" handler="on_toolbutton_services_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_preferences">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Open the preferences dialog</property>
-                <property name="label" translatable="yes">Preferences</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-preferences</property>
-                <signal name="clicked" handler="on_toolbutton_preferences_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_shortcuts">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Open the shortcuts dialog</property>
-                <property name="label" translatable="yes">Shortcuts</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-help</property>
-                <signal name="clicked" handler="on_toolbutton_shortcuts_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_about">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Open the about dialog</property>
-                <property name="label" translatable="yes">About</property>
-                <property name="use-underline">True</property>
-                <property name="stock-id">gtk-about</property>
-                <signal name="clicked" handler="on_toolbutton_about_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox" id="box2">
             <property name="visible">True</property>
@@ -257,7 +385,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -280,7 +408,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </object>
