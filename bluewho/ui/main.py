@@ -165,8 +165,6 @@ class MainWindow(UIBase):
                 process_events()
                 logging.info('please wait for scan to complete...')
                 self.ui.action_stop.emit('activate')
-                process_events()
-                time.sleep(10)
         self.thread_scanner = None
         self.settings.save_window_position(window=self.ui.window,
                                            section=SECTION_WINDOW_NAME)
