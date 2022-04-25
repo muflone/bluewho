@@ -363,7 +363,7 @@ class MainWindow(UIBase):
                 parent=self.ui.window,
                 message_type=Gtk.MessageType.ERROR,
                 title=None,
-                msg1=_('Bluez seems not to be started, please make sure'
+                msg1=_('Bluez seems not to be started, please make sure '
                        'the bluetooth service is started'),
                 msg2=None
             )

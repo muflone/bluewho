@@ -20,7 +20,6 @@
 
 from gettext import gettext, dgettext
 import os.path
-import threading
 from time import localtime
 
 from gi.repository import Gtk
@@ -29,16 +28,6 @@ from gi.repository.GLib import idle_add
 from bluewho.constants import DIR_UI
 
 localized_messages = {}
-
-
-def get_current_thread_ident(func):
-    """Decorator function to print the active running thread"""
-    def callback(*args):
-        print('%s is called from %s thread' % (
-            func,
-            threading.current_thread().name))
-        return func(*args)
-    return callback
 
 
 def get_current_time():
