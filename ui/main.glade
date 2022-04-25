@@ -76,12 +76,6 @@
         <signal name="activate" handler="on_action_preferences_activate" swapped="no"/>
       </object>
     </child>
-    <child>
-      <object class="GtkAction" id="action_services">
-        <property name="icon-name">document-properties</property>
-        <signal name="activate" handler="on_action_services_activate" swapped="no"/>
-      </object>
-    </child>
   </object>
   <object class="GtkHeaderBar" id="header_bar">
     <property name="visible">True</property>
@@ -166,20 +160,6 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton" id="button_services">
-        <property name="label" translatable="yes">Available services</property>
-        <property name="related-action">action_services</property>
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="relief">none</property>
-      </object>
-      <packing>
-        <property name="pack-type">end</property>
-        <property name="position">6</property>
-      </packing>
-    </child>
-    <child>
       <object class="GtkButton" id="button_preferences">
         <property name="label" translatable="yes">Preferences</property>
         <property name="related-action">action_preferences</property>
@@ -190,7 +170,7 @@
       </object>
       <packing>
         <property name="pack-type">end</property>
-        <property name="position">7</property>
+        <property name="position">6</property>
       </packing>
     </child>
   </object>

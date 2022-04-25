@@ -51,7 +51,6 @@ from bluewho.ui.message_dialog import (MessageDialogNoYes,
                                        MessageDialogYesNo)
 from bluewho.ui.model_devices import ModelDevices
 from bluewho.ui.preferences import DialogPreferences
-from bluewho.ui.services import DialogServices
 from bluewho.ui.shortcuts import DialogShortcuts
 
 SECTION_WINDOW_NAME = 'main window'
@@ -76,7 +75,6 @@ class MainWindow(UIBase):
                                         self.ui.button_stop,
                                         self.ui.button_clear,
                                         self.ui.button_preferences,
-                                        self.ui.button_services,
                                         self.ui.button_about,
                                         self.ui.button_options])
         # Set buttons with always show image
@@ -137,22 +135,6 @@ class MainWindow(UIBase):
         dialog = DialogPreferences(self.preferences, self.ui.window, False)
         dialog.show()
         dialog.destroy()
-
-    def on_action_services_activate(self, action):
-        """Show the available services dialog for the selected device"""
-        selected = self.ui.treeview_devices.get_selection().get_selected()[1]
-        if selected:
-            # Stop the scan to avoid locks
-            self.ui.action_stop.emit('activate')
-            # Get the device address
-            address = self.model_devices.get_type(selected) == 'adapter' and \
-                'localhost' or self.model_devices.get_address(selected)
-            # Show the services dialog
-            dialog = DialogServices(self.ui.window, False)
-            # Load the list of enabled services
-            for service in self.btsupport.get_services(address):
-                dialog.model.add_service(service)
-            dialog.show()
 
     def on_action_quit_activate(self, action):
         """Quit the application"""
