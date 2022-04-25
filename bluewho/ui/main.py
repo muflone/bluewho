@@ -258,7 +258,12 @@ class MainWindow(UIBase):
                                         device_class=1 << 2,
                                         last_seen=get_current_time(),
                                         notify=True)
-                if self.thread_scanner.cancelled:
+                if not self.thread_scanner:
+                    # Abort scan per removed thread
+                    logging.warning('thread removed')
+                    self.discoverer.stop()
+                    break
+                elif self.thread_scanner.cancelled:
                     # Cancel the running thread
                     logging.info('cancel')
                     self.discoverer.stop()
