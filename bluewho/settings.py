@@ -172,9 +172,10 @@ class Settings(object):
         if len(devices) > 0:
             logging.info('Saving the devices list')
             with open(FILE_DEVICES, 'w') as file:
-                for device in devices:
+                for address in devices:
+                    device = devices.get_iter(address)
                     file.write('%s\n%s\n%s\n%s\n>\n' % (
-                        devices.get_address(device),
+                        address,
                         devices.get_name(device),
                         hex(devices.get_class(device)),
                         devices.get_last_seen(device)))
