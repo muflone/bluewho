@@ -136,6 +136,7 @@
         <property name="focus-on-click">False</property>
         <property name="receives-default">True</property>
         <property name="relief">none</property>
+        <property name="popup">menu_options</property>
         <child>
           <placeholder/>
         </child>
