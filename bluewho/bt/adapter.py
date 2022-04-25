@@ -18,34 +18,38 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import pydbus
-
-
 class BluetoothAdapter(object):
-    def __init__(self, device_name):
-        self.device_name = device_name
-
-    def _get_dbus_interface(self):
-        """Get a DBus interface to the bluetooth adapter"""
-        return pydbus.SystemBus().get('org.bluez',
-                                      '/org/bluez/%s' % self.device_name)
+    def __init__(self, adapter):
+        self.adapter = adapter
 
     def get_device_name(self):
         """Return the device name"""
-        return self.device_name
+        return self.adapter.path.replace('/org/bluez/', '')
 
     def get_name(self):
         """Return the adapter address"""
-        return self._get_dbus_interface().Name
+        return str(self.adapter.name)
 
     def get_address(self):
         """Return the adapter address"""
-        return self._get_dbus_interface().Address
+        return str(self.adapter.address)
 
     def is_powered(self):
         """Return the adapter powered status"""
-        return self._get_dbus_interface().Powered
+        return bool(self.adapter.powered)
 
     def set_powered(self, status):
         """Set the adapter powered status"""
-        self._get_dbus_interface().Powered = status
+        self.adapter.powered = status
+
+    def start_discovery(self, timeout):
+        """
+        Start devices discovery
+        """
+        self.adapter.nearby_discovery(timeout=timeout)
+
+    def stop_discovery(self):
+        """
+        Stop devices discovery
+        """
+        self.adapter.stop_discovery()

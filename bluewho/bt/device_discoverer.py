@@ -18,26 +18,53 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from bluetooth import DeviceDiscoverer
+import dbus.exceptions
+
+import bluezero.device
+import bluezero.dbus_tools
 
 
-class BluetoothDeviceDiscoverer(DeviceDiscoverer):
-    """Support for asynchronous detection"""
-    def __init__(self, new_device_cb):
-        """Superclass constructor"""
-        DeviceDiscoverer.__init__(self)
-        # Callback function to receive new discovered device
-        self.new_device_cb = new_device_cb
+class BluetoothDeviceDiscoverer():
+    def __init__(self, adapter, timeout):
+        self.adapter = adapter
+        self.timeout = timeout
 
-    def pre_inquiry(self):
-        """Scan is starting"""
-        self.done = False
+    def start(self) -> bool:
+        """
+        Start the bluetooth devices discovery
 
-    def device_discovered(self, address, device_class, rssi, name):
-        """Call callback function for new discovered device"""
-        if self.new_device_cb:
-            self.new_device_cb(name, address, device_class)
+        :return: True if the discovery was successfull
+        """
+        print('scan started')
+        try:
+            self.adapter.start_discovery(timeout=self.timeout)
+            result = True
+        except dbus.exceptions.DBusException as error:
+            print('scan aborted', error)
+            result = False
+        return result
 
-    def inquiry_complete(self):
-        """Scan completed"""
-        self.done = True
+    def stop(self) -> None:
+        try:
+            self.adapter.stop_discovery()
+        except dbus.exceptions.DBusException:
+            pass
+        print('scan stopped')
+
+    def get_devices(self) -> list[bluezero.device.Device]:
+        """
+        Get the detected devices list
+
+        :return: list of detected device objects
+        """
+        results = []
+        managed_objects = bluezero.dbus_tools.get_managed_objects()
+        for path in managed_objects:
+            address = bluezero.dbus_tools.get_device_address_from_dbus_path(
+                path=path)
+            if address:
+                device = bluezero.device.Device(
+                    adapter_addr=self.adapter.get_address(),
+                    device_addr=address)
+                results.append(device)
+        return results

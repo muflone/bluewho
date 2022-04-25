@@ -18,24 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import select
+import bluezero.dbus_tools
 
-from gi.repository import GLib
+import dbus
 
-import pydbus
-
-import bluetooth
-
-from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.bt.major_device_classes import MajorDeviceClasses
-from bluewho.bt.service_device_classes import ServiceDeviceClasses
 from bluewho.constants import FILE_BT_CLASSES
 from bluewho.functions import readlines
 
 
 class BluetoothSupport(object):
     def __init__(self):
-        self.new_device_cb = None
         # Load classes from file FILE_BT_CLASSES
         self.classes = {}
         for line in readlines(FILE_BT_CLASSES):
@@ -58,31 +51,6 @@ class BluetoothSupport(object):
                 # Add minor class with image and description
                 self.classes[major_class][minor_class] = (image_path,
                                                           description)
-
-    def set_new_device_cb(self, new_device_cb):
-        """Set the new device callback for BluetoothDeviceDiscoverer"""
-        self.new_device_cb = new_device_cb
-
-    def discover(self, lookup_names, scan_duration, flush_cache):
-        # Add detected devices
-        discoverer = BluetoothDeviceDiscoverer(self.new_device_cb)
-        try:
-            discoverer.find_devices(
-              lookup_names=lookup_names,
-              duration=scan_duration,
-              flush_cache=flush_cache)
-        except (bluetooth._bluetooth.error, IndexError):
-            discoverer.done = True
-        readfiles = [discoverer]
-        # Wait till the end
-        while not discoverer.done:
-            ret = select.select(readfiles, [], [])[0]
-            if discoverer in ret:
-                discoverer.process_event()
-
-    def get_device_name(self, address):
-        """Retrieve device name"""
-        return bluetooth.lookup_name(address)
 
     def get_classes(self, device_class):
         """Return device minor, major class and services class"""
@@ -108,24 +76,11 @@ class BluetoothSupport(object):
             minor_class,
             self.classes[MajorDeviceClasses.UNKNOWN][0])
 
-    def get_services(self, address):
-        """Return the list of the device's available services"""
-        return bluetooth.find_service(address=address)
-
-    def get_services_from_class(self, service_class):
-        """Return the enabled services for a device class"""
-        services = []
-        service_classes = ServiceDeviceClasses.SERVICE_CLASSES
-        for service, description in service_classes.items():
-            if service_class & service:
-                services.append(description)
-        return services
-
     def is_bluez_available(self):
         """Check if bluez is available"""
         try:
-            pydbus.SystemBus().get('org.bluez')
+            bluezero.dbus_tools.get_managed_objects()
             result = True
-        except GLib.Error:
+        except dbus.exceptions.DBusException:
             result = False
         return result

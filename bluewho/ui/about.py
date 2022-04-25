@@ -31,8 +31,7 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_LICENSE,
                                FILE_RESOURCES,
                                FILE_TRANSLATORS)
-from bluewho.functions import get_ui_file, readlines
-from bluewho.gtkbuilder_loader import GtkBuilderLoader
+from bluewho.functions import readlines
 from bluewho.ui.base import UIBase
 
 

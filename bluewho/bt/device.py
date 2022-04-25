@@ -18,15 +18,29 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import bluezero.adapter
+import bluezero.device
 
-from bluewho.bt.adapter import BluetoothAdapter
+import dbus
 
 
-class BluetoothAdapters(object):
-    @staticmethod
-    def get_adapters():
-        """Get a list of local adapters"""
-        adapters = [BluetoothAdapter(adapter)
-                    for adapter in bluezero.adapter.Adapter.available()]
-        return adapters
+class BluetoothDevice(object):
+    def __init__(self, device: bluezero.device.Device):
+        try:
+            self.name = device.name
+        except dbus.exceptions.DBusException:
+            self.name = None
+
+        try:
+            self.alias = device.alias
+        except dbus.exceptions.DBusException:
+            self.alias = None
+
+        try:
+            self.address = device.address
+        except dbus.exceptions.DBusException:
+            self.address = None
+
+        try:
+            self.device_class = device.bt_class
+        except dbus.exceptions.DBusException:
+            self.device_class = None

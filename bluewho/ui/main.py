@@ -18,11 +18,13 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from time import sleep
+import time
 
 from gi.repository import GLib, Gtk
 
 from bluewho.bt.adapters import BluetoothAdapters
+from bluewho.bt.device import BluetoothDevice
+from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
@@ -53,6 +55,7 @@ class MainWindow(UIBase):
         self.application = application
         self.settings = settings
         self.btsupport = btsupport
+        self.discoverer = None
         self.is_refreshing = False
         self.load_ui()
         self.model_devices = ModelDevices(self.ui.model_devices,
@@ -85,13 +88,12 @@ class MainWindow(UIBase):
                     self.settings.get_value(Preferences.WINTOP))
         # Restore the devices list
         for device in self.settings.load_devices():
-            self.add_device(device['address'],
-                            device['name'],
-                            device['class'],
-                            device['lastseen'],
-                            False)
+            self.add_device(name=device['name'],
+                            address=device['address'],
+                            device_class=device['class'],
+                            last_seen=device['lastseen'],
+                            notify=False)
         # Set other properties
-        self.btsupport.set_new_device_cb(self.on_new_device_cb)
         self.thread_scanner = None
         self.fake_devices = FakeDevices()
 
@@ -126,6 +128,10 @@ class MainWindow(UIBase):
         about.show()
         about.destroy()
 
+    def on_action_options_menu_activate(self, widget):
+        """Open the options menu"""
+        self.ui.button_options.emit('clicked')
+
     def on_action_preferences_activate(self, action):
         """Show the preferences dialog"""
         dialog = DialogPreferences(self.settings, self.ui.window, False)
@@ -158,8 +164,9 @@ class MainWindow(UIBase):
                 self.ui.window.hide()
                 process_events()
                 print('please wait for scan to complete...')
-                self.thread_scanner.cancel()
-                self.thread_scanner.join()
+                self.ui.action_stop.emit('activate')
+                process_events()
+                time.sleep(10)
         self.thread_scanner = None
         # Save the position and size only if Preferences.RESTORE_SIZE is set
         if self.settings.get_value(Preferences.RESTORE_SIZE):
@@ -170,33 +177,16 @@ class MainWindow(UIBase):
         self.model_devices.destroy()
         self.application.quit()
 
-    def on_toolbutton_scan_toggled(self, widget):
-        """Reload the list of local and detected devices"""
-        # Start the scanner thread
-        if self.ui.toolbutton_scan.get_active():
-            # Check if Bluez service is started
-            if not self.btsupport.is_bluez_available():
-                self.settings.logText('Bluez is not available')
-                dialog_error = MessageDialogOK(
-                    parent=self.ui.window_main,
-                    message_type=Gtk.MessageType.ERROR,
-                    title=None,
-                    msg1=_('Bluez seems not to be started, please make sure'
-                           'the bluetooth service is started'),
-                    msg2=None
-                )
-                dialog_error.run()
-            else:
-                self.check_adapter_activation()
-                # Start the scan
-                self.ui.spinner.set_visible(True)
-                self.ui.spinner.start()
-                assert not self.thread_scanner
-                self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
-                self.set_status_bar_message('Start new scan')
-                self.thread_scanner.start()
+    def on_action_scan_activate(self, widget):
+        if self.check_bluetooth_availability():
+            # Start the scan
+            self.ui.spinner.set_visible(True)
+            self.ui.spinner.start()
+            assert not self.thread_scanner
+            self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
+            self.set_status_bar_message('Start new scan')
+            self.thread_scanner.start()
             self.ui.action_scan.set_sensitive(False)
-
 
     def on_action_stop_activate(self, widget):
         if self.thread_scanner:
@@ -227,72 +217,93 @@ class MainWindow(UIBase):
         if dialog.run() == Gtk.ResponseType.YES:
             self.model_devices.clear()
 
-    def on_new_device_cb(self, name, address, device_class):
-        """Callback function called when a new device has been discovered"""
-        self.add_device(address,
-                        name,
-                        device_class,
-                        get_current_time(),
-                        True)
+    def add_device(self, name, address, device_class, last_seen, notify):
+        """Add a device to the model in a thread safe way"""
+        return self.add_device_safe(name,
+                                    address,
+                                    device_class,
+                                    last_seen,
+                                    notify)
 
     @thread_safe
-    def add_device(self, address, name, device_class, time, notify):
+    def add_device_safe(self, name, address, device_class, last_seen, notify):
         """Add a device to the model and optionally notify it"""
         if notify:
+            # Add notification
             self.set_status_bar_message(
-                'Found new device %s [%s]' % (name, address))
-        self.model_devices.add_device(address,
-                                      name,
-                                      device_class,
-                                      time,
-                                      notify)
+                'Found new device {NAME} [{ADDRESS}]'.format(NAME=name,
+                                                             ADDRESS=address))
+        self.model_devices.add_device(address=address,
+                                      name=name,
+                                      device_class=device_class,
+                                      last_seen=last_seen,
+                                      notify=notify)
         return False
 
     def do_scan(self):
         """Scan for bluetooth devices until cancelled"""
-        while True:
-            # Cancel the running thread
-            if self.thread_scanner.cancelled:
-                break
-            # Wait until an event awakes the thread again
-            if self.thread_scanner.paused:
-                self.thread_scanner.event.wait()
-                self.thread_scanner.event.clear()
-            # Only show local adapters when Preferences.SHOW_LOCAL
-            # preference is set
-            if self.settings.get_value(Preferences.SHOW_LOCAL):
-                # Find local adapters
-                adapters = BluetoothAdapters().get_adapters()
-                if adapters:
-                    # Local adapters found
+        # Find local adapters
+        adapters = BluetoothAdapters.get_adapters()
+        if adapters:
+            # Discover devices via bluetooth
+            if not self.discoverer:
+                self.discoverer = BluetoothDeviceDiscoverer(
+                    adapter=adapters[0],
+                    timeout=self.settings.get_value(Preferences.SCAN_SPEED))
+            while True:
+                if self.settings.get_value(Preferences.SHOW_LOCAL):
+                    # Only show local adapters when Preferences.SHOW_LOCAL
+                    # preference is set
                     for adapter in adapters:
-                        self.add_device(adapter.get_address(),
-                                        '%s (%s)' % (adapter.get_device_name(),
-                                                     adapter.get_name()),
-                                        1 << 2,
-                                        get_current_time(),
-                                        True)
+                        self.add_device(name=f'{adapter.get_device_name()} '
+                                             f'({adapter.get_name()})',
+                                        address=adapter.get_address(),
+                                        device_class=1 << 2,
+                                        last_seen=get_current_time(),
+                                        notify=True)
+                # Cancel the running thread
+                if self.thread_scanner.cancelled:
+                    print('cancel')
+                    self.discoverer.stop()
+                    break
+                # Wait until an event awakes the thread again
+                if self.thread_scanner.paused:
+                    self.thread_scanner.event.wait()
+                    self.thread_scanner.event.clear()
+                if self.discoverer.start():
+                    # Discovery started
+                    for item in self.discoverer.get_devices():
+                        device = BluetoothDevice(device=item)
+                        self.add_device(name=device.alias,
+                                        address=device.address,
+                                        device_class=device.device_class,
+                                        last_seen=get_current_time(),
+                                        notify=True)
+                    # Add some fake devices for testing
+                    if USE_FAKE_DEVICES:
+                        self.fake_devices = FakeDevices()
+                        for fake_device in self.fake_devices.fetch_many():
+                            self.add_device(name=fake_device[0],
+                                            address=fake_device[1],
+                                            device_class=fake_device[2],
+                                            last_seen=get_current_time(),
+                                            notify=True)
+                        time.sleep(2)
                 else:
-                    # No local adapters found
                     self.settings.logText(
-                        'No local devices found during detection',
+                        'Discovery was aborted',
                         VERBOSE_LEVEL_NORMAL)
                     self.set_status_bar_message(
-                        _('No local devices found during detection.'))
-                sleep(2)
-            # Discover devices via bluetooth
-            self.btsupport.discover(
-                self.settings.get_value(Preferences.RETRIEVE_NAMES),
-                self.settings.get_value(Preferences.SCAN_SPEED),
-                True)
-
-            # What is this? useful for testing purposes, you can just ignore it
-            if USE_FAKE_DEVICES:
-                self.fake_devices = FakeDevices()
-                for fake_device in self.fake_devices.fetch_many():
-                    self.on_new_device_cb(*fake_device)
-                sleep(2)
+                        _('Discovery aborted.'))
+        else:
+            # No local adapters found
+            self.settings.logText(
+                'No local devices found during detection',
+                VERBOSE_LEVEL_NORMAL)
+            self.set_status_bar_message(
+                _('No local devices found during detection.'))
         # After exiting from the scanning process, change the UI
+        self.discoverer = None
         self.thread_scanner = None
         self.set_status_bar_message(None)
         idle_add(self.ui.spinner.stop)
@@ -300,49 +311,83 @@ class MainWindow(UIBase):
         idle_add(self.ui.action_scan.set_sensitive, True)
         return False
 
-    @thread_safe
     def set_status_bar_message(self, message=None):
         """Set a new message in the status bar"""
         self.ui.statusbar.pop(self.statusbar_context_id)
         if message is not None:
             self.ui.statusbar.push(self.statusbar_context_id, message)
 
+    def turn_on_adapters(self):
+        """
+        Try to power on every available adapter
+        """
+        for adapter in BluetoothAdapters.get_adapters():
+            self.settings.logText('powering on adapter %s' %
+                                  adapter.get_device_name())
+            try:
+                adapter.set_powered(status=True)
+            except GLib.Error as e:
+                # Intercept errors
+                self.settings.logText(e)
+                dialog_error = MessageDialogOK(
+                    parent=self.ui.window,
+                    message_type=Gtk.MessageType.WARNING,
+                    title='Unable to start adapter %s' %
+                          adapter.get_device_name(),
+                    msg2=e.message,
+                    msg1=None
+                )
+                dialog_error.run()
+
     def check_adapter_activation(self):
         """Check if any Bluetooth adapter is powered on"""
-        adapters = BluetoothAdapters().get_adapters()
+        adapters = BluetoothAdapters.get_adapters()
+        result = False
         for adapter in adapters:
             if adapter.is_powered():
                 # At least one adapter is powered on
+                result = True
                 break
-        else:
-            # No powered on adapters
-            dialog = MessageDialogYesNo(
-                parent=self.ui.window_main,
-                message_type=Gtk.MessageType.QUESTION,
-                title=None,
-                msg1=_('Do you want to start the bluetooth devices?'),
-                msg2=None)
-            if dialog.run() == Gtk.ResponseType.YES:
-                # Try to power on every adapter
-                for adapter in adapters:
-                    self.settings.logText('powering on adapter %s' %
-                                          adapter.get_device_name())
-                    try:
-                        adapter.set_powered(status=True)
-                    except GLib.Error as e:
-                        # Intercept errors
-                        self.settings.logText(e)
-                        dialog_error = MessageDialogOK(
-                            parent=self.ui.window_main,
-                            message_type=Gtk.MessageType.WARNING,
-                            title='Unable to start adapter %s' %
-                                  adapter.get_device_name(),
-                            msg2=e.message,
-                            msg1=None
-                        )
-                        dialog_error.run()
+        return result
 
-    def on_toolbutton_shortcuts_clicked(self, widget):
+    def on_action_shortcuts_activate(self, action):
         """Show the shortcuts dialog"""
-        dialog = DialogShortcuts(parent=self.ui.window_main)
+        dialog = DialogShortcuts(parent=self.ui.window)
         dialog.show()
+
+    def check_bluetooth_availability(self) -> bool:
+        """
+        Check Bluetooth availability
+
+        :return: True if the bluetooth is enabled
+        """
+        result = False
+        if not self.btsupport.is_bluez_available():
+            # Bluez is not available
+            self.settings.logText('Bluez is not available')
+            dialog_error = MessageDialogOK(
+                parent=self.ui.window,
+                message_type=Gtk.MessageType.ERROR,
+                title=None,
+                msg1=_('Bluez seems not to be started, please make sure'
+                       'the bluetooth service is started'),
+                msg2=None
+            )
+            dialog_error.run()
+        else:
+            # Bluez is available, check the adapters activation
+            if not self.check_adapter_activation():
+                # No adapters are active
+                dialog = MessageDialogYesNo(
+                    parent=self.ui.window,
+                    message_type=Gtk.MessageType.QUESTION,
+                    title=None,
+                    msg1=_('Do you want to start the bluetooth devices?'),
+                    msg2=None)
+                if dialog.run() == Gtk.ResponseType.YES:
+                    self.turn_on_adapters()
+                    result = self.check_adapter_activation()
+            else:
+                # At least one adapter is active
+                result = True
+        return result
