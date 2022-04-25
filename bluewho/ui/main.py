@@ -18,6 +18,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
 import time
 
 from gi.repository import GLib, Gtk
@@ -30,8 +31,7 @@ from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
                                FILE_SETTINGS,
-                               USE_FAKE_DEVICES,
-                               VERBOSE_LEVEL_NORMAL)
+                               USE_FAKE_DEVICES)
 from bluewho.daemon_thread import DaemonThread
 from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
@@ -163,7 +163,7 @@ class MainWindow(UIBase):
                 # continue giving the perception that the app was really closed
                 self.ui.window.hide()
                 process_events()
-                print('please wait for scan to complete...')
+                logging.info('please wait for scan to complete...')
                 self.ui.action_stop.emit('activate')
                 process_events()
                 time.sleep(10)
@@ -197,7 +197,7 @@ class MainWindow(UIBase):
                 # The scanner thread has died for some error, we need to
                 # recover the UI to allow the user to launch the scanner
                 # again
-                print('the thread has died, recovering the UI')
+                logging.error('the thread has died, recovering the UI')
                 self.set_status_bar_message(
                     'The scanning thread has died, recovering the UI')
                 self.ui.spinner.stop()
@@ -260,9 +260,9 @@ class MainWindow(UIBase):
                                         device_class=1 << 2,
                                         last_seen=get_current_time(),
                                         notify=True)
-                # Cancel the running thread
                 if self.thread_scanner.cancelled:
-                    print('cancel')
+                    # Cancel the running thread
+                    logging.info('cancel')
                     self.discoverer.stop()
                     break
                 # Wait until an event awakes the thread again
@@ -289,16 +289,12 @@ class MainWindow(UIBase):
                                             notify=True)
                         time.sleep(2)
                 else:
-                    self.settings.logText(
-                        'Discovery was aborted',
-                        VERBOSE_LEVEL_NORMAL)
+                    logging.info('Discovery was aborted')
                     self.set_status_bar_message(
                         _('Discovery aborted.'))
         else:
             # No local adapters found
-            self.settings.logText(
-                'No local devices found during detection',
-                VERBOSE_LEVEL_NORMAL)
+            logging.info('No local devices found during detection')
             self.set_status_bar_message(
                 _('No local devices found during detection.'))
         # After exiting from the scanning process, change the UI
@@ -321,13 +317,12 @@ class MainWindow(UIBase):
         Try to power on every available adapter
         """
         for adapter in BluetoothAdapters.get_adapters():
-            self.settings.logText('powering on adapter %s' %
-                                  adapter.get_device_name())
+            logging.info(f'powering on adapter {adapter.get_device_name()}')
             try:
                 adapter.set_powered(status=True)
             except GLib.Error as e:
                 # Intercept errors
-                self.settings.logText(e)
+                logging.error(e)
                 dialog_error = MessageDialogOK(
                     parent=self.ui.window,
                     message_type=Gtk.MessageType.WARNING,
@@ -363,7 +358,7 @@ class MainWindow(UIBase):
         result = False
         if not self.btsupport.is_bluez_available():
             # Bluez is not available
-            self.settings.logText('Bluez is not available')
+            logging.error('Bluez is not available')
             dialog_error = MessageDialogOK(
                 parent=self.ui.window,
                 message_type=Gtk.MessageType.ERROR,

@@ -18,6 +18,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
 import os.path
 
 from gi.repository import Gtk
@@ -27,8 +28,7 @@ from gi.repository import Notify
 from bluewho.audio_player import AudioPlayer
 from bluewho.constants import (APP_NAME,
                                DIR_BT_ICONS,
-                               FILE_SOUND,
-                               VERBOSE_LEVEL_MAX)
+                               FILE_SOUND)
 from bluewho.functions import _
 from bluewho.preferences import (PREFERENCES_NOTIFICATION,
                                  PREFERENCES_PLAY_SOUND)
@@ -91,48 +91,33 @@ class ModelDevices(object):
             # Update icon
             old_value = self.get_icon(treeiter)
             if icon_path != old_value:
-                self.settings.logText(
-                    'Updated device "%s" icon from %s to %s' % (
-                        name,
-                        os.path.basename(old_value),
-                        os.path.basename(icon_path)),
-                    VERBOSE_LEVEL_MAX)
+                logging.debug(f'Updated device "{name}" icon '
+                              f'from {os.path.basename(old_value)} '
+                              f'to {os.path.basename(icon_path)}')
                 self.set_icon(treeiter, icon_path)
             # Update device name
             old_value = self.get_name(treeiter)
             if name and name != old_value:
-                self.settings.logText('Updated device "%s" name from '
-                                      '"%s" to "%s"' % (name,
-                                                        old_value,
-                                                        name),
-                                      VERBOSE_LEVEL_MAX)
+                logging.debug(f'Updated device "{name}" name '
+                              f'from "{old_value}" to "{name}"')
                 self.set_name(treeiter, name)
             # Update device class
             old_value = self.get_class(treeiter)
             if device_class != old_value:
-                self.settings.logText('Updated device "%s" class from '
-                                      '%d to %d' % (name,
-                                                    old_value,
-                                                    device_class),
-                                      VERBOSE_LEVEL_MAX)
+                logging.debug(f'Updated device "{name}" class '
+                              f'from {old_value} to {device_class}')
                 self.set_class(treeiter, device_class)
             # Update device type
             old_value = self.get_type(treeiter)
             if device_type != old_value:
-                self.settings.logText('Updated device "%s" type from '
-                                      '%s to %s' % (name,
-                                                    old_value,
-                                                    device_type),
-                                      VERBOSE_LEVEL_MAX)
+                logging.debug(f'Updated device "{name}" type '
+                              f'from {old_value} to {device_type}')
                 self.set_type(treeiter, device_type)
             # Update device subtype
             old_value = self.get_subtype(treeiter)
             if device_subtype != old_value:
-                self.settings.logText('Updated device "%s" subtype from '
-                                      '%s to %s' % (name,
-                                                    old_value,
-                                                    device_subtype),
-                                      VERBOSE_LEVEL_MAX)
+                logging.debug(f'Updated device "{name}" subtype '
+                              f'from {old_value} to {device_subtype}')
                 self.set_subtype(treeiter, device_subtype)
             # Update device last seen time (always)
             self.set_last_seen(treeiter, last_seen)
@@ -150,9 +135,7 @@ class ModelDevices(object):
                 address,
                 last_seen])
             self.devices[address] = treeiter
-            self.settings.logText('Added new device "%s" (%s)' % (name,
-                                                                  address),
-                                  VERBOSE_LEVEL_MAX)
+            logging.debug(f'Added new device "{name}" ({address})')
             # Execute notification for new devices
             if notify:
                 # Play the sound notification
