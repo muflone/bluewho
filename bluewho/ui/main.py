@@ -38,6 +38,7 @@ from bluewho.functions import (_,
                                get_current_time,
                                process_events,
                                idle_add,
+                               text_gtk30,
                                thread_safe)
 from bluewho.preferences import (PREFERENCES_SCAN_SPEED,
                                  PREFERENCES_SHOW_LOCAL,
@@ -60,30 +61,21 @@ class MainWindow(UIBase):
     def __init__(self, application, options):
         super().__init__(filename='main.glade')
         self.application = application
-        self.load_ui()
+        # Load settings
         self.settings = Settings(FILE_SETTINGS, True)
         self.preferences = Preferences(settings=self.settings)
         self.options = options
+        self.load_ui()
+        # Set other properties
+        self.thread_scanner = None
+        self.fake_devices = FakeDevices()
         self.btsupport = BluetoothSupport()
         self.discoverer = None
+        # Prepares the models for devices
         self.model_devices = ModelDevices(self.ui.model_devices,
                                           self.settings,
                                           self.preferences,
                                           self.btsupport)
-        # Initialize Gtk.HeaderBar
-        self.set_buttons_icons(buttons=[self.ui.button_scan,
-                                        self.ui.button_stop,
-                                        self.ui.button_clear,
-                                        self.ui.button_preferences,
-                                        self.ui.button_about,
-                                        self.ui.button_options])
-        # Set buttons with always show image
-        for button in (self.ui.button_scan, ):
-            button.set_always_show_image(True)
-        self.ui.header_bar.props.title = self.ui.window.get_title()
-        self.ui.window.set_titlebar(self.ui.header_bar)
-        self.settings.restore_window_position(window=self.ui.window,
-                                              section=SECTION_WINDOW_NAME)
         # Restore the devices list
         for device in self.settings.load_devices():
             self.add_device(name=device['name'],
@@ -91,9 +83,9 @@ class MainWindow(UIBase):
                             device_class=device['class'],
                             last_seen=device['lastseen'],
                             notify=False)
-        # Set other properties
-        self.thread_scanner = None
-        self.fake_devices = FakeDevices()
+        if len(self.model_devices) > 0:
+            self.ui.treeview_devices.set_cursor(0)
+        self.ui.treeview_devices.grab_focus()
 
     def run(self):
         """Show the UI"""
@@ -104,15 +96,34 @@ class MainWindow(UIBase):
 
     def load_ui(self):
         """Load the interface UI"""
+        # Initialize translations
+        self.ui.action_about.set_label(text_gtk30('About'))
+        self.ui.action_shortcuts.set_label(text_gtk30('Shortcuts'))
+        # Initialize titles and tooltips
+        self.set_titles()
+        # Initialize Gtk.HeaderBar
+        self.ui.header_bar.props.title = self.ui.window.get_title()
+        self.ui.window.set_titlebar(self.ui.header_bar)
+        self.set_buttons_icons(buttons=[self.ui.button_scan,
+                                        self.ui.button_stop,
+                                        self.ui.button_clear,
+                                        self.ui.button_preferences,
+                                        self.ui.button_about,
+                                        self.ui.button_options])
+        # Set buttons with always show image
+        for button in (self.ui.button_scan, ):
+            button.set_always_show_image(True)
         # Obtain widget references
         self.statusbar_context_id = self.ui.statusbar.get_context_id(
             DOMAIN_NAME)
         # Set various properties
         self.ui.window.set_title(APP_NAME)
-        self.ui.window.set_icon_from_file(FILE_ICON)
+        self.ui.window.set_icon_from_file(str(FILE_ICON))
         self.ui.window.set_application(self.application)
-        # Connect signals from the glade file to the functions with the
-        # same name
+        # Restore the saved size and position
+        self.settings.restore_window_position(window=self.ui.window,
+                                              section=SECTION_WINDOW_NAME)
+        # Connect signals from the UI file to the module functions
         self.ui.connect_signals(self)
 
     def on_window_delete_event(self, widget, event):
