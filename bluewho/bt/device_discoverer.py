@@ -18,6 +18,8 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
+
 import dbus.exceptions
 
 import bluezero.device
@@ -35,12 +37,12 @@ class BluetoothDeviceDiscoverer():
 
         :return: True if the discovery was successfull
         """
-        print('scan started')
+        logging.debug('scan scarted')
         try:
             self.adapter.start_discovery(timeout=self.timeout)
             result = True
         except dbus.exceptions.DBusException as error:
-            print('scan aborted', error)
+            logging.error(f'scan aborted: {error}')
             result = False
         return result
 
@@ -49,7 +51,7 @@ class BluetoothDeviceDiscoverer():
             self.adapter.stop_discovery()
         except dbus.exceptions.DBusException:
             pass
-        print('scan stopped')
+        logging.debug('scan stopped')
 
     def get_devices(self) -> list[bluezero.device.Device]:
         """

@@ -19,31 +19,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import gettext
-import locale
-
-import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Notify', '0.7')
-
-from bluewho.settings import Settings                              # noqa: E402
-from bluewho.app import Application                                # noqa: E402
-from bluewho.bt.support import BluetoothSupport                    # noqa: E402
-from bluewho.constants import DOMAIN_NAME, DIR_LOCALE              # noqa: E402
-
+from bluewho.main import main
 
 if __name__ == '__main__':
-    # Load domain for translation
-    for module in (gettext, locale):
-        module.bindtextdomain(DOMAIN_NAME, DIR_LOCALE)
-        module.textdomain(DOMAIN_NAME)
-
-    # Load the settings from the configuration file
-    settings = Settings()
-    settings.load()
-
-    # Create BluetoothSupport instance
-    btsupport = BluetoothSupport()
-    # Start the application
-    app = Application(settings, btsupport)
-    app.run(None)
+    main()

@@ -25,16 +25,15 @@ from bluewho.ui.main import MainWindow
 
 
 class Application(Gtk.Application):
-    def __init__(self, settings, btsupport):
+    def __init__(self, settings):
         super(self.__class__, self).__init__(application_id=APP_ID)
         self.settings = settings
-        self.btsupport = btsupport
         self.connect('activate', self.activate)
         self.connect('startup', self.startup)
 
     def startup(self, application):
         """Configure the application during the startup"""
-        self.ui = MainWindow(self, self.settings, self.btsupport)
+        self.ui = MainWindow(self, self.settings)
 
     def activate(self, application):
         """Execute the application"""

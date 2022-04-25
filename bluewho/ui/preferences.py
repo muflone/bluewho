@@ -22,14 +22,18 @@ from gi.repository import Gtk
 
 from bluewho.constants import FILE_ICON
 from bluewho.functions import _
-from bluewho.settings import Preferences
+from bluewho.preferences import (PREFERENCES_STARTUPSCAN,
+                                 PREFERENCES_SCAN_SPEED,
+                                 PREFERENCES_SHOW_LOCAL,
+                                 PREFERENCES_NOTIFICATION,
+                                 PREFERENCES_PLAY_SOUND)
 from bluewho.ui.base import UIBase
 
 
 class DialogPreferences(UIBase):
-    def __init__(self, settings, parent, show=False):
+    def __init__(self, preferences, parent, show=False):
         super().__init__(filename='preferences.glade')
-        self.settings = settings
+        self.preferences = preferences
         # Obtain widget references
         dialog = self.ui.dialog
         # Set various properties
@@ -39,21 +43,15 @@ class DialogPreferences(UIBase):
         dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         dialog.set_default_response(Gtk.ResponseType.OK)
         self.ui.chkStartupScan.set_active(
-            settings.get_value(Preferences.STARTUPSCAN))
-        self.ui.chkRestoreSize.set_active(
-            settings.get_value(Preferences.RESTORE_SIZE))
+            self.preferences.get(PREFERENCES_STARTUPSCAN))
         self.ui.adjScanSpeed.set_value(
-            settings.get_value(Preferences.SCAN_SPEED))
-        self.ui.chkRetrieveName.set_active(
-            settings.get_value(Preferences.RETRIEVE_NAMES))
-        self.ui.chkResolveNames.set_active(
-            settings.get_value(Preferences.RESOLVE_NAMES))
+            self.preferences.get(PREFERENCES_SCAN_SPEED))
         self.ui.chkLocalAdapters.set_active(
-            settings.get_value(Preferences.SHOW_LOCAL))
+            self.preferences.get(PREFERENCES_SHOW_LOCAL))
         self.ui.chkNotification.set_active(
-            settings.get_value(Preferences.NOTIFICATION))
+            self.preferences.get(PREFERENCES_NOTIFICATION))
         self.ui.chkPlaySound.set_active(
-            settings.get_value(Preferences.PLAY_SOUND))
+            self.preferences.get(PREFERENCES_PLAY_SOUND))
         # Optionally show the dialog
         if show:
             self.show()
@@ -63,22 +61,16 @@ class DialogPreferences(UIBase):
         self.ui.dialog.run()
         self.ui.dialog.hide()
         # Save the values back in the configuration
-        self.settings.set_value(Preferences.STARTUPSCAN,
-                                self.ui.chkStartupScan.get_active())
-        self.settings.set_value(Preferences.RESTORE_SIZE,
-                                self.ui.chkRestoreSize.get_active())
-        self.settings.set_value(Preferences.SCAN_SPEED,
-                                int(self.ui.adjScanSpeed.get_value()))
-        self.settings.set_value(Preferences.RETRIEVE_NAMES,
-                                self.ui.chkRetrieveName.get_active())
-        self.settings.set_value(Preferences.RESOLVE_NAMES,
-                                self.ui.chkResolveNames.get_active())
-        self.settings.set_value(Preferences.SHOW_LOCAL,
-                                self.ui.chkLocalAdapters.get_active())
-        self.settings.set_value(Preferences.NOTIFICATION,
-                                self.ui.chkNotification.get_active())
-        self.settings.set_value(Preferences.PLAY_SOUND,
-                                self.ui.chkPlaySound.get_active())
+        self.preferences.set(PREFERENCES_STARTUPSCAN,
+                             self.ui.chkStartupScan.get_active())
+        self.preferences.set(PREFERENCES_SCAN_SPEED,
+                             int(self.ui.adjScanSpeed.get_value()))
+        self.preferences.set(PREFERENCES_SHOW_LOCAL,
+                             self.ui.chkLocalAdapters.get_active())
+        self.preferences.set(PREFERENCES_NOTIFICATION,
+                             self.ui.chkNotification.get_active())
+        self.preferences.set(PREFERENCES_PLAY_SOUND,
+                             self.ui.chkPlaySound.get_active())
 
     def destroy(self):
         """Destroy the Preferences dialog"""

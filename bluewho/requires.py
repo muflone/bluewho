@@ -18,15 +18,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import gettext
-import locale
+import gi
 
-import bluewho.requires                                            # noqa: F401
-
-from bluewho.constants import DOMAIN_NAME, DIR_LOCALE
-
-
-# Load domain for translation
-for module in (gettext, locale):
-    module.bindtextdomain(DOMAIN_NAME, DIR_LOCALE)
-    module.textdomain(DOMAIN_NAME)
+if gi.require_version('Gtk', '3.0') is None:
+    from gi.repository import Gtk                                  # noqa: F401
+if gi.require_version('Notify', '0.7') is None:
+    from gi.repository import Notify                               # noqa: F401

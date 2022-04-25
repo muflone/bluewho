@@ -18,157 +18,140 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import configparser
+import logging
 import os
 import os.path
-import optparse
-import time
-import configparser
 
-from bluewho.constants import (FILE_DEVICES,
-                               FILE_SETTINGS,
-                               VERBOSE_LEVEL_QUIET,
-                               VERBOSE_LEVEL_NORMAL,
-                               VERBOSE_LEVEL_MAX)
+from bluewho.constants import FILE_DEVICES
 
-
-class Sections(object):
-    MAIN = 'main window'
-    STARTUP = 'startup'
-    SCAN = 'scan'
-    NOTIFY = 'notify'
-
-
-class Preferences(object):
-    RESTORE_SIZE = 'restore size'
-    WINLEFT = 'left'
-    WINTOP = 'top'
-    WINWIDTH = 'width'
-    WINHEIGHT = 'height'
-    STARTUPSCAN = 'startup scan'
-    RETRIEVE_NAMES = 'retrieve names'
-    RESOLVE_NAMES = 'resolve names'
-    SCAN_SPEED = 'scan speed'
-    SHOW_LOCAL = 'show local'
-    NOTIFICATION = 'show notification'
-    PLAY_SOUND = 'play sound'
+POSITION_LEFT = 'left'
+POSITION_TOP = 'top'
+SIZE_WIDTH = 'width'
+SIZE_HEIGHT = 'height'
 
 
 class Settings(object):
-    def __init__(self):
-        self.settings = {}
-
-        # Command line options and arguments
-        parser = optparse.OptionParser(usage='usage: %prog [options]')
-        parser.set_defaults(verbose_level=VERBOSE_LEVEL_NORMAL)
-        parser.add_option('-v', '--verbose', dest='verbose_level',
-                          action='store_const', const=VERBOSE_LEVEL_MAX,
-                          help='show error and information messages')
-        parser.add_option('-q', '--quiet', dest='verbose_level',
-                          action='store_const', const=VERBOSE_LEVEL_QUIET,
-                          help='hide error and information messages')
-        (self.options, self.arguments) = parser.parse_args()
+    def __init__(self, filename, case_sensitive):
         # Parse settings from the configuration file
         self.config = configparser.RawConfigParser()
-        # Allow saving in case sensitive (useful for machine names)
-        self.config.optionxform = str
+        # Set case sensitiveness if requested
+        if case_sensitive:
+            self.config.optionxform = str
         # Determine which filename to use for settings
-        self.filename = FILE_SETTINGS
-        if self.filename:
-            self.logText('Loading settings from %s' % self.filename,
-                         VERBOSE_LEVEL_NORMAL)
-            self.config.read(self.filename)
+        self.filename = filename
+        logging.debug(f'Loading settings from {self.filename}')
+        self.config.read(self.filename)
 
-    def load(self):
-        """Load preferences from configuration file"""
-        # Load window preferences
-        self.logText('Loading window settings', VERBOSE_LEVEL_NORMAL)
-        if not self.config.has_section(Sections.MAIN):
-            self.config.add_section(Sections.MAIN)
-        self.load_setting(section=Sections.MAIN,
-                          option=Preferences.RESTORE_SIZE,
-                          option_type=bool,
-                          default_value=True)
-        self.load_setting(section=Sections.MAIN,
-                          option=Preferences.WINLEFT,
-                          option_type=int,
-                          default_value=0)
-        self.load_setting(section=Sections.MAIN,
-                          option=Preferences.WINTOP,
-                          option_type=int,
-                          default_value=0)
-        self.load_setting(section=Sections.MAIN,
-                          option=Preferences.WINWIDTH,
-                          option_type=int,
-                          default_value=0)
-        self.load_setting(section=Sections.MAIN,
-                          option=Preferences.WINHEIGHT,
-                          option_type=int,
-                          default_value=0)
-        # Load startup preferences
-        self.logText('Loading startup preferences', VERBOSE_LEVEL_NORMAL)
-        if not self.config.has_section(Sections.STARTUP):
-            self.config.add_section(Sections.STARTUP)
-        self.load_setting(section=Sections.STARTUP,
-                          option=Preferences.STARTUPSCAN,
-                          option_type=bool,
-                          default_value=False)
-        # Load scan preferences
-        self.logText('Loading scan preferences', VERBOSE_LEVEL_NORMAL)
-        if not self.config.has_section(Sections.SCAN):
-            self.config.add_section(Sections.SCAN)
-        self.load_setting(section=Sections.SCAN,
-                          option=Preferences.SCAN_SPEED,
-                          option_type=int,
-                          default_value=14)
-        self.load_setting(section=Sections.SCAN,
-                          option=Preferences.RETRIEVE_NAMES,
-                          option_type=bool,
-                          default_value=False)
-        self.load_setting(section=Sections.SCAN,
-                          option=Preferences.RESOLVE_NAMES,
-                          option_type=bool,
-                          default_value=True)
-        self.load_setting(section=Sections.SCAN,
-                          option=Preferences.SHOW_LOCAL,
-                          option_type=bool,
-                          default_value=True)
-        # Load notify preferences
-        self.logText('Loading notify preferences', VERBOSE_LEVEL_NORMAL)
-        if not self.config.has_section(Sections.NOTIFY):
-            self.config.add_section(Sections.NOTIFY)
-        self.load_setting(section=Sections.NOTIFY,
-                          option=Preferences.NOTIFICATION,
-                          option_type=bool,
-                          default_value=True)
-        self.load_setting(section=Sections.NOTIFY,
-                          option=Preferences.PLAY_SOUND,
-                          option_type=bool,
-                          default_value=True)
+    def get(self, section, option, default=None):
+        """Get an option from a specific section"""
+        if self.config.has_section(section) and \
+                self.config.has_option(section, option):
+            return self.config.get(section, option)
+        else:
+            return default
 
-    def load_setting(self, section, option, option_type, default_value):
-        """Retrieve the setting from the file"""
-        value = default_value
-        # Check if the option exists
-        if self.config.has_option(section, option):
-            if option_type is bool:
-                # Get boolean value
-                value = self.config.getboolean(section, option)
-            elif option_type is int:
-                # Get integer value
-                value = self.config.getint(section, option)
-            else:
-                # Type unexpected
-                assert False
-        # Set value back in the configuration to allow its saving
+    def set(self, section, option, value):
+        """Save an option in a specific section"""
+        if not self.config.has_section(section):
+            self.config.add_section(section)
         self.config.set(section, option, value)
-        self.settings[option] = value
-        return value
+
+    def get_boolean(self, section, option, default=None):
+        """Get a boolean option from a specific section"""
+        return self.get(section, option, default) == '1'
+
+    def set_boolean(self, section, option, value):
+        """Save a boolean option in a specific section"""
+        self.set(section, option, '1' if value else '0')
+
+    def get_int(self, section, option, default=0):
+        """Get an integer option from a specific section"""
+        return int(self.get(section, option, default))
+
+    def get_list(self, section, option, separator=','):
+        """Get an option list from a specific section"""
+        value = self.get(section, option, '')
+        if len(value):
+            return [v.strip() for v in value.split(separator)]
+
+    def set_int(self, section, option, value):
+        """Set an integer option from a specific section"""
+        self.set(section, option, int(value))
+
+    def get_setting(self, setting, default=None):
+        """Get the specified setting with a fallback value"""
+        section, option, option_type = setting
+        if option_type is int:
+            return self.get_int(section, option,
+                                default and default or 0)
+        elif option_type is bool:
+            return self.get_boolean(section, option,
+                                    default if True else False)
+        else:
+            return self.get(section, option, default)
+
+    def set_setting(self, setting, value):
+        """Set the specified setting"""
+        section, option, option_type = setting
+        if option_type is int:
+            return self.set_int(section, option, value)
+        elif option_type is bool:
+            return self.set_boolean(section, option, value)
+        else:
+            return self.set(section, option, value)
+
+    def save(self):
+        """Save the whole configuration"""
+        file_settings = open(self.filename, mode='w')
+        logging.debug(f'Saving settings to {self.filename}')
+        self.config.write(file_settings)
+        file_settings.close()
+
+    def get_sections(self):
+        """Return the list of the sections"""
+        return self.config.sections()
+
+    def get_options(self, section):
+        """Return the list of the options in a section"""
+        return self.config.options(section)
+
+    def unset_option(self, section, option):
+        """Remove an option from a section"""
+        return self.config.remove_option(section, option)
+
+    def clear(self):
+        """Remove every data in the settings"""
+        for section in self.get_sections():
+            self.config.remove_section(section)
+
+    def restore_window_position(self, window, section):
+        """Restore the saved window size and position"""
+        if self.get_int(section, SIZE_WIDTH) and \
+                self.get_int(section, SIZE_HEIGHT):
+            window.set_default_size(
+                self.get_int(section, SIZE_WIDTH, -1),
+                self.get_int(section, SIZE_HEIGHT, -1))
+        if self.get_int(section, POSITION_LEFT) and \
+                self.get_int(section, POSITION_TOP):
+            window.move(
+                self.get_int(section, POSITION_LEFT),
+                self.get_int(section, POSITION_TOP))
+
+    def save_window_position(self, window, section):
+        """Save the window size and position"""
+        position = window.get_position()
+        self.set_int(section, POSITION_LEFT, position[0])
+        self.set_int(section, POSITION_TOP, position[1])
+        size = window.get_size()
+        self.set_int(section, SIZE_WIDTH, size[0])
+        self.set_int(section, SIZE_HEIGHT, size[1])
 
     def load_devices(self):
         """Return the devices list from the configuration file"""
         devices = []
         if os.path.exists(FILE_DEVICES):
-            self.logText('Loading the devices list', VERBOSE_LEVEL_NORMAL)
+            logging.info('Loading the devices list')
             with open(FILE_DEVICES, 'r') as file:
                 # Each device is separated by a single line with >
                 lines = file.read().split('\n>\n')
@@ -187,7 +170,7 @@ class Settings(object):
     def save_devices(self, devices):
         """Save devices list to filename"""
         if len(devices) > 0:
-            self.logText('Saving the devices list', VERBOSE_LEVEL_NORMAL)
+            logging.info('Saving the devices list')
             with open(FILE_DEVICES, 'w') as file:
                 for device in devices:
                     file.write('%s\n%s\n%s\n%s\n>\n' % (
@@ -196,47 +179,5 @@ class Settings(object):
                         hex(devices.get_class(device)),
                         devices.get_last_seen(device)))
         elif os.path.exists(FILE_DEVICES):
-            self.logText('Deleting the devices list', VERBOSE_LEVEL_NORMAL)
+            logging.info('Deleting the devices list')
             os.remove(FILE_DEVICES)
-
-    def get_value(self, option, default=None):
-        """Get the value of an option"""
-        return self.settings.get(option, default)
-
-    def set_value(self, option, value):
-        """Set the value for an option"""
-        self.settings[option] = value
-        # Search the option in all the sections of the configuration file
-        for section in self.config.sections():
-            if self.config.has_option(section, option):
-                # Set the value in the configuration file
-                self.config.set(section, option, value)
-                break
-
-    def set_sizes(self, parent):
-        """Save configuration for main window"""
-        # Main window settings section
-        self.logText('Saving window settings', VERBOSE_LEVEL_NORMAL)
-        if not self.config.has_section(Sections.MAIN):
-            self.config.add_section(Sections.MAIN)
-        # Window position
-        position = parent.get_position()
-        self.config.set(Sections.MAIN, Preferences.WINLEFT, position[0])
-        self.config.set(Sections.MAIN, Preferences.WINTOP, position[1])
-        # Window size
-        size = parent.get_size()
-        self.config.set(Sections.MAIN, Preferences.WINWIDTH, size[0])
-        self.config.set(Sections.MAIN, Preferences.WINHEIGHT, size[1])
-
-    def save(self):
-        """Save the whole configuration"""
-        # Always save the settings in the new configuration file
-        with open(FILE_SETTINGS, mode='w') as file:
-            self.logText('Saving settings to %s' % FILE_SETTINGS,
-                         VERBOSE_LEVEL_NORMAL)
-            self.config.write(file)
-
-    def logText(self, text, verbose_level=VERBOSE_LEVEL_NORMAL):
-        """Print a text with current date and time based on verbose level"""
-        if verbose_level <= self.options.verbose_level:
-            print('[%s] %s' % (time.strftime('%Y/%m/%d %H:%M:%S'), text))

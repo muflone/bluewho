@@ -30,7 +30,8 @@ from bluewho.constants import (APP_NAME,
                                FILE_SOUND,
                                VERBOSE_LEVEL_MAX)
 from bluewho.functions import _
-from bluewho.settings import Preferences
+from bluewho.preferences import (PREFERENCES_NOTIFICATION,
+                                 PREFERENCES_PLAY_SOUND)
 
 
 class ModelDevices(object):
@@ -45,9 +46,10 @@ class ModelDevices(object):
     COL_ADDRESS = 8
     COL_LASTSEEN = 9
 
-    def __init__(self, model, settings, btsupport):
+    def __init__(self, model, settings, preferences, btsupport):
         self.model = model
         self.settings = settings
+        self.preferences = preferences
         self.btsupport = btsupport
         self.devices = {}
         self.audio_player = AudioPlayer()
@@ -86,11 +88,6 @@ class ModelDevices(object):
         if address in self.devices:
             # Update the existing device in the model
             treeiter = self.devices[address]
-            # Resolve the undetected name if Preferences.RESOLVE_NAMES is set
-            if self.settings.get_value(Preferences.RESOLVE_NAMES) and not name:
-                name = self.btsupport.get_device_name(address)
-                self.settings.logText('Resolved device %s name to "%s"' % (
-                    address, name), VERBOSE_LEVEL_MAX)
             # Update icon
             old_value = self.get_icon(treeiter)
             if icon_path != old_value:
@@ -159,10 +156,10 @@ class ModelDevices(object):
             # Execute notification for new devices
             if notify:
                 # Play the sound notification
-                if self.settings.get_value(Preferences.PLAY_SOUND):
+                if self.preferences.get(PREFERENCES_PLAY_SOUND):
                     self.audio_player.play_file(FILE_SOUND)
                 # Show the graphical notification with icon
-                if self.settings.get_value(Preferences.NOTIFICATION):
+                if self.preferences.get(PREFERENCES_NOTIFICATION):
                     notification = Notify.Notification.new(
                           _('New bluetooth device detected'),
                           _('Name: %s\nAddress: %s') % (name or 'unknown',

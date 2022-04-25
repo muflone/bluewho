@@ -25,9 +25,11 @@ from gi.repository import GLib, Gtk
 from bluewho.bt.adapters import BluetoothAdapters
 from bluewho.bt.device import BluetoothDevice
 from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
+from bluewho.bt.support import BluetoothSupport
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
+                               FILE_SETTINGS,
                                USE_FAKE_DEVICES,
                                VERBOSE_LEVEL_NORMAL)
 from bluewho.daemon_thread import DaemonThread
@@ -37,7 +39,11 @@ from bluewho.functions import (_,
                                process_events,
                                idle_add,
                                thread_safe)
-from bluewho.settings import Preferences
+from bluewho.preferences import (PREFERENCES_SCAN_SPEED,
+                                 PREFERENCES_SHOW_LOCAL,
+                                 PREFERENCES_STARTUPSCAN,
+                                 Preferences)
+from bluewho.settings import Settings
 from bluewho.ui.about import DialogAbout
 from bluewho.ui.base import UIBase
 from bluewho.ui.message_dialog import (MessageDialogNoYes,
@@ -48,18 +54,22 @@ from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.services import DialogServices
 from bluewho.ui.shortcuts import DialogShortcuts
 
+SECTION_WINDOW_NAME = 'main window'
+
 
 class MainWindow(UIBase):
-    def __init__(self, application, settings, btsupport):
+    def __init__(self, application, options):
         super().__init__(filename='main.glade')
         self.application = application
-        self.settings = settings
-        self.btsupport = btsupport
-        self.discoverer = None
-        self.is_refreshing = False
         self.load_ui()
+        self.settings = Settings(FILE_SETTINGS, True)
+        self.preferences = Preferences(settings=self.settings)
+        self.options = options
+        self.btsupport = BluetoothSupport()
+        self.discoverer = None
         self.model_devices = ModelDevices(self.ui.model_devices,
                                           self.settings,
+                                          self.preferences,
                                           self.btsupport)
         # Initialize Gtk.HeaderBar
         self.set_buttons_icons(buttons=[self.ui.button_scan,
@@ -74,18 +84,8 @@ class MainWindow(UIBase):
             button.set_always_show_image(True)
         self.ui.header_bar.props.title = self.ui.window.get_title()
         self.ui.window.set_titlebar(self.ui.header_bar)
-        # Restore the saved size and position
-        if self.settings.get_value(Preferences.RESTORE_SIZE):
-            if self.settings.get_value(Preferences.WINWIDTH) and \
-                    self.settings.get_value(Preferences.WINHEIGHT):
-                self.ui.window.set_default_size(
-                    self.settings.get_value(Preferences.WINWIDTH),
-                    self.settings.get_value(Preferences.WINHEIGHT))
-            if self.settings.get_value(Preferences.WINLEFT) and \
-                    self.settings.get_value(Preferences.WINTOP):
-                self.ui.window.move(
-                    self.settings.get_value(Preferences.WINLEFT),
-                    self.settings.get_value(Preferences.WINTOP))
+        self.settings.restore_window_position(window=self.ui.window,
+                                              section=SECTION_WINDOW_NAME)
         # Restore the devices list
         for device in self.settings.load_devices():
             self.add_device(name=device['name'],
@@ -101,7 +101,7 @@ class MainWindow(UIBase):
         """Show the UI"""
         self.ui.window.show_all()
         # Activate scan on startup if Preferences.STARTUPSCAN is set
-        if self.settings.get_value(Preferences.STARTUPSCAN):
+        if self.preferences.get(PREFERENCES_STARTUPSCAN):
             self.ui.action_scan.emit('activate')
 
     def load_ui(self):
@@ -134,7 +134,7 @@ class MainWindow(UIBase):
 
     def on_action_preferences_activate(self, action):
         """Show the preferences dialog"""
-        dialog = DialogPreferences(self.settings, self.ui.window, False)
+        dialog = DialogPreferences(self.preferences, self.ui.window, False)
         dialog.show()
         dialog.destroy()
 
@@ -168,9 +168,8 @@ class MainWindow(UIBase):
                 process_events()
                 time.sleep(10)
         self.thread_scanner = None
-        # Save the position and size only if Preferences.RESTORE_SIZE is set
-        if self.settings.get_value(Preferences.RESTORE_SIZE):
-            self.settings.set_sizes(self.ui.window)
+        self.settings.save_window_position(window=self.ui.window,
+                                           section=SECTION_WINDOW_NAME)
         self.settings.save_devices(self.model_devices)
         self.settings.save()
         self.ui.window.destroy()
@@ -249,10 +248,10 @@ class MainWindow(UIBase):
             if not self.discoverer:
                 self.discoverer = BluetoothDeviceDiscoverer(
                     adapter=adapters[0],
-                    timeout=self.settings.get_value(Preferences.SCAN_SPEED))
+                    timeout=self.preferences.get(PREFERENCES_SCAN_SPEED))
             while True:
-                if self.settings.get_value(Preferences.SHOW_LOCAL):
-                    # Only show local adapters when Preferences.SHOW_LOCAL
+                if self.preferences.get(PREFERENCES_SHOW_LOCAL):
+                    # Only show local adapters when PREFERENCES_SHOW_LOCAL
                     # preference is set
                     for adapter in adapters:
                         self.add_device(name=f'{adapter.get_device_name()} '
