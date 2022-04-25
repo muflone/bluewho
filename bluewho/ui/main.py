@@ -225,7 +225,7 @@ class MainWindow(UIBase):
     @thread_safe
     def add_device_safe(self, name, address, device_class, last_seen, notify):
         """Add a device to the model and optionally notify it"""
-        if notify:
+        if notify and address not in self.model_devices.devices:
             # Add notification
             self.set_status_bar_message(
                 'Found new device {NAME} [{ADDRESS}]'.format(NAME=name,
