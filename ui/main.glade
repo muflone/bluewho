@@ -3,11 +3,11 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAccelGroup" id="accelerators"/>
-  <object class="GtkActionGroup" id="actions_app">
+  <object class="GtkActionGroup" id="actions_application">
     <property name="accel-group">accelerators</property>
     <child>
       <object class="GtkAction" id="action_quit">
-        <property name="label" context="gtk30">Quit</property>
+        <property name="label" context="gtk30">_Quit</property>
         <signal name="activate" handler="on_action_quit_activate" swapped="no"/>
       </object>
       <accelerator key="q" modifiers="GDK_CONTROL_MASK"/>
@@ -64,7 +64,7 @@
     <child>
       <object class="GtkAction" id="action_clear">
         <property name="label" translatable="yes">Clear list</property>
-        <property name="icon-name">edit-clear-all-symbolic</property>
+        <property name="icon-name">edit-clear-all</property>
         <signal name="activate" handler="on_action_clear_activate" swapped="no"/>
       </object>
       <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
@@ -250,6 +250,10 @@
     <property name="can-focus">False</property>
     <property name="default-width">450</property>
     <property name="default-height">300</property>
+    <property name="show-menubar">False</property>
+    <accel-groups>
+      <group name="accelerators"/>
+    </accel-groups>
     <signal name="delete-event" handler="on_window_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
