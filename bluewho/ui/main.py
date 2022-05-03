@@ -40,7 +40,9 @@ from bluewho.functions import (_,
                                idle_add,
                                text_gtk30,
                                thread_safe)
-from bluewho.preferences import (PREFERENCES_SCAN_SPEED,
+from bluewho.preferences import (PREFERENCES_NOTIFICATION,
+                                 PREFERENCES_PLAY_SOUND,
+                                 PREFERENCES_SCAN_SPEED,
                                  PREFERENCES_SHOW_LOCAL,
                                  PREFERENCES_STARTUPSCAN,
                                  Preferences)
@@ -51,7 +53,6 @@ from bluewho.ui.message_dialog import (MessageDialogNoYes,
                                        MessageDialogOK,
                                        MessageDialogYesNo)
 from bluewho.ui.model_devices import ModelDevices
-from bluewho.ui.preferences import DialogPreferences
 from bluewho.ui.shortcuts import DialogShortcuts
 
 SECTION_WINDOW_NAME = 'main window'
@@ -107,7 +108,6 @@ class MainWindow(UIBase):
         self.set_buttons_icons(buttons=[self.ui.button_scan,
                                         self.ui.button_stop,
                                         self.ui.button_clear,
-                                        self.ui.button_preferences,
                                         self.ui.button_about,
                                         self.ui.button_options])
         # Set buttons with always show image
@@ -120,6 +120,29 @@ class MainWindow(UIBase):
         self.ui.window.set_title(APP_NAME)
         self.ui.window.set_icon_from_file(str(FILE_ICON))
         self.ui.window.set_application(self.application)
+        # Load settings
+        self.settings_map = {
+            PREFERENCES_NOTIFICATION:
+                self.ui.action_options_notification_show,
+            PREFERENCES_PLAY_SOUND:
+                self.ui.action_options_notification_play_sound,
+            PREFERENCES_SHOW_LOCAL:
+                self.ui.action_options_show_local_adapters,
+            PREFERENCES_STARTUPSCAN:
+                self.ui.action_options_startup_scan,
+        }
+        for setting_name, action in self.settings_map.items():
+            action.set_active(self.preferences.get(setting_name))
+        self.settings_scan_speed_map = {
+            4: self.ui.action_options_scan_speed_high,
+            8: self.ui.action_options_scan_speed_medium,
+            12: self.ui.action_options_scan_speed_low
+        }
+        scan_speed = self.preferences.get(PREFERENCES_SCAN_SPEED)
+        if scan_speed in self.settings_scan_speed_map:
+            self.settings_scan_speed_map.get(
+                scan_speed,
+                self.ui.action_options_scan_speed_medium).set_active(True)
         # Restore the saved size and position
         self.settings.restore_window_position(window=self.ui.window,
                                               section=SECTION_WINDOW_NAME)
@@ -140,12 +163,6 @@ class MainWindow(UIBase):
     def on_action_options_menu_activate(self, widget):
         """Open the options menu"""
         self.ui.button_options.emit('clicked')
-
-    def on_action_preferences_activate(self, action):
-        """Show the preferences dialog"""
-        dialog = DialogPreferences(self.preferences, self.ui.window, False)
-        dialog.show()
-        dialog.destroy()
 
     def on_action_quit_activate(self, action):
         """Quit the application"""
@@ -206,6 +223,18 @@ class MainWindow(UIBase):
             msg2=None)
         if dialog.run() == Gtk.ResponseType.YES:
             self.model_devices.clear()
+
+    def on_action_options_scan_speed_activate(self, action):
+        """Change scan speed"""
+        for speed, item in self.settings_scan_speed_map.items():
+            if item is action and action.get_active():
+                self.preferences.set(PREFERENCES_SCAN_SPEED, speed)
+
+    def on_action_options_toggled(self, action):
+        """Change an option value"""
+        for setting_name, item in self.settings_map.items():
+            if item is action:
+                self.preferences.set(setting_name, item.get_active())
 
     def add_device(self, name, address, device_class, last_seen, notify):
         """Add a device to the model in a thread safe way"""
