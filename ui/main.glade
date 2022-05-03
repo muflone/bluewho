@@ -38,7 +38,7 @@
         <property name="is-important">True</property>
         <signal name="activate" handler="on_action_scan_activate" swapped="no"/>
       </object>
-      <accelerator key="r" modifiers="GDK_CONTROL_MASK"/>
+      <accelerator key="F5"/>
     </child>
     <child>
       <object class="GtkAction" id="action_stop">
@@ -54,7 +54,7 @@
         <property name="icon-name">edit-clear-all</property>
         <signal name="activate" handler="on_action_clear_activate" swapped="no"/>
       </object>
-      <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
+      <accelerator key="Delete" modifiers="GDK_CONTROL_MASK"/>
     </child>
   </object>
   <object class="GtkActionGroup" id="actions_options">
