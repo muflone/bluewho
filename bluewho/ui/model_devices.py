@@ -51,7 +51,6 @@ class ModelDevices(ModelAbstract):
         self.settings = settings
         self.preferences = preferences
         self.btsupport = btsupport
-        self.devices = {}
         self.audio_player = AudioPlayer()
         Notify.init(APP_NAME)
 
@@ -61,13 +60,13 @@ class ModelDevices(ModelAbstract):
         self.model = None
         self.settings = None
         self.btsupport = None
-        self.devices = None
         self.audio_player = None
 
     def add_data(self, item: DeviceInfo):
-        """Add a new row to the model if it doesn't exist"""
+        """Add or update a model row"""
         super(self.__class__, self).add_data(item)
         if item.address not in self.rows:
+            # Add a new row if it doesn't exist
             minor_class, major_class, services_class = self.btsupport.get_classes(
                 item.device_class)
             device_type = self.btsupport.get_device_type(major_class)
@@ -82,9 +81,9 @@ class ModelDevices(ModelAbstract):
             # Replace None with empty string in name
             if item.name is None:
                 item.name = ''
-            if item.address in self.devices:
+            if item.address in self.rows:
                 # Update the existing device in the model
-                treeiter = self.devices[item.address]
+                treeiter = self.rows[item.address]
                 # Update icon
                 old_value = self.get_icon(treeiter)
                 if icon_path != old_value:
@@ -150,7 +149,13 @@ class ModelDevices(ModelAbstract):
                         )
                         notification.set_urgency(Notify.Urgency.LOW)
                         notification.show()
-            return treeiter
+        else:
+            # Update existing row
+            treeiter = self.rows[item.address]
+            self.set_last_seen(treeiter, item.last_seen)
+            logging.debug(f'Updated device "{item.name}" '
+                          f'({item.address})')
+        return treeiter
 
     def add_device(self, address, name, device_class, last_seen, notify):
         """Add a new device to the list and pops notification"""
