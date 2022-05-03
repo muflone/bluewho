@@ -374,6 +374,10 @@ class MainWindow(UIBase):
         dialog = DialogShortcuts(parent=self.ui.window)
         dialog.show()
 
+    def on_action_options_menu_activate(self, action):
+        """Open the options menu"""
+        self.ui.button_options.emit('clicked')
+
     def check_bluetooth_availability(self) -> bool:
         """
         Check Bluetooth availability
