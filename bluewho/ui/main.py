@@ -60,7 +60,7 @@ SECTION_WINDOW_NAME = 'main window'
 
 class MainWindow(UIBase):
     def __init__(self, application, options):
-        super().__init__(filename='main.glade')
+        super().__init__(filename='main.ui')
         self.application = application
         # Load settings
         self.settings = Settings(FILE_SETTINGS, True)
