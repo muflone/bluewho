@@ -37,7 +37,7 @@ from bluewho.ui.base import UIBase
 
 class DialogAbout(UIBase):
     def __init__(self, parent):
-        super().__init__(filename='about.glade')
+        super().__init__(filename='about.ui')
         # Retrieve the translators list
         translators = []
         for line in readlines(FILE_TRANSLATORS, False):
