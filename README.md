@@ -21,8 +21,6 @@ detected a notification will be shown.
 Each device found will be saved on the list with its name, type, address and
 last seen date and time.
 
-For each device a list of available Bluetooth services can be requested.
-
 System Requirements
 -------------------
 
