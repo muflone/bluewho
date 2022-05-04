@@ -174,11 +174,10 @@ class Settings(object):
             with open(FILE_DEVICES, 'w') as file:
                 for address in devices:
                     device = devices.get_iter(address)
-                    file.write('%s\n%s\n%s\n%s\n>\n' % (
-                        address,
-                        devices.get_name(device),
-                        hex(devices.get_class(device)),
-                        devices.get_last_seen(device)))
+                    file.write(f'{address}\n'
+                               f'{devices.get_name(device)}\n'
+                               f'{hex(devices.get_class(device))}\n'
+                               f'{devices.get_last_seen(device)}\n>\n')
         elif os.path.exists(FILE_DEVICES):
             logging.info('Deleting the devices list')
             os.remove(FILE_DEVICES)

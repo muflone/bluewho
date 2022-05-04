@@ -31,12 +31,12 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_LICENSE,
                                FILE_RESOURCES,
                                FILE_TRANSLATORS)
-from bluewho.functions import readlines
+from bluewho.functions import readlines, _
 from bluewho.ui.base import UIBase
 
 
 class DialogAbout(UIBase):
-    def __init__(self, parent, show=False):
+    def __init__(self, parent):
         super().__init__(filename='about.glade')
         # Retrieve the translators list
         translators = []
@@ -46,27 +46,25 @@ class DialogAbout(UIBase):
             line = line.replace('(at)', '@').strip()
             if line not in translators:
                 translators.append(line)
-        # Obtain widget references
-        dialog = self.ui.dialog
         # Set various properties
-        dialog.set_program_name(APP_NAME)
-        dialog.set_version('Version %s' % APP_VERSION)
-        dialog.set_comments(APP_DESCRIPTION)
-        dialog.set_website(APP_URL)
-        dialog.set_copyright(APP_COPYRIGHT)
-        dialog.set_authors(['%s <%s>' % (APP_AUTHOR, APP_AUTHOR_EMAIL)])
-        dialog.set_license('\n'.join(readlines(FILE_LICENSE, True)))
-        dialog.set_translator_credits('\n'.join(translators))
+        self.ui.dialog.set_program_name(APP_NAME)
+        self.ui.dialog.set_version(_('Version {VERSION}').format(
+            VERSION=APP_VERSION))
+        self.ui.dialog.set_comments(APP_DESCRIPTION)
+        self.ui.dialog.set_website(APP_URL)
+        self.ui.dialog.set_copyright(APP_COPYRIGHT)
+        # Prepare lists for authors and contributors
+        authors = [f'{APP_AUTHOR} <{APP_AUTHOR_EMAIL}>']
+        self.ui.dialog.set_authors(authors)
+        self.ui.dialog.set_license('\n'.join(readlines(FILE_LICENSE, True)))
+        self.ui.dialog.set_translator_credits('\n'.join(translators))
         # Retrieve the external resources links
         for line in readlines(FILE_RESOURCES, False):
             resource_type, resource_url = line.split(':', 1)
-            dialog.add_credit_section(resource_type, (resource_url,))
+            self.ui.dialog.add_credit_section(resource_type, (resource_url,))
         icon_logo = Pixbuf.new_from_file(FILE_ICON)
-        dialog.set_logo(icon_logo)
-        dialog.set_transient_for(parent)
-        # Optionally show the dialog
-        if show:
-            self.show()
+        self.ui.dialog.set_logo(icon_logo)
+        self.ui.dialog.set_transient_for(parent)
 
     def show(self):
         """Show the About dialog"""

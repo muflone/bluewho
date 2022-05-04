@@ -67,11 +67,11 @@ class ModelDevices(ModelAbstract):
         super(self.__class__, self).add_data(item)
         if item.address not in self.rows:
             # Add a new row if it doesn't exist
-            minor_class, major_class, services_class = self.btsupport.get_classes(
+            minor, major, services_class = self.btsupport.get_classes(
                 item.device_class)
-            device_type = self.btsupport.get_device_type(major_class)
+            device_type = self.btsupport.get_device_type(major)
             icon_filename, device_subtype = self.btsupport.get_device_detail(
-                major_class, minor_class)
+                major, minor)
             if device_subtype == 'adapter':
                 device_type = 'adapter'
             icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
@@ -142,8 +142,10 @@ class ModelDevices(ModelAbstract):
                     if self.preferences.get(PREFERENCES_NOTIFICATION):
                         notification = Notify.Notification.new(
                             _('New bluetooth device detected'),
-                            _('Name: %s\nAddress: %s') % (item.name or 'unknown',
-                                                          item.address),
+                            _('Name: {NAME}\nAddress: {ADDRESS}').format(
+                                NAME=item.name or 'unknown',
+                                ADDRESS=item.address
+                            ),
                             # Notification requires absolute paths
                             os.path.abspath(icon_path)
                         )

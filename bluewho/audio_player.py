@@ -27,10 +27,10 @@ class AudioPlayer(object):
     def __init__(self):
         """Initialize audio players"""
         self.players = {
-          'canberra-gtk-play': ('-f', '%s'),
-          'aplay': ('-q', '%s'),
-          'paplay': ('-p', '%s'),
-          'mplayer': ('-really-quiet', '%s'),
+          'canberra-gtk-play': ('-f', '{FILENAME}'),
+          'aplay': ('-q', '{FILENAME}'),
+          'paplay': ('-p', '{FILENAME}'),
+          'mplayer': ('-really-quiet', '{FILENAME}'),
         }
         self.player = None
         self.player_path = None
@@ -71,7 +71,9 @@ class AudioPlayer(object):
         if self.player:
             arguments = [self.player_path]
             for option in self.players[self.player]:
-                arguments.append(option == '%s' and audio_file or option)
+                arguments.append(audio_file
+                                 if option == '{FILENAME}'
+                                 else option)
             # Execute external process
             subprocess.Popen(arguments,
                              stdout=subprocess.PIPE,

@@ -155,12 +155,11 @@ class MainWindow(UIBase):
 
     def on_action_about_activate(self, action):
         """Show the about dialog"""
-        about = DialogAbout(parent=self.ui.window,
-                            show=False)
+        about = DialogAbout(parent=self.ui.window)
         about.show()
         about.destroy()
 
-    def on_action_options_menu_activate(self, widget):
+    def on_action_options_menu_activate(self, action):
         """Open the options menu"""
         self.ui.button_options.emit('clicked')
 
@@ -351,8 +350,8 @@ class MainWindow(UIBase):
                 dialog_error = MessageDialogOK(
                     parent=self.ui.window,
                     message_type=Gtk.MessageType.WARNING,
-                    title='Unable to start adapter %s' %
-                          adapter.get_device_name(),
+                    title='Unable to start adapter '
+                          f'{adapter.get_device_name()}',
                     msg2=e.message,
                     msg1=None
                 )
@@ -373,10 +372,6 @@ class MainWindow(UIBase):
         """Show the shortcuts dialog"""
         dialog = DialogShortcuts(parent=self.ui.window)
         dialog.show()
-
-    def on_action_options_menu_activate(self, action):
-        """Open the options menu"""
-        self.ui.button_options.emit('clicked')
 
     def check_bluetooth_availability(self) -> bool:
         """
