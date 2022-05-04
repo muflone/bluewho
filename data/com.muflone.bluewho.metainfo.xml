@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.muflone.bluewho</id>
+
+  <name>BlueWho</name>
+  <summary>Information and notification of new discovered bluetooth devices</summary>
+  <description>
+    <p>
+      The scan will automatically detect any visible device and for each one
+      that was detected a notification will be shown.
+    </p>
+    <p>
+      Each device found will be saved on the list with its name, type, address
+      and last seen date and time.
+    </p>
+  </description>
+
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <content_rating type="oars-1.0" />
+  <categories>
+    <category>Network</category>
+  </categories>
+  <url type="homepage">https://github.com/muflone/bluewho</url>
+  <url type="help">https://www.muflone.com/bluewho</url>
+  <url type="translate">https://www.transifex.com/projects/p/bluewho/</url>
+  <url type="bugtracker">https://github.com/muflone/bluewho/issues</url>
+  <url type="contact">http://www.muflone.com/contacts/</url>
+
+  <launchable type="desktop-id">bluewho.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://www.muflone.com/resources/bluewho/archive/latest/english/main.png</image>
+    </screenshot>
+    <screenshot>
+      <image>http://www.muflone.com/resources/bluewho/archive/latest/english/about.png</image>
+    </screenshot>
+  </screenshots>
+</component>
