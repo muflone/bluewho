@@ -11,7 +11,7 @@ addons:
     - python3-gi                              # GObject
     - libgirepository1.0-dev                  # GObject
     - gir1.2-gtk-3.0                          # gi.repository.gtk
-    - libbluetooth-dev                        # PyBluez
+    - libdbus-1-dev                           # DBus-1
 install:
   - pip install -r requirements_travis.txt
 script:
