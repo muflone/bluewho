@@ -18,9 +18,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import datetime
 from gettext import gettext, dgettext
 import os.path
-from time import localtime
 
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
@@ -32,15 +32,7 @@ localized_messages = {}
 
 def get_current_time():
     """Returns the formatted current date and time"""
-    current_time = localtime()
-    return _('%(year)04d/%(month)02d/%(day)02d '
-             '%(hour)02d:%(minute)02d.%(second)02d') % {
-                 'day': current_time.tm_mday,
-                 'month': current_time.tm_mon,
-                 'year': current_time.tm_year,
-                 'hour': current_time.tm_hour,
-                 'minute': current_time.tm_min,
-                 'second': current_time.tm_sec}
+    return datetime.datetime.now().strftime('%x %X')
 
 
 def get_ui_file(filename):
