@@ -27,6 +27,7 @@ last seen date and time.
 * Python >= 3.6 (developed and tested for Python 3.9 and 3.10)
 * XDG library for Python 3 ( https://pypi.org/project/pyxdg/ )
 * GTK+ 3.0 libraries for Python 3
+* Notify 0.7 library for Python 3
 * GObject libraries for Python 3 ( https://pypi.org/project/PyGObject/ )
 * BlueZero library for Python 3 ( https://pypi.org/project/bluezero/ )
 
