@@ -20,8 +20,6 @@
 
 import configparser
 import logging
-import os
-import os.path
 
 from bluewho.constants import FILE_DEVICES
 
@@ -150,7 +148,7 @@ class Settings(object):
     def load_devices(self):
         """Return the devices list from the configuration file"""
         devices = []
-        if os.path.exists(FILE_DEVICES):
+        if FILE_DEVICES.exists():
             logging.info('Loading the devices list')
             with open(FILE_DEVICES, 'r') as file:
                 # Each device is separated by a single line with >
@@ -178,6 +176,6 @@ class Settings(object):
                                f'{devices.get_name(device)}\n'
                                f'{hex(devices.get_class(device))}\n'
                                f'{devices.get_last_seen(device)}\n>\n')
-        elif os.path.exists(FILE_DEVICES):
+        elif FILE_DEVICES.exists():
             logging.info('Deleting the devices list')
-            os.remove(FILE_DEVICES)
+            FILE_DEVICES.unlink()

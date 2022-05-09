@@ -26,7 +26,7 @@ from gi.repository import Notify
 
 from bluewho.audio_player import AudioPlayer
 from bluewho.constants import (APP_NAME,
-                               DIR_BT_ICONS,
+                               DIR_ICONS,
                                FILE_SOUND)
 from bluewho.functions import _
 from bluewho.models.abstract import ModelAbstract
@@ -74,10 +74,10 @@ class ModelDevices(ModelAbstract):
                 major, minor)
             if device_subtype == 'adapter':
                 device_type = 'adapter'
-            icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
-            if not os.path.isfile(icon_path):
+            icon_path = DIR_ICONS / icon_filename
+            if not icon_path.is_file():
                 icon_filename = 'unknown.png'
-                icon_path = os.path.join(DIR_BT_ICONS, icon_filename)
+                icon_path = DIR_ICONS / icon_filename
             # Replace None with empty string in name
             if item.name is None:
                 item.name = ''
@@ -121,8 +121,8 @@ class ModelDevices(ModelAbstract):
                 # Add a new device to the model
                 treeiter = self.model.append([
                     item.address,
-                    GdkPixbuf.Pixbuf.new_from_file(icon_path),
-                    icon_path,
+                    GdkPixbuf.Pixbuf.new_from_file(str(icon_path)),
+                    str(icon_path),
                     item.device_class,
                     device_type,
                     _(device_type),
@@ -147,7 +147,7 @@ class ModelDevices(ModelAbstract):
                                 ADDRESS=item.address
                             ),
                             # Notification requires absolute paths
-                            os.path.abspath(icon_path)
+                            str(icon_path.resolve())
                         )
                         notification.set_urgency(Notify.Urgency.LOW)
                         notification.show()

@@ -20,7 +20,6 @@
 
 import datetime
 from gettext import gettext, dgettext
-import os.path
 
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
@@ -37,7 +36,7 @@ def get_current_time():
 
 def get_ui_file(filename):
     """Return the full path of a Glade/UI file"""
-    return os.path.join(DIR_UI, filename)
+    return str(DIR_UI / filename)
 
 
 def process_events():

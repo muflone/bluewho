@@ -62,7 +62,7 @@ class DialogAbout(UIBase):
         for line in readlines(FILE_RESOURCES, False):
             resource_type, resource_url = line.split(':', 1)
             self.ui.dialog.add_credit_section(resource_type, (resource_url,))
-        icon_logo = Pixbuf.new_from_file(FILE_ICON)
+        icon_logo = Pixbuf.new_from_file(str(FILE_ICON))
         self.ui.dialog.set_logo(icon_logo)
         self.ui.dialog.set_transient_for(parent)
 
