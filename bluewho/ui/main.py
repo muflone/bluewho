@@ -190,7 +190,7 @@ class MainWindow(UIBase):
             self.ui.spinner.start()
             assert not self.thread_scanner
             self.thread_scanner = DaemonThread(self.do_scan, 'BTScanner')
-            self.set_status_bar_message('Start new scan')
+            self.set_status_bar_message(_('Detect devices'))
             self.thread_scanner.start()
             self.ui.action_scan.set_sensitive(False)
 
@@ -199,7 +199,7 @@ class MainWindow(UIBase):
             # Check if the scanner is still running and cancel it
             if self.thread_scanner.is_alive():
                 self.thread_scanner.cancel()
-                self.set_status_bar_message('Cancel running scan')
+                self.set_status_bar_message(_('Stop detection'))
             else:
                 # The scanner thread has died for some error, we need to
                 # recover the UI to allow the user to launch the scanner
@@ -249,8 +249,9 @@ class MainWindow(UIBase):
         if notify and address not in self.model_devices.rows:
             # Add notification
             self.set_status_bar_message(
-                'Found new device {NAME} [{ADDRESS}]'.format(NAME=name,
-                                                             ADDRESS=address))
+                _('New device found: {NAME} [{ADDRESS}]').format(
+                    NAME=name,
+                    ADDRESS=address))
         self.model_devices.add_device(address=address,
                                       name=name,
                                       device_class=device_class,

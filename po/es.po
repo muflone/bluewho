@@ -11,403 +11,144 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
-"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
-"POT-Creation-Date: 2010-01-02 01:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
+"POT-Creation-Date: 2022-05-10 00:45+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Luca Della Ghezza <luca_dgh(at)hotmail.it>\n"
 "Language-Team: Spanish (https://www.transifex.com/projects/p/bluewho/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/bluewho.glade.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>Servicios disponibles</b>"
+#: bluewho/ui/about.py:51
+#, python-brace-format
+msgid "Version {VERSION}"
+msgstr ""
 
-#: ../data/bluewho.glade.h:2
-msgid "<b>Detected devices:</b>"
-msgstr "<b>Dispositivos detectados:</b>"
-
-#: ../data/bluewho.glade.h:3
-msgid "<b>Scan options:</b>"
-msgstr "<b>Opciones del escáner:</b>"
-
-#: ../data/bluewho.glade.h:4
-msgid "<b>Startup preferences:</b>"
-msgstr "<b>Preferencias de lanzamiento:</b>"
-
-#: ../data/bluewho.glade.h:5
-msgid "<b>When a device has been found:</b>"
-msgstr "<b>Cuando se encuentra un dispositivo:</b>"
-
-#: ../data/bluewho.glade.h:6
-msgid "About"
-msgstr "Acerca de"
-
-#: ../data/bluewho.glade.h:7
-msgid "Auto scan"
-msgstr "Escanear automaticamente"
-
-#: ../data/bluewho.glade.h:8
-msgid "Available services"
-msgstr "Servicios disponibles"
-
-#: ../data/bluewho.glade.h:9
-msgid "Clear list"
-msgstr "Limpia la lista"
-
-#: ../data/bluewho.glade.h:10
+#: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Detecta los dispositivos"
 
-#: ../data/bluewho.glade.h:11
-msgid "Detect devices at _startup"
-msgstr "Detecta los dispositivos al _lanzamiento"
+#: bluewho/ui/main.py:202 ui/main.ui:45 ui/shortcuts.ui:64
+msgid "Stop detection"
+msgstr ""
 
-#: ../data/bluewho.glade.h:12
-msgid "Preferences"
-msgstr "Preferencias"
+#: bluewho/ui/main.py:221
+msgid "Do you want to clear the devices list?"
+msgstr ""
 
-#: ../data/bluewho.glade.h:13
-msgid "Re_trieve name during scan (slow)"
-msgstr "Re_cupera el nombre mientras que está escaneando (lento)"
+#: bluewho/ui/main.py:252
+#, python-brace-format
+msgid "New device found: {NAME} [{ADDRESS}]"
+msgstr ""
 
-#: ../data/bluewho.glade.h:14
-msgid "Restore last used _window size and position"
-msgstr "Restablece los tamaños y las posiciones de las _ventanas utilizadas"
+#: bluewho/ui/main.py:319
+msgid "Discovery aborted."
+msgstr ""
 
-#: ../data/bluewho.glade.h:15
-msgid "S_end notification"
-msgstr "E_nvia notificación"
-
-#: ../data/bluewho.glade.h:16
-msgid "Show _local adapters"
-msgstr "Muestra los adaptadores _locales"
-
-#: ../data/bluewho.glade.h:17
-msgid "_Automatic scan at startup"
-msgstr "Escanea _automaticamente al lanzamiento"
-
-#: ../data/bluewho.glade.h:18
-msgid "_Notification command:"
-msgstr "_Mando de notificación:"
-
-#: ../data/bluewho.glade.h:19
-msgid "_Play a sound"
-msgstr "_Emite un sonido"
-
-#: ../data/bluewho.glade.h:20
-msgid "_Resolve device name after each detection"
-msgstr "_Asigna los nombres a los dispositivos tras detectarlo"
-
-#: ../src/bluewho.py:64
-msgid "adapter"
-msgstr "adaptador"
-
-#: ../src/bluewho.py:83
-#, python-format
-msgid "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
-msgstr "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
-
-#: ../src/bluewho.py:113
+#: bluewho/ui/main.py:324
 msgid "No local devices found during detection."
 msgstr "No se encontró ningun dispositivo."
 
-#: ../src/bluewho.py:143
-#, python-format
-msgid "Last scan: %s"
-msgstr "Ultimo objecto escaneado: %s"
+#: bluewho/ui/main.py:391
+msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
+msgstr ""
 
-#: ../src/bluewho.py:156
+#: bluewho/ui/main.py:404
+msgid "Do you want to start the bluetooth devices?"
+msgstr ""
+
+#: bluewho/ui/model_devices.py:144
+msgid "New bluetooth device detected"
+msgstr "Nuevos dispositivos bluetooth detectados"
+
+#: bluewho/ui/model_devices.py:145
+#, python-brace-format
+msgid "Name: {NAME}\nAddress: {ADDRESS}"
+msgstr ""
+
+#: ui/main.ui:53
+msgid "Clear list"
+msgstr "Limpia la lista"
+
+#: ui/main.ui:64 ui/shortcuts.ui:28
+msgid "Open the options menu"
+msgstr ""
+
+#: ui/main.ui:77
+msgid "Detect devices at startup"
+msgstr "Detecta los dispositivos al lanzamiento"
+
+#: ui/main.ui:83
+msgid "Show local adapters"
+msgstr "Muestra los adaptadores locales"
+
+#: ui/main.ui:89
+msgid "Send notification"
+msgstr "Envia notificación"
+
+#: ui/main.ui:95
+msgid "Play a sound"
+msgstr "Emite un sonido"
+
+#: ui/main.ui:101
+msgid "Low scan speed"
+msgstr ""
+
+#: ui/main.ui:107
+msgid "Medium scan speed"
+msgstr ""
+
+#: ui/main.ui:113
+msgid "High scan speed"
+msgstr ""
+
+#: ui/main.ui:158
+msgid "Options"
+msgstr ""
+
+#: ui/main.ui:385
+msgid "<b>Detected devices:</b>"
+msgstr "<b>Dispositivos detectados:</b>"
+
+#: ui/main.ui:422
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/bluewho.py:164
-msgid "Device name"
-msgstr "Nombre del dispositivo"
+#: ui/main.ui:439
+msgid "Name"
+msgstr ""
 
-#: ../src/bluewho.py:172
+#: ui/main.ui:451
 msgid "Bluetooth address"
 msgstr "Dirección bluetooth"
 
-#: ../src/bluewho.py:179
+#: ui/main.ui:462
 msgid "Last seen"
 msgstr "Ultimo visto"
 
-#: ../src/bluewho.py:188
-msgid "Service name"
-msgstr "Nombre del servicio"
-
-#: ../src/bluewho.py:195
-msgid "Protocol"
-msgstr "Protocolo"
-
-#: ../src/bluewho.py:202
-msgid "Channel"
-msgstr "Canal"
-
-#: ../src/bluewho.py:335
-msgid "A GTK utility to inform and notify you when a new bluetooth device is discovered."
-msgstr "Una utilidad escrita en GTK para avisar y informar acerca de nuevos dispositivos bluetooth descubiertos."
-
-#: ../src/btsupport.py:40
-msgid "positioning service"
-msgstr "servicios de posicionamiento"
-
-#: ../src/btsupport.py:41
-msgid "networking service"
-msgstr "servicios de red"
-
-#: ../src/btsupport.py:42
-msgid "rendering service"
-msgstr "servicio de render"
-
-#: ../src/btsupport.py:43
-msgid "capturing service"
-msgstr "servicio de captura"
-
-#: ../src/btsupport.py:44
-msgid "object transfer service"
-msgstr "servicio de transferencia de objectos"
-
-#: ../src/btsupport.py:45
-msgid "audio service"
-msgstr "servicio audio"
-
-#: ../src/btsupport.py:46
-msgid "telephony service"
-msgstr "servicio telefonía"
-
-#: ../src/btsupport.py:47
-msgid "information service"
-msgstr "servicio informativo"
-
-#: ../src/btsupport.py:58
-msgid "miscellaneous"
-msgstr "varias"
-
-#: ../src/btsupport.py:59
-msgid "computer"
-msgstr "ordenador"
-
-#: ../src/btsupport.py:60
-msgid "phone"
-msgstr "telefono"
-
-#: ../src/btsupport.py:61
-msgid "network"
-msgstr "red"
-
-#: ../src/btsupport.py:62
-msgid "audio-video"
-msgstr "audio-video"
-
-#: ../src/btsupport.py:63
-msgid "peripheral"
-msgstr "periférico"
-
-#: ../src/btsupport.py:64
-msgid "imaging"
-msgstr "imagen"
-
-#: ../src/btsupport.py:65 ../src/btsupport.py:73
-msgid "uncategorized"
-msgstr "sin categoria"
-
-#: ../src/btsupport.py:79
-msgid "desktop workstation"
-msgstr "ordenador de escritorio"
-
-#: ../src/btsupport.py:80
-msgid "server"
-msgstr "servidor"
-
-#: ../src/btsupport.py:81
-msgid "laptop"
-msgstr "ordenador portátil"
-
-#: ../src/btsupport.py:82
-msgid "handheld"
-msgstr "palmar"
-
-#: ../src/btsupport.py:83
-msgid "palm"
-msgstr "palmar"
-
-#: ../src/btsupport.py:84
-msgid "wearable computer"
-msgstr "ordenador ponible"
-
-#: ../src/btsupport.py:88
-msgid "cellular"
-msgstr "movíl"
-
-#: ../src/btsupport.py:89
-msgid "cordless"
-msgstr "inalambrico"
-
-#: ../src/btsupport.py:90
-msgid "smartphone"
-msgstr "smartphone"
-
-#: ../src/btsupport.py:91
-msgid "wired modem - voice gateway"
-msgstr "modem con cables - gateway voz"
-
-#: ../src/btsupport.py:92
-msgid "common ISDN access"
-msgstr "acceso común ISDN"
-
-#: ../src/btsupport.py:96
-msgid "network fully available"
-msgstr "red totalmente disponible"
-
-#: ../src/btsupport.py:97
-msgid "network 1-17% used"
-msgstr "red utilizada al 1-17%"
-
-#: ../src/btsupport.py:98
-msgid "network 17-33% used"
-msgstr "red utilizada al 17-33%"
-
-#: ../src/btsupport.py:99
-msgid "network 33-50% used"
-msgstr "red utilizada al 33-50%"
-
-#: ../src/btsupport.py:100
-msgid "network 50-67% used"
-msgstr "red utilizada 50-67%"
-
-#: ../src/btsupport.py:101
-msgid "network 67-83% used"
-msgstr "red utilizada 67-83%"
-
-#: ../src/btsupport.py:102
-msgid "network 83-99% used"
-msgstr "red utilizada 83-99%"
-
-#: ../src/btsupport.py:103
-msgid "network unavailable"
-msgstr "red no disponible"
-
-#: ../src/btsupport.py:107
-msgid "headset"
-msgstr "auricolares de tapón"
-
-#: ../src/btsupport.py:108
-msgid "hands-free"
-msgstr "sin manos"
-
-#: ../src/btsupport.py:109
-msgid "microphone"
-msgstr "microfono"
-
-#: ../src/btsupport.py:110
-msgid "loudspeaker"
-msgstr "altavoces"
-
-#: ../src/btsupport.py:111
-msgid "headphone"
-msgstr "auricolares"
-
-#: ../src/btsupport.py:112
-msgid "portable audio"
-msgstr "audio portatile"
-
-#: ../src/btsupport.py:113
-msgid "car audio"
-msgstr "audio para el coche"
-
-#: ../src/btsupport.py:114
-msgid "set-top box"
-msgstr "decodificadores/descodificadores"
-
-#: ../src/btsupport.py:115
-msgid "hifi audio"
-msgstr "audio hifi"
-
-#: ../src/btsupport.py:116
-msgid "vcr"
-msgstr "videograbadora"
-
-#: ../src/btsupport.py:117
-msgid "videocamera"
-msgstr "videocamára"
-
-#: ../src/btsupport.py:118
-msgid "camcorder"
-msgstr "camcorder"
-
-#: ../src/btsupport.py:119
-msgid "video monitor"
-msgstr "pantalla"
-
-#: ../src/btsupport.py:120
-msgid "video display loudspeaker"
-msgstr "pantalla con altavoces"
-
-#: ../src/btsupport.py:121
-msgid "video conferencing"
-msgstr "videoconferencia"
-
-#: ../src/btsupport.py:122
-msgid "gaming toy"
-msgstr "juego"
-
-#: ../src/btsupport.py:127
-msgid "joystick"
-msgstr "joystick"
-
-#: ../src/btsupport.py:128
-msgid "gamepad"
-msgstr "joypad"
-
-#: ../src/btsupport.py:129
-msgid "remote control"
-msgstr "mando remoto"
-
-#: ../src/btsupport.py:130
-msgid "sensing device"
-msgstr "dispositivo perceptivo"
-
-#: ../src/btsupport.py:131
-msgid "digitizer tablet"
-msgstr "tableta grafica"
-
-#: ../src/btsupport.py:132
-msgid "card reader"
-msgstr "lector di tarjetas"
-
-#: ../src/btsupport.py:136
-msgid "keyboard"
-msgstr "teclado"
-
-#: ../src/btsupport.py:137
-msgid "mouse"
-msgstr "ratón"
-
-#: ../src/btsupport.py:138
-msgid "keyboard+mouse"
-msgstr "teclado+ratón"
-
-#: ../src/btsupport.py:142
-msgid "display"
-msgstr "pantalla"
-
-#: ../src/btsupport.py:143
-msgid "camera"
-msgstr "camara"
-
-#: ../src/btsupport.py:144
-msgid "scanner"
-msgstr "escáner"
-
-#: ../src/btsupport.py:145
-msgid "printer"
-msgstr "impresora"
-
-#: ../src/settings.py:67
-msgid "New bluetooth device detected"
-msgstr "Nuevos dispositivos bluetooth detectados"
+#: ui/shortcuts.ui:16
+msgid "General"
+msgstr ""
+
+#: ui/shortcuts.ui:21
+msgid "Open the about dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:35
+msgid "Open the shortcuts dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:42
+msgid "Quit"
+msgstr ""
+
+#: ui/shortcuts.ui:52
+msgid "Scan"
+msgstr ""
+
+#: ui/shortcuts.ui:71
+msgid "Clear the devices list"
+msgstr "Limpia la lista"

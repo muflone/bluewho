@@ -10,403 +10,144 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
-"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues \n"
-"POT-Creation-Date: 2010-01-02 01:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
+"POT-Creation-Date: 2022-05-10 00:45+0200\n"
 "PO-Revision-Date: 2014-08-31 18:03+0000\n"
 "Last-Translator: sahwar <ve4ernik(at)gmail.com>\n"
 "Language-Team: Bulgarian (https://www.transifex.com/projects/p/bluewho/language/bg/)\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/bluewho.glade.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>Услуги на разположение:</b>"
+#: bluewho/ui/about.py:51
+#, python-brace-format
+msgid "Version {VERSION}"
+msgstr ""
 
-#: ../data/bluewho.glade.h:2
-msgid "<b>Detected devices:</b>"
-msgstr "<b>Засечени устройства:</b>"
-
-#: ../data/bluewho.glade.h:3
-msgid "<b>Scan options:</b>"
-msgstr "<b>Опции за сканиране:</b>"
-
-#: ../data/bluewho.glade.h:4
-msgid "<b>Startup preferences:</b>"
-msgstr "<b>Предпочитания за стартиране:</b>"
-
-#: ../data/bluewho.glade.h:5
-msgid "<b>When a device has been found:</b>"
-msgstr "<b>Когато е открито устройство:</b>"
-
-#: ../data/bluewho.glade.h:6
-msgid "About"
-msgstr "За програмата"
-
-#: ../data/bluewho.glade.h:7
-msgid "Auto scan"
-msgstr "Автоматично сканиране"
-
-#: ../data/bluewho.glade.h:8
-msgid "Available services"
-msgstr "Услуги на разположение"
-
-#: ../data/bluewho.glade.h:9
-msgid "Clear list"
-msgstr "Изчистване на списъка"
-
-#: ../data/bluewho.glade.h:10
+#: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Засичане на устройства"
 
-#: ../data/bluewho.glade.h:11
-msgid "Detect devices at _startup"
-msgstr "Засичане на устройства при _стартиране"
+#: bluewho/ui/main.py:202 ui/main.ui:45 ui/shortcuts.ui:64
+msgid "Stop detection"
+msgstr ""
 
-#: ../data/bluewho.glade.h:12
-msgid "Preferences"
-msgstr "Предпочитания"
+#: bluewho/ui/main.py:221
+msgid "Do you want to clear the devices list?"
+msgstr ""
 
-#: ../data/bluewho.glade.h:13
-msgid "Re_trieve name during scan (slow)"
-msgstr "_Намиране на името по време на сканиране (бавно)"
+#: bluewho/ui/main.py:252
+#, python-brace-format
+msgid "New device found: {NAME} [{ADDRESS}]"
+msgstr ""
 
-#: ../data/bluewho.glade.h:14
-msgid "Restore last used _window size and position"
-msgstr "Възстановяване на последно използваните размери и позиция на _прозореца"
+#: bluewho/ui/main.py:319
+msgid "Discovery aborted."
+msgstr ""
 
-#: ../data/bluewho.glade.h:15
-msgid "S_end notification"
-msgstr "И_зпращане на известие"
-
-#: ../data/bluewho.glade.h:16
-msgid "Show _local adapters"
-msgstr "Показване на _локалните адаптери"
-
-#: ../data/bluewho.glade.h:17
-msgid "_Automatic scan at startup"
-msgstr "_Автоматично сканиране при стартиране"
-
-#: ../data/bluewho.glade.h:18
-msgid "_Notification command:"
-msgstr "_Команда за известие"
-
-#: ../data/bluewho.glade.h:19
-msgid "_Play a sound"
-msgstr "Из_пълнение на звук"
-
-#: ../data/bluewho.glade.h:20
-msgid "_Resolve device name after each detection"
-msgstr "_Разрешаване на проблеми с името на устройството след всяко засичане"
-
-#: ../src/bluewho.py:64
-msgid "adapter"
-msgstr "адаптер"
-
-#: ../src/bluewho.py:83
-#, python-format
-msgid "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
-msgstr "%(year)04d/%(month)02d/%(day)02d %(hour)02d:%(minute)02d.%(second)02d"
-
-#: ../src/bluewho.py:113
+#: bluewho/ui/main.py:324
 msgid "No local devices found during detection."
 msgstr "По време на засичането не са намерени локални устройства."
 
-#: ../src/bluewho.py:143
-#, python-format
-msgid "Last scan: %s"
-msgstr "Последно сканиране: %s"
+#: bluewho/ui/main.py:391
+msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
+msgstr ""
 
-#: ../src/bluewho.py:156
+#: bluewho/ui/main.py:404
+msgid "Do you want to start the bluetooth devices?"
+msgstr ""
+
+#: bluewho/ui/model_devices.py:144
+msgid "New bluetooth device detected"
+msgstr "Засечено е ново Bluetooth устройство"
+
+#: bluewho/ui/model_devices.py:145
+#, python-brace-format
+msgid "Name: {NAME}\nAddress: {ADDRESS}"
+msgstr ""
+
+#: ui/main.ui:53
+msgid "Clear list"
+msgstr "Изчистване на списъка"
+
+#: ui/main.ui:64 ui/shortcuts.ui:28
+msgid "Open the options menu"
+msgstr ""
+
+#: ui/main.ui:77
+msgid "Detect devices at startup"
+msgstr "Засичане на устройства при стартиране"
+
+#: ui/main.ui:83
+msgid "Show local adapters"
+msgstr "Показване на локалните адаптери"
+
+#: ui/main.ui:89
+msgid "Send notification"
+msgstr "Изпращане на известие"
+
+#: ui/main.ui:95
+msgid "Play a sound"
+msgstr "Изпълнение на звук"
+
+#: ui/main.ui:101
+msgid "Low scan speed"
+msgstr ""
+
+#: ui/main.ui:107
+msgid "Medium scan speed"
+msgstr ""
+
+#: ui/main.ui:113
+msgid "High scan speed"
+msgstr ""
+
+#: ui/main.ui:158
+msgid "Options"
+msgstr ""
+
+#: ui/main.ui:385
+msgid "<b>Detected devices:</b>"
+msgstr "<b>Засечени устройства:</b>"
+
+#: ui/main.ui:422
 msgid "Type"
 msgstr "Тип"
 
-#: ../src/bluewho.py:164
-msgid "Device name"
-msgstr "Име на устройството"
+#: ui/main.ui:439
+msgid "Name"
+msgstr ""
 
-#: ../src/bluewho.py:172
+#: ui/main.ui:451
 msgid "Bluetooth address"
 msgstr "Bluetooth адрес"
 
-#: ../src/bluewho.py:179
+#: ui/main.ui:462
 msgid "Last seen"
 msgstr "Последно видян на"
 
-#: ../src/bluewho.py:188
-msgid "Service name"
-msgstr "Име на услугата"
-
-#: ../src/bluewho.py:195
-msgid "Protocol"
-msgstr "Протокол"
-
-#: ../src/bluewho.py:202
-msgid "Channel"
-msgstr "Канал"
-
-#: ../src/bluewho.py:335
-msgid "A GTK utility to inform and notify you when a new bluetooth device is discovered."
-msgstr "GTK приложение, което Ви информира чрез известие, когато е открито ново Bluetooth устройство."
-
-#: ../src/btsupport.py:40
-msgid "positioning service"
-msgstr "услуга за позициониране"
-
-#: ../src/btsupport.py:41
-msgid "networking service"
-msgstr "мрежова услуга"
-
-#: ../src/btsupport.py:42
-msgid "rendering service"
-msgstr "услуга за рендване"
-
-#: ../src/btsupport.py:43
-msgid "capturing service"
-msgstr "услуга за захващане"
-
-#: ../src/btsupport.py:44
-msgid "object transfer service"
-msgstr "услуга за трансфер на обект"
-
-#: ../src/btsupport.py:45
-msgid "audio service"
-msgstr "аудио услуга"
-
-#: ../src/btsupport.py:46
-msgid "telephony service"
-msgstr "услуга за телефония"
-
-#: ../src/btsupport.py:47
-msgid "information service"
-msgstr "информационна услуга"
-
-#: ../src/btsupport.py:58
-msgid "miscellaneous"
-msgstr "разни"
-
-#: ../src/btsupport.py:59
-msgid "computer"
-msgstr "компютър"
-
-#: ../src/btsupport.py:60
-msgid "phone"
-msgstr "телефон"
-
-#: ../src/btsupport.py:61
-msgid "network"
-msgstr "мрежа"
-
-#: ../src/btsupport.py:62
-msgid "audio-video"
-msgstr "аудио-видео"
-
-#: ../src/btsupport.py:63
-msgid "peripheral"
-msgstr "периферно устройство"
-
-#: ../src/btsupport.py:64
-msgid "imaging"
-msgstr "редактиране на изображения"
-
-#: ../src/btsupport.py:65 ../src/btsupport.py:73
-msgid "uncategorized"
-msgstr "некатегоризирани"
-
-#: ../src/btsupport.py:79
-msgid "desktop workstation"
-msgstr "десктоп работна станция"
-
-#: ../src/btsupport.py:80
-msgid "server"
-msgstr "сървър"
-
-#: ../src/btsupport.py:81
-msgid "laptop"
-msgstr "лаптоп"
-
-#: ../src/btsupport.py:82
-msgid "handheld"
-msgstr "преносимо (мобилно) устройство"
-
-#: ../src/btsupport.py:83
-msgid "palm"
-msgstr "Palm (PDA)"
-
-#: ../src/btsupport.py:84
-msgid "wearable computer"
-msgstr "компютър, подходящ за носене"
-
-#: ../src/btsupport.py:88
-msgid "cellular"
-msgstr "клетъчно устройство"
-
-#: ../src/btsupport.py:89
-msgid "cordless"
-msgstr "безжично устройство"
-
-#: ../src/btsupport.py:90
-msgid "smartphone"
-msgstr "смартфон"
-
-#: ../src/btsupport.py:91
-msgid "wired modem - voice gateway"
-msgstr "жичен модем — voice gateway"
-
-#: ../src/btsupport.py:92
-msgid "common ISDN access"
-msgstr "общ ISDN достъп"
-
-#: ../src/btsupport.py:96
-msgid "network fully available"
-msgstr "мрежата е напълно на разположение"
-
-#: ../src/btsupport.py:97
-msgid "network 1-17% used"
-msgstr "използват се 1-17% от мрежата"
-
-#: ../src/btsupport.py:98
-msgid "network 17-33% used"
-msgstr "използват се 17-33% от мрежата"
-
-#: ../src/btsupport.py:99
-msgid "network 33-50% used"
-msgstr "използват се 33-50% от мрежата"
-
-#: ../src/btsupport.py:100
-msgid "network 50-67% used"
-msgstr "използват се 50-67% от мрежата"
-
-#: ../src/btsupport.py:101
-msgid "network 67-83% used"
-msgstr "използват се 67-83% от мрежата"
-
-#: ../src/btsupport.py:102
-msgid "network 83-99% used"
-msgstr "използват се 83-99% от мрежата"
-
-#: ../src/btsupport.py:103
-msgid "network unavailable"
-msgstr "мрежата не е на разположение"
-
-#: ../src/btsupport.py:107
-msgid "headset"
-msgstr "слушалки с микрофон"
-
-#: ../src/btsupport.py:108
-msgid "hands-free"
-msgstr "хендсфрий (устройство, което се използва без ръце)"
-
-#: ../src/btsupport.py:109
-msgid "microphone"
-msgstr "микрофон"
-
-#: ../src/btsupport.py:110
-msgid "loudspeaker"
-msgstr "високоговорител"
-
-#: ../src/btsupport.py:111
-msgid "headphone"
-msgstr "слушалки"
-
-#: ../src/btsupport.py:112
-msgid "portable audio"
-msgstr "преносимо аудио"
-
-#: ../src/btsupport.py:113
-msgid "car audio"
-msgstr "аудио на кола"
-
-#: ../src/btsupport.py:114
-msgid "set-top box"
-msgstr "ТВ декодери (Set-top box)"
-
-#: ../src/btsupport.py:115
-msgid "hifi audio"
-msgstr "hifi аудио"
-
-#: ../src/btsupport.py:116
-msgid "vcr"
-msgstr "VCR"
-
-#: ../src/btsupport.py:117
-msgid "videocamera"
-msgstr "видеокамера"
-
-#: ../src/btsupport.py:118
-msgid "camcorder"
-msgstr "видеокамера (camcorder)"
-
-#: ../src/btsupport.py:119
-msgid "video monitor"
-msgstr "видео монитор"
-
-#: ../src/btsupport.py:120
-msgid "video display loudspeaker"
-msgstr "видео дисплей високоговорител"
-
-#: ../src/btsupport.py:121
-msgid "video conferencing"
-msgstr "устройство за видео конференции"
-
-#: ../src/btsupport.py:122
-msgid "gaming toy"
-msgstr "играчка за гейминг"
-
-#: ../src/btsupport.py:127
-msgid "joystick"
-msgstr "джойстик"
-
-#: ../src/btsupport.py:128
-msgid "gamepad"
-msgstr "геймпад"
-
-#: ../src/btsupport.py:129
-msgid "remote control"
-msgstr "дистанционно управление"
-
-#: ../src/btsupport.py:130
-msgid "sensing device"
-msgstr "сетивно устройство"
-
-#: ../src/btsupport.py:131
-msgid "digitizer tablet"
-msgstr "графичен таблет"
-
-#: ../src/btsupport.py:132
-msgid "card reader"
-msgstr "четец на карти"
-
-#: ../src/btsupport.py:136
-msgid "keyboard"
-msgstr "клавиатура"
-
-#: ../src/btsupport.py:137
-msgid "mouse"
-msgstr "мишка"
-
-#: ../src/btsupport.py:138
-msgid "keyboard+mouse"
-msgstr "клавиатура+мишка"
-
-#: ../src/btsupport.py:142
-msgid "display"
-msgstr "екран"
-
-#: ../src/btsupport.py:143
-msgid "camera"
-msgstr "камера"
-
-#: ../src/btsupport.py:144
-msgid "scanner"
-msgstr "скенер"
-
-#: ../src/btsupport.py:145
-msgid "printer"
-msgstr "принтер"
-
-#: ../src/settings.py:67
-msgid "New bluetooth device detected"
-msgstr "Засечено е ново Bluetooth устройство"
+#: ui/shortcuts.ui:16
+msgid "General"
+msgstr ""
+
+#: ui/shortcuts.ui:21
+msgid "Open the about dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:35
+msgid "Open the shortcuts dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:42
+msgid "Quit"
+msgstr ""
+
+#: ui/shortcuts.ui:52
+msgid "Scan"
+msgstr ""
+
+#: ui/shortcuts.ui:71
+msgid "Clear the devices list"
+msgstr "Изчистване на списъка"

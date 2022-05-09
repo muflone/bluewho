@@ -42,7 +42,7 @@
     </child>
     <child>
       <object class="GtkAction" id="action_stop">
-        <property name="label" context="gtk30">Stop</property>
+        <property name="label" translatable="yes">Stop detection</property>
         <property name="icon-name">bluetooth-disabled</property>
         <signal name="activate" handler="on_action_stop_activate" swapped="no"/>
       </object>
@@ -74,25 +74,25 @@
     </child>
     <child>
       <object class="GtkToggleAction" id="action_options_startup_scan">
-        <property name="label" translatable="yes">Detect devices at _startup</property>
+        <property name="label" translatable="yes">Detect devices at startup</property>
         <signal name="toggled" handler="on_action_options_toggled" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkToggleAction" id="action_options_show_local_adapters">
-        <property name="label" translatable="yes">Show _local adapters</property>
+        <property name="label" translatable="yes">Show local adapters</property>
         <signal name="toggled" handler="on_action_options_toggled" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkToggleAction" id="action_options_notification_show">
-        <property name="label" translatable="yes">S_end notification</property>
+        <property name="label" translatable="yes">Send notification</property>
         <signal name="toggled" handler="on_action_options_toggled" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkToggleAction" id="action_options_notification_play_sound">
-        <property name="label" translatable="yes">_Play a sound</property>
+        <property name="label" translatable="yes">Play a sound</property>
         <signal name="toggled" handler="on_action_options_toggled" swapped="no"/>
       </object>
     </child>
@@ -123,7 +123,7 @@
         <property name="related-action">action_scan</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" translatable="yes">Detect devices</property>
+        <property name="label">Detect devices</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -132,7 +132,7 @@
         <property name="related-action">action_stop</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" translatable="yes">Stop</property>
+        <property name="label">Stop detection</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -141,7 +141,7 @@
         <property name="related-action">action_clear</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" translatable="yes">Clear list</property>
+        <property name="label">Clear list</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -166,7 +166,7 @@
                 <property name="related-action">action_options_startup_scan</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Detect devices at startup</property>
+                <property name="label">Detect devices at startup</property>
               </object>
             </child>
             <child>
@@ -174,7 +174,7 @@
                 <property name="related-action">action_options_show_local_adapters</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Show local adapters</property>
+                <property name="label">Show local adapters</property>
               </object>
             </child>
             <child>
@@ -182,7 +182,7 @@
                 <property name="related-action">action_options_notification_show</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Send notification</property>
+                <property name="label">Send notification</property>
               </object>
             </child>
             <child>
@@ -190,7 +190,7 @@
                 <property name="related-action">action_options_notification_play_sound</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Play a sound</property>
+                <property name="label">Play a sound</property>
               </object>
             </child>
             <child>
@@ -204,7 +204,7 @@
                 <property name="related-action">action_options_scan_speed_high</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">High scan speed</property>
+                <property name="label">High scan speed</property>
                 <property name="draw-as-radio">True</property>
                 <property name="group">menuitem_preferences_scan_speed_low</property>
               </object>
@@ -214,7 +214,7 @@
                 <property name="related-action">action_options_scan_speed_medium</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Medium scan speed</property>
+                <property name="label">Medium scan speed</property>
                 <property name="draw-as-radio">True</property>
                 <property name="group">menuitem_preferences_scan_speed_low</property>
               </object>
@@ -224,7 +224,7 @@
                 <property name="related-action">action_options_scan_speed_low</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Low scan speed</property>
+                <property name="label">Low scan speed</property>
                 <property name="draw-as-radio">True</property>
               </object>
             </child>
@@ -257,7 +257,7 @@
     <property name="show-close-button">True</property>
     <child>
       <object class="GtkButton" id="button_scan">
-        <property name="label" translatable="yes">Detect devices</property>
+        <property name="label">Detect devices</property>
         <property name="related-action">action_scan</property>
         <property name="visible">True</property>
         <property name="can-focus">True</property>
@@ -267,7 +267,7 @@
     </child>
     <child>
       <object class="GtkButton" id="button_stop">
-        <property name="label" translatable="yes">Stop</property>
+        <property name="label">Stop detection</property>
         <property name="related-action">action_stop</property>
         <property name="visible">True</property>
         <property name="can-focus">True</property>
@@ -289,7 +289,7 @@
     </child>
     <child>
       <object class="GtkButton" id="button_clear">
-        <property name="label" translatable="yes">Clear list</property>
+        <property name="label">Clear list</property>
         <property name="related-action">action_clear</property>
         <property name="visible">True</property>
         <property name="can-focus">True</property>
@@ -320,7 +320,7 @@
     </child>
     <child>
       <object class="GtkButton" id="button_about">
-        <property name="label" translatable="yes">About</property>
+        <property name="label">About</property>
         <property name="related-action">action_about</property>
         <property name="visible">True</property>
         <property name="can-focus">True</property>
