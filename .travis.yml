@@ -10,7 +10,8 @@ addons:
     packages:
     - python3-gi                              # GObject
     - libgirepository1.0-dev                  # GObject
-    - gir1.2-gtk-3.0                          # gi.repository.gtk
+    - gir1.2-gtk-3.0                          # gi.repository.Gtk
+    - gir1.2-notify-0.7                       # gi.repository.Notify
     - libdbus-1-dev                           # DBus-1
 install:
   - pip install -r requirements_travis.txt
