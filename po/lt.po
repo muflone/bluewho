@@ -1,0 +1,153 @@
+# BlueWho
+# Information and notification of new discovered bluetooth devices.
+# Copyright (C) 2009-2022 Fabio Castelli (Muflone) <muflone(at)muflone.com>
+# Website: https://www.muflone.com/bluewho/
+# This file is distributed under the same license of Bluewho.
+# Lithuanian translation for BlueWho.
+#
+# Translators:
+# Moo, 2016,2021
+msgid ""
+msgstr ""
+"Project-Id-Version: BlueWho\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
+"POT-Creation-Date: 2022-05-10 00:45+0200\n"
+"PO-Revision-Date: 2014-09-06 00:03+0000\n"
+"Last-Translator: Moo, 2016,2021\n"
+"Language-Team: Lithuanian (http://www.transifex.com/muflone/bluewho/language/lt/)\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: bluewho/ui/about.py:51
+#, python-brace-format
+msgid "Version {VERSION}"
+msgstr ""
+
+#: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
+msgid "Detect devices"
+msgstr ""
+
+#: bluewho/ui/main.py:202 ui/main.ui:45 ui/shortcuts.ui:64
+msgid "Stop detection"
+msgstr ""
+
+#: bluewho/ui/main.py:221
+msgid "Do you want to clear the devices list?"
+msgstr ""
+
+#: bluewho/ui/main.py:252
+#, python-brace-format
+msgid "New device found: {NAME} [{ADDRESS}]"
+msgstr ""
+
+#: bluewho/ui/main.py:319
+msgid "Discovery aborted."
+msgstr ""
+
+#: bluewho/ui/main.py:324
+msgid "No local devices found during detection."
+msgstr "Aptikimo metu nerasta jokių vietinių įrenginių."
+
+#: bluewho/ui/main.py:391
+msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
+msgstr ""
+
+#: bluewho/ui/main.py:404
+msgid "Do you want to start the bluetooth devices?"
+msgstr ""
+
+#: bluewho/ui/model_devices.py:144
+msgid "New bluetooth device detected"
+msgstr "Aptiktas naujas bluetooth įrenginys"
+
+#: bluewho/ui/model_devices.py:145
+#, python-brace-format
+msgid "Name: {NAME}\nAddress: {ADDRESS}"
+msgstr ""
+
+#: ui/main.ui:53
+msgid "Clear list"
+msgstr "Išvalyti sąrašą"
+
+#: ui/main.ui:64 ui/shortcuts.ui:28
+msgid "Open the options menu"
+msgstr ""
+
+#: ui/main.ui:77
+msgid "Detect devices at startup"
+msgstr "Paleidimo metu aptikti įrenginius"
+
+#: ui/main.ui:83
+msgid "Show local adapters"
+msgstr "Rodyti vietinius adapterius"
+
+#: ui/main.ui:89
+msgid "Send notification"
+msgstr "Siųsti pranešimą"
+
+#: ui/main.ui:95
+msgid "Play a sound"
+msgstr "Groti garsą"
+
+#: ui/main.ui:101
+msgid "Low scan speed"
+msgstr ""
+
+#: ui/main.ui:107
+msgid "Medium scan speed"
+msgstr ""
+
+#: ui/main.ui:113
+msgid "High scan speed"
+msgstr ""
+
+#: ui/main.ui:158
+msgid "Options"
+msgstr ""
+
+#: ui/main.ui:385
+msgid "<b>Detected devices:</b>"
+msgstr "<b>Aptikti įrenginiai:</b>"
+
+#: ui/main.ui:422
+msgid "Type"
+msgstr "Tipas"
+
+#: ui/main.ui:439
+msgid "Name"
+msgstr ""
+
+#: ui/main.ui:451
+msgid "Bluetooth address"
+msgstr "Bluetooth adresas"
+
+#: ui/main.ui:462
+msgid "Last seen"
+msgstr "Paskiausiai matytas"
+
+#: ui/shortcuts.ui:16
+msgid "General"
+msgstr ""
+
+#: ui/shortcuts.ui:21
+msgid "Open the about dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:35
+msgid "Open the shortcuts dialog"
+msgstr ""
+
+#: ui/shortcuts.ui:42
+msgid "Quit"
+msgstr ""
+
+#: ui/shortcuts.ui:52
+msgid "Scan"
+msgstr ""
+
+#: ui/shortcuts.ui:71
+msgid "Clear the devices list"
+msgstr "Išvalyti sąrašą"
