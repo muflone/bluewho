@@ -20,8 +20,12 @@ BlueWho
 The scan will automatically detect any visible device and for each one that was
 detected a notification will be shown.
 
+![Main window](https://www.muflone.com/resources/bluewho/archive/latest/english/main.png)
+
 Each device found will be saved on the list with its name, type, address and
 last seen date and time.
+
+![Notification window](https://www.muflone.com/resources/bluewho/archive/latest/english/notification.png)
 
 # System Requirements
 
