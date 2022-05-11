@@ -17,6 +17,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
+import logging
 
 import bluezero.adapter
 
@@ -27,6 +28,10 @@ class BluetoothAdapters(object):
     @staticmethod
     def get_adapters():
         """Get a list of local adapters"""
-        adapters = [BluetoothAdapter(adapter)
-                    for adapter in bluezero.adapter.Adapter.available()]
+        try:
+            adapters = [BluetoothAdapter(adapter)
+                        for adapter in bluezero.adapter.Adapter.available()]
+        except bluezero.adapter.AdapterError as error:
+            adapters = []
+            logging.error(error)
         return adapters
