@@ -24,7 +24,7 @@ msgstr ""
 #: bluewho/ui/about.py:51
 #, python-brace-format
 msgid "Version {VERSION}"
-msgstr ""
+msgstr "Version {VERSION}"
 
 #: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
@@ -66,7 +66,7 @@ msgstr "Nouveau dispositif Bluetooth détecté"
 #: bluewho/ui/model_devices.py:145
 #, python-brace-format
 msgid "Name: {NAME}\nAddress: {ADDRESS}"
-msgstr ""
+msgstr "Nom: {NAME}\nAdresse: {ADDRESS}"
 
 #: ui/main.ui:53
 msgid "Clear list"
@@ -118,7 +118,7 @@ msgstr "Type"
 
 #: ui/main.ui:439
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ui/main.ui:451
 msgid "Bluetooth address"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: ui/shortcuts.ui:42
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: ui/shortcuts.ui:52
 msgid "Scan"

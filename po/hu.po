@@ -24,7 +24,7 @@ msgstr ""
 #: bluewho/ui/about.py:51
 #, python-brace-format
 msgid "Version {VERSION}"
-msgstr ""
+msgstr "{VERSION} verzió"
 
 #: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
