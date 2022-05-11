@@ -179,7 +179,8 @@ class Settings(object):
                     file.write(f'{address}\n'
                                f'{devices.get_name(device)}\n'
                                f'{hex(devices.get_class(device))}\n'
-                               f'{devices.get_last_seen(device)}\n>\n')
+                               f'{devices.get_last_seen(device)}\n'
+                               '>\n')
         elif FILE_DEVICES.exists():
             logging.info('Deleting the devices list')
             FILE_DEVICES.unlink()

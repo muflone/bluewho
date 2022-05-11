@@ -259,8 +259,8 @@ class MainWindow(UIBase):
                     # preference is set
                     for adapter in adapters:
                         device = DeviceInfo(address=adapter.get_address(),
-                                            name=f'{adapter.get_device_name()} '
-                                                 f'({adapter.get_name()})',
+                                            name=f'{adapter.get_device_name()}'
+                                                 f' ({adapter.get_name()})',
                                             device_class=1 << 2,
                                             last_seen=get_current_time(),
                                             notify=True)
