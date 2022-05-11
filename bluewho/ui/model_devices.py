@@ -62,13 +62,13 @@ class ModelDevices(ModelAbstract):
         self.btsupport = None
         self.audio_player = None
 
-    def add_data(self, item: DeviceInfo):
+    def add_data(self, device: DeviceInfo):
         """Add or update a model row"""
-        super(self.__class__, self).add_data(item)
-        if item.address not in self.rows:
+        super(self.__class__, self).add_data(device)
+        if device.address not in self.rows:
             # Add a new row if it doesn't exist
             minor, major, services_class = self.btsupport.get_classes(
-                item.device_class)
+                device.device_class)
             device_type = self.btsupport.get_device_type(major)
             icon_filename, device_subtype = self.btsupport.get_device_detail(
                 major, minor)
@@ -79,62 +79,62 @@ class ModelDevices(ModelAbstract):
                 icon_filename = 'unknown.png'
                 icon_path = DIR_ICONS / icon_filename
             # Replace None with empty string in name
-            if item.name is None:
-                item.name = ''
-            if item.address in self.rows:
+            if device.name is None:
+                device.name = ''
+            if device.address in self.rows:
                 # Update the existing device in the model
-                treeiter = self.rows[item.address]
+                treeiter = self.rows[device.address]
                 # Update icon
                 old_value = self.get_icon(treeiter)
                 if icon_path != old_value:
-                    logging.debug(f'Updated device "{item.name}" icon '
+                    logging.debug(f'Updated device "{device.name}" icon '
                                   f'from {os.path.basename(old_value)} '
                                   f'to {os.path.basename(icon_path)}')
                     self.set_icon(treeiter, icon_path)
                 # Update device name
                 old_value = self.get_name(treeiter)
-                if item.name and item.name != old_value:
-                    logging.debug(f'Updated device "{item.name}" name '
-                                  f'from "{old_value}" to "{item.name}"')
-                    self.set_name(treeiter, item.name)
+                if device.name and device.name != old_value:
+                    logging.debug(f'Updated device "{device.name}" name '
+                                  f'from "{old_value}" to "{device.name}"')
+                    self.set_name(treeiter, device.name)
                 # Update device class
                 old_value = self.get_class(treeiter)
-                if item.device_class != old_value:
-                    logging.debug(f'Updated device "{item.name}" class '
-                                  f'from {old_value} to {item.device_class}')
-                    self.set_class(treeiter, item.device_class)
+                if device.device_class != old_value:
+                    logging.debug(f'Updated device "{device.name}" class '
+                                  f'from {old_value} to {device.device_class}')
+                    self.set_class(treeiter, device.device_class)
                 # Update device type
                 old_value = self.get_type(treeiter)
                 if device_type != old_value:
-                    logging.debug(f'Updated device "{item.name}" type '
+                    logging.debug(f'Updated device "{device.name}" type '
                                   f'from {old_value} to {device_type}')
                     self.set_type(treeiter, device_type)
                 # Update device subtype
                 old_value = self.get_subtype(treeiter)
                 if device_subtype != old_value:
-                    logging.debug(f'Updated device "{item.name}" subtype '
+                    logging.debug(f'Updated device "{device.name}" subtype '
                                   f'from {old_value} to {device_subtype}')
                     self.set_subtype(treeiter, device_subtype)
                 # Update device last seen time (always)
-                self.set_last_seen(treeiter, item.last_seen)
+                self.set_last_seen(treeiter, device.last_seen)
             else:
                 # Add a new device to the model
                 treeiter = self.model.append([
-                    item.address,
+                    device.address,
                     GdkPixbuf.Pixbuf.new_from_file(str(icon_path)),
                     str(icon_path),
-                    item.device_class,
+                    device.device_class,
                     device_type,
                     _(device_type),
                     device_subtype,
                     _(device_subtype),
-                    item.name,
-                    item.last_seen])
-                self.rows[item.address] = treeiter
-                logging.debug(f'Added new device "{item.name}" '
-                              f'({item.address})')
+                    device.name,
+                    device.last_seen])
+                self.rows[device.address] = treeiter
+                logging.debug(f'Added new device "{device.name}" '
+                              f'({device.address})')
                 # Execute notification for new devices
-                if item.notify:
+                if device.notify:
                     # Play the sound notification
                     if self.preferences.get(PREFERENCES_PLAY_SOUND):
                         self.audio_player.play_file(FILE_SOUND)
@@ -143,27 +143,19 @@ class ModelDevices(ModelAbstract):
                         notification = Notify.Notification.new(
                             _('New bluetooth device detected'),
                             _('Name: {NAME}\nAddress: {ADDRESS}').format(
-                                NAME=item.name or 'unknown',
-                                ADDRESS=item.address),
+                                NAME=device.name or 'unknown',
+                                ADDRESS=device.address),
                             # Notification requires absolute paths
                             str(icon_path.resolve()))
                         notification.set_urgency(Notify.Urgency.LOW)
                         notification.show()
         else:
             # Update existing row
-            treeiter = self.rows[item.address]
-            self.set_last_seen(treeiter, item.last_seen)
-            logging.debug(f'Updated device "{item.name}" '
-                          f'({item.address})')
+            treeiter = self.rows[device.address]
+            self.set_last_seen(treeiter, device.last_seen)
+            logging.debug(f'Updated device "{device.name}" '
+                          f'({device.address})')
         return treeiter
-
-    def add_device(self, address, name, device_class, last_seen, notify):
-        """Add a new device to the list and pops notification"""
-        self.add_data(DeviceInfo(address=address,
-                                 name=name,
-                                 device_class=device_class,
-                                 last_seen=last_seen,
-                                 notify=notify))
 
     def get_icon(self, treeiter):
         """Get the device icon"""

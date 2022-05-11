@@ -22,6 +22,7 @@ import configparser
 import logging
 
 from bluewho.constants import FILE_DEVICES
+from bluewho.models.device_info import DeviceInfo
 
 POSITION_LEFT = 'left'
 POSITION_TOP = 'top'
@@ -153,16 +154,19 @@ class Settings(object):
             with open(FILE_DEVICES, 'r') as file:
                 # Each device is separated by a single line with >
                 lines = file.read().split('\n>\n')
-                for device in lines:
-                    if device:
-                        device = device.split('\n')
-                        devices.append({
-                          'address': device[0],
-                          'name': device[1],
-                          'class': int(device[2],
-                                       device[2].startswith('0x')
-                                       and 16 or 10),
-                          'lastseen': device[3]})
+                for line in lines:
+                    if line:
+                        line = line.split('\n')
+                        device_class = int(line[2],
+                                           16
+                                           if line[2].startswith('0x')
+                                           else 10)
+                        device = DeviceInfo(address=line[0],
+                                            name=line[1],
+                                            device_class=device_class,
+                                            last_seen=line[3],
+                                            notify=False)
+                        devices.append(device)
         return devices
 
     def save_devices(self, devices):

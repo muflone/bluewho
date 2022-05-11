@@ -40,6 +40,7 @@ from bluewho.functions import (_,
                                idle_add,
                                text_gtk30,
                                thread_safe)
+from bluewho.models.device_info import DeviceInfo
 from bluewho.preferences import (PREFERENCES_NOTIFICATION,
                                  PREFERENCES_PLAY_SOUND,
                                  PREFERENCES_SCAN_SPEED,
@@ -78,11 +79,7 @@ class MainWindow(UIBase):
                                           self.btsupport)
         # Restore the devices list
         for device in self.settings.load_devices():
-            self.add_device(name=device['name'],
-                            address=device['address'],
-                            device_class=device['class'],
-                            last_seen=device['lastseen'],
-                            notify=False)
+            self.add_device(device)
         if len(self.model_devices) > 0:
             self.ui.treeview_devices.set_cursor(0)
         self.ui.treeview_devices.grab_focus()
@@ -234,28 +231,16 @@ class MainWindow(UIBase):
             if item is action:
                 self.preferences.set(setting_name, item.get_active())
 
-    def add_device(self, name, address, device_class, last_seen, notify):
-        """Add a device to the model in a thread safe way"""
-        return self.add_device_safe(name,
-                                    address,
-                                    device_class,
-                                    last_seen,
-                                    notify)
-
     @thread_safe
-    def add_device_safe(self, name, address, device_class, last_seen, notify):
+    def add_device(self, device: DeviceInfo):
         """Add a device to the model and optionally notify it"""
-        if notify and address not in self.model_devices.rows:
+        if device.notify and device.address not in self.model_devices.rows:
             # Add notification
             self.set_status_bar_message(
                 _('New device found: {NAME} [{ADDRESS}]').format(
-                    NAME=name,
-                    ADDRESS=address))
-        self.model_devices.add_device(address=address,
-                                      name=name,
-                                      device_class=device_class,
-                                      last_seen=last_seen,
-                                      notify=notify)
+                    NAME=device.name,
+                    ADDRESS=device.address))
+        self.model_devices.add_data(device=device)
         return False
 
     def do_scan(self):
@@ -273,12 +258,13 @@ class MainWindow(UIBase):
                     # Only show local adapters when PREFERENCES_SHOW_LOCAL
                     # preference is set
                     for adapter in adapters:
-                        self.add_device(name=f'{adapter.get_device_name()} '
-                                             f'({adapter.get_name()})',
-                                        address=adapter.get_address(),
-                                        device_class=1 << 2,
-                                        last_seen=get_current_time(),
-                                        notify=True)
+                        device = DeviceInfo(address=adapter.get_address(),
+                                            name=f'{adapter.get_device_name()} '
+                                                 f'({adapter.get_name()})',
+                                            device_class=1 << 2,
+                                            last_seen=get_current_time(),
+                                            notify=True)
+                        self.add_device(device)
                 if not self.thread_scanner:
                     # Abort scan per removed thread
                     logging.warning('thread removed')
@@ -296,12 +282,8 @@ class MainWindow(UIBase):
                 if self.discoverer.start():
                     # Discovery started
                     for item in self.discoverer.get_devices():
-                        device = BluetoothDevice(device=item)
-                        self.add_device(name=device.alias,
-                                        address=device.address,
-                                        device_class=device.device_class,
-                                        last_seen=get_current_time(),
-                                        notify=True)
+                        device = BluetoothDevice(device=item).to_device_info()
+                        self.add_device(device)
                     # Add some fake devices for testing
                     if USE_FAKE_DEVICES:
                         self.fake_devices = FakeDevices()

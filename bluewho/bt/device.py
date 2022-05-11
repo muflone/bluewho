@@ -22,6 +22,9 @@ import bluezero.device
 
 import dbus
 
+from bluewho.functions import get_current_time
+from bluewho.models.device_info import DeviceInfo
+
 
 class BluetoothDevice(object):
     def __init__(self, device: bluezero.device.Device):
@@ -44,3 +47,11 @@ class BluetoothDevice(object):
             self.device_class = device.bt_class
         except dbus.exceptions.DBusException:
             self.device_class = None
+
+    def to_device_info(self) -> DeviceInfo:
+        """Return data in DeviceInfo format"""
+        return DeviceInfo(address=self.address,
+                          name=self.name,
+                          device_class=self.device_class,
+                          last_seen=get_current_time(),
+                          notify=True)
