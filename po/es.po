@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-10 00:45+0200\n"
+"POT-Creation-Date: 2022-05-12 01:00+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Luca Della Ghezza <luca_dgh(at)hotmail.it>\n"
 "Language-Team: Spanish (https://www.transifex.com/muflone/bluewho/language/es/)\n"
@@ -27,44 +27,44 @@ msgstr ""
 msgid "Version {VERSION}"
 msgstr "Versión {VERSION}"
 
-#: bluewho/ui/main.py:193 ui/main.ui:36 ui/shortcuts.ui:57
+#: bluewho/ui/main.py:188 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Detecta los dispositivos"
 
-#: bluewho/ui/main.py:202 ui/main.ui:45 ui/shortcuts.ui:64
+#: bluewho/ui/main.py:197 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
 msgstr ""
 
-#: bluewho/ui/main.py:221
+#: bluewho/ui/main.py:216
 msgid "Do you want to clear the devices list?"
 msgstr ""
 
-#: bluewho/ui/main.py:252
+#: bluewho/ui/main.py:239
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr ""
 
-#: bluewho/ui/main.py:319
+#: bluewho/ui/main.py:302
 msgid "Discovery aborted."
 msgstr ""
 
-#: bluewho/ui/main.py:324
+#: bluewho/ui/main.py:307 bluewho/ui/main.py:351
 msgid "No local devices found during detection."
 msgstr "No se encontró ningun dispositivo."
 
-#: bluewho/ui/main.py:391
+#: bluewho/ui/main.py:385
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
 msgstr ""
 
-#: bluewho/ui/main.py:404
+#: bluewho/ui/main.py:397
 msgid "Do you want to start the bluetooth devices?"
 msgstr ""
 
-#: bluewho/ui/model_devices.py:144
+#: bluewho/ui/model_devices.py:145
 msgid "New bluetooth device detected"
 msgstr "Nuevos dispositivos bluetooth detectados"
 
-#: bluewho/ui/model_devices.py:145
+#: bluewho/ui/model_devices.py:146
 #, python-brace-format
 msgid "Name: {NAME}\nAddress: {ADDRESS}"
 msgstr "Nombre: {NAME}\nDirección: {ADDRESS}"
