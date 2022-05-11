@@ -22,6 +22,7 @@ import random
 
 from bluewho.constants import FILE_FAKE_DEVICES
 from bluewho.functions import readlines
+from bluewho.models.device_info import DeviceInfo
 
 
 class FakeDevices(object):
@@ -41,7 +42,12 @@ class FakeDevices(object):
                                             for octet in range(6)))).upper()
                 class_type = int(class_type,
                                  class_type.startswith('0x') and 16 or 10)
-                self.devices.append([name, address, class_type])
+                device = DeviceInfo(address=address,
+                                    name=name,
+                                    device_class=class_type,
+                                    last_seen=None,
+                                    notify=True)
+                self.devices.append(device)
 
     def fetch_one(self):
         """Fetch a single fake device"""
@@ -50,7 +56,7 @@ class FakeDevices(object):
     def fetch_max(self, count):
         """Fetch max count fake devices"""
         return random.sample(self.devices,
-                             random.randint(0,
+                             random.randint(1,
                                             count if count <= len(self.devices)
                                             else len(self.devices)))
 

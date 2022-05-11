@@ -28,7 +28,7 @@ from bluewho.audio_player import AudioPlayer
 from bluewho.constants import (APP_NAME,
                                DIR_ICONS,
                                FILE_SOUND)
-from bluewho.functions import _
+from bluewho.functions import _, get_current_time
 from bluewho.models.abstract import ModelAbstract
 from bluewho.models.device_info import DeviceInfo
 from bluewho.preferences import (PREFERENCES_NOTIFICATION,
@@ -116,7 +116,8 @@ class ModelDevices(ModelAbstract):
                                   f'from {old_value} to {device_subtype}')
                     self.set_subtype(treeiter, device_subtype)
                 # Update device last seen time (always)
-                self.set_last_seen(treeiter, device.last_seen)
+                self.set_last_seen(treeiter,
+                                   device.last_seen or get_current_time())
             else:
                 # Add a new device to the model
                 treeiter = self.model.append([
@@ -129,7 +130,7 @@ class ModelDevices(ModelAbstract):
                     device_subtype,
                     _(device_subtype),
                     device.name,
-                    device.last_seen])
+                    device.last_seen or get_current_time()])
                 self.rows[device.address] = treeiter
                 logging.debug(f'Added new device "{device.name}" '
                               f'({device.address})')
@@ -152,7 +153,8 @@ class ModelDevices(ModelAbstract):
         else:
             # Update existing row
             treeiter = self.rows[device.address]
-            self.set_last_seen(treeiter, device.last_seen)
+            self.set_last_seen(treeiter,
+                               device.last_seen or get_current_time())
             logging.debug(f'Updated device "{device.name}" '
                           f'({device.address})')
         return treeiter

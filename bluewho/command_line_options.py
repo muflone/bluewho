@@ -49,6 +49,11 @@ class CommandLineOptions(object):
                                  action='store_const',
                                  const=VERBOSE_LEVEL_QUIET,
                                  help='hide error and information messages')
+        self.parser.add_argument('-f', '--fake_devices',
+                                 dest='fake_devices',
+                                 required=False,
+                                 type=int,
+                                 help='fake devices count per scan')
         self.options = None
 
     def add_group(self, name: str) -> argparse._ArgumentGroup:

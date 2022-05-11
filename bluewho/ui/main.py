@@ -30,8 +30,7 @@ from bluewho.bt.support import BluetoothSupport
 from bluewho.constants import (APP_NAME,
                                DOMAIN_NAME,
                                FILE_ICON,
-                               FILE_SETTINGS,
-                               USE_FAKE_DEVICES)
+                               FILE_SETTINGS)
 from bluewho.daemon_thread import DaemonThread
 from bluewho.fake_devices import FakeDevices
 from bluewho.functions import (_,
@@ -180,7 +179,7 @@ class MainWindow(UIBase):
         self.application.quit()
 
     def on_action_scan_activate(self, widget):
-        if self.check_bluetooth_availability():
+        if self.check_bluetooth_availability() or self.options.fake_devices:
             # Start the scan
             self.ui.spinner.set_visible(True)
             self.ui.spinner.start()
@@ -247,16 +246,21 @@ class MainWindow(UIBase):
         """Scan for bluetooth devices until cancelled"""
         # Find local adapters
         adapters = BluetoothAdapters.get_adapters()
-        if adapters:
-            # Discover devices via bluetooth
-            if not self.discoverer:
-                self.discoverer = BluetoothDeviceDiscoverer(
-                    adapter=adapters[0],
-                    timeout=self.preferences.get(PREFERENCES_SCAN_SPEED))
+        if adapters or self.options.fake_devices:
+            if self.options.fake_devices:
+                # Add some fake devices
+                fake_devices = FakeDevices()
+            else:
+                # Discover devices via bluetooth
+                if not self.discoverer:
+                    self.discoverer = BluetoothDeviceDiscoverer(
+                        adapter=adapters[0],
+                        timeout=self.preferences.get(PREFERENCES_SCAN_SPEED))
             while True:
-                if self.preferences.get(PREFERENCES_SHOW_LOCAL):
+                if (self.preferences.get(PREFERENCES_SHOW_LOCAL) and
+                        not self.options.fake_devices):
                     # Only show local adapters when PREFERENCES_SHOW_LOCAL
-                    # preference is set
+                    # preference is set and not using fake devices
                     for adapter in adapters:
                         device = DeviceInfo(address=adapter.get_address(),
                                             name=f'{adapter.get_device_name()}'
@@ -268,36 +272,34 @@ class MainWindow(UIBase):
                 if not self.thread_scanner:
                     # Abort scan per removed thread
                     logging.warning('thread removed')
-                    self.discoverer.stop()
+                    if self.discoverer:
+                        self.discoverer.stop()
                     break
                 elif self.thread_scanner.cancelled:
                     # Cancel the running thread
                     logging.info('cancel')
-                    self.discoverer.stop()
+                    if self.discoverer:
+                        self.discoverer.stop()
                     break
                 # Wait until an event awakes the thread again
                 if self.thread_scanner.paused:
                     self.thread_scanner.event.wait()
                     self.thread_scanner.event.clear()
-                if self.discoverer.start():
-                    # Discovery started
-                    for item in self.discoverer.get_devices():
-                        device = BluetoothDevice(device=item).to_device_info()
+                if self.options.fake_devices:
+                    # Add some fake devices
+                    devices = fake_devices.fetch_max(self.options.fake_devices)
+                    for device in devices:
                         self.add_device(device)
-                    # Add some fake devices for testing
-                    if USE_FAKE_DEVICES:
-                        self.fake_devices = FakeDevices()
-                        for fake_device in self.fake_devices.fetch_many():
-                            self.add_device(name=fake_device[0],
-                                            address=fake_device[1],
-                                            device_class=fake_device[2],
-                                            last_seen=get_current_time(),
-                                            notify=True)
-                        time.sleep(2)
+                    time.sleep(self.preferences.get(PREFERENCES_SCAN_SPEED))
                 else:
-                    logging.info('Discovery was aborted')
-                    self.set_status_bar_message(
-                        _('Discovery aborted.'))
+                    # Start the discovery
+                    if self.discoverer.start():
+                        for item in self.discoverer.get_devices():
+                            device = BluetoothDevice(device=item)
+                            self.add_device(device.to_device_info())
+                    else:
+                        logging.info('Discovery was aborted')
+                        self.set_status_bar_message(_('Discovery aborted.'))
         else:
             # No local adapters found
             logging.info('No local devices found during detection')

@@ -22,87 +22,87 @@
 # Format: NAME | MAC ADDRESS | BLUETOOTH CLASS TYPE (0x for hexadecimal value)
 
 # Major class 0 Unknown
-#Adapter | <RANDOM> | 0x004
+Adapter | <RANDOM> | 0x004
 
 # Major class 1 Computer
-#Desktop workstation | <RANDOM> | 0x104
-#Server-class computer | <RANDOM> | 0x108
-#Laptop | <RANDOM> | 0x10C
-#Handheld PC/PDA | <RANDOM> | 0x110
-#Palm size PC/PDA | <RANDOM> | 0x114
-#Wearable computer | <RANDOM> | 0x118
+Desktop workstation | <RANDOM> | 0x104
+Server-class computer | <RANDOM> | 0x108
+Laptop | <RANDOM> | 0x10C
+Handheld PC/PDA | <RANDOM> | 0x110
+Palm size PC/PDA | <RANDOM> | 0x114
+Wearable computer | <RANDOM> | 0x118
 
 # Major class 2 Phone
-#Cellular | <RANDOM> | 0x204
-#Cordless | <RANDOM> | 0x208
-#Smartphone | <RANDOM> | 0x20C
-#Modem | <RANDOM> | 0x210
-#ISDN | <RANDOM> | 0x214
+Cellular | <RANDOM> | 0x204
+Cordless | <RANDOM> | 0x208
+Smartphone | <RANDOM> | 0x20C
+Modem | <RANDOM> | 0x210
+ISDN | <RANDOM> | 0x214
 
 # Major class 3 LAN/Network
-#Network available | <RANDOM> | 0x300
-#Network 1-17% used | <RANDOM> | 0x320
-#Network 17-33% used | <RANDOM> | 0x340
-#Network 33-50% used | <RANDOM> | 0x360
-#Network 50-67% used | <RANDOM> | 0x380
-#Network 67-83% used | <RANDOM> | 0x3A0
-#Network 83-99% used | <RANDOM> | 0x3C0
-#Network unavailable | <RANDOM> | 0x3E0
+Network available | <RANDOM> | 0x300
+Network 1-17% used | <RANDOM> | 0x320
+Network 17-33% used | <RANDOM> | 0x340
+Network 33-50% used | <RANDOM> | 0x360
+Network 50-67% used | <RANDOM> | 0x380
+Network 67-83% used | <RANDOM> | 0x3A0
+Network 83-99% used | <RANDOM> | 0x3C0
+Network unavailable | <RANDOM> | 0x3E0
 
 # Major class 4 Audio/Video
-#Wearable headset | <RANDOM> | 0x404
-#Hands-free | <RANDOM> | 0x408
-#Microphone | <RANDOM> | 0x410
-#Loudspeaker | <RANDOM> | 0x414
-#Headphones | <RANDOM> | 0x418
-#Portable audio | <RANDOM> | 0x41C
-#Car audio | <RANDOM> | 0x420
-#Set-top box | <RANDOM> | 0x424
-#HiFi Audio | <RANDOM> | 0x428
-#VCR | <RANDOM> | 0x42C
-#Videocamera | <RANDOM> | 0x430
-#Camcorder | <RANDOM> | 0x434
-#Video monitor | <RANDOM> | 0x438
-#Video display with loudspeaker | <RANDOM> | 0x43C
-#Video conferencing | <RANDOM> | 0x440
-#Gaming | <RANDOM> | 0x448
+Wearable headset | <RANDOM> | 0x404
+Hands-free | <RANDOM> | 0x408
+Microphone | <RANDOM> | 0x410
+Loudspeaker | <RANDOM> | 0x414
+Headphones | <RANDOM> | 0x418
+Portable audio | <RANDOM> | 0x41C
+Car audio | <RANDOM> | 0x420
+Set-top box | <RANDOM> | 0x424
+HiFi Audio | <RANDOM> | 0x428
+VCR | <RANDOM> | 0x42C
+Videocamera | <RANDOM> | 0x430
+Camcorder | <RANDOM> | 0x434
+Video monitor | <RANDOM> | 0x438
+Video display with loudspeaker | <RANDOM> | 0x43C
+Video conferencing | <RANDOM> | 0x440
+Gaming | <RANDOM> | 0x448
 
 # Major class 5 Peripherals
-#Joystick | <RANDOM> | 0x504
-#Gamepad | <RANDOM> | 0x508
-#Remote control | <RANDOM> | 0x50C
-#Sensing device | <RANDOM> | 0x510
-#Digitizer tablet | <RANDOM> | 0x514
-#Card reader | <RANDOM> | 0x518
-#Keyboard | <RANDOM> | 0x540
-#Pointing device | <RANDOM> | 0x580
-#Combo keyboard with pointing device | <RANDOM> | 0x5C0
+Joystick | <RANDOM> | 0x504
+Gamepad | <RANDOM> | 0x508
+Remote control | <RANDOM> | 0x50C
+Sensing device | <RANDOM> | 0x510
+Digitizer tablet | <RANDOM> | 0x514
+Card reader | <RANDOM> | 0x518
+Keyboard | <RANDOM> | 0x540
+Pointing device | <RANDOM> | 0x580
+Combo keyboard with pointing device | <RANDOM> | 0x5C0
 
 # Major class 6 Imaging
-#Display | <RANDOM> | 0x610
-#Camera | <RANDOM> | 0x620
-#Scanner | <RANDOM> | 0x640
-#Printer | <RANDOM> | 0x680
+Display | <RANDOM> | 0x610
+Camera | <RANDOM> | 0x620
+Scanner | <RANDOM> | 0x640
+Printer | <RANDOM> | 0x680
 
 # Major class 7 Wearable
-#Wrist watch | <RANDOM> | 0x704
-#Pager | <RANDOM> | 0x708
-#Jacket | <RANDOM> | 0x70C
-#Helmet | <RANDOM> | 0x710
-#Glasses | <RANDOM> | 0x714
+Wrist watch | <RANDOM> | 0x704
+Pager | <RANDOM> | 0x708
+Jacket | <RANDOM> | 0x70C
+Helmet | <RANDOM> | 0x710
+Glasses | <RANDOM> | 0x714
 
 # Major class 8 Toy
-#Robot | <RANDOM> | 0x804
-#Vehicle | <RANDOM> | 0x808
-#Doll | <RANDOM> | 0x80C
-#Controller | <RANDOM> | 0x810
-#Game | <RANDOM> | 0x814
+Robot | <RANDOM> | 0x804
+Vehicle | <RANDOM> | 0x808
+Doll | <RANDOM> | 0x80C
+Controller | <RANDOM> | 0x810
+Game | <RANDOM> | 0x814
 
 # Major class 9 Health
-#Blood pressure | <RANDOM> | 0x904
-#Thermometer | <RANDOM> | 0x908
-#Weighing | <RANDOM> | 0x90C
-#Glucose | <RANDOM> | 0x910
-#Pulse oximeter | <RANDOM> | 0x914
-#Pulse rate | <RANDOM> | 0x918
-#Data display | <RANDOM> | 0x91C
+Blood pressure | <RANDOM> | 0x904
+Thermometer | <RANDOM> | 0x908
+Weighing | <RANDOM> | 0x90C
+Glucose | <RANDOM> | 0x910
+Pulse oximeter | <RANDOM> | 0x914
+Pulse rate | <RANDOM> | 0x918
+Data display | <RANDOM> | 0x91C

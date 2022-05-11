@@ -40,7 +40,6 @@ DOMAIN_NAME = 'bluewho'
 VERBOSE_LEVEL_QUIET = 0
 VERBOSE_LEVEL_NORMAL = 1
 VERBOSE_LEVEL_MAX = 2
-USE_FAKE_DEVICES = False
 
 # Paths constants
 path_xdg_data_home = pathlib.Path(BaseDirectory.xdg_data_home)
