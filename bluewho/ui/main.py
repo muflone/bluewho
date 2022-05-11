@@ -322,21 +322,33 @@ class MainWindow(UIBase):
         """
         Try to power on every available adapter
         """
-        for adapter in BluetoothAdapters.get_adapters():
-            logging.info(f'powering on adapter {adapter.get_device_name()}')
-            try:
-                adapter.set_powered(status=True)
-            except GLib.Error as e:
-                # Intercept errors
-                logging.error(e)
-                dialog = MessageDialogOK(
-                    parent=self.ui.window,
-                    message_type=Gtk.MessageType.WARNING,
-                    title='Unable to start adapter '
-                          f'{adapter.get_device_name()}',
-                    msg1=None,
-                    msg2=e.message)
-                dialog.run()
+        adapters = BluetoothAdapters.get_adapters()
+        if adapters:
+            for adapter in adapters:
+                logging.info('powering on adapter '
+                             f'{adapter.get_device_name()}')
+                try:
+                    adapter.set_powered(status=True)
+                except GLib.Error as e:
+                    # Intercept errors
+                    logging.error(e)
+                    dialog = MessageDialogOK(
+                        parent=self.ui.window,
+                        message_type=Gtk.MessageType.WARNING,
+                        title='Unable to start adapter '
+                              f'{adapter.get_device_name()}',
+                        msg1=None,
+                        msg2=e.message)
+                    dialog.run()
+        else:
+            # No local adapters found
+            dialog = MessageDialogOK(
+                parent=self.ui.window,
+                message_type=Gtk.MessageType.WARNING,
+                title=None,
+                msg1=_('No local devices found during detection.'),
+                msg2=None)
+            dialog.run()
 
     def check_adapter_activation(self):
         """Check if any Bluetooth adapter is powered on"""
