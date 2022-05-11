@@ -25,6 +25,7 @@ class MessageDialog(Gtk.Window):
     def __init__(self, parent, message_type, title, msg1, msg2,
                  buttons, default_response_id):
         """Prepare the message dialog"""
+        super().__init__()
         self.dialog = Gtk.MessageDialog(parent=parent,
                                         flags=Gtk.DialogFlags.MODAL,
                                         message_type=message_type,

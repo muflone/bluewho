@@ -43,7 +43,7 @@ VERBOSE_LEVEL_MAX = 2
 
 # Paths constants
 path_xdg_data_home = pathlib.Path(BaseDirectory.xdg_data_home)
-if ((pathlib.Path('data') / 'bluewho.png')).is_file():
+if (pathlib.Path('data') / 'bluewho.png').is_file():
     # Use relative paths
     DIR_PREFIX = pathlib.Path('data').parent.absolute()
     DIR_LOCALE = DIR_PREFIX / 'locale'
@@ -71,7 +71,7 @@ DIR_ICONS = DIR_DATA / 'icons'
 DIR_UI = DIR_PREFIX / 'ui'
 try:
     # In read-only environments, the settings folder cannot be created
-    # (eg in a Debian pbuilder fakeroot)
+    # (e.g. in a Debian pbuilder fakeroot)
     DIR_SETTINGS = pathlib.Path(BaseDirectory.save_config_path(DOMAIN_NAME))
 except Exception:
     # Get the settings path without actually creating it

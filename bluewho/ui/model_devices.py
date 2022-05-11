@@ -195,11 +195,11 @@ class ModelDevices(ModelAbstract):
         self.set_data(treeiter, self.COL_TYPE_TRANSLATED, _(value))
 
     def get_subtype(self, treeiter):
-        """Get the device sub type (untranslated)"""
+        """Get the device subtype (untranslated)"""
         return self.get_data(treeiter, self.COL_SUBTYPE)
 
     def set_subtype(self, treeiter, value):
-        """Set the device sub type (untranslated)"""
+        """Set the device subtype (untranslated)"""
         self.set_data(treeiter, self.COL_SUBTYPE, value)
         self.set_data(treeiter, self.COL_SUBTYPE_TRANSLATED, _(value))
 

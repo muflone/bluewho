@@ -27,7 +27,7 @@ from bluewho.models.device_info import DeviceInfo
 
 class FakeDevices(object):
     def __init__(self):
-        """Fake devices producer by reading the FILE_FAKE_DEVICES file"""
+        """Fake devices' producer by reading the FILE_FAKE_DEVICES file"""
         self.devices = []
         for line in readlines(FILE_FAKE_DEVICES):
             # Skip comments
@@ -39,7 +39,7 @@ class FakeDevices(object):
                 if address == '<RANDOM>':
                     address = ':'.join(map(lambda number: '%02x' % number,
                                            (random.randint(0, 255)
-                                            for octet in range(6)))).upper()
+                                            for _ in range(6)))).upper()
                 class_type = int(class_type,
                                  class_type.startswith('0x') and 16 or 10)
                 device = DeviceInfo(address=address,

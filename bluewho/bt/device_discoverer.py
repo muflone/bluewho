@@ -26,7 +26,7 @@ import bluezero.device
 import bluezero.dbus_tools
 
 
-class BluetoothDeviceDiscoverer():
+class BluetoothDeviceDiscoverer(object):
     def __init__(self, adapter, timeout):
         self.adapter = adapter
         self.timeout = timeout

@@ -178,7 +178,7 @@ class MainWindow(UIBase):
         self.model_devices.destroy()
         self.application.quit()
 
-    def on_action_scan_activate(self, widget):
+    def on_action_scan_activate(self, action):
         if self.check_bluetooth_availability() or self.options.fake_devices:
             # Start the scan
             self.ui.spinner.set_visible(True)
@@ -189,7 +189,7 @@ class MainWindow(UIBase):
             self.thread_scanner.start()
             self.ui.action_scan.set_sensitive(False)
 
-    def on_action_stop_activate(self, widget):
+    def on_action_stop_activate(self, action):
         if self.thread_scanner:
             # Check if the scanner is still running and cancel it
             if self.thread_scanner.is_alive():
@@ -207,12 +207,12 @@ class MainWindow(UIBase):
                 self.thread_scanner = None
                 self.ui.action_scan.set_sensitive(True)
 
-    def on_action_clear_activate(self, widget):
+    def on_action_clear_activate(self, action):
         """Clear the devices list"""
         dialog = MessageDialogNoYes(
             parent=self.ui.window,
             message_type=Gtk.MessageType.QUESTION,
-            title=None,
+            title='',
             msg1=_('Do you want to clear the devices list?'),
             msg2=None)
         if dialog.run() == Gtk.ResponseType.YES:
@@ -347,7 +347,7 @@ class MainWindow(UIBase):
             dialog = MessageDialogOK(
                 parent=self.ui.window,
                 message_type=Gtk.MessageType.WARNING,
-                title=None,
+                title='',
                 msg1=_('No local devices found during detection.'),
                 msg2=None)
             dialog.run()
@@ -381,7 +381,7 @@ class MainWindow(UIBase):
             dialog = MessageDialogOK(
                 parent=self.ui.window,
                 message_type=Gtk.MessageType.ERROR,
-                title=None,
+                title='',
                 msg1=_('Bluez seems not to be started, please make sure '
                        'the bluetooth service is started'),
                 msg2=None)
@@ -393,7 +393,7 @@ class MainWindow(UIBase):
                 dialog = MessageDialogYesNo(
                     parent=self.ui.window,
                     message_type=Gtk.MessageType.QUESTION,
-                    title=None,
+                    title='',
                     msg1=_('Do you want to start the bluetooth devices?'),
                     msg2=None)
                 if dialog.run() == Gtk.ResponseType.YES:

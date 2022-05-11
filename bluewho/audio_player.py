@@ -38,9 +38,9 @@ class AudioPlayer(object):
 
     def which(self, program):
         """Determine the full path of an executable program"""
-        def is_exe(fpath):
+        def is_exe(file_path):
             """Check if fpath is an executable file"""
-            return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+            return os.path.isfile(file_path) and os.access(file_path, os.X_OK)
 
         fpath, fname = os.path.split(program)
         if fpath:
