@@ -51,8 +51,8 @@ class FakeDevices(object):
         """Fetch max count fake devices"""
         return random.sample(self.devices,
                              random.randint(0,
-                                            count <= len(self.devices)
-                                            and count or len(self.devices)))
+                                            count if count <= len(self.devices)
+                                            else len(self.devices)))
 
     def fetch_many(self):
         """Fetch a random number of fake devices"""

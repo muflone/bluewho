@@ -144,11 +144,9 @@ class ModelDevices(ModelAbstract):
                             _('New bluetooth device detected'),
                             _('Name: {NAME}\nAddress: {ADDRESS}').format(
                                 NAME=item.name or 'unknown',
-                                ADDRESS=item.address
-                            ),
+                                ADDRESS=item.address),
                             # Notification requires absolute paths
-                            str(icon_path.resolve())
-                        )
+                            str(icon_path.resolve()))
                         notification.set_urgency(Notify.Urgency.LOW)
                         notification.show()
         else:

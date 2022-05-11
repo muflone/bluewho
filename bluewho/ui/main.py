@@ -69,7 +69,6 @@ class MainWindow(UIBase):
         self.load_ui()
         # Set other properties
         self.thread_scanner = None
-        self.fake_devices = FakeDevices()
         self.btsupport = BluetoothSupport()
         self.discoverer = None
         # Prepares the models for devices
@@ -348,20 +347,19 @@ class MainWindow(UIBase):
             except GLib.Error as e:
                 # Intercept errors
                 logging.error(e)
-                dialog_error = MessageDialogOK(
+                dialog = MessageDialogOK(
                     parent=self.ui.window,
                     message_type=Gtk.MessageType.WARNING,
                     title='Unable to start adapter '
                           f'{adapter.get_device_name()}',
-                    msg2=e.message,
-                    msg1=None
-                )
-                dialog_error.run()
+                    msg1=None,
+                    msg2=e.message)
+                dialog.run()
 
     def check_adapter_activation(self):
         """Check if any Bluetooth adapter is powered on"""
-        adapters = BluetoothAdapters.get_adapters()
         result = False
+        adapters = BluetoothAdapters.get_adapters()
         for adapter in adapters:
             if adapter.is_powered():
                 # At least one adapter is powered on
@@ -384,15 +382,14 @@ class MainWindow(UIBase):
         if not self.btsupport.is_bluez_available():
             # Bluez is not available
             logging.error('Bluez is not available')
-            dialog_error = MessageDialogOK(
+            dialog = MessageDialogOK(
                 parent=self.ui.window,
                 message_type=Gtk.MessageType.ERROR,
                 title=None,
                 msg1=_('Bluez seems not to be started, please make sure '
                        'the bluetooth service is started'),
-                msg2=None
-            )
-            dialog_error.run()
+                msg2=None)
+            dialog.run()
         else:
             # Bluez is available, check the adapters activation
             if not self.check_adapter_activation():
