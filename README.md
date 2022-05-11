@@ -13,7 +13,7 @@ BlueWho
 
 **Documentation:** https://www.muflone.com/bluewho
 
-**Translations:** https://www.transifex.com/projects/p/bluewho/
+**Translations:** https://www.transifex.com/muflone/bluewho/
 
 # Usage
 
