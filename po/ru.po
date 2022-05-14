@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-12 01:00+0200\n"
+"POT-Creation-Date: 2022-05-14 16:03+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Ivan Vedernikov <ecugol(at)gmail.com>\n"
 "Language-Team: Russian (https://www.transifex.com/muflone/bluewho/language/ru/)\n"
@@ -33,32 +33,32 @@ msgstr "Обнаружить устройства"
 
 #: bluewho/ui/main.py:197 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
-msgstr ""
+msgstr "Остановить обнаружение"
 
 #: bluewho/ui/main.py:216
 msgid "Do you want to clear the devices list?"
-msgstr ""
+msgstr "Вы хотите очистить список устройств?"
 
 #: bluewho/ui/main.py:239
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
-msgstr ""
+msgstr "Найдено новое устройство: {NAME} [{ADDRESS}]"
 
 #: bluewho/ui/main.py:302
 msgid "Discovery aborted."
-msgstr ""
+msgstr "Обнаружение прервано."
 
 #: bluewho/ui/main.py:307 bluewho/ui/main.py:351
 msgid "No local devices found during detection."
-msgstr "Доступных устройств не обнаружено."
+msgstr "Локальные устройства не были найдены во время обнаружения."
 
 #: bluewho/ui/main.py:385
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
-msgstr ""
+msgstr "Bluez по-видимому не запущен, убедитесь, что служба bluetooth работает."
 
 #: bluewho/ui/main.py:397
 msgid "Do you want to start the bluetooth devices?"
-msgstr ""
+msgstr "Вы хотите запустить устройства Bluetooth?"
 
 #: bluewho/ui/model_devices.py:145
 msgid "New bluetooth device detected"
@@ -67,7 +67,7 @@ msgstr "Обнаружено новое устройство Bluetooth"
 #: bluewho/ui/model_devices.py:146
 #, python-brace-format
 msgid "Name: {NAME}\nAddress: {ADDRESS}"
-msgstr "Имя: {NAME}\nадрес: {ADDRESS}"
+msgstr "Имя: {NAME}\nАдрес: {ADDRESS}"
 
 #: ui/main.ui:53
 msgid "Clear list"
@@ -75,7 +75,7 @@ msgstr "Очистить список"
 
 #: ui/main.ui:64 ui/shortcuts.ui:28
 msgid "Open the options menu"
-msgstr ""
+msgstr "Открыть настройки"
 
 #: ui/main.ui:77
 msgid "Detect devices at startup"
@@ -95,19 +95,19 @@ msgstr "Воспроизвести звук"
 
 #: ui/main.ui:101
 msgid "Low scan speed"
-msgstr ""
+msgstr "Низкая скорость сканирования"
 
 #: ui/main.ui:107
 msgid "Medium scan speed"
-msgstr ""
+msgstr "Средняя скорость сканирования"
 
 #: ui/main.ui:113
 msgid "High scan speed"
-msgstr ""
+msgstr "Высокая скорость сканирования"
 
 #: ui/main.ui:158
 msgid "Options"
-msgstr ""
+msgstr "Настройки"
 
 #: ui/main.ui:385
 msgid "<b>Detected devices:</b>"
@@ -127,19 +127,19 @@ msgstr "Bluetooth адрес"
 
 #: ui/main.ui:462
 msgid "Last seen"
-msgstr "Подключался"
+msgstr "Последнее подключение"
 
 #: ui/shortcuts.ui:16
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #: ui/shortcuts.ui:21
 msgid "Open the about dialog"
-msgstr ""
+msgstr "О приложении"
 
 #: ui/shortcuts.ui:35
 msgid "Open the shortcuts dialog"
-msgstr ""
+msgstr "Комбинации клавиш"
 
 #: ui/shortcuts.ui:42
 msgid "Quit"
@@ -147,7 +147,7 @@ msgstr "Завершить"
 
 #: ui/shortcuts.ui:52
 msgid "Scan"
-msgstr ""
+msgstr "Сканирование"
 
 #: ui/shortcuts.ui:71
 msgid "Clear the devices list"
