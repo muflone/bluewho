@@ -53,7 +53,7 @@ class BluetoothDeviceDiscoverer(object):
             pass
         logging.debug('scan stopped')
 
-    def get_devices(self) -> list[bluezero.device.Device]:
+    def get_devices(self) -> list:
         """
         Get the detected devices list
 
