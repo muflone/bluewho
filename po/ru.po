@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-14 16:03+0200\n"
+"POT-Creation-Date: 2022-05-15 00:37+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Dmitry <hi(at)dmitry.email>\n"
 "Language-Team: Russian (https://www.transifex.com/muflone/bluewho/language/ru/)\n"
@@ -23,41 +23,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: bluewho/ui/about.py:51
+#: bluewho/ui/about.py:54
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Версия {VERSION}"
 
-#: bluewho/ui/main.py:188 ui/main.ui:36 ui/shortcuts.ui:57
+#: bluewho/ui/main.py:192 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Обнаружить устройства"
 
-#: bluewho/ui/main.py:197 ui/main.ui:45 ui/shortcuts.ui:64
+#: bluewho/ui/main.py:201 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
 msgstr "Остановить обнаружение"
 
-#: bluewho/ui/main.py:216
+#: bluewho/ui/main.py:220
 msgid "Do you want to clear the devices list?"
 msgstr "Вы хотите очистить список устройств?"
 
-#: bluewho/ui/main.py:239
+#: bluewho/ui/main.py:244
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr "Найдено новое устройство: {NAME} [{ADDRESS}]"
 
-#: bluewho/ui/main.py:302
+#: bluewho/ui/main.py:307
 msgid "Discovery aborted."
 msgstr "Обнаружение прервано."
 
-#: bluewho/ui/main.py:307 bluewho/ui/main.py:351
+#: bluewho/ui/main.py:312 bluewho/ui/main.py:356
 msgid "No local devices found during detection."
 msgstr "Локальные устройства не были найдены во время обнаружения."
 
-#: bluewho/ui/main.py:385
+#: bluewho/ui/main.py:390
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
 msgstr "Bluez по-видимому не запущен, убедитесь, что служба bluetooth работает."
 
-#: bluewho/ui/main.py:397
+#: bluewho/ui/main.py:402
 msgid "Do you want to start the bluetooth devices?"
 msgstr "Вы хотите запустить устройства Bluetooth?"
 

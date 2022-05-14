@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-12 01:00+0200\n"
+"POT-Creation-Date: 2022-05-15 00:37+0200\n"
 "PO-Revision-Date: 2022-05-11 18:10+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss(at)fastmail.com>, 2022\n"
 "Language-Team: Dutch (http://www.transifex.com/muflone/bluewho/language/nl/)\n"
@@ -22,41 +22,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: bluewho/ui/about.py:51
+#: bluewho/ui/about.py:54
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Versie {VERSION}"
 
-#: bluewho/ui/main.py:188 ui/main.ui:36 ui/shortcuts.ui:57
+#: bluewho/ui/main.py:192 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Zoeken naar apparaten"
 
-#: bluewho/ui/main.py:197 ui/main.ui:45 ui/shortcuts.ui:64
+#: bluewho/ui/main.py:201 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
 msgstr "Zoeken afbreken"
 
-#: bluewho/ui/main.py:216
+#: bluewho/ui/main.py:220
 msgid "Do you want to clear the devices list?"
 msgstr "Weet u zeker dat u de lijst met apparaten wilt wissen?"
 
-#: bluewho/ui/main.py:239
+#: bluewho/ui/main.py:244
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr "Nieuw apparaat aangetroffen: {NAME} [{ADDRESS}]"
 
-#: bluewho/ui/main.py:302
+#: bluewho/ui/main.py:307
 msgid "Discovery aborted."
 msgstr "Het zoeken is afgebroken."
 
-#: bluewho/ui/main.py:307 bluewho/ui/main.py:351
+#: bluewho/ui/main.py:312 bluewho/ui/main.py:356
 msgid "No local devices found during detection."
 msgstr "Er is geen apparaat aangetroffen."
 
-#: bluewho/ui/main.py:385
+#: bluewho/ui/main.py:390
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
 msgstr "Bluez lijkt niet actief te zijn. Controleer of de bluetoothdienst van het systeem gestart is."
 
-#: bluewho/ui/main.py:397
+#: bluewho/ui/main.py:402
 msgid "Do you want to start the bluetooth devices?"
 msgstr "Wilt u de bluetoothapparaten koppelen?"
 
