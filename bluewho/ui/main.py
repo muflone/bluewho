@@ -61,6 +61,7 @@ SECTION_WINDOW_NAME = 'main window'
 class MainWindow(UIBase):
     def __init__(self, application, options):
         super().__init__(filename='main.ui')
+        logging.debug(f'{self.__class__.__name__} init')
         self.application = application
         # Load settings
         self.settings = Settings(FILE_SETTINGS, True)
@@ -85,6 +86,7 @@ class MainWindow(UIBase):
 
     def run(self):
         """Show the UI"""
+        logging.debug(f'{self.__class__.__name__} run')
         self.ui.window.show_all()
         # Activate scan on startup if Preferences.STARTUPSCAN is set
         if self.preferences.get(PREFERENCES_STARTUPSCAN):
@@ -146,6 +148,7 @@ class MainWindow(UIBase):
 
     def on_window_delete_event(self, widget, event):
         """Close the application by closing the main window"""
+        logging.debug(f'{self.__class__.__name__} delete')
         self.ui.action_quit.emit('activate')
 
     def on_action_about_activate(self, action):
@@ -160,6 +163,7 @@ class MainWindow(UIBase):
 
     def on_action_quit_activate(self, action):
         """Quit the application"""
+        logging.debug(f'{self.__class__.__name__} quit')
         if self.thread_scanner:
             # Cancel the running thread
             if self.thread_scanner.is_alive():
@@ -216,6 +220,7 @@ class MainWindow(UIBase):
             msg1=_('Do you want to clear the devices list?'),
             msg2=None)
         if dialog.run() == Gtk.ResponseType.YES:
+            logging.debug('Clearing results list')
             self.model_devices.clear()
 
     def on_action_options_scan_speed_activate(self, action):
@@ -277,7 +282,7 @@ class MainWindow(UIBase):
                     break
                 elif self.thread_scanner.cancelled:
                     # Cancel the running thread
-                    logging.info('cancel')
+                    logging.info('Discovery canceled')
                     if self.discoverer:
                         self.discoverer.stop()
                     break

@@ -18,6 +18,8 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
+
 from gi.repository import Gtk
 
 from bluewho.ui.base import UIBase
@@ -27,6 +29,7 @@ class DialogShortcuts(UIBase):
     def __init__(self, parent):
         """Prepare the shortcuts dialog"""
         super().__init__(filename='shortcuts.ui')
+        logging.debug(f'{self.__class__.__name__} init')
         # Load the user interface
         self.ui.shortcuts.set_transient_for(parent)
         # Initialize groups
@@ -38,9 +41,11 @@ class DialogShortcuts(UIBase):
 
     def show(self):
         """Show the shortcuts dialog"""
+        logging.debug(f'{self.__class__.__name__} show')
         self.ui.shortcuts.show()
 
     def destroy(self):
         """Destroy the shortcuts dialog"""
+        logging.debug(f'{self.__class__.__name__} destroy')
         self.ui.shortcuts.destroy()
         self.ui.shortcuts = None

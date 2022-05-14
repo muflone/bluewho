@@ -18,6 +18,8 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
+
 from gi.repository.GdkPixbuf import Pixbuf
 
 from bluewho.constants import (APP_AUTHOR,
@@ -38,6 +40,7 @@ from bluewho.ui.base import UIBase
 class DialogAbout(UIBase):
     def __init__(self, parent):
         super().__init__(filename='about.ui')
+        logging.debug(f'{self.__class__.__name__} init')
         # Retrieve the translators list
         translators = []
         for line in readlines(FILE_TRANSLATORS, False):
@@ -68,9 +71,11 @@ class DialogAbout(UIBase):
 
     def show(self):
         """Show the About dialog"""
+        logging.debug(f'{self.__class__.__name__} show')
         self.ui.dialog.run()
         self.ui.dialog.hide()
 
     def destroy(self):
         """Destroy the About dialog"""
+        logging.debug(f'{self.__class__.__name__} destroy')
         self.ui.dialog.destroy()

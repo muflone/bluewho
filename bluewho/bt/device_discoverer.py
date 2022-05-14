@@ -37,12 +37,12 @@ class BluetoothDeviceDiscoverer(object):
 
         :return: True if the discovery was successfull
         """
-        logging.debug('scan scarted')
+        logging.debug('Discovery started')
         try:
             self.adapter.start_discovery(timeout=self.timeout)
             result = True
         except dbus.exceptions.DBusException as error:
-            logging.error(f'scan aborted: {error}')
+            logging.error(f'Discovery aborted: {error}')
             result = False
         return result
 
@@ -51,7 +51,7 @@ class BluetoothDeviceDiscoverer(object):
             self.adapter.stop_discovery()
         except dbus.exceptions.DBusException:
             pass
-        logging.debug('scan stopped')
+        logging.debug('Discovery stopped')
 
     def get_devices(self) -> list:
         """
