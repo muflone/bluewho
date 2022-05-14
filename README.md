@@ -35,6 +35,7 @@ last seen date and time.
 * Notify 0.7 library for Python 3
 * GObject libraries for Python 3 ( https://pypi.org/project/PyGObject/ )
 * BlueZero library for Python 3 ( https://pypi.org/project/bluezero/ )
+* dbus-python library for Python 3 ( https://pypi.org/project/dbus-python/ )
 
 For the audio notification one of the following audio player is required:
 
