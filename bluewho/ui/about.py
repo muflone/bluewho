@@ -33,7 +33,8 @@ from bluewho.constants import (APP_AUTHOR,
                                FILE_LICENSE,
                                FILE_RESOURCES,
                                FILE_TRANSLATORS)
-from bluewho.functions import readlines, _
+from bluewho.functions import readlines
+from bluewho.localize import _
 from bluewho.ui.base import UIBase
 
 

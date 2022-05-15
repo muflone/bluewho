@@ -23,7 +23,8 @@ from typing import Iterable
 from gi.repository import Gtk
 
 from bluewho.gtkbuilder_loader import GtkBuilderLoader
-from bluewho.functions import get_ui_file, text
+from bluewho.functions import get_ui_file
+from bluewho.localize import text
 
 
 class UIBase(object):

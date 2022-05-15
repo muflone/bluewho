@@ -19,14 +19,11 @@
 ##
 
 import datetime
-from gettext import gettext, dgettext
 
 from gi.repository import Gtk
 from gi.repository.GLib import idle_add
 
 from bluewho.constants import DIR_UI
-
-localized_messages = {}
 
 
 def get_current_time():
@@ -56,33 +53,8 @@ def readlines(filename, empty_lines=False):
     return result
 
 
-def text(message, gtk30=False, context=None):
-    """Return a translated message and cache it for reuse"""
-    if message not in localized_messages:
-        if gtk30:
-            # Get a message translated from GTK+ 3 domain
-            full_message = message if not context else f'{context}\04{message}'
-            localized_messages[message] = dgettext('gtk30', full_message)
-            # Fix for untranslated messages with context
-            if context and localized_messages[message] == full_message:
-                localized_messages[message] = dgettext('gtk30', message)
-        else:
-            localized_messages[message] = gettext(message)
-    return localized_messages[message]
-
-
-def text_gtk30(message, context=None):
-    """Return a translated text from GTK+ 3.0"""
-    return text(message=message, gtk30=True, context=context)
-
-
 def thread_safe(func):
     """Decorator function to make a thread safe call to a GTK+ function"""
     def callback(*args):
         idle_add(func, *args)
     return callback
-
-
-# This special alias is used to track localization requests to catch
-# by xgettext. The text() calls aren't tracked by xgettext
-_ = text

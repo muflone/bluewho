@@ -28,7 +28,8 @@ from bluewho.audio_player import AudioPlayer
 from bluewho.constants import (APP_NAME,
                                DIR_ICONS,
                                FILE_SOUND)
-from bluewho.functions import _, get_current_time
+from bluewho.functions import get_current_time
+from bluewho.localize import _
 from bluewho.models.abstract import ModelAbstract
 from bluewho.models.device_info import DeviceInfo
 from bluewho.preferences import (PREFERENCES_NOTIFICATION,

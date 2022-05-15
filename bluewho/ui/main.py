@@ -33,12 +33,11 @@ from bluewho.constants import (APP_NAME,
                                FILE_SETTINGS)
 from bluewho.daemon_thread import DaemonThread
 from bluewho.fake_devices import FakeDevices
-from bluewho.functions import (_,
-                               get_current_time,
+from bluewho.functions import (get_current_time,
                                process_events,
                                idle_add,
-                               text_gtk30,
                                thread_safe)
+from bluewho.localize import _, text_gtk30
 from bluewho.models.device_info import DeviceInfo
 from bluewho.preferences import (PREFERENCES_NOTIFICATION,
                                  PREFERENCES_PLAY_SOUND,
