@@ -69,3 +69,8 @@ class UIBase(object):
             action = widget.get_related_action()
             if action:
                 widget.set_tooltip_text(action.get_label().replace('_', ''))
+
+    def set_buttons_style_suggested_action(self, buttons: Iterable):
+        """Add the suggested-action style to a widget"""
+        for button in buttons:
+            button.get_style_context().add_class('suggested-action')

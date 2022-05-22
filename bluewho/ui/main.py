@@ -109,6 +109,8 @@ class MainWindow(UIBase):
         # Set buttons with always show image
         for button in (self.ui.button_scan, ):
             button.set_always_show_image(True)
+        self.set_buttons_style_suggested_action(
+            buttons=[self.ui.button_scan])
         # Obtain widget references
         self.statusbar_context_id = self.ui.statusbar.get_context_id(
             DOMAIN_NAME)

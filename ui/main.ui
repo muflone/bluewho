@@ -262,7 +262,6 @@
         <property name="visible">True</property>
         <property name="can-focus">True</property>
         <property name="receives-default">True</property>
-        <property name="relief">none</property>
       </object>
     </child>
     <child>
