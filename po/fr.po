@@ -32,20 +32,20 @@ msgstr "Rechercher les dispositifs"
 
 #: bluewho/ui/main.py:201 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
-msgstr ""
+msgstr "Arrêter la recherche"
 
 #: bluewho/ui/main.py:220
 msgid "Do you want to clear the devices list?"
-msgstr ""
+msgstr "Voulez-vous vider la liste des appareils ?"
 
 #: bluewho/ui/main.py:244
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
-msgstr ""
+msgstr "Nouvel appareil trouvé: {NAME} [{ADDRESS}]"
 
 #: bluewho/ui/main.py:307
 msgid "Discovery aborted."
-msgstr ""
+msgstr "Recherche annulée."
 
 #: bluewho/ui/main.py:312 bluewho/ui/main.py:356
 msgid "No local devices found during detection."
@@ -53,11 +53,11 @@ msgstr "Aucun dispositif locale a été trouvé lors de la détection."
 
 #: bluewho/ui/main.py:390
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
-msgstr ""
+msgstr "Bluez semble ne pas être démarré, rassurez-vous que le service de bluetooth est lancé"
 
 #: bluewho/ui/main.py:402
 msgid "Do you want to start the bluetooth devices?"
-msgstr ""
+msgstr "Voulez-vous lancer le service bluetooth ?"
 
 #: bluewho/ui/model_devices.py:145
 msgid "New bluetooth device detected"
@@ -74,7 +74,7 @@ msgstr "Effacer la liste"
 
 #: ui/main.ui:64 ui/shortcuts.ui:28
 msgid "Open the options menu"
-msgstr ""
+msgstr "Ouvrir le menu options"
 
 #: ui/main.ui:77
 msgid "Detect devices at startup"
@@ -94,19 +94,19 @@ msgstr "Jouer un son"
 
 #: ui/main.ui:101
 msgid "Low scan speed"
-msgstr ""
+msgstr "Faible vitesse de scan"
 
 #: ui/main.ui:107
 msgid "Medium scan speed"
-msgstr ""
+msgstr "Vitesse de scan moyenne"
 
 #: ui/main.ui:113
 msgid "High scan speed"
-msgstr ""
+msgstr "Vitesse de scan élevée"
 
 #: ui/main.ui:158
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
 #: ui/main.ui:385
 msgid "<b>Detected devices:</b>"
@@ -130,15 +130,15 @@ msgstr "Dernière détection"
 
 #: ui/shortcuts.ui:16
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: ui/shortcuts.ui:21
 msgid "Open the about dialog"
-msgstr ""
+msgstr "Ouvrir la boîte de dialoge à propos"
 
 #: ui/shortcuts.ui:35
 msgid "Open the shortcuts dialog"
-msgstr ""
+msgstr "Ouvrir la boîte de dialogue des raccourcis"
 
 #: ui/shortcuts.ui:42
 msgid "Quit"
@@ -146,7 +146,7 @@ msgstr "Quitter"
 
 #: ui/shortcuts.ui:52
 msgid "Scan"
-msgstr ""
+msgstr "Scan"
 
 #: ui/shortcuts.ui:71
 msgid "Clear the devices list"
