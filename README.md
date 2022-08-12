@@ -15,7 +15,7 @@
 
 **Translations:** https://explore.transifex.com/muflone/bluewho/
 
-# Usage
+# Description
 
 The scan will automatically detect any visible device and for each one that was
 detected a notification will be shown.
