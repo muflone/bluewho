@@ -7,13 +7,14 @@
 #
 # Translators:
 # Emmanuel <emmanuel(at)simple-linux.com>, 2010
+# Paul Mairo <herrmpr(at)gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
 "POT-Creation-Date: 2022-05-15 00:37+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
-"Last-Translator: Emmanuel <emmanuel(at)simple-linux.com>\n"
+"Last-Translator: Paul Mairo <herrmpr(at)gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
