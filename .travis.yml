@@ -8,6 +8,7 @@ virtualenv:
 addons:
   apt:
     packages:
+    - gettext                                 # msgfmt
     - python3-gi                              # GObject
     - libgirepository1.0-dev                  # GObject
     - gir1.2-gtk-3.0                          # gi.repository.Gtk
@@ -17,7 +18,7 @@ install:
   - pip install -r requirements_travis.txt
 script:
   - python -m compileall .
-  - pep8 . || true
+  - python -m pycodestyle .
   - python -m flake8 .
   - python setup.py install --optimize=1 --root=build
   - ls -laR build
