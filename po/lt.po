@@ -1,4 +1,4 @@
-# Blhttp://ueWho
+# BlueWho
 # Information and notification of new discovered bluetooth devices.
 # Copyright (C) 2009-2022 Fabio Castelli (Muflone) <muflone(at)muflone.com>
 # Website: https://www.muflone.com/bluewho/
