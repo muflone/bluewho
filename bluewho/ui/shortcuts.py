@@ -22,22 +22,26 @@ import logging
 
 from gi.repository import Gtk
 
+from bluewho.localize import text
 from bluewho.ui.base import UIBase
 
 
-class DialogShortcuts(UIBase):
-    def __init__(self, parent):
+class UIShortcuts(UIBase):
+    def __init__(self, parent, settings, options):
         """Prepare the shortcuts dialog"""
-        super().__init__(filename='shortcuts.ui')
         logging.debug(f'{self.__class__.__name__} init')
+        super().__init__(filename='shortcuts.ui')
+        # Initialize members
+        self.settings = settings
+        self.options = options
         # Load the user interface
         self.ui.shortcuts.set_transient_for(parent)
         # Initialize groups
         for widget in self.ui.get_objects_by_type(Gtk.ShortcutsGroup):
-            widget.props.title = widget.props.title
+            widget.props.title = text(widget.props.title)
         # Initialize shortcuts
         for widget in self.ui.get_objects_by_type(Gtk.ShortcutsShortcut):
-            widget.props.title = widget.props.title
+            widget.props.title = text(widget.props.title)
 
     def show(self):
         """Show the shortcuts dialog"""

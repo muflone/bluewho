@@ -24,9 +24,8 @@ from gi.repository.GdkPixbuf import Pixbuf
 
 from bluewho.constants import (APP_AUTHOR,
                                APP_AUTHOR_EMAIL,
-                               APP_NAME,
                                APP_COPYRIGHT,
-                               APP_DESCRIPTION,
+                               APP_NAME,
                                APP_URL,
                                APP_VERSION,
                                FILE_CONTRIBUTORS,
@@ -39,10 +38,14 @@ from bluewho.localize import _
 from bluewho.ui.base import UIBase
 
 
-class DialogAbout(UIBase):
-    def __init__(self, parent):
-        super().__init__(filename='about.ui')
+class UIAbout(UIBase):
+    def __init__(self, parent, settings, options):
+        """Prepare the information dialog"""
         logging.debug(f'{self.__class__.__name__} init')
+        super().__init__(filename='about.ui')
+        # Initialize members
+        self.settings = settings
+        self.options = options
         # Retrieve the translators list
         translators = []
         for line in readlines(FILE_TRANSLATORS, False):
@@ -55,7 +58,9 @@ class DialogAbout(UIBase):
         self.ui.dialog.set_program_name(APP_NAME)
         self.ui.dialog.set_version(_('Version {VERSION}').format(
             VERSION=APP_VERSION))
-        self.ui.dialog.set_comments(APP_DESCRIPTION)
+        self.ui.dialog.set_comments(
+            _('Information and notification of new discovered bluetooth '
+              'devices'))
         self.ui.dialog.set_website(APP_URL)
         self.ui.dialog.set_copyright(APP_COPYRIGHT)
         # Prepare lists for authors and contributors
@@ -76,14 +81,17 @@ class DialogAbout(UIBase):
         icon_logo = Pixbuf.new_from_file(str(FILE_ICON))
         self.ui.dialog.set_logo(icon_logo)
         self.ui.dialog.set_transient_for(parent)
+        # Connect signals from the UI file to the functions with the same name
+        self.ui.connect_signals(self)
 
     def show(self):
-        """Show the About dialog"""
+        """Show the information dialog"""
         logging.debug(f'{self.__class__.__name__} show')
         self.ui.dialog.run()
         self.ui.dialog.hide()
 
     def destroy(self):
-        """Destroy the About dialog"""
+        """Destroy the information dialog"""
         logging.debug(f'{self.__class__.__name__} destroy')
         self.ui.dialog.destroy()
+        self.ui.dialog = None

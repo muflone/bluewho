@@ -22,7 +22,6 @@ import gettext
 import locale
 
 import bluewho.requires                                            # noqa: F401
-
 from bluewho.constants import DOMAIN_NAME, DIR_LOCALE
 
 

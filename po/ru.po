@@ -1,5 +1,5 @@
 # BlueWho
-# Information and notification of new discovered bluetooth devices.
+# Information and notification of new discovered bluetooth devices
 # Copyright (C) 2009-2022 Fabio Castelli (Muflone) <muflone(at)muflone.com>
 # Website: https://www.muflone.com/bluewho/
 # This file is distributed under the same license of BlueWho.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-15 00:37+0200\n"
+"POT-Creation-Date: 2022-08-15 23:59+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Dmitry <hi(at)dmitry.email>\n"
 "Language-Team: Russian\n"
@@ -23,52 +23,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: bluewho/ui/about.py:54
+#: bluewho/ui/about.py:59
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Версия {VERSION}"
 
-#: bluewho/ui/main.py:192 ui/main.ui:36 ui/shortcuts.ui:57
-msgid "Detect devices"
-msgstr "Обнаружить устройства"
+#: bluewho/ui/about.py:62
+msgid "Information and notification of new discovered bluetooth devices"
+msgstr ""
 
-#: bluewho/ui/main.py:201 ui/main.ui:45 ui/shortcuts.ui:64
-msgid "Stop detection"
-msgstr "Остановить обнаружение"
+#: bluewho/ui/about.py:72
+msgid "Contributors:"
+msgstr "Контрибьюторы:"
 
-#: bluewho/ui/main.py:220
-msgid "Do you want to clear the devices list?"
-msgstr "Вы хотите очистить список устройств?"
-
-#: bluewho/ui/main.py:244
+#: bluewho/ui/main.py:164
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr "Найдено новое устройство: {NAME} [{ADDRESS}]"
 
-#: bluewho/ui/main.py:307
-msgid "Discovery aborted."
-msgstr "Обнаружение прервано."
-
-#: bluewho/ui/main.py:312 bluewho/ui/main.py:356
-msgid "No local devices found during detection."
-msgstr "Локальные устройства не были найдены во время обнаружения."
-
-#: bluewho/ui/main.py:390
+#: bluewho/ui/main.py:195
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
-msgstr "Bluez по-видимому не запущен, убедитесь, что служба bluetooth работает."
+msgstr "Bluez по-видимому не запущен, убедитесь, что служба bluetooth работает"
 
-#: bluewho/ui/main.py:402
+#: bluewho/ui/main.py:207
 msgid "Do you want to start the bluetooth devices?"
 msgstr "Вы хотите запустить устройства Bluetooth?"
 
-#: bluewho/ui/model_devices.py:145
+#: bluewho/ui/main.py:277
+msgid "Discovery aborted."
+msgstr "Обнаружение прервано."
+
+#: bluewho/ui/main.py:282 bluewho/ui/main.py:327
+msgid "No local devices found during detection."
+msgstr "Локальные устройства не были найдены во время обнаружения."
+
+#: bluewho/ui/main.py:391 ui/main.ui:36 ui/shortcuts.ui:57
+msgid "Detect devices"
+msgstr "Обнаружить устройства"
+
+#: bluewho/ui/main.py:400 ui/main.ui:45 ui/shortcuts.ui:64
+msgid "Stop detection"
+msgstr "Остановить обнаружение"
+
+#: bluewho/ui/main.py:419
+msgid "Do you want to clear the devices list?"
+msgstr "Вы хотите очистить список устройств?"
+
+#: bluewho/ui/model_devices.py:147
 msgid "New bluetooth device detected"
 msgstr "Обнаружено новое устройство Bluetooth"
 
-#: bluewho/ui/model_devices.py:146
+#: bluewho/ui/model_devices.py:148
 #, python-brace-format
 msgid "Name: {NAME}\nAddress: {ADDRESS}"
 msgstr "Имя: {NAME}\nАдрес: {ADDRESS}"
+
+#: ui/main.ui:25 ui/shortcuts.ui:35
+msgid "Keyboard shortcuts"
+msgstr "Комбинации клавиш"
 
 #: ui/main.ui:53
 msgid "Clear list"
@@ -106,27 +118,27 @@ msgstr "Средняя скорость сканирования"
 msgid "High scan speed"
 msgstr "Высокая скорость сканирования"
 
-#: ui/main.ui:158
+#: ui/main.ui:155
 msgid "Options"
 msgstr "Настройки"
 
-#: ui/main.ui:385
+#: ui/main.ui:372
 msgid "<b>Detected devices:</b>"
 msgstr "<b>Найденные устройства:</b>"
 
-#: ui/main.ui:422
+#: ui/main.ui:409
 msgid "Type"
 msgstr "Тип"
 
-#: ui/main.ui:439
+#: ui/main.ui:426
 msgid "Name"
 msgstr "Имя"
 
-#: ui/main.ui:451
+#: ui/main.ui:438
 msgid "Bluetooth address"
 msgstr "Bluetooth адрес"
 
-#: ui/main.ui:462
+#: ui/main.ui:449
 msgid "Last seen"
 msgstr "Последнее подключение"
 
@@ -135,12 +147,8 @@ msgid "General"
 msgstr "Общие"
 
 #: ui/shortcuts.ui:21
-msgid "Open the about dialog"
-msgstr "О приложении"
-
-#: ui/shortcuts.ui:35
-msgid "Open the shortcuts dialog"
-msgstr "Комбинации клавиш"
+msgid "Show the about dialog"
+msgstr "Показать диалог \"О программе\""
 
 #: ui/shortcuts.ui:42
 msgid "Quit"

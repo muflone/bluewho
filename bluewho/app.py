@@ -21,20 +21,25 @@
 from gi.repository import Gtk
 
 from bluewho.constants import APP_ID
-from bluewho.ui.main import MainWindow
+from bluewho.ui.main import UIMain
 
 
 class Application(Gtk.Application):
-    def __init__(self, settings):
+    def __init__(self, options):
+        """Prepare the GtkApplication"""
         super(self.__class__, self).__init__(application_id=APP_ID)
-        self.settings = settings
+        self.options = options
+        self.ui = None
         self.connect('activate', self.activate)
         self.connect('startup', self.startup)
 
+    # noinspection PyUnusedLocal
     def startup(self, application):
         """Configure the application during the startup"""
-        self.ui = MainWindow(self, self.settings)
+        self.ui = UIMain(application=self,
+                         options=self.options)
 
+    # noinspection PyMethodOverriding
     def activate(self, application):
         """Execute the application"""
         self.ui.run()

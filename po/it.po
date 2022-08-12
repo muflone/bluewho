@@ -1,5 +1,5 @@
 # BlueWho
-# Information and notification of new discovered bluetooth devices.
+# Information and notification of new discovered bluetooth devices
 # Copyright (C) 2009-2022 Fabio Castelli (Muflone) <muflone(at)muflone.com>
 # Website: https://www.muflone.com/bluewho/
 # This file is distributed under the same license of BlueWho.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
-"POT-Creation-Date: 2022-05-15 00:37+0200\n"
+"POT-Creation-Date: 2022-08-15 23:59+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
 "Language-Team: Italian\n"
@@ -21,52 +21,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: bluewho/ui/about.py:54
+#: bluewho/ui/about.py:59
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Versione {VERSION}"
 
-#: bluewho/ui/main.py:192 ui/main.ui:36 ui/shortcuts.ui:57
-msgid "Detect devices"
-msgstr "Rileva dispositivi"
+#: bluewho/ui/about.py:62
+msgid "Information and notification of new discovered bluetooth devices"
+msgstr ""
 
-#: bluewho/ui/main.py:201 ui/main.ui:45 ui/shortcuts.ui:64
-msgid "Stop detection"
-msgstr "Interrompi rilevazione"
+#: bluewho/ui/about.py:72
+msgid "Contributors:"
+msgstr "Contributori"
 
-#: bluewho/ui/main.py:220
-msgid "Do you want to clear the devices list?"
-msgstr "Vuoi svuotare la lista dei dispositivi?"
-
-#: bluewho/ui/main.py:244
+#: bluewho/ui/main.py:164
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr "Nuovo dispositivo trovato: {NAME} [{ADDRESS}]"
 
-#: bluewho/ui/main.py:307
-msgid "Discovery aborted."
-msgstr "Rilevazione annullata."
-
-#: bluewho/ui/main.py:312 bluewho/ui/main.py:356
-msgid "No local devices found during detection."
-msgstr "Nessun dispositivo locale trovato con la rilevazione"
-
-#: bluewho/ui/main.py:390
+#: bluewho/ui/main.py:195
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
 msgstr "Bluez sembra non essere avviato, prego assicurarsi che il servizio bluetooth sia avviato"
 
-#: bluewho/ui/main.py:402
+#: bluewho/ui/main.py:207
 msgid "Do you want to start the bluetooth devices?"
 msgstr "Vuoi avviare i dispositivi bluetooth?"
 
-#: bluewho/ui/model_devices.py:145
+#: bluewho/ui/main.py:277
+msgid "Discovery aborted."
+msgstr "Rilevazione annullata."
+
+#: bluewho/ui/main.py:282 bluewho/ui/main.py:327
+msgid "No local devices found during detection."
+msgstr "Nessun dispositivo locale trovato con la rilevazione"
+
+#: bluewho/ui/main.py:391 ui/main.ui:36 ui/shortcuts.ui:57
+msgid "Detect devices"
+msgstr "Rileva dispositivi"
+
+#: bluewho/ui/main.py:400 ui/main.ui:45 ui/shortcuts.ui:64
+msgid "Stop detection"
+msgstr "Interrompi rilevazione"
+
+#: bluewho/ui/main.py:419
+msgid "Do you want to clear the devices list?"
+msgstr "Vuoi svuotare la lista dei dispositivi?"
+
+#: bluewho/ui/model_devices.py:147
 msgid "New bluetooth device detected"
 msgstr "Nuovo dispositivo bluetooth rilevato"
 
-#: bluewho/ui/model_devices.py:146
+#: bluewho/ui/model_devices.py:148
 #, python-brace-format
 msgid "Name: {NAME}\nAddress: {ADDRESS}"
 msgstr "Nome: {NAME}\nIndirizzo: {ADDRESS}"
+
+#: ui/main.ui:25 ui/shortcuts.ui:35
+msgid "Keyboard shortcuts"
+msgstr "Scorciatoie da tastiera"
 
 #: ui/main.ui:53
 msgid "Clear list"
@@ -104,27 +116,27 @@ msgstr "Velocità di scansione media"
 msgid "High scan speed"
 msgstr "Velocità di scansione alta"
 
-#: ui/main.ui:158
+#: ui/main.ui:155
 msgid "Options"
 msgstr "Opzioni"
 
-#: ui/main.ui:385
+#: ui/main.ui:372
 msgid "<b>Detected devices:</b>"
 msgstr "<b>Dispositivi rilevati:</b>"
 
-#: ui/main.ui:422
+#: ui/main.ui:409
 msgid "Type"
 msgstr "Tipo"
 
-#: ui/main.ui:439
+#: ui/main.ui:426
 msgid "Name"
 msgstr "Nome"
 
-#: ui/main.ui:451
+#: ui/main.ui:438
 msgid "Bluetooth address"
 msgstr "Indirizzo bluetooth"
 
-#: ui/main.ui:462
+#: ui/main.ui:449
 msgid "Last seen"
 msgstr "Ultima rilevazione"
 
@@ -133,12 +145,8 @@ msgid "General"
 msgstr "Generale"
 
 #: ui/shortcuts.ui:21
-msgid "Open the about dialog"
-msgstr "Apri la finestra delle informazioni"
-
-#: ui/shortcuts.ui:35
-msgid "Open the shortcuts dialog"
-msgstr "Apri la finestra delle scorciatoie"
+msgid "Show the about dialog"
+msgstr "Mostra la finestra delle informazioni"
 
 #: ui/shortcuts.ui:42
 msgid "Quit"

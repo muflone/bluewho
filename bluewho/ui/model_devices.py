@@ -32,8 +32,8 @@ from bluewho.functions import get_current_time
 from bluewho.localize import _
 from bluewho.models.abstract import ModelAbstract
 from bluewho.models.device_info import DeviceInfo
-from bluewho.preferences import (PREFERENCES_NOTIFICATION,
-                                 PREFERENCES_PLAY_SOUND)
+from bluewho.settings import (PREFERENCES_NOTIFICATION,
+                              PREFERENCES_PLAY_SOUND)
 
 
 class ModelDevices(ModelAbstract):
@@ -47,10 +47,9 @@ class ModelDevices(ModelAbstract):
     COL_NAME = 8
     COL_LASTSEEN = 9
 
-    def __init__(self, model, settings, preferences, btsupport):
+    def __init__(self, model, settings, btsupport):
         super(self.__class__, self).__init__(model)
         self.settings = settings
-        self.preferences = preferences
         self.btsupport = btsupport
         self.audio_player = AudioPlayer()
         Notify.init(APP_NAME)
@@ -138,10 +137,12 @@ class ModelDevices(ModelAbstract):
                 # Execute notification for new devices
                 if device.notify:
                     # Play the sound notification
-                    if self.preferences.get(PREFERENCES_PLAY_SOUND):
+                    if self.settings.get_preference(
+                            option=PREFERENCES_PLAY_SOUND):
                         self.audio_player.play_file(FILE_SOUND)
                     # Show the graphical notification with icon
-                    if self.preferences.get(PREFERENCES_NOTIFICATION):
+                    if self.settings.get_preference(
+                            option=PREFERENCES_NOTIFICATION):
                         notification = Notify.Notification.new(
                             _('New bluetooth device detected'),
                             _('Name: {NAME}\nAddress: {ADDRESS}').format(

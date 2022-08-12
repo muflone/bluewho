@@ -56,6 +56,7 @@ class CommandLineOptions(object):
                                  help='fake devices count per scan')
         self.options = None
 
+    # noinspection PyProtectedMember,PyUnresolvedReferences
     def add_group(self, name: str) -> argparse._ArgumentGroup:
         """
         Add a command-line options group

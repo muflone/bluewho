@@ -43,18 +43,19 @@ VERBOSE_LEVEL_MAX = 2
 
 # Paths constants
 path_xdg_data_home = pathlib.Path(BaseDirectory.xdg_data_home)
-if (pathlib.Path('data') / 'bluewho.png').is_file():
+icon_name = f'{DOMAIN_NAME}.png'
+if (pathlib.Path('data') / icon_name).is_file():
     # Use relative paths
     DIR_PREFIX = pathlib.Path('data').parent.absolute()
     DIR_LOCALE = DIR_PREFIX / 'locale'
     DIR_DOCS = DIR_PREFIX / 'doc'
-elif (path_xdg_data_home / DOMAIN_NAME / 'data' / 'bluewho.png').is_file():
+elif (path_xdg_data_home / DOMAIN_NAME / 'data' / icon_name).is_file():
     # Use local user path
     DIR_PREFIX = path_xdg_data_home / DOMAIN_NAME
     DIR_LOCALE = path_xdg_data_home / 'locale'
     DIR_DOCS = path_xdg_data_home / 'doc' / DOMAIN_NAME
 elif (pathlib.Path(__file__).parent.parent / 'share' / DOMAIN_NAME / 'data' /
-      'bluewho.png').is_file():
+      icon_name).is_file():
     # Use local user path in the local Python directory
     DIR_PREFIX = pathlib.Path(__file__).parent.parent / 'share' / DOMAIN_NAME
     DIR_LOCALE = DIR_PREFIX.parent / 'locale'
@@ -73,11 +74,11 @@ try:
     # In read-only environments, the settings folder cannot be created
     # (e.g. in a Debian pbuilder fakeroot)
     DIR_SETTINGS = pathlib.Path(BaseDirectory.save_config_path(DOMAIN_NAME))
-except Exception:
+except PermissionError:
     # Get the settings path without actually creating it
     DIR_SETTINGS = pathlib.Path(BaseDirectory.xdg_config_home) / DOMAIN_NAME
 # Set the paths for the data files
-FILE_ICON = DIR_DATA / 'bluewho.png'
+FILE_ICON = DIR_DATA / icon_name
 FILE_CONTRIBUTORS = DIR_DOCS / 'contributors'
 FILE_TRANSLATORS = DIR_DOCS / 'translators'
 FILE_LICENSE = DIR_DOCS / 'license'

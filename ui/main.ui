@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAccelGroup" id="accelerators"/>
@@ -22,7 +22,7 @@
     </child>
     <child>
       <object class="GtkAction" id="action_shortcuts">
-        <property name="label" context="gtk30">Shortcuts</property>
+        <property name="label" translatable="yes">Keyboard shortcuts</property>
         <property name="icon-name">help-browser</property>
         <signal name="activate" handler="on_action_shortcuts_activate" swapped="no"/>
       </object>
@@ -123,7 +123,6 @@
         <property name="related-action">action_scan</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label">Detect devices</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -132,7 +131,6 @@
         <property name="related-action">action_stop</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label">Stop detection</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -141,7 +139,6 @@
         <property name="related-action">action_clear</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label">Clear list</property>
         <property name="use-underline">True</property>
       </object>
     </child>
@@ -166,7 +163,6 @@
                 <property name="related-action">action_options_startup_scan</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Detect devices at startup</property>
               </object>
             </child>
             <child>
@@ -174,7 +170,6 @@
                 <property name="related-action">action_options_show_local_adapters</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Show local adapters</property>
               </object>
             </child>
             <child>
@@ -182,7 +177,6 @@
                 <property name="related-action">action_options_notification_show</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Send notification</property>
               </object>
             </child>
             <child>
@@ -190,7 +184,6 @@
                 <property name="related-action">action_options_notification_play_sound</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Play a sound</property>
               </object>
             </child>
             <child>
@@ -204,7 +197,6 @@
                 <property name="related-action">action_options_scan_speed_high</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">High scan speed</property>
                 <property name="draw-as-radio">True</property>
                 <property name="group">menuitem_preferences_scan_speed_low</property>
               </object>
@@ -214,7 +206,6 @@
                 <property name="related-action">action_options_scan_speed_medium</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Medium scan speed</property>
                 <property name="draw-as-radio">True</property>
                 <property name="group">menuitem_preferences_scan_speed_low</property>
               </object>
@@ -224,7 +215,6 @@
                 <property name="related-action">action_options_scan_speed_low</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label">Low scan speed</property>
                 <property name="draw-as-radio">True</property>
               </object>
             </child>
@@ -237,7 +227,6 @@
         <property name="related-action">action_shortcuts</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" context="gtk30">Shortcuts</property>
       </object>
     </child>
     <child>
@@ -245,7 +234,6 @@
         <property name="related-action">action_about</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" context="gtk30">About</property>
       </object>
     </child>
   </object>
