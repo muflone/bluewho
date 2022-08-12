@@ -29,6 +29,7 @@ from bluewho.constants import (APP_AUTHOR,
                                APP_DESCRIPTION,
                                APP_URL,
                                APP_VERSION,
+                               FILE_CONTRIBUTORS,
                                FILE_ICON,
                                FILE_LICENSE,
                                FILE_RESOURCES,
@@ -59,6 +60,12 @@ class DialogAbout(UIBase):
         self.ui.dialog.set_copyright(APP_COPYRIGHT)
         # Prepare lists for authors and contributors
         authors = [f'{APP_AUTHOR} <{APP_AUTHOR_EMAIL}>']
+        contributors = []
+        for line in readlines(FILE_CONTRIBUTORS, False):
+            contributors.append(line)
+        if len(contributors) > 0:
+            contributors.insert(0, _('Contributors:'))
+            authors.extend(contributors)
         self.ui.dialog.set_authors(authors)
         self.ui.dialog.set_license('\n'.join(readlines(FILE_LICENSE, True)))
         self.ui.dialog.set_translator_credits('\n'.join(translators))
