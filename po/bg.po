@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
-"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues/\n"
 "POT-Creation-Date: 2022-08-15 23:59+0200\n"
 "PO-Revision-Date: 2014-08-31 18:03+0000\n"
 "Last-Translator: sahwar <ve4ernik(at)gmail.com>\n"

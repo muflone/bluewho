@@ -9,9 +9,9 @@
 
 **License:** GPL-3+
 
-**Source code:** https://github.com/muflone/bluewho
+**Source code:** https://github.com/muflone/bluewho/
 
-**Documentation:** https://www.muflone.com/bluewho
+**Documentation:** https://www.muflone.com/bluewho/
 
 **Translations:** https://explore.transifex.com/muflone/bluewho/
 
