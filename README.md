@@ -5,7 +5,7 @@
 
 **Description:** Information and notification of new discovered bluetooth devices
 
-**Copyright:** 2009-2022 Fabio Castelli <muflone@muflone.com>
+**Copyright:** 2009-2022 Fabio Castelli (Muflone) <muflone@muflone.com>
 
 **License:** GPL-3+
 
