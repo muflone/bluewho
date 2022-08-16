@@ -29,7 +29,7 @@ msgstr "Versie {VERSION}"
 
 #: bluewho/ui/about.py:62
 msgid "Information and notification of new discovered bluetooth devices"
-msgstr ""
+msgstr "Informatie en meldingen omtrent nieuwe bluetoothapparaten"
 
 #: bluewho/ui/about.py:72
 msgid "Contributors:"
