@@ -37,7 +37,7 @@ class FakeDevices(object):
                 name, address, class_type = line.split(' | ', 2)
                 # Generate random MAC address
                 if address == '<RANDOM>':
-                    address = ':'.join(map(lambda number: '%02x' % number,
+                    address = ':'.join(map(lambda number: f'{number:02x}',
                                            (random.randint(0, 255)
                                             for _ in range(6)))).upper()
                 class_type = int(class_type,
