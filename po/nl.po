@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues/\n"
-"POT-Creation-Date: 2022-08-15 23:59+0200\n"
+"POT-Creation-Date: 2022-08-19 01:34+0200\n"
 "PO-Revision-Date: 2022-05-11 18:10+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss(at)fastmail.com>, 2022\n"
 "Language-Team: Dutch\n"
@@ -22,18 +22,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: bluewho/ui/about.py:59
+#: bluewho/ui/about.py:65
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Versie {VERSION}"
 
-#: bluewho/ui/about.py:62
+#: bluewho/ui/about.py:68
 msgid "Information and notification of new discovered bluetooth devices"
 msgstr "Informatie en meldingen omtrent nieuwe bluetoothapparaten"
 
-#: bluewho/ui/about.py:72
+#: bluewho/ui/about.py:78
 msgid "Contributors:"
 msgstr "Bijdragers:"
+
+#: bluewho/ui/about.py:85
+msgid "Project home page"
+msgstr "Website"
+
+#: bluewho/ui/about.py:86
+msgid "Source code"
+msgstr "Broncode"
+
+#: bluewho/ui/about.py:87
+msgid "Author information"
+msgstr "Informatie over de maker"
+
+#: bluewho/ui/about.py:88
+msgid "Issues and bugs tracking"
+msgstr "Problemen en bugs"
+
+#: bluewho/ui/about.py:89
+msgid "Translations"
+msgstr "Vertalingen"
 
 #: bluewho/ui/main.py:164
 #, python-brace-format

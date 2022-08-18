@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues/\n"
-"POT-Creation-Date: 2022-08-15 23:59+0200\n"
+"POT-Creation-Date: 2022-08-19 01:34+0200\n"
 "PO-Revision-Date: 2014-09-23 21:37+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore(at)googlemail.com>\n"
 "Language-Team: German\n"
@@ -24,18 +24,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: bluewho/ui/about.py:59
+#: bluewho/ui/about.py:65
 #, python-brace-format
 msgid "Version {VERSION}"
 msgstr "Version {VERSION}"
 
-#: bluewho/ui/about.py:62
+#: bluewho/ui/about.py:68
 msgid "Information and notification of new discovered bluetooth devices"
 msgstr ""
 
-#: bluewho/ui/about.py:72
+#: bluewho/ui/about.py:78
 msgid "Contributors:"
 msgstr "Beitragende:"
+
+#: bluewho/ui/about.py:85
+msgid "Project home page"
+msgstr ""
+
+#: bluewho/ui/about.py:86
+msgid "Source code"
+msgstr ""
+
+#: bluewho/ui/about.py:87
+msgid "Author information"
+msgstr ""
+
+#: bluewho/ui/about.py:88
+msgid "Issues and bugs tracking"
+msgstr ""
+
+#: bluewho/ui/about.py:89
+msgid "Translations"
+msgstr ""
 
 #: bluewho/ui/main.py:164
 #, python-brace-format
