@@ -19,8 +19,8 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from bluewho.main import main
+import bluewho.main
 
 
 if __name__ == '__main__':
-    main()
+    bluewho.main.main()
