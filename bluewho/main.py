@@ -20,6 +20,7 @@
 
 import logging
 
+import bluewho.requires                                            # noqa: F401
 from bluewho.app import Application
 from bluewho.command_line_options import CommandLineOptions
 from bluewho.constants import (DIR_DATA,
@@ -28,6 +29,7 @@ from bluewho.constants import (DIR_DATA,
                                DIR_PREFIX,
                                DIR_SETTINGS,
                                DIR_UI)
+import bluewho.translations                                        # noqa: F401
 
 
 def main():
