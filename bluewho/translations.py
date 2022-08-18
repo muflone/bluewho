@@ -21,9 +21,10 @@
 import gettext
 import locale
 
-from bluewho.constants import DOMAIN_NAME, DIR_LOCALE
+from bluewho.constants import APP_DOMAIN, DIR_LOCALE
+
 
 # Load domain for translation
 for module in (gettext, locale):
-    module.bindtextdomain(DOMAIN_NAME, DIR_LOCALE)
-    module.textdomain(DOMAIN_NAME)
+    module.bindtextdomain(APP_DOMAIN, DIR_LOCALE)
+    module.textdomain(APP_DOMAIN)

@@ -27,8 +27,8 @@ from bluewho.bt.adapters import BluetoothAdapters
 from bluewho.bt.device import BluetoothDevice
 from bluewho.bt.device_discoverer import BluetoothDeviceDiscoverer
 from bluewho.bt.support import BluetoothSupport
-from bluewho.constants import (APP_NAME,
-                               DOMAIN_NAME,
+from bluewho.constants import (APP_DOMAIN,
+                               APP_NAME,
                                FILE_ICON,
                                FILE_SETTINGS)
 from bluewho.daemon_thread import DaemonThread
@@ -291,7 +291,7 @@ class UIMain(UIBase):
 
     def do_set_status_bar_message(self, message=None):
         """Set a new message in the status bar"""
-        statusbar_context_id = self.ui.statusbar.get_context_id(DOMAIN_NAME)
+        statusbar_context_id = self.ui.statusbar.get_context_id(APP_DOMAIN)
         self.ui.statusbar.pop(statusbar_context_id)
         if message is not None:
             self.ui.statusbar.push(statusbar_context_id, message)
