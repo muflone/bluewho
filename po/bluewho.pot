@@ -4,8 +4,6 @@
 # Website: https://www.muflone.com/bluewho/
 # This file is distributed under the same license of BlueWho.
 # X translation for BlueWho.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
