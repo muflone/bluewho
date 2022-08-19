@@ -7,7 +7,7 @@
 #
 # Translators:
 # RoyD <damman(at)wxs.nl>, 2011
-# Heimen Stoffels <vistausss(at)fastmail.com>, 2015,2020,2022
+# Heimen Stoffels <vistausss(at)fastmail.com>, 2015-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"

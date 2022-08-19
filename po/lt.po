@@ -57,7 +57,7 @@ msgstr ""
 #: bluewho/ui/main.py:164
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
-msgstr ""
+msgstr "Rastas naujas įrenginys: {NAME} [{ADDRESS}]"
 
 #: bluewho/ui/main.py:195
 msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
@@ -77,15 +77,15 @@ msgstr "Aptikimo metu nerasta jokių vietinių įrenginių."
 
 #: bluewho/ui/main.py:391 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
-msgstr ""
+msgstr "Aptikti įrenginius"
 
 #: bluewho/ui/main.py:400 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
-msgstr ""
+msgstr "Stabdyti aptikimą"
 
 #: bluewho/ui/main.py:419
 msgid "Do you want to clear the devices list?"
-msgstr ""
+msgstr "Ar norite išvalyti įrenginių sąrašą?"
 
 #: bluewho/ui/model_devices.py:147
 msgid "New bluetooth device detected"
