@@ -22,9 +22,26 @@ import gettext
 import locale
 
 from bluewho.constants import APP_DOMAIN, DIR_LOCALE
+from bluewho.localize import (store_message,
+                              strip_colon,
+                              strip_underline,
+                              text)
 
 
 # Load domain for translation
 for module in (gettext, locale):
     module.bindtextdomain(APP_DOMAIN, DIR_LOCALE)
     module.textdomain(APP_DOMAIN)
+
+# Import some translated messages from GTK+ domain
+for message in ('About', 'General', 'Name', 'Type'):
+    store_message(strip_colon(strip_underline(message)),
+                  strip_colon(strip_underline(text(message=message,
+                                                   gtk30=True))))
+
+# Import some translated messages from GTK+ domain and context
+for message in ('_Quit', ):
+    store_message(strip_colon(strip_underline(message)),
+                  strip_colon(strip_underline(text(message=message,
+                                                   gtk30=True,
+                                                   context='Stock label'))))

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues/\n"
-"POT-Creation-Date: 2022-08-19 01:34+0200\n"
+"POT-Creation-Date: 2022-08-20 16:55+0200\n"
 "PO-Revision-Date: 2014-08-30 19:11+0000\n"
 "Last-Translator: Dmitry <hi(at)dmitry.email>\n"
 "Language-Team: Russian\n"
@@ -21,7 +21,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: bluewho/ui/about.py:65
 #, python-brace-format
@@ -56,36 +57,38 @@ msgstr ""
 msgid "Translations"
 msgstr ""
 
-#: bluewho/ui/main.py:164
+#: bluewho/ui/main.py:162
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr "Найдено новое устройство: {NAME} [{ADDRESS}]"
 
-#: bluewho/ui/main.py:195
-msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
+#: bluewho/ui/main.py:193
+msgid ""
+"Bluez seems not to be started, please make sure the bluetooth service is "
+"started"
 msgstr "Bluez по-видимому не запущен, убедитесь, что служба bluetooth работает"
 
-#: bluewho/ui/main.py:207
+#: bluewho/ui/main.py:205
 msgid "Do you want to start the bluetooth devices?"
 msgstr "Вы хотите запустить устройства Bluetooth?"
 
-#: bluewho/ui/main.py:277
+#: bluewho/ui/main.py:275
 msgid "Discovery aborted."
 msgstr "Обнаружение прервано."
 
-#: bluewho/ui/main.py:282 bluewho/ui/main.py:327
+#: bluewho/ui/main.py:280 bluewho/ui/main.py:325
 msgid "No local devices found during detection."
 msgstr "Локальные устройства не были найдены во время обнаружения."
 
-#: bluewho/ui/main.py:391 ui/main.ui:36 ui/shortcuts.ui:57
+#: bluewho/ui/main.py:389 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Обнаружить устройства"
 
-#: bluewho/ui/main.py:400 ui/main.ui:45 ui/shortcuts.ui:64
+#: bluewho/ui/main.py:398 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
 msgstr "Остановить обнаружение"
 
-#: bluewho/ui/main.py:419
+#: bluewho/ui/main.py:417
 msgid "Do you want to clear the devices list?"
 msgstr "Вы хотите очистить список устройств?"
 
@@ -95,8 +98,12 @@ msgstr "Обнаружено новое устройство Bluetooth"
 
 #: bluewho/ui/model_devices.py:148
 #, python-brace-format
-msgid "Name: {NAME}\nAddress: {ADDRESS}"
-msgstr "Имя: {NAME}\nАдрес: {ADDRESS}"
+msgid ""
+"Name: {NAME}\n"
+"Address: {ADDRESS}"
+msgstr ""
+"Имя: {NAME}\n"
+"Адрес: {ADDRESS}"
 
 #: ui/main.ui:25 ui/shortcuts.ui:35
 msgid "Keyboard shortcuts"
@@ -138,41 +145,25 @@ msgstr "Средняя скорость сканирования"
 msgid "High scan speed"
 msgstr "Высокая скорость сканирования"
 
-#: ui/main.ui:155
+#: ui/main.ui:158
 msgid "Options"
 msgstr "Настройки"
 
-#: ui/main.ui:372
+#: ui/main.ui:384
 msgid "<b>Detected devices:</b>"
 msgstr "<b>Найденные устройства:</b>"
 
-#: ui/main.ui:409
-msgid "Type"
-msgstr "Тип"
-
-#: ui/main.ui:426
-msgid "Name"
-msgstr "Имя"
-
-#: ui/main.ui:438
+#: ui/main.ui:450
 msgid "Bluetooth address"
 msgstr "Bluetooth адрес"
 
-#: ui/main.ui:449
+#: ui/main.ui:461
 msgid "Last seen"
 msgstr "Последнее подключение"
-
-#: ui/shortcuts.ui:16
-msgid "General"
-msgstr "Общие"
 
 #: ui/shortcuts.ui:21
 msgid "Show the about dialog"
 msgstr "Показать диалог \"О программе\""
-
-#: ui/shortcuts.ui:42
-msgid "Quit"
-msgstr "Завершить"
 
 #: ui/shortcuts.ui:52
 msgid "Scan"

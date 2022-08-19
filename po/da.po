@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlueWho\n"
 "Report-Msgid-Bugs-To: https://github.com/muflone/bluewho/issues/\n"
-"POT-Creation-Date: 2022-08-19 01:34+0200\n"
+"POT-Creation-Date: 2022-08-20 16:55+0200\n"
 "PO-Revision-Date: 2014-08-30 18:13+0000\n"
 "Last-Translator: Joe Hansen <joedalton2(at)yahoo.dk>\n"
 "Language-Team: Danish\n"
@@ -54,36 +54,38 @@ msgstr ""
 msgid "Translations"
 msgstr ""
 
-#: bluewho/ui/main.py:164
+#: bluewho/ui/main.py:162
 #, python-brace-format
 msgid "New device found: {NAME} [{ADDRESS}]"
 msgstr ""
 
-#: bluewho/ui/main.py:195
-msgid "Bluez seems not to be started, please make sure the bluetooth service is started"
+#: bluewho/ui/main.py:193
+msgid ""
+"Bluez seems not to be started, please make sure the bluetooth service is "
+"started"
 msgstr ""
 
-#: bluewho/ui/main.py:207
+#: bluewho/ui/main.py:205
 msgid "Do you want to start the bluetooth devices?"
 msgstr ""
 
-#: bluewho/ui/main.py:277
+#: bluewho/ui/main.py:275
 msgid "Discovery aborted."
 msgstr ""
 
-#: bluewho/ui/main.py:282 bluewho/ui/main.py:327
+#: bluewho/ui/main.py:280 bluewho/ui/main.py:325
 msgid "No local devices found during detection."
 msgstr "Ingen lokale enheder fundet under detektering."
 
-#: bluewho/ui/main.py:391 ui/main.ui:36 ui/shortcuts.ui:57
+#: bluewho/ui/main.py:389 ui/main.ui:36 ui/shortcuts.ui:57
 msgid "Detect devices"
 msgstr "Detekter enheder"
 
-#: bluewho/ui/main.py:400 ui/main.ui:45 ui/shortcuts.ui:64
+#: bluewho/ui/main.py:398 ui/main.ui:45 ui/shortcuts.ui:64
 msgid "Stop detection"
 msgstr ""
 
-#: bluewho/ui/main.py:419
+#: bluewho/ui/main.py:417
 msgid "Do you want to clear the devices list?"
 msgstr ""
 
@@ -93,7 +95,9 @@ msgstr "Ny bluetoothenhed detekteret"
 
 #: bluewho/ui/model_devices.py:148
 #, python-brace-format
-msgid "Name: {NAME}\nAddress: {ADDRESS}"
+msgid ""
+"Name: {NAME}\n"
+"Address: {ADDRESS}"
 msgstr ""
 
 #: ui/main.ui:25 ui/shortcuts.ui:35
@@ -136,40 +140,24 @@ msgstr ""
 msgid "High scan speed"
 msgstr ""
 
-#: ui/main.ui:155
+#: ui/main.ui:158
 msgid "Options"
 msgstr ""
 
-#: ui/main.ui:372
+#: ui/main.ui:384
 msgid "<b>Detected devices:</b>"
 msgstr "<b>Detekterede enheder:</b>"
 
-#: ui/main.ui:409
-msgid "Type"
-msgstr "Type"
-
-#: ui/main.ui:426
-msgid "Name"
-msgstr ""
-
-#: ui/main.ui:438
+#: ui/main.ui:450
 msgid "Bluetooth address"
 msgstr "Bluetoothadresse"
 
-#: ui/main.ui:449
+#: ui/main.ui:461
 msgid "Last seen"
 msgstr "Sidst set"
 
-#: ui/shortcuts.ui:16
-msgid "General"
-msgstr ""
-
 #: ui/shortcuts.ui:21
 msgid "Show the about dialog"
-msgstr ""
-
-#: ui/shortcuts.ui:42
-msgid "Quit"
 msgstr ""
 
 #: ui/shortcuts.ui:52

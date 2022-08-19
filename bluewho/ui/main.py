@@ -37,7 +37,7 @@ from bluewho.functions import (get_current_time,
                                process_events,
                                idle_add,
                                thread_safe)
-from bluewho.localize import _, text_gtk30
+from bluewho.localize import _
 from bluewho.models.device_info import DeviceInfo
 from bluewho.settings import (PREFERENCES_NOTIFICATION,
                               PREFERENCES_PLAY_SOUND,
@@ -85,8 +85,6 @@ class UIMain(UIBase):
     def load_ui(self):
         """Load the interface UI"""
         logging.debug(f'{self.__class__.__name__} load UI')
-        # Initialize translations
-        self.ui.action_about.set_label(text_gtk30('About'))
         # Initialize titles and tooltips
         self.set_titles()
         # Initialize Gtk.HeaderBar
