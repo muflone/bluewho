@@ -32,7 +32,7 @@ msgstr ""
 
 #: bluewho/ui/about.py:78
 msgid "Contributors:"
-msgstr ""
+msgstr "Közreműködők:"
 
 #: bluewho/ui/about.py:85
 msgid "Project home page"

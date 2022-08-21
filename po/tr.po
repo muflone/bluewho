@@ -112,7 +112,7 @@ msgstr "Listeyi temizle"
 
 #: ui/main.ui:64 ui/shortcuts.ui:28
 msgid "Open the options menu"
-msgstr ""
+msgstr "Seçenekler menüsünü aç"
 
 #: ui/main.ui:77
 msgid "Detect devices at startup"

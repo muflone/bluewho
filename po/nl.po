@@ -115,7 +115,7 @@ msgstr "Lijst wissen"
 
 #: ui/main.ui:64 ui/shortcuts.ui:28
 msgid "Open the options menu"
-msgstr "Optiesmenu openen"
+msgstr "Open het optiesmenu"
 
 #: ui/main.ui:77
 msgid "Detect devices at startup"

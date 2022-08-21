@@ -38,23 +38,23 @@ msgstr "Talkininkai:"
 
 #: bluewho/ui/about.py:85
 msgid "Project home page"
-msgstr ""
+msgstr "Projekto internetinė svetainė"
 
 #: bluewho/ui/about.py:86
 msgid "Source code"
-msgstr ""
+msgstr "Pirminis kodas"
 
 #: bluewho/ui/about.py:87
 msgid "Author information"
-msgstr ""
+msgstr "Informacija apie autorių"
 
 #: bluewho/ui/about.py:88
 msgid "Issues and bugs tracking"
-msgstr ""
+msgstr "Klaidos ir klaidų sekiklis"
 
 #: bluewho/ui/about.py:89
 msgid "Translations"
-msgstr ""
+msgstr "Vertimai"
 
 #: bluewho/ui/main.py:162
 #, python-brace-format
@@ -114,7 +114,7 @@ msgstr "Išvalyti sąrašą"
 
 #: ui/main.ui:64 ui/shortcuts.ui:28
 msgid "Open the options menu"
-msgstr ""
+msgstr "Atverti parinkčių meniu"
 
 #: ui/main.ui:77
 msgid "Detect devices at startup"
