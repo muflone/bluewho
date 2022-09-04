@@ -32,7 +32,7 @@ msgstr "Informazioni e notifica sui nuovi dispositivi bluetooth scoperti"
 
 #: bluewho/ui/about.py:78
 msgid "Contributors:"
-msgstr "Contributori"
+msgstr "Contributori:"
 
 #: bluewho/ui/about.py:85
 msgid "Project home page"
