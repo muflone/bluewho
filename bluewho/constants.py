@@ -26,7 +26,7 @@ from xdg import BaseDirectory
 
 # Application constants
 APP_NAME = 'BlueWho'
-APP_VERSION = '0.5.1'
+APP_VERSION = '0.5.2'
 APP_DESCRIPTION = ('Information and notification of new discovered '
                    'bluetooth devices')
 APP_DOMAIN = 'bluewho'

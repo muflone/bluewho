@@ -31,7 +31,7 @@ AppDir:
     id: com.muflone.bluewho
     name: bluewho
     icon: bluewho
-    version: 0.5.1
+    version: 0.5.2
     exec: usr/bin/python3
     exec_args: "$APPDIR/usr/share/bluewho/bluewho.py $@"
 
