@@ -1,4 +1,4 @@
-setuptools==58
+setuptools==65.5.1
 pyxdg==0.28
 PyGObject==3.40.1
 bluezero==0.6.0
